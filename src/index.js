@@ -5,33 +5,6 @@ import superagent from "superagent";
 
 //sample data below
 
-/*var charList = [
-    {
-        name: 'nullsoldier',
-        level: 5,
-        is_online: false,
-        steam_id: 123124352523,
-        conan_id: 1,
-        last_online: 14322352,
-        last_killed_by: null,
-        x: 0,
-        y: 0,
-        z: 0,
-    }, {
-        name: 'immotal',
-        level: 34,
-        is_online: true,
-        steam_id: 67642313,
-        conan_id: 2,
-        last_online: 1632200,
-        last_killed_by: 1,
-        x: 0,
-        y: 0,
-        z: 0,
-    }
-];*/
-
-
 //create structure on the DOM
 
 $(document.body).append('<div id="main"></div>');
@@ -94,6 +67,31 @@ $('.loadbutton').mouseleave(function(){
 })
 
 $('.loadbutton').click(function(){
+    // displayCharacters([
+    //     {
+    //         name: 'nullsoldier',
+    //         level: 5,
+    //         is_online: false,
+    //         steam_id: 123124352523,
+    //         conan_id: 1,
+    //         last_online: 14322352,
+    //         last_killed_by: null,
+    //         x: 0,
+    //         y: 0,
+    //         z: 0,
+    //     }, {
+    //         name: 'immotal',
+    //         level: 34,
+    //         is_online: true,
+    //         steam_id: 67642313,
+    //         conan_id: 2,
+    //         last_online: 1632200,
+    //         last_killed_by: 1,
+    //         x: 0,
+    //         y: 0,
+    //         z: 0,
+    //     }
+    // ]);
 
     superagent.get("https://serverthrallapi.herokuapp.com/api/1/characters").end(function(err, res){
         displayCharacters(res.body);

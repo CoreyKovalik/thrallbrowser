@@ -99,33 +99,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 //sample data below
 
-/*var charList = [
-    {
-        name: 'nullsoldier',
-        level: 5,
-        is_online: false,
-        steam_id: 123124352523,
-        conan_id: 1,
-        last_online: 14322352,
-        last_killed_by: null,
-        x: 0,
-        y: 0,
-        z: 0,
-    }, {
-        name: 'immotal',
-        level: 34,
-        is_online: true,
-        steam_id: 67642313,
-        conan_id: 2,
-        last_online: 1632200,
-        last_killed_by: 1,
-        x: 0,
-        y: 0,
-        z: 0,
-    }
-];*/
-
-
 //create structure on the DOM
 
 __WEBPACK_IMPORTED_MODULE_0_jquery___default.a(document.body).append('<div id="main"></div>');
@@ -188,6 +161,31 @@ __WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').mouseleave(functio
 })
 
 __WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').click(function(){
+    // displayCharacters([
+    //     {
+    //         name: 'nullsoldier',
+    //         level: 5,
+    //         is_online: false,
+    //         steam_id: 123124352523,
+    //         conan_id: 1,
+    //         last_online: 14322352,
+    //         last_killed_by: null,
+    //         x: 0,
+    //         y: 0,
+    //         z: 0,
+    //     }, {
+    //         name: 'immotal',
+    //         level: 34,
+    //         is_online: true,
+    //         steam_id: 67642313,
+    //         conan_id: 2,
+    //         last_online: 1632200,
+    //         last_killed_by: 1,
+    //         x: 0,
+    //         y: 0,
+    //         z: 0,
+    //     }
+    // ]);
 
     __WEBPACK_IMPORTED_MODULE_1_superagent___default.a.get("https://serverthrallapi.herokuapp.com/api/1/characters").end(function(err, res){
         displayCharacters(res.body);
