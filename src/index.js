@@ -1,6 +1,11 @@
 import $ from "jquery";
+import superagent from "superagent";
 
-var charList = [
+//execute ./build.sh to regenerate
+
+//sample data below
+
+/*var charList = [
     {
         name: 'nullsoldier',
         level: 5,
@@ -24,16 +29,19 @@ var charList = [
         y: 0,
         z: 0,
     }
-];
+];*/
 
+
+//create structure on the DOM
 
 $(document.body).append('<div id="main"></div>');
-
 
 $('#main').append('<h1 class="loadbutton"></h1>');
 $('.loadbutton').append("Click to load all characters!");
 
 $('#main').append('<div id="allcharacters"></div>');
+
+//characterDiv allows a starting point to wrap characterStart's data which will be printed
 
 var characterDiv = $('#allcharacters').append('<div class="character"></div>');
 var characterStart = '\
@@ -48,8 +56,9 @@ X-coord: <b>%x%</b><br>\
 Y-coord: <b>%y%</b><br>\
 Z-coord: <b>%z%</b></p>';
 
+//function for looping through charList and pulling out data from the JSON object
 
-var displayCharacters = function() {
+var displayCharacters = function(charList) {
 
 	for(var char in charList) {
 	if (charList.hasOwnProperty(char)) {
@@ -57,30 +66,36 @@ var displayCharacters = function() {
 		//make a div
 		$("#allcharacters").append(characterDiv);
 		var characterEditLoop = characterStart.replace("%name%", charList[char].name);
-		var characterEditLoop = characterEditLoop.replace("%level%", charList[char].level);
-		var characterEditLoop = characterEditLoop.replace("%online%", charList[char].is_online);
-		var characterEditLoop = characterEditLoop.replace("%steam%", charList[char].steam_id);
-		var	characterEditLoop = characterEditLoop.replace("%conan%", charList[char].conan_id);
-		var characterEditLoop = characterEditLoop.replace("%lastonline%", charList[char].last_online);
-		var characterEditLoop = characterEditLoop.replace("%lastkilled%", charList[char].last_killed_by);
-		var characterEditLoop = characterEditLoop.replace("%x%", charList[char].x);
-		var characterEditLoop = characterEditLoop.replace("%y%", charList[char].y);
-		var characterEditLoop = characterEditLoop.replace("%z%", charList[char].z);
+		characterEditLoop = characterEditLoop.replace("%level%", charList[char].level);
+		characterEditLoop = characterEditLoop.replace("%online%", charList[char].is_online);
+		characterEditLoop = characterEditLoop.replace("%steam%", charList[char].steam_id);
+		characterEditLoop = characterEditLoop.replace("%conan%", charList[char].conan_id);
+		characterEditLoop = characterEditLoop.replace("%lastonline%", charList[char].last_online);
+		characterEditLoop = characterEditLoop.replace("%lastkilled%", charList[char].last_killed_by_id);
+		characterEditLoop = characterEditLoop.replace("%x%", charList[char].x);
+		characterEditLoop = characterEditLoop.replace("%y%", charList[char].y);
+		characterEditLoop = characterEditLoop.replace("%z%", charList[char].z);
+
+        //potentially create new var = characterFinish to store finished loop
 
 		$(".character:last").append(characterEditLoop);
 	}
 	}
 };
 
+//Ultra-Fancy functionality
+
 $('.loadbutton').mouseenter(function(){
 	$('.loadbutton').css("color", "green");
-
 });
 
 $('.loadbutton').mouseleave(function(){
 	$('.loadbutton').css("color", "black");
-
 })
 
+$('.loadbutton').click(function(){
 
-$('.loadbutton').click(displayCharacters);
+    superagent.get("https://serverthrallapi.herokuapp.com/api/1/characters").end(function(err, res){
+        displayCharacters(res.body);
+    });
+});
