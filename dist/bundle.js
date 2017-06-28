@@ -95,105 +95,182 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-//execute ./build.sh to regenerate
+// //execute ./build.sh to regenerate
 
-//sample data below
+// //sample data below
 
-//create structure on the DOM
+// //create structure on the DOM
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a(document.body).append('<div id="main"></div>');
+// $(document.body).append('<div id="main"></div>');
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('#main').append('<h1 class="loadbutton"></h1>');
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').append("Click to load all characters!");
+// $('#main').append('<h1 class="loadbutton"></h1>');
+// $('.loadbutton').append("Click to load all characters!");
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('#main').append('<div id="allcharacters"></div>');
+// $('#main').append('<div id="allcharacters"></div>');
 
-//characterDiv allows a starting point to wrap characterStart's data which will be printed
+// //characterDiv allows a starting point to wrap characterStart's data which will be printed
 
-var characterDiv = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a('#allcharacters').append('<div class="character"></div>');
-var characterStart = '\
-<p>Character Name is: <b>%name%</b><br>\
-Level is: <b>%level%</b><br>\
-Player Online?: <b>%online%</b><br>\
-Steam ID: <b>%steam%</b><br>\
-Conan ID: <b>%conan%</b><br>\
-Last Online: <b>%lastonline%</b><br>\
-Last Killed by: <b>%lastkilled%</b><br>\
-X-coord: <b>%x%</b><br>\
-Y-coord: <b>%y%</b><br>\
-Z-coord: <b>%z%</b></p>';
+// var characterDiv = $('#allcharacters').append('<div class="character"></div>');
+// var characterStart = '\
+// <p>Character Name is: <b>%name%</b><br>\
+// Level is: <b>%level%</b><br>\
+// Player Online?: <b>%online%</b><br>\
+// Steam ID: <b>%steam%</b><br>\
+// Conan ID: <b>%conan%</b><br>\
+// Last Online: <b>%lastonline%</b><br>\
+// Last Killed by: <b>%lastkilled%</b><br>\
+// X-coord: <b>%x%</b><br>\
+// Y-coord: <b>%y%</b><br>\
+// Z-coord: <b>%z%</b></p>';
 
-//function for looping through charList and pulling out data from the JSON object
+// //function for looping through charList and pulling out data from the JSON object
 
-var displayCharacters = function(charList) {
+// var displayCharacters = function(charList) {
 
-	for(var char in charList) {
-	if (charList.hasOwnProperty(char)) {
+// 	for(var char in charList) {
+// 	if (charList.hasOwnProperty(char)) {
 
-		//make a div
-		__WEBPACK_IMPORTED_MODULE_0_jquery___default.a("#allcharacters").append(characterDiv);
-		var characterEditLoop = characterStart.replace("%name%", charList[char].name);
-		characterEditLoop = characterEditLoop.replace("%level%", charList[char].level);
-		characterEditLoop = characterEditLoop.replace("%online%", charList[char].is_online);
-		characterEditLoop = characterEditLoop.replace("%steam%", charList[char].steam_id);
-		characterEditLoop = characterEditLoop.replace("%conan%", charList[char].conan_id);
-		characterEditLoop = characterEditLoop.replace("%lastonline%", charList[char].last_online);
-		characterEditLoop = characterEditLoop.replace("%lastkilled%", charList[char].last_killed_by_id);
-		characterEditLoop = characterEditLoop.replace("%x%", charList[char].x);
-		characterEditLoop = characterEditLoop.replace("%y%", charList[char].y);
-		characterEditLoop = characterEditLoop.replace("%z%", charList[char].z);
+// 		//make a div
+// 		$("#allcharacters").append(characterDiv);
+// 		var characterEditLoop = characterStart.replace("%name%", charList[char].name);
+// 		characterEditLoop = characterEditLoop.replace("%level%", charList[char].level);
+// 		characterEditLoop = characterEditLoop.replace("%online%", charList[char].is_online);
+// 		characterEditLoop = characterEditLoop.replace("%steam%", charList[char].steam_id);
+// 		characterEditLoop = characterEditLoop.replace("%conan%", charList[char].conan_id);
+// 		characterEditLoop = characterEditLoop.replace("%lastonline%", charList[char].last_online);
+// 		characterEditLoop = characterEditLoop.replace("%lastkilled%", charList[char].last_killed_by_id);
+// 		characterEditLoop = characterEditLoop.replace("%x%", charList[char].x);
+// 		characterEditLoop = characterEditLoop.replace("%y%", charList[char].y);
+// 		characterEditLoop = characterEditLoop.replace("%z%", charList[char].z);
 
-        var characterFinish;
-        characterFinish = characterEditLoop;
+//         var characterFinish;
+//         characterFinish = characterEditLoop;
 
-        //potentially create new var = characterFinish to store finished loop
+//         //potentially create new var = characterFinish to store finished loop
 
-		__WEBPACK_IMPORTED_MODULE_0_jquery___default.a(".character:last").append(characterFinish);
-	}
-	}
-};
+// 		$(".character:last").append(characterFinish);
+// 	}
+// 	}
+// };
 
-//Ultra-Fancy functionality
+// //Ultra-Fancy functionality
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').mouseenter(function(){
-	__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').css("color", "green");
-});
+// $('.loadbutton').mouseenter(function(){
+// 	$('.loadbutton').css("color", "green");
+// });
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').mouseleave(function(){
-	__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').css("color", "black");
-})
+// $('.loadbutton').mouseleave(function(){
+// 	$('.loadbutton').css("color", "black");
+// })
 
-__WEBPACK_IMPORTED_MODULE_0_jquery___default.a('.loadbutton').click(function(){
-    // displayCharacters([
-    //     {
-    //         name: 'nullsoldier',
-    //         level: 5,
-    //         is_online: false,
-    //         steam_id: 123124352523,
-    //         conan_id: 1,
-    //         last_online: 14322352,
-    //         last_killed_by: null,
-    //         x: 0,
-    //         y: 0,
-    //         z: 0,
-    //     }, {
-    //         name: 'immotal',
-    //         level: 34,
-    //         is_online: true,
-    //         steam_id: 67642313,
-    //         conan_id: 2,
-    //         last_online: 1632200,
-    //         last_killed_by: 1,
-    //         x: 0,
-    //         y: 0,
-    //         z: 0,
-    //     }
-    // ]);
+// $('.loadbutton').click(function(){
+//     // displayCharacters([
+//     //     {
+//     //         name: 'nullsoldier',
+//     //         level: 5,
+//     //         is_online: false,
+//     //         steam_id: 123124352523,
+//     //         conan_id: 1,
+//     //         last_online: 14322352,
+//     //         last_killed_by: null,
+//     //         x: 0,
+//     //         y: 0,
+//     //         z: 0,
+//     //     }, {
+//     //         name: 'immotal',
+//     //         level: 34,
+//     //         is_online: true,
+//     //         steam_id: 67642313,
+//     //         conan_id: 2,
+//     //         last_online: 1632200,
+//     //         last_killed_by: 1,
+//     //         x: 0,
+//     //         y: 0,
+//     //         z: 0,
+//     //     }
+//     // ]);
 
-    __WEBPACK_IMPORTED_MODULE_1_superagent___default.a.get("https://serverthrallapi.herokuapp.com/api/1/characters").end(function(err, res){
-        displayCharacters(res.body);
+//     superagent.get("https://serverthrallapi.herokuapp.com/api/1/characters").end(function(err, res){
+//         displayCharacters(res.body);
+//     });
+// });
+
+
+    var characters = [
+        {
+            name: 'nullsoldier',
+            level: 5,
+            is_online: false,
+            // steam_id: 123124352523,
+            // conan_id: 1,
+            // last_online: 14322352,
+            // last_killed_by: null,
+            // x: 0,
+            // y: 0,
+            // z: 0,
+        }, {
+            name: 'immotal',
+            level: 34,
+            is_online: true,
+            // steam_id: 67642313,
+            // conan_id: 2,
+            // last_online: 1632200,
+            // last_killed_by: 1,
+            // x: 0,
+            // y: 0,
+            // z: 0,
+        }
+    ]
+
+    function renderTable(characters) {
+        var element = document.createElement('table');
+        element.appendChild(renderHeader());
+
+        for (var character of characters) {
+            element.appendChild(renderCharacterData(character));
+        }
+
+
+
+        return element;
+    }
+
+    function renderHeader() {
+        var elementTR = document.createElement('tr');
+        var nameTH = document.createElement('th');
+        var levelTH = document.createElement('th');
+        var onlineTH = document.createElement('th');
+        nameTH.innerText = "Name";
+        levelTH.innerText = "Level";
+        onlineTH.innerText = "Online?";
+        elementTR.appendChild(nameTH);
+        elementTR.appendChild(levelTH);
+        elementTR.appendChild(onlineTH);
+
+        return elementTR;
+    }
+
+    function renderCharacterData(character) {
+        var elementTR = document.createElement('tr');
+        var nameTD = document.createElement('td');
+        var levelTD = document.createElement('td');
+        var onlineTD = document.createElement('td');
+        nameTD.innerText = character.name;
+        levelTD.innerText = character.x;
+        onlineTD.innerText = character.is_online;
+        elementTR.appendChild(nameTD);
+        elementTR.appendChild(levelTD);
+        elementTR.appendChild(onlineTD);
+
+        return elementTR;
+    }
+
+
+    __WEBPACK_IMPORTED_MODULE_1_superagent___default.a.get("https://serverthrallapi.herokuapp.com/api/2/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254").end(function(err, res){
+
+        var characterTable = renderTable(res.body);
+        document.body.appendChild(characterTable);
     });
-});
 
 /***/ }),
 /* 2 */
