@@ -49,9 +49,12 @@ var displayCharacters = function(charList) {
 		characterEditLoop = characterEditLoop.replace("%y%", charList[char].y);
 		characterEditLoop = characterEditLoop.replace("%z%", charList[char].z);
 
+        var characterFinish;
+        characterFinish = characterEditLoop;
+
         //potentially create new var = characterFinish to store finished loop
 
-		$(".character:last").append(characterEditLoop);
+		$(".character:last").append(characterFinish);
 	}
 	}
 };
