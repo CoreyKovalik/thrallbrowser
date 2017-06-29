@@ -215,7 +215,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     __WEBPACK_IMPORTED_MODULE_1_superagent___default.a.get("https://serverthrallapi.herokuapp.com/api/2/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254").end(function(err, res){
 
         var characterTable = renderTable(res.body);
-        document.body.appendChild(characterTable);
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a(".test").append(characterTable);
     });
 
 /***/ }),

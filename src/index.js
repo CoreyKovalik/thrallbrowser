@@ -121,5 +121,5 @@ import superagent from "superagent";
     superagent.get("https://serverthrallapi.herokuapp.com/api/2/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254").end(function(err, res){
 
         var characterTable = renderTable(res.body);
-        document.body.appendChild(characterTable);
+        $(".test").append(characterTable);
     });

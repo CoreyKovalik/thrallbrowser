@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Jomhuria');
+
 body {
 	background-color: black;
 }
 
 table {
 	background-color: #1b1b1b;
+
 }
 
 th {
@@ -14,4 +17,26 @@ th {
 td
 {
 	color: white;
+}
+
+.test {
+	overflow-y: auto;
+	overflow-x: auto;
+	position: fixed;
+	bottom: 0;
+	height: 33%;
+	width:100%;
+}
+
+.test2 {
+	position: fixed;
+	top: 0;
+	height: 5%;
+	width: 100%;
+	background-color: #1b1b1b;
+	color: #ddc271;
+	font-family: 'Jomhuria', sans-serif;
+	text-align: center;
+	font-weight: normal;
+	font-size: 50px;
 }
