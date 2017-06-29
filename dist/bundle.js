@@ -144,9 +144,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var conanTH = document.createElement('th');
         var serverTH = document.createElement('th');
         var killedTH = document.createElement('th');
-        var xTH = document.createElement('th');
-        var yTH = document.createElement('th');
-        var zTH = document.createElement('th');
+        var xyzTH = document.createElement('th');
         nameTH.innerText = "Name";
         levelTH.innerText = "Level";
         onlineTH.innerText = "Online?";
@@ -154,9 +152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         conanTH.innerText = "Conan ID";
         serverTH.innerText = "Server ID";
         killedTH.innerText = "Last Killed by";
-        xTH.innerText = "Z-Pos";
-        yTH.innerText = "Y-Pos";
-        zTH.innerText = "Z-Pos";
+        xyzTH.innerText = "(X, Y, Z)";
         elementTR.appendChild(nameTH);
         elementTR.appendChild(levelTH);
         elementTR.appendChild(onlineTH);
@@ -164,9 +160,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         elementTR.appendChild(conanTH);
         elementTR.appendChild(serverTH);
         elementTR.appendChild(killedTH);
-        elementTR.appendChild(xTH);
-        elementTR.appendChild(yTH);
-        elementTR.appendChild(zTH);
+        elementTR.appendChild(xyzTH);
 
         return elementTR;
     }
@@ -180,9 +174,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var conanTD = document.createElement('td');
         var serverTD = document.createElement('td');
         var killedTD = document.createElement('td');
-        var xTD = document.createElement('td');
-        var yTD = document.createElement('td');
-        var zTD = document.createElement('td');
+        var xyzTD = document.createElement('td');
         nameTD.innerText = character.name;
         levelTD.innerText = character.level;
 
@@ -196,9 +188,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         conanTD.innerText = character.conan_id;
         serverTD.innerText = character.server_id;
         killedTD.innerText = character.last_killed_by;
-        xTD.innerText = character.x;
-        yTD.innerText = character.y;
-        zTD.innerText = character.z;
+
+        function roundConcatXYZ(x, y, z) {
+            var xx = Math.round(x);
+            var yy = Math.round(y);
+            var zz = Math.round(z);
+            var xyz = "(" + xx + ", " + yy + ", " + zz + ")";
+
+            return xyz;
+        }
+
+        xyzTD.innerText = roundConcatXYZ(character.x, character.y, character.z);
         elementTR.appendChild(nameTD);
         elementTR.appendChild(levelTD);
         elementTR.appendChild(onlineTD);
@@ -206,9 +206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         elementTR.appendChild(conanTD);
         elementTR.appendChild(serverTD);
         elementTR.appendChild(killedTD);
-        elementTR.appendChild(xTD);
-        elementTR.appendChild(yTD);
-        elementTR.appendChild(zTD);
+        elementTR.appendChild(xyzTD);
 
         return elementTR;
     }
