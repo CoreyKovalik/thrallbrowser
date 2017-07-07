@@ -9,11 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.2.1",
+    "angular": "^1.6.5",
     "lodash": "^4.17.4",
-    "superagent": "^3.5.2"
   },
   "devDependencies": {
-    "webpack": "^3.0.0"
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.12",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "vinyl-source-stream": "^1.1.0",
   }
 }
