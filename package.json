@@ -11,12 +11,13 @@
   "dependencies": {
     "angular": "^1.6.5",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
     "gulp": "^3.9.1",
-    "vinyl-source-stream": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

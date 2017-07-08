@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Jomhuria');
+
+body {
+    background-color: black;
+    margin: auto;
+}
+
+table {
+    background-color: #1b1b1b;
+    width: 100%;
+
+}
+
+th {
+    background-color: black;
+    color: #ddc271;
+}
+
+th#name{
+  width:30%;
+}
+th#level{
+  width:7%;
+}
+th#online{
+  width:14%;
+}
+th#steam{
+  width:21%;
+}
+th#conan{
+  width:7%;
+}
+th#server{
+  width:7%;
+}
+th#xyz{
+  width:25%;
+}
+
+td
+{
+  color: white;
+}
+
+.test {
+  overflow-y: auto;
+  overflow-x: auto;
+  position: fixed;
+  bottom: 0;
+  height: 95%;
+  width:100%;
+}
+
+.test2 {
+  position: fixed;
+  top: 0;
+  height: 5%;
+  width: 100%;
+  background-color: #1b1b1b;
+  color: #ddc271;
+  font-family: 'Jomhuria', sans-serif;
+  text-align: center;
+  font-weight: normal;
+  font-size: 50px;
+}
+
+/* Lightweight spinner from https://stephanwagner.me/only-css-loading-spinner */
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
+}

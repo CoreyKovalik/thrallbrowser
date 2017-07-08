@@ -5,7 +5,7 @@ var browserSync = require('browser-sync');
 var util        = require('gulp-util');
 
 var bundler = browserify({
-    entries      : ['app/src/app.js'],
+    entries      : ['app/app.js'],
     transform    : ['babelify'],
     debug        : true,
     insertGlobals: true,
@@ -27,7 +27,7 @@ gulp.task('scripts', function(cb) {
         if (cb) {cb(); cb = null}
     }
 
-    bundler
+    return bundler
         .bundle()
         .on('log', util.log)
         .on('error', onError)
@@ -36,19 +36,25 @@ gulp.task('scripts', function(cb) {
 });
 
 gulp.task('index', function() {
-    gulp.src('app/index.html')
+    return gulp.src('app/index.html')
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('html', function() {
+    return gulp.src(['app/**/*.html', '!app/index.html'])
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('styles', function() {
-    gulp.src('app/styles/**.css')
-        .pipe(gulp.dest('dist/styles'))
+    return gulp.src('app/**/*.css')
+        .pipe(gulp.dest('dist/'))
 });
 
 gulp.task('watch', [
     'index',
     'styles',
-    'scripts'], function() {
+    'scripts',
+    'html'], function() {
     browserSync({
         port     : 8080,
         open     : true,
@@ -63,8 +69,9 @@ gulp.task('watch', [
     gulp.watch('app/index.html', ['index']);
     gulp.watch('app/**/*.js', ['scripts']);
     gulp.watch('app/**/*.css', ['styles']);
+    gulp.watch(['app/**/*.html', '!app/index.html'], ['html']);
     gulp.watch('dist/**/*.*', browserSync.reload);
 });
 
-gulp.task('build', ['scripts', 'index', 'styles']);
+gulp.task('build', ['scripts', 'index', 'styles', 'html']);
 gulp.task('default', ['build']);
