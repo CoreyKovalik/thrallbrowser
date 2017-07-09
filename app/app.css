@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Jomhuria');
 
 body {
-    background-color: black;
-    margin: auto;
+  background-color: black;
+  margin: auto;
+  font-family: Trebuchet MS;
 }
 
 table {
-    background-color: #1b1b1b;
-    width: 100%;
-
+  background-color: #1b1b1b;
+  width: 100%;
+  border-spacing: 0px 1px;
 }
 
 th {
-    background-color: black;
-    color: #ddc271;
+  background-color: black;
+  color: #ddc271;
+  font-size: 18px;
 }
 
 th#name{
@@ -21,12 +23,15 @@ th#name{
 }
 th#level{
   width:7%;
+  text-align: left;
 }
 th#online{
   width:14%;
+  text-align: left;
 }
 th#steam{
   width:21%;
+  text-align: left;
 }
 th#conan{
   width:7%;
@@ -36,26 +41,44 @@ th#server{
 }
 th#xyz{
   width:25%;
+  text-align: left;
 }
 
-td
-{
+a {
+  color:white;
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+  font-size: 17px;
+  color: #ddc271;
+}
+
+td {
   color: white;
 }
 
-.test {
-  overflow-y: auto;
-  overflow-x: auto;
-  position: fixed;
-  bottom: 0;
-  height: 95%;
-  width:100%;
+td:hover {
+  color: #ddc271;
+  cursor: default;
 }
 
-.test2 {
-  position: fixed;
+td:hover a {
+  color: #ddc271;
+  display: block;
+
+}
+
+tr.highlight:hover {
+  font-size:17px;
+  background-color:black;
+  font-weight: bold;
+}
+
+header {
   top: 0;
-  height: 5%;
+  position: sticky;
   width: 100%;
   background-color: #1b1b1b;
   color: #ddc271;
@@ -63,6 +86,7 @@ td
   text-align: center;
   font-weight: normal;
   font-size: 50px;
+  padding-top: .2em;
 }
 
 /* Lightweight spinner from https://stephanwagner.me/only-css-loading-spinner */

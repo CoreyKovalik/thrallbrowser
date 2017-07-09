@@ -1,31 +1,31 @@
-<div class="test2">WELCOME TO THRALL BROWSER</div>
+<header>WELCOME TO THRALL BROWSER</header>
 
-<div class="test">
+<div>
 
-<div ng-show="all.isloading" class="test spinner"></div>
-<table>
-  <thead>
-    <tr>
-      <th id="name">Name</th>
-      <th id="level">Level</th>
-      <th id="online">Last Online</th>
-      <th id="steam">Steam ID</th>
-      <!-- <th id="conan">Conan ID</th> -->
-      <!-- <th id="server">Server ID</th> -->
-      <th id="xyz">(X,Y,Z)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="character in all.characters" class="highlight">
-      <td><a href="/character{{character.id}}"> {{character.name}}</a></td>
-      <td>{{character.level}}</td>
-      <td>{{character | isonline}}</td>
-      <td>{{character.steam_id}}</td>
-      <!-- <td>{{character.conan_id}}</td> -->
-<!--       <td>{{character.server_id}}</td> -->
-      <td>{{all.roundConcatXYZ(character.x, character.y, character.z)}}</td>
-    </tr>
-  </tbody>
-</table>
+  <div ng-show="all.isloading" class="test spinner"></div>
+  <table>
+    <thead>
+      <tr>
+        <th id="name">Name</th>
+        <th id="level">Level</th>
+        <th id="online">Last Online</th>
+        <th id="steam">Steam ID</th>
+        <!-- <th id="conan">Conan ID</th> -->
+        <!-- <th id="server">Server ID</th> -->
+        <th id="xyz">(X,Y,Z)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="character in all.characters" class="highlight">
+        <td><a href="/character{{character.id}}"> {{character.name}}</a></td>
+        <td>{{character.level}}</td>
+        <td>{{character | isonline}}</td>
+        <td>{{character.steam_id}}</td>
+        <!-- <td>{{character.conan_id}}</td> -->
+        <!-- <td>{{character.server_id}}</td> -->
+        <td>{{all.roundConcatXYZ(character.x, character.y, character.z)}}</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
