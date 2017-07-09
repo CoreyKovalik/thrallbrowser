@@ -1,3 +1,5 @@
+<div class="test2">WELCOME TO THRALL BROWSER</div>
+
 <div class="test">
 
 <div ng-show="all.isloading" class="test spinner"></div>
@@ -15,7 +17,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="character in all.characters">
-      <td>{{character.name}}</td>
+      <td><a href="#!/character-list/{{character.id}}"> {{character.name}}</a></td>
       <td>{{character.level}}</td>
       <td>{{character | isonline}}</td>
       <td>{{character.steam_id}}</td>

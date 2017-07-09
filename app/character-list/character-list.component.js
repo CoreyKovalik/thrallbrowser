@@ -43,7 +43,7 @@ angular
       }
 
       loadCharacterData();
-      setInterval(loadCharacterData, 60000);
+      setInterval(loadCharacterData, 62000);
 
       this.roundConcatXYZ = function(x, y, z) {
         var xx = Math.round(x);
