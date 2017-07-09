@@ -16,8 +16,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="character in all.characters">
-      <td><a href="#!/character-list/{{character.id}}"> {{character.name}}</a></td>
+    <tr ng-repeat="character in all.characters" class="highlight">
+      <td><a href="/character{{character.id}}"> {{character.name}}</a></td>
       <td>{{character.level}}</td>
       <td>{{character | isonline}}</td>
       <td>{{character.steam_id}}</td>

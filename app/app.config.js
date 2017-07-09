@@ -1,16 +1,15 @@
 angular
   .module('thrallbro')
-  .config(function config($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
-
+  .config(function config($routeProvider, $locationProvider) {
+    // $locationProvider.hashPrefix('');
     $routeProvider
-    debugger
-      .when('/character-list', {
+      .when('/', {
         template: '<character-list></character-list>'
       })
-      .when('/character-list/:charId', {
+      .when('/character' + ':charId', {
         template: '<character-sheet></character-sheet>'
       })
-      .otherwise('/character-list');
+      .otherwise('/');
+    $locationProvider.html5Mode(true);
     }
   );
