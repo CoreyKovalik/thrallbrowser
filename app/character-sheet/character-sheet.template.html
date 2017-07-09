@@ -1,1 +1,30 @@
-<p>Hello World</p>
+<header>{{the.char.name}} (ID # {{the.char.id}})</header>
+
+<div>
+
+  <blockquote>
+
+    <ul>
+      <li>Username:  {{the.char.name}}</li>
+      <li>Character created: {{the.char.created}}</li>
+      <li>Character's level:  {{the.char.level}}</li>
+      <li>Character's sex:  </li>
+      <li>Online Status: {{the.char.is_online}}</li>
+      <li>Last Online:  {{the.char | isonline}}</li>
+      <li>Last killed by:  "{{the.char.last_killed_by}}"</li>
+      <li>Unique ID:  {{the.char.id}}</li>
+      <li>Conan ID:  {{the.char.conan_id}}</li>
+      <li>Server ID:  {{the.char.server_id}}</li>
+      <li>Server Name: </li>
+      <li>Clan Name:</li>
+      <li>Steam ID/Profile: {{the.char.steam_id}}</li>
+      <li>X-coordinate: {{the.char.x}}</li>
+      <li>Y-coordinate: {{the.char.y}}</li>
+      <li>Z-coordinate: {{the.char.z}}</li>
+    </ul>
+
+
+
+  </blockquote>
+
+</div>
