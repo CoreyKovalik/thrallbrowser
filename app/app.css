@@ -13,34 +13,48 @@ table {
   border-spacing: 0px 1px;
 }
 
+/*tbody, thead {
+  display:block;
+}
+
+tbody {
+  overflow: auto;
+  height: 500px;
+}
+
+.test {
+  width: 100%;
+}*/
+
 th {
   background-color: black;
   color: #ddc271;
   font-size: 18px;
 }
 
-th#name{
+.name{
   width:30%;
+  text-align:left;
 }
-th#level{
+.level{
   width:7%;
   text-align: left;
 }
-th#online{
+.online{
   width:14%;
   text-align: left;
 }
-th#steam{
+.steam{
   width:21%;
   text-align: left;
 }
-th#conan{
+.conan{
   width:7%;
 }
-th#server{
+.server{
   width:7%;
 }
-th#xyz{
+.xyz{
   width:25%;
   text-align: left;
 }
