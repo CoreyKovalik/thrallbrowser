@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
     "lodash": "^4.17.4",
     "moment": "^2.18.1"
   },

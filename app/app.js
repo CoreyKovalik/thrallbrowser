@@ -1,7 +1,9 @@
 require('angular');
+require('angular-route');
 
 angular
   .module('thrallbro', [
+    'ngRoute'
   ]);
 
 require('./app.config.js');
