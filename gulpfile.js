@@ -50,11 +50,17 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('dist/'))
 });
 
+gulp.task('vendors', function() {
+    return gulp.src('vendor/**/*.*')
+        .pipe(gulp.dest('dist/vendor'))
+});
+
 gulp.task('watch', [
     'index',
     'styles',
     'scripts',
-    'html'], function() {
+    'html',
+    'vendors'], function() {
     browserSync({
         port     : 8080,
         open     : true,
@@ -73,5 +79,5 @@ gulp.task('watch', [
     gulp.watch('dist/**/*.*', browserSync.reload);
 });
 
-gulp.task('build', ['scripts', 'index', 'styles', 'html']);
+gulp.task('build', ['scripts', 'index', 'styles', 'html','vendors']);
 gulp.task('default', ['build']);

@@ -1,8 +1,8 @@
-window.$ = window.jQuery = require('./js/jquery-3.2.1.min');
+window.$ = window.jQuery = require('../vendor/jquery/jquery-3.2.1.min');
 window._ = require('lodash');
 require('angular');
 require('angular-route');
-require('./js/bootstrap.min.js');
+require('../vendor/bootstrap/js/bootstrap.min.js');
 
 angular
   .module('thrallbro', [
