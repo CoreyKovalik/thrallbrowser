@@ -47,8 +47,8 @@ th {
   text-align: left;
 }
 .steam{
-  width:21%;
-  text-align: left;
+  width:4%;
+  text-align: center;
 }
 .conan{
   width:7%;
@@ -77,15 +77,14 @@ td {
   color: white;
 }
 
-td:hover {
-  color: #ddc271;
-  cursor: default;
+td.name a {
+  display: block;
 }
 
-td:hover a {
+td.level:hover,
+td.online:hover {
   color: #ddc271;
-  display: block;
-
+  cursor: default;
 }
 
 tr.highlight:hover {
@@ -126,4 +125,16 @@ header {
   border: 2px solid #ccc;
   border-top-color: #333;
   animation: spinner .6s linear infinite;
+}
+
+th .fa-steam-square {
+  font-size: 1.4em;
+}
+
+td .fa-steam-square {
+  color: grey;
+}
+
+td.fa-steam-square:hover {
+  color: #ddc271;
 }
