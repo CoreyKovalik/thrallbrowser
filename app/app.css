@@ -5,6 +5,7 @@ body {
   margin: auto;
   font-family: Trebuchet MS;
   color: white;
+  font-size: 16px;
 }
 
 table {
@@ -30,6 +31,7 @@ th {
   background-color: black;
   color: #ddc271;
   font-size: 18px;
+  cursor: default;
 }
 
 .name{
@@ -68,6 +70,7 @@ a:hover {
   font-weight: bold;
   font-size: 17px;
   color: #ddc271;
+  text-decoration: none;
 }
 
 td {
