@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Jomhuria');
-
 body {
   background-color: black;
   margin: auto;
@@ -7,92 +6,6 @@ body {
   color: white;
   font-size: 16px;
 }
-
-table {
-  background-color: #1b1b1b;
-  width: 100%;
-  border-spacing: 0px 1px;
-}
-
-/*tbody, thead {
-  display:block;
-}
-
-tbody {
-  overflow: auto;
-  height: 500px;
-}
-
-.test {
-  width: 100%;
-}*/
-
-th {
-  background-color: black;
-  color: #ddc271;
-  font-size: 18px;
-  cursor: default;
-}
-
-.name{
-  width:30%;
-  text-align:left;
-}
-.level{
-  width:7%;
-  text-align: left;
-}
-.online{
-  width:14%;
-  text-align: left;
-}
-.steam{
-  width:4%;
-  text-align: center;
-}
-.conan{
-  width:7%;
-}
-.server{
-  width:7%;
-}
-.xyz{
-  width:25%;
-  text-align: left;
-}
-
-a {
-  color:white;
-  text-decoration: none;
-}
-
-a:hover {
-  font-weight: bold;
-  font-size: 17px;
-  color: #ddc271;
-  text-decoration: none;
-}
-
-td {
-  color: white;
-}
-
-td.name a {
-  display: block;
-}
-
-td.level:hover,
-td.online:hover {
-  color: #ddc271;
-  cursor: default;
-}
-
-tr.highlight:hover {
-  font-size:17px;
-  background-color:black;
-  font-weight: bold;
-}
-
 header {
   top: 0;
   position: sticky;
@@ -105,12 +18,71 @@ header {
   font-size: 50px;
   padding-top: .2em;
 }
-
+a {
+  color:white;
+  text-decoration: none;
+}
+a:hover {
+  font-weight: bold;
+  font-size: 17px;
+  color: #ddc271;
+  text-decoration: none;
+}
+table {
+  width: 100%;
+  border-spacing: 0px 1px;
+  -webkit-border-vertical-spacing: 0px;
+}
+tbody {
+  background-color: #1b1b1b;
+}
+/*tbody, thead {
+  display:block;
+}
+thead {
+  background-color: black;
+}
+tbody {
+  background-color: #1b1b1b;
+  overflow-y: scroll;
+  height:auto;
+  max-height: 500px;
+}*/
+th {
+  background-color: black;
+  color: #ddc271;
+  font-size: 18px;
+  cursor: default;
+}
+td {
+  color: white;
+}
+td.name a {
+  display: block;
+}
+td.level:hover,
+td.online:hover {
+  color: #ddc271;
+  cursor: default;
+}
+tr.highlight:hover {
+  font-size:17px;
+  background-color:black;
+  font-weight: bold;
+}
+th .fa-steam-square {
+  font-size: 1.4em;
+}
+td .fa-steam-square {
+  color: grey;
+}
+td .fa-steam-square:hover {
+  color: #ddc271;
+}
 /* Lightweight spinner from https://stephanwagner.me/only-css-loading-spinner */
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
-
 .spinner:before {
   content: '';
   box-sizing: border-box;
@@ -126,15 +98,19 @@ header {
   border-top-color: #333;
   animation: spinner .6s linear infinite;
 }
-
-th .fa-steam-square {
-  font-size: 1.4em;
+.steam{
+  width:10%;
+  text-align: center;
 }
-
-td .fa-steam-square {
-  color: grey;
+.name{
+  width:40%;
+  text-align:left;
 }
-
-td.fa-steam-square:hover {
-  color: #ddc271;
+.level{
+  width:25%;
+  text-align: left;
+}
+.online{
+  width:25%;
+  text-align: left;
 }

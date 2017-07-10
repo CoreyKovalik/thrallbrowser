@@ -1,17 +1,13 @@
 <header>WELCOME TO THRALL BROWSER</header>
 
 <div>
-
-  <table>
+  <table align="center" class="table table-responsive">
     <thead>
       <tr>
         <th class="steam" title="View Steam Profile"><i class="fa fa-steam-square fa-2x" aria-hidden="true"></th>
         <th class="name">Name</th>
         <th class="level">Level</th>
         <th class="online">Last Online</th>
-        <!-- <th id="conan">Conan ID</th> -->
-        <!-- <th id="server">Server ID</th> -->
-        <th class="xyz">(X,Y,Z)</th>
       </tr>
     </thead>
   <div ng-show="all.isloading" class="test spinner"></div>
@@ -21,9 +17,6 @@
         <td class="name"><a  title="View Character Details" ng-href="/character{{character.id}}"> {{character.name}}</a></td>
         <td class="level">{{character.level}}</td>
         <td class="online">{{character | isonline}}</td>
-        <!-- <td>{{character.conan_id}}</td> -->
-        <!-- <td>{{character.server_id}}</td> -->
-        <td class="xyz">{{all.roundConcatXYZ(character.x, character.y, character.z)}}</td>
       </tr>
     </tbody>
   </table>
