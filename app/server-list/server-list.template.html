@@ -11,13 +11,20 @@
     </div>
 
     <div class="col-md-12 text-center">
+    <label class="go-server">
       Enter your server ID:
     <input type="text" class="server-input" ng-model="the.serverId" min="0" step="1" required>
-    <button class="btn btn-warning" title="Go to Server" ng-click="the.goServer()">Go!</button>
 
+    <button class="btn btn-warning go-server" title="Go to Server #{{the.serverId}}" ng-click="the.goServer()">Go!</button>
+    </label>
 
       <br/>- or -<br/>
       Choose from the server list below (coming soon...)
+    </div>
+
+    <div class="col-md-12 text-center">
+    <br/>
+      (Go to server Id 5 for a live example)
     </div>
 
             <br/><br/><br/><br/>

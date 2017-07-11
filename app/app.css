@@ -180,12 +180,21 @@ input.server-input {
   width: 60px;
   padding: 5px;
   border-color: #ddc271;
-  outline-color: #ddc271;
+  outline-color: transparent;
   font-weight: bold;
+  text-align: center;
+  border-radius: 15px;
+  margin-left: 5px;
 }
-.btn-warning {
+button.go-server {
   background-color: #ddc271;
   color: #1b1b1b;
+  margin-left: 10px;
+  margin-bottom: 1px;
+  border-radius: 15px;
+}
+label.go-server {
+  font-weight: normal;
 }
 /*.no-rel,
 .no-rel > div {
