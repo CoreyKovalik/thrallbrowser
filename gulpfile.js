@@ -3,6 +3,7 @@ var browserify  = require('browserify');
 var source      = require('vinyl-source-stream');
 var browserSync = require('browser-sync');
 var util        = require('gulp-util');
+var historyApiFallback = require('connect-history-api-fallback');
 
 var bundler = browserify({
     entries      : ['app/app.js'],
@@ -69,7 +70,10 @@ gulp.task('watch', [
         ghostMode: false,
         logPrefix: 'BS',
         logLevel : 'silent',
-        server   : {baseDir: 'dist'},
+        server   : {
+            baseDir: 'dist',
+            middleware: [ historyApiFallback() ]
+        },
     });
 
     gulp.watch('app/index.html', ['index']);
