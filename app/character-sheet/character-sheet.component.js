@@ -11,6 +11,12 @@ angular
         $http.get('https://serverthrallapi.herokuapp.com/api/5/characters/' + $routeParams.charId + '?private_secret=200cd768-5b1d-11e7-9e82-d60626067254').then(function(response) {
             self.char = response.data;
             self.isloading = false;
+            self.success = true;
+        })
+        .catch(function(respone) {
+          console.log("Error: Invalid charId in URL")
+          self.isloading = false;
+          self.fail = true;
         });
       }
 

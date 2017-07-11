@@ -1,5 +1,6 @@
+<div ng-if="the.fail"><a>Incorrect Character ID, try again:<br/>Return to Index</a></div>
 <div ng-show="the.isloading" class="test spinner"></div>
-<div ng-if="!the.isloading">
+<div ng-if="the.success">
 <header>{{the.char.name}} (ID # {{the.char.id}})</header>
 
 <div>
