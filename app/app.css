@@ -156,3 +156,38 @@ td .fa-steam-square:hover {
   border: 0px;
 }
 }
+.top-container {
+  margin-top: 80px;
+  background-color: #1b1b1b
+}
+.col-md-12 {
+  position: static;
+}
+.server-list-stick-top {
+  position: sticky;
+  top: 81px;
+  background-color: black;
+}
+.thrall-heading {
+    font-family: Trebuchet MS;
+    background-color: black;
+    color: #ddc271;
+    font-size: 18px;
+    cursor: default;
+}
+input.server-input {
+  background-color: black;
+  width: 60px;
+  padding: 5px;
+  border-color: #ddc271;
+  outline-color: #ddc271;
+  font-weight: bold;
+}
+.btn-warning {
+  background-color: #ddc271;
+  color: #1b1b1b;
+}
+/*.no-rel,
+.no-rel > div {
+  position: static;
+}*/

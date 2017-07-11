@@ -2,8 +2,8 @@ angular
   .module('thrallbro')
   .component('characterList', {
     templateUrl: 'character-list/character-list.template.html',
-    controllerAs: 'all',
-    controller: function characterListController($http){
+    controllerAs: 'the',
+    controller: function characterListController($http, $routeParams){
       // this.characters = [
       //   {
       //     //SAMPLE DATA
@@ -36,12 +36,23 @@ angular
 
       self.isloading = true;
       function loadCharacterData() {
-        $http.get('https://serverthrallapi.herokuapp.com/api/5/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254').then(function(response) {
+        $http.get('https://serverthrallapi.herokuapp.com/api/' + $routeParams.serverId + '/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254').then(function(response) {
             self.characters = response.data;
             self.isloading = false;
             console.log(_.minBy(self.characters, 'conan_id'));
+        })
+        .catch(function(respone) {
+          console.log("Error: Invalid charId in URL")
+          self.isloading = false;
+          self.fail = true;
         });
       }
+
+      self.serverId = $routeParams.serverId;
+
+      // this.serverIdagain = 1337;
+      // var addId = this.serverIdagain.toString();
+      // this.serverStringagain = "../server" + addId;
 
       loadCharacterData();
       setInterval(loadCharacterData, 62000);

@@ -14,3 +14,4 @@ require('./core/is-online/is-online.filter.js');
 
 require('./character-list/character-list.component.js');
 require('./character-sheet/character-sheet.component.js');
+require('./server-list/server-list.component.js');

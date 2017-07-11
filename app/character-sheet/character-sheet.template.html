@@ -6,7 +6,15 @@
 <div ng-show="the.isloading" class="test spinner"></div>
 
 <div ng-if="!the.isloading && !the.fail">
-  <header>{{the.char.name}} (ID # {{the.char.id}})</header>
+  <header>
+<!--     <a ng-href="../" style="float:left; font-size:40px; padding-top:12px;">
+    &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+    </a> -->
+
+<!--     ^^ not centered and aligned properly, CSS issue to fix later. -->
+
+    {{the.char.name}} (ID # {{the.char.id}})
+  </header>
 
   <div>
     <table class="table table-responsive character-sheet">

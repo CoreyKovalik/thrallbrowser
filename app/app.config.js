@@ -4,9 +4,12 @@ angular
     // $locationProvider.hashPrefix('');
     $routeProvider
       .when('/', {
+        template: '<server-list></server-list>'
+      })
+      .when('/server/:serverId', {
         template: '<character-list></character-list>'
       })
-      .when('/character' + ':charId', {
+      .when('/server/:serverId/character/:charId', {
         template: '<character-sheet></character-sheet>'
       })
       .otherwise('/');
