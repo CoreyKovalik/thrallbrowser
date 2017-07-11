@@ -1,16 +1,22 @@
-<header>WELCOME TO THRALL BROWSER</header>
+<header>WELCOME TO THRALL BROWSER
 
-<div>
-  <table align="center" class="table table-responsive">
-    <thead>
+
+  <table class="char-list-head table table-responsive">
+      <thead>
       <tr>
-        <th class="steam" title="View Steam Profile"><i class="fa fa-steam-square fa-2x" aria-hidden="true"></th>
+        <th class="steam" title="View Steam Profile"><i class="fa fa-steam-square fa-2x" aria-hidden="true"></i></th>
         <th class="name">Name</th>
         <th class="level">Level</th>
         <th class="online">Last Online</th>
       </tr>
-    </thead>
-  <div ng-show="all.isloading" class="test spinner"></div>
+      </thead>
+  </table>
+
+</header>
+
+
+<div>
+  <table class="char-list-content table">
     <tbody>
       <tr ng-repeat="character in all.characters" class="highlight">
         <td class="steam"><a  title="View Steam Profile" ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}"><i class="fa fa-steam-square fa-lg" aria-hidden="true"></td>
@@ -20,5 +26,5 @@
       </tr>
     </tbody>
   </table>
-
+<div ng-show="all.isloading" class="test spinner"></div>
 </div>

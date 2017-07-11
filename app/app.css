@@ -5,10 +5,11 @@ body {
   font-family: Trebuchet MS;
   color: white;
   font-size: 16px;
+  min-width: 480px;
 }
 header {
   top: 0;
-  position: sticky;
+  position: fixed;
   width: 100%;
   background-color: #1b1b1b;
   color: #ddc271;
@@ -17,6 +18,7 @@ header {
   font-weight: normal;
   font-size: 50px;
   padding-top: .2em;
+  min-width: 480px;
 }
 a {
   color:white;
@@ -32,6 +34,15 @@ table {
   width: 100%;
   border-spacing: 0px 1px;
   -webkit-border-vertical-spacing: 0px;
+}
+table.character-sheet,
+table.character-sheet tbody{
+  margin-top: 80px;
+  border-top: 0px;
+  margin-bottom: 0px;
+}
+table.character-sheet > tbody {
+  background-color: black;
 }
 tbody {
   background-color: #1b1b1b;
@@ -69,6 +80,32 @@ tr.highlight:hover {
   font-size:17px;
   background-color:black;
   font-weight: bold;
+}
+.char-list-head,
+.char-list-head>thead>tr>th,
+.char-list-head>tbody>tr>th,
+.char-list-head>thead>tr>td,
+.char-list-head>tbody>tr>td {
+  font-family: Trebuchet MS;
+  background-color: black;
+  color: #ddc271;
+  font-size: 18px;
+  cursor: default;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+}
+table.char-list-content {
+  margin-top: 108px;
+}
+.char-list-content,
+.char-list-content>thead>tr>th,
+.char-list-content>tbody>tr>th,
+.char-list-content>thead>tr>td,
+.char-list-content>tbody>tr>td {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
 }
 th .fa-steam-square {
   font-size: 1.4em;
@@ -113,4 +150,9 @@ td .fa-steam-square:hover {
 .online{
   width:25%;
   text-align: left;
+}
+@media screen and (max-width: 767px) {
+.table-responsive {
+  border: 0px;
+}
 }

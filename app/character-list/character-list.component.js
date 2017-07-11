@@ -34,11 +34,12 @@ angular
       // ];
       var self = this;
 
+      self.isloading = true;
       function loadCharacterData() {
-        self.isloading = true;
         $http.get('https://serverthrallapi.herokuapp.com/api/5/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254').then(function(response) {
             self.characters = response.data;
             self.isloading = false;
+            console.log(_.minBy(self.characters, 'conan_id'));
         });
       }
 
