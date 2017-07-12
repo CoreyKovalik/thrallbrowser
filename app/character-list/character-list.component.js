@@ -50,10 +50,6 @@ angular
 
       self.serverId = $routeParams.serverId;
 
-      // this.serverIdagain = 1337;
-      // var addId = this.serverIdagain.toString();
-      // this.serverStringagain = "../server" + addId;
-
       loadCharacterData();
       setInterval(loadCharacterData, 62000);
 

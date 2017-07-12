@@ -47,18 +47,6 @@ table.character-sheet > tbody {
 tbody {
   background-color: #1b1b1b;
 }
-/*tbody, thead {
-  display:block;
-}
-thead {
-  background-color: black;
-}
-tbody {
-  background-color: #1b1b1b;
-  overflow-y: scroll;
-  height:auto;
-  max-height: 500px;
-}*/
 th {
   background-color: black;
   color: #ddc271;
@@ -196,7 +184,3 @@ button.go-server {
 label.go-server {
   font-weight: normal;
 }
-/*.no-rel,
-.no-rel > div {
-  position: static;
-}*/
