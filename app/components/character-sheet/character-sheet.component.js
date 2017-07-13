@@ -1,7 +1,7 @@
 angular
   .module('thrallbro')
   .component('characterSheet', {
-    templateUrl: 'character-sheet/character-sheet.template.html',
+    templateUrl: 'components/character-sheet/character-sheet.template.html',
     controllerAs: 'the',
     controller: function characterSheetController($http, $routeParams){
       var self = this;

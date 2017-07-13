@@ -1,7 +1,7 @@
 angular
   .module('thrallbro')
   .component('characterList', {
-    templateUrl: 'character-list/character-list.template.html',
+    templateUrl: 'components/character-list/character-list.template.html',
     controllerAs: 'the',
     controller: function characterListController($http, $routeParams){
       // this.characters = [
