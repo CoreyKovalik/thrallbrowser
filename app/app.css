@@ -196,6 +196,7 @@ button.go-server {
   margin-left: 10px;
   margin-bottom: 1px;
   border-radius: 15px;
+  width: 75px;
 }
 label.go-server {
   font-weight: normal;
