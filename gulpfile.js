@@ -5,6 +5,8 @@ var browserSync = require('browser-sync');
 var util        = require('gulp-util');
 var historyApiFallback = require('connect-history-api-fallback');
 
+var ignoreErrors = true;
+
 var bundler = browserify({
     entries      : ['app/app.js'],
     transform    : ['babelify'],
@@ -23,15 +25,20 @@ gulp.task('scripts', function(cb) {
         }
     }
 
-    function onError(err) {
+    function onErrorIgnore(err) {
         logBrowserifyError(err);
         if (cb) {cb(); cb = null}
+    }
+
+    function onError(err) {
+        logBrowserifyError(err);
+        process.exit(1);
     }
 
     return bundler
         .bundle()
         .on('log', util.log)
-        .on('error', onError)
+        .on('error', ignoreErrors ? onErrorIgnore : onError)
         .pipe(source('app.js'))
         .pipe(gulp.dest('dist'))
 });
@@ -56,12 +63,7 @@ gulp.task('vendors', function() {
         .pipe(gulp.dest('dist/vendor'))
 });
 
-gulp.task('watch', [
-    'index',
-    'styles',
-    'scripts',
-    'html',
-    'vendors'], function() {
+gulp.task('watch', ['build'], function() {
     browserSync({
         port     : 8080,
         open     : true,
@@ -83,5 +85,8 @@ gulp.task('watch', [
     gulp.watch('dist/**/*.*', browserSync.reload);
 });
 
-gulp.task('build', ['scripts', 'index', 'styles', 'html','vendors']);
-gulp.task('default', ['build']);
+gulp.task('build', ['scripts', 'index', 'styles', 'html', 'vendors']);
+gulp.task('default', function() {
+    ignoreErrors = false;
+    return gulp.start('build');
+});
