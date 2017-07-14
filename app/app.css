@@ -5,7 +5,7 @@ body {
   font-family: Trebuchet MS;
   color: white;
   font-size: 16px;
-  min-width: 480px;
+  min-width: 360px;
 }
 header {
   top: 0;
@@ -18,7 +18,8 @@ header {
   font-weight: normal;
   font-size: 50px;
   padding-top: .2em;
-  min-width: 480px;
+  min-width: 360px;
+  height: 81px;
 }
 a {
   color:white;
@@ -132,11 +133,11 @@ td .fa-steam-square:hover {
   text-align:left;
 }
 .level{
-  width:25%;
+  width:20%;
   text-align: left;
 }
 .online{
-  width:25%;
+  width:30%;
   text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -165,7 +166,7 @@ td .fa-steam-square:hover {
 }
 input.server-input {
   background-color: black;
-  width: 60px;
+  width: 110px;
   padding: 5px;
   border-color: #ddc271;
   outline-color: transparent;
@@ -183,4 +184,25 @@ button.go-server {
 }
 label.go-server {
   font-weight: normal;
+}
+html {
+  font-size:100%;
+}
+@media (max-width: 450px) {
+  body {
+    font-size:0.6rem;
+  }
+  header {
+    font-size:2.5rem;
+    padding-top: .4em;
+  }
+  .char-list-head>thead>tr>th {
+    font-size:.9rem;
+  }
+  table.char-list-content {
+    margin-top: 95px;
+  }
+  table.character-sheet>tbody>tr>th {
+    font-size:.9rem;
+  }
 }

@@ -6,7 +6,7 @@ angular
     controller: function serverListController($http, $location){
       var self = this;
 
-      this.serverId = 1337;
+      this.serverId = "¯\\_(ツ)_/¯";
 
       this.goServer = function() {
         $location.url("/server/" + self.serverId);
