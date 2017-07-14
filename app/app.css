@@ -21,7 +21,9 @@ header {
   min-width: 360px;
   height: 81px;
 }
-a {
+a:visited,
+a:active,
+a:link {
   color:white;
   text-decoration: none;
 }
