@@ -7,7 +7,7 @@ angular
       if (character.is_online) {
         return "Online Now";
       } else {
-        return moment.unix(1498556222).format('l');
+        return moment.unix(character.last_online).fromNow();
       }
     }
   });
