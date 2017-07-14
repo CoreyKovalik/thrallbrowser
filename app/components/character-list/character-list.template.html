@@ -1,38 +1,65 @@
 <div ng-if="the.fail">
-  <a>Incorrect Server ID, try again:
-  <br/>Return to Index</a>
+  Incorrect Server ID, try again:<br />
+  <a ng-href="/">Click to Return to Server List</a>
 </div>
 
-<div ng-show="the.isloading" class="test spinner"></div>
+<div ng-show="the.isloading" class="test spinner">
+</div>
 
 <div ng-if="!the.isloading && !the.fail">
 
-  <header>WELCOME TO THRALL BROWSER
-
-
-    <table class="char-list-head table table-responsive">
-        <thead>
-        <tr>
-          <th class="test steam" title="View Steam Profile"><i class="fa fa-steam-square fa-2x" aria-hidden="true"></i></th>
-          <th class="test name">Name</th>
-          <th class="test level">Level</th>
-          <th class="test online">Last Online</th>
-        </tr>
-        </thead>
-    </table>
+  <header>
+  THRALL BROWSER
   </header>
 
-  <div>
-    <table class="char-list-content table">
-      <tbody>
-        <tr ng-repeat="character in the.characters" class="highlight">
-          <td class="steam"><a  title="View Steam Profile" ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}"><i class="fa fa-steam-square fa-lg" aria-hidden="true"></td>
-          <td class="name"><a  title="View Character Details" ng-href="/server/{{the.serverId}}/character/{{character.id}}"> {{character.name}}</a></td>
-          <td class="level">{{character.level}}</td>
-          <td class="online">{{character | isonline}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="container top-container">
+    <div class="row">
+      <div class="col-md-12 server-list-stick-top">
 
-</div>
+        <table class="char-list-head table table-responsive">
+            <thead>
+            <tr>
+              <th class="test steam" title="View Steam Profile">
+              <i class="fa fa-steam-square fa-2x" aria-hidden="true"></i>
+              </th>
+              <th class="test name">
+              Name
+              </th>
+              <th class="test level">
+              Level
+              </th>
+              <th class="test online">
+              Last Online
+              </th>
+            </tr>
+            </thead>
+        </table>
+      </div>
+
+      <div class="col-md-12 text-center">
+        <table class="char-list-content table table-responsive">
+          <tbody>
+            <tr ng-repeat="character in the.characters" class="highlight">
+              <td class="steam">
+              <a  title="View Steam Profile" ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
+              <i class="fa fa-steam-square fa-lg" aria-hidden="true"></i>
+              </td>
+              <td class="name">
+              <a  title="View Character Details" ng-href="/server/{{the.serverId}}/character/{{character.id}}">
+              {{character.name}}
+              </a>
+              </td>
+              <td class="level">
+              {{character.level}}
+              </td>
+              <td class="online">
+              {{character | isonline}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div> <!-- end 1st(only) row -->
+  </div><!-- end 1st(only) container -->
+</div> <!-- end ng-if -->

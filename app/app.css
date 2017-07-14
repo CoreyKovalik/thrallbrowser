@@ -84,9 +84,6 @@ tr.highlight:hover {
   border: 0px;
   padding: 0px;
 }
-table.char-list-content {
-  margin-top: 108px;
-}
 .char-list-content,
 .char-list-content>thead>tr>th,
 .char-list-content>tbody>tr>th,
@@ -196,12 +193,14 @@ html {
     font-size:2.5rem;
     padding-top: .4em;
   }
+  /*character-list*/
   .char-list-head>thead>tr>th {
     font-size:.9rem;
   }
-  table.char-list-content {
-    margin-top: 95px;
+  input.server-input {
+    width: 70px;
   }
+  /*character-sheet*/
   table.character-sheet>tbody>tr>th {
     font-size:.9rem;
   }
