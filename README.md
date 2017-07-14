@@ -1,22 +1,23 @@
-### thrallbrowser
+# thrallbrowser
 
 This will let you view your Conan Exiles server information on the web.
 
-Separate from, but used based on using **serverthrall** with your Conan Exiles dedicated server.  See more info at **https://github.com/NullSoldier/serverthrall**
+Separate from, but used based on using **serverthrall** with your Conan Exiles dedicated server.
+See more info at **https://github.com/NullSoldier/serverthrall**
 
 thrallbrowser is *live* and currently deployed at **https://thrallbrowser.com**
 
-Get started viewing servers by entering a server id at thrallbrowser.com, server id's start at 1 and continue for every serverthrall server id that has been created
+Get started viewing servers by entering a server id at [thrallbrowser] (https://thrallbrowser.com), server id's start at 1 and continue for every serverthrall server id that has been created.
 
-###Future
+## Future
 
 thrallbrowser is fully intended to pump out plenty of features that will prove useful to:
--Server admins
--PvP players
--PvE players
--Clan leaders and members alike
+- Server admins
+- PvP players
+- PvE players
+- Clan leaders and members alike
 
-###Big features we intend to implement
+## Big features we intend to implement
 
 - [ ] interactive live map of player locations
 - [ ] live map features can be set to public or private by admins
