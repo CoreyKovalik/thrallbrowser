@@ -19,6 +19,8 @@ angular
         });
       }
 
+      self.serverId = $routeParams.serverId;
+
       loadCharacterData();
       setInterval(loadCharacterData, 62000);
     }

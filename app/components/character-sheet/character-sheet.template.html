@@ -1,86 +1,98 @@
 <div ng-if="the.fail">
-  <a>Incorrect Character ID, try again:
-  <br/>Return to Index</a>
+  Invalid Character ID, try again:<br />
+  <a ng-href="/server/{{the.serverId}}">Click to Return to Character List for server {{the.serverId}}</a>
 </div>
 
-<div ng-show="the.isloading" class="test spinner"></div>
+<div ng-show="the.isloading" class="spinner"></div>
 
 <div ng-if="!the.isloading && !the.fail">
+
   <header>
 <!--     <a ng-href="../" style="float:left; font-size:40px; padding-top:12px;">
     &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
     </a> -->
 
 <!--     ^^ not centered and aligned properly, CSS issue to fix later. -->
-
-    {{the.char.name}} (ID # {{the.char.id}})
+  {{the.char.name}} (ID # {{the.char.id}})
   </header>
-  <div>
-    <table class="table table-responsive character-sheet">
-        <tr>
-          <th>Username:</th>
-          <td>{{the.char.name}}</td>
-        </tr>
-        <tr>
-          <th>Character created:</th>
-          <td>{{the.char.created}}</td>
-        </tr>
-        <tr>
-          <th>Character's level:</th>
-          <td>{{the.char.level}}</td>
-        </tr>
-        <tr>
-          <th>Character's sex:</th>
-          <td>(feature coming soon...)</td>
-        </tr>
-        <tr>
-          <th>Online Status:</th>
-          <td>{{the.char.is_online}}</td>
-        </tr>
-        <tr>
-          <th>Last Online:</th>
-          <td>{{the.char | isonline}}</td>
-        </tr>
-        <tr>
-          <th>Last killed by:</th>
-          <td>"{{the.char.last_killed_by}}"</td>
-        </tr>
-        <tr>
-          <th>Unique ID:</th>
-          <td>{{the.char.id}}</td>
-        </tr>
-        <tr>
-          <th>Conan ID:</th>
-          <td>{{the.char.conan_id}}</td>
-        </tr>
-        <tr>
-          <th>Server ID:</th>
-          <td>{{the.char.server_id}}</td>
-        </tr>
-        <tr>
-          <th>Server Name:</th>
-          <td>(feature coming soon...)</td>
-        </tr>
-        <tr>
-          <th>Clan Name:</th>
-          <td>(feature coming soon...)</td>
-        </tr>
-        <tr>
-          <th>Steam ID/Profile:</th>
-          <td>{{the.char.steam_id}}</td>
-        </tr>
-        <tr>
-          <th>X-coordinate:</th>
-          <td>{{the.char.x}}</td>
-        </tr>
-        <tr>
-          <th>Y-coordinate:</th>
-          <td>{{the.char.y}}</td>
-        </tr>
-        <tr>
-          <th>Z-coordinate:</th>
-          <td>{{the.char.z}}</td>
-        </tr>
-    </table>
-  </div>
-</div>
+
+  <div class="container top-container">
+    <div class="row">
+      <div class="col-xl-12 server-list-stick-top">
+        <p class="thrall-heading text-center p-fix">
+        Server name: (feature coming soon...) (ID: {{the.serverId}})
+        </p>
+      </div>
+
+      <div class="col-xl-12 text-center">
+        <table class="table table-responsive character-sheet">
+          <tr class="highlight">
+            <th>Username:</th>
+            <td>{{the.char.name}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Character created:</th>
+            <td>{{the.char.created}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Character's level:</th>
+            <td>{{the.char.level}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Character's sex:</th>
+            <td>(feature coming soon...)</td>
+          </tr>
+          <tr class="highlight">
+            <th>Online Status:</th>
+            <td>{{the.char.is_online}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Last Online:</th>
+            <td>{{the.char | isonline}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Last killed by:</th>
+            <td>"{{the.char.last_killed_by}}"</td>
+          </tr>
+          <tr class="highlight">
+            <th>Unique ID:</th>
+            <td>{{the.char.id}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Conan ID:</th>
+            <td>{{the.char.conan_id}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Server ID:</th>
+            <td>{{the.char.server_id}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Server Name:</th>
+            <td>(feature coming soon...)</td>
+          </tr>
+          <tr class="highlight">
+            <th>Clan Name:</th>
+            <td>(feature coming soon...)</td>
+          </tr>
+          <tr class="highlight">
+            <th>Steam ID/Profile:</th>
+            <td>{{the.char.steam_id}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>X-coordinate:</th>
+            <td>{{the.char.x}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Y-coordinate:</th>
+            <td>{{the.char.y}}</td>
+          </tr>
+          <tr class="highlight">
+            <th>Z-coordinate:</th>
+            <td>{{the.char.z}}</td>
+          </tr>
+        </table>
+      </div>
+
+    </div> <!-- end 1st(only) row -->
+  </div><!-- end 1st(only) container -->
+</div> <!-- end ng-if -->

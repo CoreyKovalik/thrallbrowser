@@ -31,6 +31,9 @@ a:hover {
   color: #ddc271;
   text-decoration: none;
 }
+p.p-fix {
+  margin-bottom: 0px;
+}
 table {
   width: 100%;
   border-spacing: 0px 1px;
@@ -38,7 +41,6 @@ table {
 }
 table.character-sheet,
 table.character-sheet tbody{
-  margin-top: 80px;
   border-top: 0px;
   margin-bottom: 0px;
 }
@@ -66,9 +68,17 @@ td.online:hover {
   cursor: default;
 }
 tr.highlight:hover {
-  font-size:17px;
+  font-size: 17px;
   background-color:black;
   font-weight: bold;
+}
+table.character-sheet>tbody>tr.highlight:hover {
+  font-size: 16px;
+  background-color: #1b1b1b;
+  font-weight: normal;
+}
+table.character-sheet>tbody>tr.highlight:hover>th {
+  background-color: #1b1b1b;
 }
 .char-list-head,
 .char-list-head>thead>tr>th,
@@ -93,8 +103,16 @@ tr.highlight:hover {
   border: 0px;
   padding: 0px;
 }
+.char-list-head>thead>tr>th.name,
+.char-list-head>thead>tr>th.level,
+.char-list-head>thead>tr>th.online {
+  padding-bottom: 2px;
+}
 th .fa-steam-square {
   font-size: 1.4em;
+}
+th > i.fa-steam-square {
+  padding-top: 3px;
 }
 td .fa-steam-square {
   color: grey;
@@ -146,7 +164,7 @@ td .fa-steam-square:hover {
   margin-top: 80px;
   background-color: #1b1b1b
 }
-.col-md-12 {
+.col-xl-12 {
   position: static;
 }
 .server-list-stick-top {

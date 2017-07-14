@@ -1,9 +1,9 @@
 <div ng-if="the.fail">
-  Incorrect Server ID, try again:<br />
+  Invalid Server ID, try again:<br />
   <a ng-href="/">Click to Return to Server List</a>
 </div>
 
-<div ng-show="the.isloading" class="test spinner">
+<div ng-show="the.isloading" class="spinner">
 </div>
 
 <div ng-if="!the.isloading && !the.fail">
@@ -14,21 +14,20 @@
 
   <div class="container top-container">
     <div class="row">
-      <div class="col-md-12 server-list-stick-top">
-
+      <div class="col-lg-12" server-list-stick-top">
         <table class="char-list-head table table-responsive">
             <thead>
             <tr>
-              <th class="test steam" title="View Steam Profile">
+              <th class="steam" title="View Steam Profile">
               <i class="fa fa-steam-square fa-2x" aria-hidden="true"></i>
               </th>
-              <th class="test name">
+              <th class="name">
               Name
               </th>
-              <th class="test level">
+              <th class="level">
               Level
               </th>
-              <th class="test online">
+              <th class="online">
               Last Online
               </th>
             </tr>
@@ -36,7 +35,7 @@
         </table>
       </div>
 
-      <div class="col-md-12 text-center">
+      <div class="col-lg-12" text-center">
         <table class="char-list-content table table-responsive">
           <tbody>
             <tr ng-repeat="character in the.characters" class="highlight">
