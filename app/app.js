@@ -1,5 +1,6 @@
 window.$ = window.jQuery = require('../vendor/jquery/jquery-3.2.1.min');
 window._ = require('lodash');
+window.moment = require('moment');
 require('angular');
 require('angular-route');
 require('../vendor/bootstrap/js/bootstrap.min.js');
