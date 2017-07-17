@@ -180,7 +180,7 @@ td .fa-steam-square:hover {
     font-size: 18px;
     cursor: default;
 }
-input.server-input {
+input.search-input {
   background-color: black;
   width: 110px;
   padding: 5px;
@@ -217,11 +217,18 @@ html {
   .char-list-head>thead>tr>th {
     font-size:.9rem;
   }
-  input.server-input {
+  input.search-input {
     width: 70px;
   }
   /*character-sheet*/
   table.character-sheet>tbody>tr>th {
     font-size:.9rem;
   }
+}
+.search-input.name-search {
+  width: 65%;
+  padding:0px;
+  border-radius: 5px;
+  border: 0px;
+  font-weight: normal;
 }
