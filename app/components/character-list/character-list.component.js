@@ -39,7 +39,8 @@ angular
         $http.get('https://serverthrallapi.herokuapp.com/api/' + $routeParams.serverId + '/characters?private_secret=200cd768-5b1d-11e7-9e82-d60626067254').then(function(response) {
             self.characters = response.data;
             self.isloading = false;
-            console.log(_.minBy(self.characters, 'conan_id'));
+            self.lastWipe = _.minBy(self.characters, 'conan_id');
+            self.lastWipeDate = moment.unix(self.lastWipe.created).format('LL');
         })
         .catch(function(respone) {
           console.log("Error: Invalid charId in URL")
