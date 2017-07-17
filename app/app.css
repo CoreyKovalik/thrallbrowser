@@ -17,9 +17,8 @@ header {
   text-align: center;
   font-weight: normal;
   font-size: 50px;
-  padding-top: .2em;
   min-width: 360px;
-  height: 81px;
+  height: 60px;
 }
 a:visited,
 a:active,
@@ -163,7 +162,7 @@ td .fa-steam-square:hover {
 }
 }
 .top-container {
-  margin-top: 80px;
+  margin-top: 60px;
   background-color: #1b1b1b
 }
 .col-xl-12 {
@@ -171,7 +170,7 @@ td .fa-steam-square:hover {
 }
 .server-list-stick-top {
   position: sticky;
-  top: 81px;
+  top: 60px;
   background-color: black;
 }
 .thrall-heading {
