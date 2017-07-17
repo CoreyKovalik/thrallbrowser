@@ -62,5 +62,8 @@ angular
 
         return xyz;
       }
+
+      self.sortLastOnline = '-last_online';
+      self.sortOnline = '-is_online';
     }
   });
