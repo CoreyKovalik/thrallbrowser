@@ -1,0 +1,41 @@
+<div class="serverlist">
+  <header>
+    THRALL BROWSER
+  </header>
+
+  <div class="container top-container">
+    <div class="row">
+      <div class="col-xl-12">
+        <label class="go-server">
+          Enter your serverthrall server ID
+          <input type="text" class="search-input server-id-placeholder" ng-model="serverId" placeholder="5" required>
+          <button class="btn btn-warning go-server" title="Go to Server #{{serverId}}" ng-click="the.goServer(serverId)">Go!</button>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12" style="padding-top: 20px;">
+        <table>
+            <thead>
+              <tr>
+                <th class="level">Name</th>
+                <th class="online">Last Sync</th>
+                <th class="online">Character Count</th>
+                <th class="name">Join</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="server in the.servers" ng-click="the.goServer(server.id)" class="highlight">
+                <td>{{server.name}}</td>
+                <td>{{server.last_sync}}</td>
+                <td>{{server.character_count}}</td>
+                <td>Coming soon.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>

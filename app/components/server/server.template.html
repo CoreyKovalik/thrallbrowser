@@ -1,0 +1,61 @@
+<div class="server">
+
+  <div ng-if="serverCtrl.fail">
+    <div>Invalid Server ID, try again:</div>
+    <a ng-href="/">Click to Return to Server List</a>
+  </div>
+
+  <div ng-show="serverCtrl.isloading" class="spinner"></div>
+
+  <div ng-if="!serverCtrl.isloading && !serverCtrl.fail">
+    <header>THRALL BROWSER</header>
+    <br><br>
+
+    <div class="container top-container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div>{{serverCtrl.server.name}}</div>
+          <div>Last Server Wipe: {{serverCtrl.lastWipeDate}}</div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-xl-12">
+          <input type="text" ng-model="serverCtrl.query.name" class="search-input name-search" placeholder="search character name...">
+
+          <table class="char-list-head char-list-content table table-responsive">
+            <thead>
+              <tr>
+                <th class="steam" title="View Steam Profile">
+                  <i class="fa fa-steam-square fa-2x" aria-hidden="true"></i>
+                </th>
+                <th class="level">Level</th>
+                <th class="name">Name</th>
+                <th class="clan">Clan</th>
+                <th class="online">Last Online</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="character in serverCtrl.characters | filter:serverCtrl.query | orderBy:serverCtrl.sortLastOnline | orderBy:serverCtrl.sortOnline" class="highlight">
+                <td class="steam">
+                  <a  title="View Steam Profile" ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
+                  <i class="fa fa-steam-square fa-lg" aria-hidden="true"></i>
+                </td>
+                <td class="level">{{character.level}}</td>
+                <td class="name">
+                  <a title="View Character Details" ng-href="/server/{{serverCtrl.serverId}}/character/{{character.id}}">
+                    {{character.name}}
+                  </a>
+                </td>
+                <td class="clan">{{character.clan_name}}</td>
+                <td class="online">{{character | isonline}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div> <!-- end 1st(only) row -->
+    </div><!-- end 1st(only) container -->
+  </div> <!-- end ng-if -->
+</div>

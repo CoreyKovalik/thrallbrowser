@@ -1,18 +1,19 @@
 angular
-  .module('thrallbro')
+  .module('thrallbrowser')
   .config(function config($routeProvider, $locationProvider) {
     // $locationProvider.hashPrefix('');
+
     $routeProvider
       .when('/', {
         template: '<server-list></server-list>'
       })
       .when('/server/:serverId', {
-        template: '<character-list></character-list>'
+        template: '<server></server>'
       })
       .when('/server/:serverId/character/:charId', {
-        template: '<character-sheet></character-sheet>'
+        template: '<character></character>'
       })
       .otherwise('/');
+
     $locationProvider.html5Mode(true);
-    }
-  );
+  });
