@@ -6,13 +6,14 @@ require('angular-route');
 require('../vendor/bootstrap/js/bootstrap.min.js');
 
 angular
-  .module('thrallbro', [
+  .module('thrallbrowser', [
     'ngRoute'
   ]);
 
 require('./app.config.js');
-require('./core/is-online/is-online.filter.js');
 
-require('./components/character-list/character-list.component.js');
-require('./components/character-sheet/character-sheet.component.js');
-require('./components/server-list/server-list.component.js');
+require('./components/character/character.component.js');
+require('./components/server/server.component.js');
+require('./components/serverlist/serverlist.component.js');
+require('./core/filters/isonline.filter.js');
+require('./core/serverthrallapi.service.js');

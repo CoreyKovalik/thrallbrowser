@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Jomhuria');
+
 body {
   background-color: black;
   margin: auto;
@@ -7,6 +8,7 @@ body {
   font-size: 16px;
   min-width: 360px;
 }
+
 header {
   top: 0;
   position: fixed;
@@ -46,13 +48,13 @@ table.character-sheet tbody{
   margin-bottom: 0px;
 }
 table.character-sheet > tbody {
-  background-color: black;
+  /*background-color*/: black;
 }
 tbody {
-  background-color: #1b1b1b;
+  /*background-color: #1b1b1b;*/
 }
 th {
-  background-color: black;
+  /*background-color*/: black;
   color: #ddc271;
   font-size: 18px;
   cursor: default;
@@ -70,24 +72,26 @@ td.online:hover {
 }
 tr.highlight:hover {
   font-size: 17px;
-  background-color:black;
+  /*background-color*/:black;
   font-weight: bold;
 }
 table.character-sheet>tbody>tr.highlight:hover {
   font-size: 16px;
-  background-color: #1b1b1b;
+  /*background-color*/: #1b1b1b;
   font-weight: normal;
 }
 table.character-sheet>tbody>tr.highlight:hover>th {
-  background-color: #1b1b1b;
+  /*background-color*/: #1b1b1b;
 }
-.char-list-head,
+
+.char-list {
+
+}
+
 .char-list-head>thead>tr>th,
-.char-list-head>tbody>tr>th,
-.char-list-head>thead>tr>td,
-.char-list-head>tbody>tr>td {
+.char-list-head>thead>tr>td {
   font-family: Trebuchet MS;
-  background-color: black;
+  background-color: #1b1b1b;
   color: #ddc271;
   font-size: 18px;
   cursor: default;
@@ -95,20 +99,20 @@ table.character-sheet>tbody>tr.highlight:hover>th {
   border: 0px;
   padding: 0px;
 }
-.char-list-content,
-.char-list-content>thead>tr>th,
-.char-list-content>tbody>tr>th,
-.char-list-content>thead>tr>td,
-.char-list-content>tbody>tr>td {
-  margin: 0px;
-  border: 0px;
-  padding: 0px;
-}
+
 .char-list-head>thead>tr>th.name,
 .char-list-head>thead>tr>th.level,
 .char-list-head>thead>tr>th.online {
   padding-bottom: 2px;
 }
+
+.char-list-content>tbody>tr>th,
+.char-list-content>tbody>tr>td {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+}
+
 th .fa-steam-square {
   font-size: 1.4em;
 }
@@ -144,16 +148,20 @@ td .fa-steam-square:hover {
   width:10%;
   text-align: center;
 }
+.level{
+  width:10%;
+  text-align: left;
+}
 .name{
-  width:40%;
+  width:30%;
   text-align:left;
 }
-.level{
-  width:20%;
+.clan{
+  width:30%;
   text-align: left;
 }
 .online{
-  width:30%;
+  width:20%;
   text-align: left;
 }
 @media screen and (max-width: 767px) {
@@ -163,16 +171,21 @@ td .fa-steam-square:hover {
 }
 .top-container {
   margin-top: 60px;
-  background-color: #1b1b1b
 }
 .col-xl-12 {
   position: static;
 }
-.server-list-stick-top {
+
+.server-list. .server-list-stick-top {
   position: sticky;
   top: 60px;
   background-color: black;
 }
+
+.server-list input.server-id-placeholder {
+  width: 200px;
+}
+
 .thrall-heading {
     font-family: Trebuchet MS;
     background-color: black;
@@ -187,7 +200,6 @@ input.search-input {
   border-color: #ddc271;
   outline-color: transparent;
   font-weight: bold;
-  text-align: center;
   border-radius: 15px;
   margin-left: 5px;
 }
@@ -224,6 +236,9 @@ html {
   table.character-sheet>tbody>tr>th {
     font-size:.9rem;
   }
+  td {
+    border-top: none !important;
+  }
 }
 .search-input.name-search {
   width: 65%;
@@ -231,4 +246,9 @@ html {
   border-radius: 5px;
   border: 0px;
   font-weight: normal;
+}
+
+.server .input.search-input {
+  background-color: #1b1b1b;
+
 }

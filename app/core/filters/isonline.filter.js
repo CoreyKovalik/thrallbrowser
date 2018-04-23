@@ -1,5 +1,5 @@
 angular
-  .module('thrallbro')
+  .module('thrallbrowser')
   .filter('isonline', function() {
     return function(character) {
       if (character.is_online) {

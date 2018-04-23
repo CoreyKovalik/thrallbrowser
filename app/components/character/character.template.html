@@ -1,0 +1,73 @@
+<div ng-if="the.fail">
+  Invalid Character ID, try again:<br />
+  <a ng-href="/server/{{the.serverId}}">Click to Return to Character List for server {{the.serverId}}</a>
+</div>
+
+<div ng-show="the.isloading" class="spinner"></div>
+
+<div ng-if="!the.isloading && !the.fail">
+  <header>
+    {{the.char.name}}
+    <!--
+    <a ng-href="../" style="float:left; font-size:40px; padding-top:12px;">
+      &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+    </a>
+    -->
+    <!--     ^^ not centered and aligned properly, CSS issue to fix later. -->
+  </header>
+
+  <div class="container top-container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="thrall-heading">
+          Character is on
+          <a ng-href="/server/{{the.serverId}}">Server {{the.serverId}}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <table class="character-sheet">
+          <tr class="highlight">
+            <td>Name</td>
+            <td>{{the.char.name}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Level</td>
+            <td>{{the.char.level}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Server Name</td>
+            <td>{{the.server.name}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Clan Name</td>
+            <td>{{the.char.clan_name}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Steam ID/Profile</td>
+            <td>{{the.char.steam_id}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>In Game Location</td>
+            <td>{{the.roundConcatXYZ(the.char.x, the.char.y, the.char.z)}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Last killed by</td>
+            <td{{the.char.last_killed_by}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Created</td>
+            <td>{{the.char.created}}</td>
+          </tr>
+          <tr class="highlight">
+            <td>Last Online</td>
+            <td>{{the.char | isonline}}</td>
+          </tr>
+        </table>
+      </div>
+
+    </div> <!-- end 1st(only) row -->
+  </div><!-- end 1st(only) container -->
+</div> <!-- end ng-if -->
