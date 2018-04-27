@@ -24,7 +24,9 @@ angular
             characters = results[1]
 
             firstCharacter = _.minBy(characters, 'conan_id');
-            self.lastWipeDate = moment.unix(firstCharacter.created).format('LL');
+            if(firstCharacter != null) {
+              self.lastWipeDate = moment.unix(firstCharacter.created).format('LL');
+            }
             self.characters = characters;
             self.server = server
             self.isloading = false;
