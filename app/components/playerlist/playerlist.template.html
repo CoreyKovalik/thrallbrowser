@@ -1,0 +1,74 @@
+<server-navbar></server-navbar>
+
+<div class="main-container playerlistview">
+  <div ng-show="playerListCtrl.isLoading" class="spinner"></div>
+
+  <div ng-if="!playerListCtrl.isLoading && playerListCtrl.loadingError">
+    Invalid Server ID, <a ng-href="/">click here to Return to Server List</a>
+  </div>
+
+  <div ng-if="!playerListCtrl.isLoading && !playerListCtrl.loadingError">
+    <input
+      type="text"
+      ng-model="nameFilter.name"
+      class="search-input name-search"
+      placeholder="search a character name...">
+
+    <div class="container-fluid push-top playerlist">
+      <div class="row">
+        <div class="col-sm-2 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('level')">
+          Level
+          <span
+            ng-show="playerListCtrl.currentSort == 'level'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': playerListCtrl.currentSortAsc, 'glyphicon-menu-up': !playerListCtrl.currentSortAsc}">
+          </span>
+        </div>
+
+        <div class="col-sm-4 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('name')">
+          <i class="fa fa-steam-square fa-lg"></i>
+          Name
+          <span
+            ng-show="playerListCtrl.currentSort == 'name'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': playerListCtrl.currentSortAsc, 'glyphicon-menu-up': !playerListCtrl.currentSortAsc}">
+          </span>
+        </div>
+
+        <div class="col-sm-4 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('clan_name')">
+          Clan
+          <span
+            ng-show="playerListCtrl.currentSort == 'clan_name'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': playerListCtrl.currentSortAsc, 'glyphicon-menu-up': !playerListCtrl.currentSortAsc}">
+          </span>
+        </div>
+
+        <div class="col-sm-2 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('last_online')">
+          Last Online
+          <span
+            ng-show="playerListCtrl.currentSort == 'last_online'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': playerListCtrl.currentSortAsc, 'glyphicon-menu-up': !playerListCtrl.currentSortAsc}">
+          </span>
+        </div>
+      </div>
+
+      <div class="row playerlist-item" ng-repeat="character in playerListCtrl.characters | filter:nameFilter | orderBy:playerListCtrl.orderBy track by character.id">
+        <div class="col-sm-2">{{character.level}}</div>
+        <div class="col-sm-4">
+          <a ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
+            <i class="fa fa-steam-square fa-lg"></i>
+          </a>
+          <div class="character-name">
+            <a ng-href="/server/{{playerListCtrl.serverId}}/character/{{character.id}}">
+              {{character.name}}
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">{{character.clan_name}}</div>
+        <div class="col-sm-2">{{character | isonline}}</div>
+      </div>
+    </div>
+  </div>
+</div>

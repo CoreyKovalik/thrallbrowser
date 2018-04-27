@@ -13,7 +13,10 @@ angular
 require('./app.config.js');
 
 require('./components/character/character.component.js');
+require('./components/clanlist/clanlist.component.js');
+require('./components/playerlist/playerlist.component.js');
 require('./components/server/server.component.js');
 require('./components/serverlist/serverlist.component.js');
+require('./components/servernavbar/servernavbar.component.js');
 require('./core/filters/isonline.filter.js');
 require('./core/serverthrallapi.service.js');

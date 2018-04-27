@@ -1,18 +1,15 @@
 angular
   .module('thrallbrowser')
-  .component('server', {
-    templateUrl: 'components/server/server.template.html',
-    controllerAs: 'serverCtrl',
+  .component('clanList', {
+    templateUrl: 'components/clanlist/clanlist.template.html',
+    controllerAs: 'clanListCtrl',
     controller: function serverController($q, $routeParams, serverthrallapi) {
       var self = this;
 
       self.isloading = true;
       self.serverId = $routeParams.serverId;
-      self.sortLastOnline = '-last_online';
-      self.sortOnline = '-is_online';
       self.server = null;
-      self.characters = null;
-      self.lastWipeDate = null;
+      self.clans = null;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
@@ -21,13 +18,9 @@ angular
         $q.all([serverPromise, charPromise])
           .then(function(results) {
             server = results[0]
-            characters = _.filter(results[1], function(c) {return c.is_online;});
+            clans = results[1]
 
-            firstCharacter = _.minBy(characters, 'conan_id');
-            if(firstCharacter != null) {
-              self.lastWipeDate = moment.unix(firstCharacter.created).format('LL');
-            }
-            self.characters = characters;
+            self.clans = clans;
             self.server = server
             self.isloading = false;
           })
