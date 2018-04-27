@@ -252,3 +252,133 @@ html {
   background-color: #1b1b1b;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.push-top {
+  margin-top: 10px;
+}
+
+.non-interactive {
+  user-select: none;
+  cursor: pointer;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-width: 1024px;
+  width: 100%;
+  height: 100%;
+  background-image: url(images/background.png);
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+#ng-view {
+  width: 100%;
+  height: 100%;
+}
+
+.navigationbar {
+  background-image: url('images/navigationbg.png');
+  background-repeat: repeat-x;
+  background-size: cover;
+  width: 100%;
+  height: 100px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.navigationbar .navigationbutton {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  background-size: contain;
+  text-align: center;
+  width: 256px;
+  height: 64px;
+  padding-top: 11px;
+  user-select: none;
+  display: inline-block;
+  background-image: url('images/button_normal.png');
+}
+
+.navigationbar .navigationbutton.active {
+  background-image: url('images/button_hover.png');
+}
+
+.navigationbar .navigationbutton:hover {
+  background-image: url('images/button_pressed.png');
+  cursor: pointer;
+}
+
+.navigationbar .navigationbutton .navigationbutton-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navigationbutton + .navigationbutton {
+  margin-left: 100px;
+}
+
+.main-container {
+  margin-bottom: 100px;
+  margin-top: 20px;
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1024px;
+  position: relative;
+  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+}
+
+
+.playerlistview .name-search {
+
+}
+
+.playerlistview .playerlist {
+
+}
+
+.playerlistview .playerlist .playerlist-header {
+  height: 30px;
+  line-height: 30px;
+  font-size: 20px;
+  vertical-align: middle;
+  color: #ddc271;
+}
+
+.playerlistview .playerlist .playerlist-item {
+  height: 25px;
+  line-height: 25px;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.playerlistview .playerlist .playerlist-item:hover {
+  color: #ddc271;
+  background-color: rgb(5, 5, 5);
+}
+
+.playerlistview .playerlist .playerlist-item .character-name {
+  display: inline-block;
+  margin-left: 5px;
+}

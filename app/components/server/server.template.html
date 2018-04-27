@@ -1,17 +1,21 @@
+<server-navbar></server-navbar>
+
+<!-- <div class="main-container">
+  <div class="main-container-bg">
+  </div>
+</div> -->
+
 <div class="server">
+  <div ng-show="serverCtrl.isloading" class="spinner"></div>
 
   <div ng-if="serverCtrl.fail">
     <div>Invalid Server ID, try again:</div>
     <a ng-href="/">Click to Return to Server List</a>
   </div>
 
-  <div ng-show="serverCtrl.isloading" class="spinner"></div>
-
   <div ng-if="!serverCtrl.isloading && !serverCtrl.fail">
-    <header>THRALL BROWSER</header>
-    <br><br>
+    <div class="container">
 
-    <div class="container top-container">
       <div class="row">
         <div class="col-xl-12">
           <div>{{serverCtrl.server.name}}</div>
@@ -55,7 +59,9 @@
           </table>
         </div>
 
-      </div> <!-- end 1st(only) row -->
-    </div><!-- end 1st(only) container -->
-  </div> <!-- end ng-if -->
+      </div>
+    </div>
+  </div>
 </div>
+
+

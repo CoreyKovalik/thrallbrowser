@@ -58,6 +58,16 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('dist/'))
 });
 
+gulp.task('images', function() {
+    return gulp.src('images/**/*.png')
+        .pipe(gulp.dest('dist/images'))
+});
+
+gulp.task('fonts', function() {
+    return gulp.src('fonts/**/*.*')
+        .pipe(gulp.dest('dist/fonts'))
+});
+
 gulp.task('vendors', function() {
     return gulp.src('vendor/**/*.*')
         .pipe(gulp.dest('dist/vendor'))
@@ -81,11 +91,14 @@ gulp.task('watch', ['build'], function() {
     gulp.watch('app/index.html', ['index']);
     gulp.watch('app/**/*.js', ['scripts']);
     gulp.watch('app/**/*.css', ['styles']);
+    gulp.watch('images/**/*.*', ['images']);
+    gulp.watch('fonts/**/*.*', ['fonts']);
     gulp.watch(['app/**/*.html', '!app/index.html'], ['html']);
     gulp.watch('dist/**/*.*', browserSync.reload);
 });
 
-gulp.task('build', ['scripts', 'index', 'styles', 'html', 'vendors']);
+gulp.task('build', ['scripts', 'index', 'styles', 'html', 'vendors', 'images', 'fonts']);
+
 gulp.task('default', function() {
     ignoreErrors = false;
     return gulp.start('build');

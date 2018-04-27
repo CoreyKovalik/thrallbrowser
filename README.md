@@ -25,3 +25,16 @@ thrallbrowser is fully intended to pump out plenty of features that will prove u
 - [ ] clan features on the interactive map to include all structures created by that clan
 - [ ] ability to view server "message of the day", and clan "message of the day" in thrallbrowser
 - [ ] ability for server admins to provide a link to their means for server donations
+
+* Home
+    * Online player list
+    * Top clan list
+    * Server info
+    * Discord
+* Players
+* Clans
+ * Clan page
+ * Character page
+    * attributes
+    * stats
+    * paper doll

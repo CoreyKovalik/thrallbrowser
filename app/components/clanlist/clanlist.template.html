@@ -1,0 +1,40 @@
+<server-navbar></server-navbar>
+
+<!-- <div class="main-container">
+  <div class="main-container-bg">
+  </div>
+</div> -->
+
+<div class="playerlist">
+  <div ng-show="clanListCtrl.isloading" class="spinner"></div>
+
+  <div ng-if="clanListCtrl.fail">
+    <div>Invalid Server ID, try again:</div>
+    <a ng-href="/">Click to Return to Server List</a>
+  </div>
+
+  <div ng-if="!clanListCtrl.isloading && !clanListCtrl.fail">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <table class="char-list-head char-list-content table table-responsive push-top">
+            <thead>
+              <tr>
+                <th class="name">Name</th>
+                <th class="clan">Created</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="clan in clanListCtrl.clans" class="highlight">
+                <td class="name">{{clan.name}}</td>
+                <td class="clan">{{clan.created}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+<div class="navigationbar">
+  <a
+    ng-href="/server/{{navbarCtrl.serverId}}/"
+    class="navigationbutton"
+    ng-class="{'active': navbarCtrl.routeId == 'server'}">
+      <div class="navigationbutton-text">HOME</div>
+  </a>
+
+  <a
+    ng-href="/server/{{navbarCtrl.serverId}}/players"
+    class="navigationbutton"
+    ng-class="{'active': navbarCtrl.routeId == 'player-list'}">
+    <div class="navigationbutton-text">PLAYERS</div>
+  </a>
+
+  <a
+    ng-href="/server/{{navbarCtrl.serverId}}/clans"
+    class="navigationbutton"
+    ng-class="{'active': navbarCtrl.routeId == 'clan-list'}">
+    <div class="navigationbutton-text">CLANS</div>
+  </a>
+</div>
