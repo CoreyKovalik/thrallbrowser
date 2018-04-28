@@ -8,11 +8,29 @@
   </div>
 
   <div ng-if="!playerListCtrl.isLoading && !playerListCtrl.loadingError">
-    <input
-      type="text"
-      ng-model="nameFilter.name"
-      class="search-input name-search"
-      placeholder="Search for a character name...">
+
+    <div class="container-fluid push-top">
+      <div class="row">
+        <div class="col-xs-6">
+          <input
+            type="text"
+            style="inline-block"
+            ng-model="playerFilter.name"
+            class="search-input name-search"
+            placeholder="Search for a character name...">
+        </div>
+
+        <div class="col-xs-6">
+          <label class="filter-online pointer">
+            <span>Show online players only</span>
+            <input
+              type="checkbox"
+              class="pointer"
+              ng-model="playerFilter.is_online">
+          </label>
+        </div>
+      </div>
+    </div>
 
     <div class="container-fluid push-top playerlist itemlist">
       <div class="row">
@@ -56,7 +74,7 @@
 
       <div
         class="row itemlist-item"
-        ng-repeat="character in playerListCtrl.characters | filter:nameFilter | orderBy:playerListCtrl.orderBy track by character.id">
+        ng-repeat="character in playerListCtrl.characters | filter:playerFilter | filter: orderBy:playerListCtrl.orderBy track by character.id">
         <div class="col-xs-2">{{character.level}}</div>
         <div class="col-xs-4">
           <a ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">

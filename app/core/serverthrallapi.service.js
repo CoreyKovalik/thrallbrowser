@@ -12,16 +12,22 @@ angular
       return clan;
     }
 
+    function processCharacter(character) {
+      if(character.created != null)
+        character.created = moment.unix(character.created);
+      return character;
+    }
+
     function getCharacters(serverId) {
       return $http.get(root_api + serverId + '/characters').then(function(response) {
-        return response.data;
+        return _.map(response.data, processCharacter);
       });
     }
 
     function getCharacter(serverId, characterId)
     {
       return $http.get(root_api + serverId + '/characters/' + characterId).then(function(response) {
-        return response.data;
+        return processCharcter(response.data);
       });
     }
 

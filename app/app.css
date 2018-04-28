@@ -276,6 +276,10 @@ html {
   cursor: pointer;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -379,23 +383,39 @@ body {
 }
 
 .itemlist .itemlist-item:hover {
-  color: #ddc271;
-  background-color: rgb(5, 5, 5);
+  color: #DDC271;
+  background-color: #050505;
 }
 
 
 /* PLAYER LIST */
 .playerlistview .name-search {
-  background-color: rgb(5, 5, 5);
+  background-color: #191919;
   width: 100%;
   height: 30px;
-  display: block;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .playerlistview .name-search::placeholder {
   padding-left: 10px;
   color: #AAA;
+}
+
+.playerlistview .filter-online {
+  margin: 0;
+  display: inline-block;
+  float: right;
+  line-height: 30px;
+  height: 30px;
+  vertical-align: middle
+}
+
+.playerlistview .filter-online input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 
 .playerlistview .playerlist.itemlist .itemlist-item .character-name {

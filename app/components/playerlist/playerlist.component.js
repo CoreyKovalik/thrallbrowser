@@ -7,7 +7,7 @@ angular
       var self = this;
 
       self.isLoading = true;
-      self.loadingError = null;
+      self.loadingError = false;
       self.serverId = $routeParams.serverId;
       self.sortLastOnline = '-last_online';
       self.sortOnline = '-is_online';
@@ -27,11 +27,11 @@ angular
             self.server = results[0]
             self.characters = results[1];
             self.isLoading = false;
-            self.loadingError = null;
+            self.loadingError = false;
           })
           .catch(function(respone) {
             self.isLoading = false;
-            self.loadingError = 'FAIL_LOAD';
+            self.loadingError = true;
           });
       }
 
