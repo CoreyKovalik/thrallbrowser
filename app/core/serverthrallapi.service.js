@@ -18,6 +18,14 @@ angular
       return character;
     }
 
+    function processServer(server) {
+      if(server.name.startsWith('"'))
+        server.name = server.name.substring(1);
+      if(server.name.endsWith('"'))
+        server.name = server.name.substring(0, server.name.length-1);
+      return server;
+    }
+
     function getCharacters(serverId) {
       return $http.get(root_api + serverId + '/characters').then(function(response) {
         return _.map(response.data, processCharacter);
@@ -48,14 +56,14 @@ angular
     function getServers()
     {
       return $http.get(root_api).then(function(response) {
-        return response.data.items;
+        return _.map(response.data.items, processServer);
       });
     }
 
     function getServer(serverId)
     {
       return $http.get(root_api + serverId).then(function(response) {
-        return response.data;
+        return processServer(response.data);
       });
     }
 
