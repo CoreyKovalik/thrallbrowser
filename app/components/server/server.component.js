@@ -6,7 +6,8 @@ angular
     controller: function serverController($q, $routeParams, serverthrallapi) {
       var self = this;
 
-      self.isloading = true;
+      self.isLoading = true;
+      self.loadingError = false;
       self.serverId = $routeParams.serverId;
       self.sortLastOnline = '-last_online';
       self.sortOnline = '-is_online';
@@ -17,27 +18,32 @@ angular
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
         charPromise = serverthrallapi.getCharacters(self.serverId);
+        clanPromise = serverthrallapi.getClans(self.serverId);
 
-        $q.all([serverPromise, charPromise])
+        $q.all([serverPromise, charPromise, clanPromise])
           .then(function(results) {
             server = results[0]
             characters = _.filter(results[1], function(c) {return c.is_online;});
+            clans = results[2]
 
             firstCharacter = _.minBy(characters, 'conan_id');
             if(firstCharacter != null) {
-              self.lastWipeDate = moment.unix(firstCharacter.created).format('LL');
+              self.lastWipeDate = firstCharacter.created.format('LL');
             }
-            self.characters = characters;
+
             self.server = server
-            self.isloading = false;
+            self.characters = characters;
+            self.clans = clans;
+            self.isLoading = false;
+            self.loadingError = false;
           })
           .catch(function(respone) {
-            self.isloading = false;
-            self.fail = true;
+            self.isLoading = false;
+            self.loadingError = true;
           });
       }
 
       loadData();
-      setInterval(loadData, 62000);
+      // setInterval(loadData, 62000);
     }
   });

@@ -1,275 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Jomhuria');
 
-body {
-  background-color: black;
-  margin: auto;
-  font-family: Trebuchet MS;
-  color: white;
-  font-size: 16px;
-  min-width: 360px;
-}
-
-header {
-  top: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #1b1b1b;
-  color: #ddc271;
-  font-family: 'Jomhuria', sans-serif;
-  text-align: center;
-  font-weight: normal;
-  font-size: 50px;
-  min-width: 360px;
-  height: 60px;
-}
-a:visited,
-a:active,
-a:link {
-  color:white;
-  text-decoration: none;
-}
-a:hover {
-  font-weight: bold;
-  font-size: 17px;
-  color: #ddc271;
-  text-decoration: none;
-}
-p.p-fix {
-  margin-bottom: 0px;
-}
-table {
-  width: 100%;
-  border-spacing: 0px 1px;
-  -webkit-border-vertical-spacing: 0px;
-}
-table.character-sheet,
-table.character-sheet tbody{
-  border-top: 0px;
-  margin-bottom: 0px;
-}
-table.character-sheet > tbody {
-  /*background-color*/: black;
-}
-tbody {
-  /*background-color: #1b1b1b;*/
-}
-th {
-  /*background-color*/: black;
-  color: #ddc271;
-  font-size: 18px;
-  cursor: default;
-}
-td {
-  color: white;
-}
-td.name a {
-  display: block;
-}
-td.level:hover,
-td.online:hover {
-  color: #ddc271;
-  cursor: default;
-}
-tr.highlight:hover {
-  font-size: 17px;
-  /*background-color*/:black;
-  font-weight: bold;
-}
-table.character-sheet>tbody>tr.highlight:hover {
-  font-size: 16px;
-  /*background-color*/: #1b1b1b;
-  font-weight: normal;
-}
-table.character-sheet>tbody>tr.highlight:hover>th {
-  /*background-color*/: #1b1b1b;
-}
-
-.char-list {
-
-}
-
-.char-list-head>thead>tr>th,
-.char-list-head>thead>tr>td {
-  font-family: Trebuchet MS;
-  background-color: #1b1b1b;
-  color: #ddc271;
-  font-size: 18px;
-  cursor: default;
-  margin: 0px;
-  border: 0px;
-  padding: 0px;
-}
-
-.char-list-head>thead>tr>th.name,
-.char-list-head>thead>tr>th.level,
-.char-list-head>thead>tr>th.online {
-  padding-bottom: 2px;
-}
-
-.char-list-content>tbody>tr>th,
-.char-list-content>tbody>tr>td {
-  margin: 0px;
-  border: 0px;
-  padding: 0px;
-}
-
-th .fa-steam-square {
-  font-size: 1.4em;
-}
-th > i.fa-steam-square {
-  padding-top: 3px;
-}
-td .fa-steam-square {
-  color: grey;
-}
-td .fa-steam-square:hover {
-  color: #ddc271;
-}
-/* Lightweight spinner from https://stephanwagner.me/only-css-loading-spinner */
-@keyframes spinner {
-  to {transform: rotate(360deg);}
-}
-.spinner:before {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin-top: -10px;
-  margin-left: -10px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  border-top-color: #333;
-  animation: spinner .6s linear infinite;
-}
-.steam{
-  width:10%;
-  text-align: center;
-}
-.level{
-  width:10%;
-  text-align: left;
-}
-.name{
-  width:30%;
-  text-align:left;
-}
-.clan{
-  width:30%;
-  text-align: left;
-}
-.online{
-  width:20%;
-  text-align: left;
-}
-@media screen and (max-width: 767px) {
-.table-responsive {
-  border: 0px;
-}
-}
-.top-container {
-  margin-top: 60px;
-}
-.col-xl-12 {
-  position: static;
-}
-
-.server-list. .server-list-stick-top {
-  position: sticky;
-  top: 60px;
-  background-color: black;
-}
-
-.server-list input.server-id-placeholder {
-  width: 200px;
-}
-
-.thrall-heading {
-    font-family: Trebuchet MS;
-    background-color: black;
-    color: #ddc271;
-    font-size: 18px;
-    cursor: default;
-}
-input.search-input {
-  background-color: black;
-  width: 110px;
-  padding: 5px;
-  border-color: #ddc271;
-  outline-color: transparent;
-  font-weight: bold;
-  border-radius: 15px;
-  margin-left: 5px;
-}
-button.go-server {
-  background-color: #ddc271;
-  color: #1b1b1b;
-  margin-left: 10px;
-  margin-bottom: 1px;
-  border-radius: 15px;
-  width: 75px;
-}
-label.go-server {
-  font-weight: normal;
-}
-html {
-  font-size:100%;
-}
-@media (max-width: 450px) {
-  body {
-    font-size:0.6rem;
-  }
-  header {
-    font-size:2.5rem;
-    padding-top: .4em;
-  }
-  /*character-list*/
-  .char-list-head>thead>tr>th {
-    font-size:.9rem;
-  }
-  input.search-input {
-    width: 70px;
-  }
-  /*character-sheet*/
-  table.character-sheet>tbody>tr>th {
-    font-size:.9rem;
-  }
-  td {
-    border-top: none !important;
-  }
-}
-.search-input.name-search {
-  width: 65%;
-  padding:0px;
-  border-radius: 5px;
-  border: 0px;
-  font-weight: normal;
-}
-
-.server .input.search-input {
-  background-color: #1b1b1b;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
 .push-top {
   margin-top: 10px;
 }
 
 .non-interactive {
   user-select: none;
+  cursor: pointer;
+}
+
+.pointer {
   cursor: pointer;
 }
 
@@ -282,9 +22,22 @@ body {
   min-width: 1024px;
   width: 100%;
   height: 100%;
-  background-image: url(images/background.png);
+  background-image: url(images/background.jpg);
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+a:visited,
+a:active,
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+  color: #ddc271;
 }
 
 #ng-view {
@@ -292,18 +45,36 @@ body {
   height: 100%;
 }
 
+
+/* NAVIGATION */
 .navigationbar {
   background-image: url('images/navigationbg.png');
   background-repeat: repeat-x;
   background-size: cover;
   width: 100%;
   height: 100px;
-  padding-top: 20px;
+}
+
+.navigationbar .navigationbar-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+}
+
+.navigationbar .servername {
+  font-family: 'poppins';
+  font-size: 20px;
+  color: #DDC271;
+}
+
+.navigationbar .navigationbar-buttons {
+  width: 100%;
+  padding-top: 10px;
   display: flex;
   justify-content: center;
 }
 
-.navigationbar .navigationbutton {
+.navigationbar .navigationbar-buttons .navigationbutton {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -331,7 +102,7 @@ body {
   margin-right: auto;
 }
 
-.navigationbutton + .navigationbutton {
+.navigationbar .navigationbutton + .navigationbutton {
   margin-left: 100px;
 }
 
@@ -350,35 +121,138 @@ body {
 }
 
 
-.playerlistview .name-search {
-
+/* SERVER */
+.serverview {
+  width: 1024px;
 }
 
-.playerlistview .playerlist {
-
+.serverview.container {
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.playerlistview .playerlist .playerlist-header {
+.serverview .widget-container {
+  margin-top: 20px;
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  background-color: black;
+}
+
+.serverview .playerlist.itemlist .itemlist-item .character-name {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.serverview .playerlist.itemlist .itemlist-item .clan-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/* ITEM LIST*/
+.itemlist .itemlist-header {
   height: 30px;
   line-height: 30px;
-  font-size: 20px;
+  font-size: 18px;
   vertical-align: middle;
-  color: #ddc271;
+  font-weight: bold;
+  color: #DDC271;
 }
 
-.playerlistview .playerlist .playerlist-item {
+.itemlist .itemlist-empty {
+  text-align: center;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.itemlist .itemlist-item {
   height: 25px;
   line-height: 25px;
   font-size: 16px;
   vertical-align: middle;
 }
 
-.playerlistview .playerlist .playerlist-item:hover {
-  color: #ddc271;
-  background-color: rgb(5, 5, 5);
+.itemlist .itemlist-item:hover {
+  color: #DDC271;
+  background-color: #050505;
 }
 
-.playerlistview .playerlist .playerlist-item .character-name {
+
+/* INPUTS */
+input.search-input {
+  outline-color: transparent;
+  background-color: #191919;
+  font-weight: bold;
+  padding: 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+input.search-input::placeholder {
+  color: #AAA;
+}
+
+
+/* PLAYER LIST */
+.playerlistview .playername-search {
+  width: 100%;
+}
+
+.playerlistview .filter-online {
+  margin: 0;
+  display: inline-block;
+  float: right;
+  line-height: 30px;
+  height: 30px;
+  vertical-align: middle
+}
+
+.playerlistview .filter-online input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.playerlistview .playerlist.itemlist .itemlist-item .character-name {
   display: inline-block;
   margin-left: 5px;
+}
+
+
+/* CLAN LIST */
+.clanlistview .clanname-search {
+  width: 50%;
+}
+
+.clanlistview .clanlist.itemlist .itemlist-header.character-count,
+.clanlistview .clanlist.itemlist .itemlist-item .character-count {
+  text-align: right;
+}
+
+/* SPINNER */
+/* Lightweight spinner from https://stephanwagner.me/only-css-loading-spinner */
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
 }
