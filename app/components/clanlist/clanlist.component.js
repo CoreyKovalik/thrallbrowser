@@ -32,23 +32,26 @@ angular
           });
       }
 
-      function sortBy(column) {
+      function sortBy(column, ascending) {
         if(self.currentSort == column)
           self.currentSortAsc = !self.currentSortAsc;
         else
           self.currentSortAsc = true;
+
+        if(ascending != null)
+          self.currentSortAsc = ascending;
 
         self.currentSort = column;
 
         if(!self.currentSortAsc)
           column = '-' + column;
 
-        self.orderBy = [column];
+        self.orderBy = [column, 'name'];
       }
 
       self.sortBy = sortBy;
 
-      sortBy('name')
+      sortBy('character_count', false)
       loadData();
       setInterval(loadData, 62000);
     }
