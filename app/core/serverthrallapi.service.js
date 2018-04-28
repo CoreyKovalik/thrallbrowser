@@ -6,6 +6,12 @@ angular
     var root_api = 'https://serverthrallapi.herokuapp.com/api/';
     // root_api = 'http://localhost:8000/api/';
 
+    function processClan(clan) {
+      if(clan.created != null)
+        clan.created = moment.unix(clan.created);
+      return clan;
+    }
+
     function getCharacters(serverId) {
       return $http.get(root_api + serverId + '/characters').then(function(response) {
         return response.data;
@@ -22,14 +28,14 @@ angular
     function getClans(serverId)
     {
       return $http.get(root_api + serverId + '/clans').then(function(response) {
-        return response.data;
+        return _.map(response.data, processClan);
       });
     }
 
     function getClan(serverId, clanId)
     {
       return $http.get(root_api + serverId + '/clans/' + clanId).then(function(response) {
-        return response.data;
+        return processClan(response.data);
       });
     }
 

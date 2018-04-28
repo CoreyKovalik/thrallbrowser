@@ -6,30 +6,49 @@ angular
     controller: function serverController($q, $routeParams, serverthrallapi) {
       var self = this;
 
-      self.isloading = true;
       self.serverId = $routeParams.serverId;
+      self.isLoading = true;
+      self.loadingError = null;
       self.server = null;
       self.clans = null;
+      self.orderBy = [];
+      self.currentSort = null;
+      self.currentSortAsc = true;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
-        charPromise = serverthrallapi.getCharacters(self.serverId);
+        clanPromise = serverthrallapi.getClans(self.serverId);
 
-        $q.all([serverPromise, charPromise])
+        $q.all([serverPromise, clanPromise])
           .then(function(results) {
-            server = results[0]
-            clans = results[1]
-
-            self.clans = clans;
-            self.server = server
-            self.isloading = false;
+            self.server = results[0];
+            self.clans = results[1];
+            self.isLoading = false;
+            self.loadingError = null;
           })
           .catch(function(respone) {
-            self.isloading = false;
-            self.fail = true;
+            self.isLoading = false;
+            self.loadingError = 'FAIL_LOAD';
           });
       }
 
+      function sortBy(column) {
+        if(self.currentSort == column)
+          self.currentSortAsc = !self.currentSortAsc;
+        else
+          self.currentSortAsc = true;
+
+        self.currentSort = column;
+
+        if(!self.currentSortAsc)
+          column = '-' + column;
+
+        self.orderBy = [column];
+      }
+
+      self.sortBy = sortBy;
+
+      sortBy('name')
       loadData();
       setInterval(loadData, 62000);
     }
