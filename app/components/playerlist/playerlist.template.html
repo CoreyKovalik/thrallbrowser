@@ -12,11 +12,11 @@
       type="text"
       ng-model="nameFilter.name"
       class="search-input name-search"
-      placeholder="search a character name...">
+      placeholder="Search for a character name...">
 
-    <div class="container-fluid push-top playerlist">
+    <div class="container-fluid push-top playerlist itemlist">
       <div class="row">
-        <div class="col-xs-2 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('level')">
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="playerListCtrl.sortBy('level')">
           Level
           <span
             ng-show="playerListCtrl.currentSort == 'level'"
@@ -25,7 +25,7 @@
           </span>
         </div>
 
-        <div class="col-xs-4 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('name')">
+        <div class="col-xs-4 itemlist-header non-interactive" ng-click="playerListCtrl.sortBy('name')">
           <i class="fa fa-steam-square fa-lg"></i>
           Name
           <span
@@ -35,7 +35,7 @@
           </span>
         </div>
 
-        <div class="col-xs-4 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('clan_name')">
+        <div class="col-xs-4 itemlist-header non-interactive" ng-click="playerListCtrl.sortBy('clan_name')">
           Clan
           <span
             ng-show="playerListCtrl.currentSort == 'clan_name'"
@@ -44,7 +44,7 @@
           </span>
         </div>
 
-        <div class="col-xs-2 playerlist-header non-interactive" ng-click="playerListCtrl.sortBy('last_online')">
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="playerListCtrl.sortBy('last_online')">
           Last Online
           <span
             ng-show="playerListCtrl.currentSort == 'last_online'"
@@ -55,7 +55,7 @@
       </div>
 
       <div
-        class="row playerlist-item"
+        class="row itemlist-item"
         ng-repeat="character in playerListCtrl.characters | filter:nameFilter | orderBy:playerListCtrl.orderBy track by character.id">
         <div class="col-xs-2">{{character.level}}</div>
         <div class="col-xs-4">
@@ -68,6 +68,10 @@
         </div>
         <div class="col-xs-4">{{character.clan_name}}</div>
         <div class="col-xs-2">{{character | isonline}}</div>
+      </div>
+
+      <div class="row itemlist-empty" ng-show="!playerListCtrl.characters.length">
+        <div class="col-xs-12">No characters on this server yet.</div>
       </div>
     </div>
   </div>
