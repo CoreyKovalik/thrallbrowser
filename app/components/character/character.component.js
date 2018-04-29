@@ -8,17 +8,20 @@ angular
 
       self.isloading = true;
       self.serverId = $routeParams.serverId;
-      self.characterId = $routeParams.charId;
+      self.characterId = $routeParams.characterId;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
-        charPromise = serverthrallapi.getCharacter(self.serverId, self.characterId);
+        charPromise = serverthrallapi.getChar(self.serverId, self.characterId);
 
         $q.all([serverPromise, charPromise])
           .then(function(results) {
-            console.log(results)
+            console.log(results);
+            console.log(results[0]);
+            console.log(results[1]);
+            console.log("ID is: " + results[1].id);
             self.server = results[0];
-            self.char = results[1];
+            self.character = results[1];
             self.isloading = false;
           })
           .catch(function(respone) {

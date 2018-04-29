@@ -7,7 +7,7 @@
 
 <div ng-if="!the.isloading && !the.fail">
   <header>
-    {{the.char.name}}
+    {{the.character.name}}
     <!--
     <a ng-href="../" style="float:left; font-size:40px; padding-top:12px;">
       &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -31,11 +31,11 @@
         <table class="character-sheet">
           <tr class="highlight">
             <td>Name</td>
-            <td>{{the.char.name}}</td>
+            <td>{{the.character.name}}</td>
           </tr>
           <tr class="highlight">
             <td>Level</td>
-            <td>{{the.char.level}}</td>
+            <td>{{the.character.level}}</td>
           </tr>
           <tr class="highlight">
             <td>Server Name</td>
@@ -43,27 +43,27 @@
           </tr>
           <tr class="highlight">
             <td>Clan Name</td>
-            <td>{{the.char.clan_name}}</td>
+            <td>{{the.character.clan_name}}</td>
           </tr>
           <tr class="highlight">
             <td>Steam ID/Profile</td>
-            <td>{{the.char.steam_id}}</td>
+            <td>{{the.character.steam_id}}</td>
           </tr>
           <tr class="highlight">
             <td>In Game Location</td>
-            <td>{{the.roundConcatXYZ(the.char.x, the.char.y, the.char.z)}}</td>
+            <td>{{the.roundConcatXYZ(the.character.x, the.character.y, the.character.z)}}</td>
           </tr>
           <tr class="highlight">
             <td>Last killed by</td>
-            <td{{the.char.last_killed_by}}</td>
+            <td{{the.character.last_killed_by}}</td>
           </tr>
           <tr class="highlight">
             <td>Created</td>
-            <td>{{the.char.created}}</td>
+            <td>{{the.character.created}}</td>
           </tr>
           <tr class="highlight">
             <td>Last Online</td>
-            <td>{{the.char | isonline}}</td>
+            <td>{{the.character | isonline}}</td>
           </tr>
         </table>
       </div>
