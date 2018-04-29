@@ -20,7 +20,7 @@ angular
         id: 'clan-list',
         template: '<clan-list></clan-list>'
       })
-      .when('/server/:serverId/character/:charId', {
+      .when('/server/:serverId/character/:characterId', {
         id: 'character',
         template: '<character></character>'
       })
