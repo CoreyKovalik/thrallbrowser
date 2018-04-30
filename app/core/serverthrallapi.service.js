@@ -35,15 +35,7 @@ angular
     function getCharacter(serverId, characterId)
     {
       return $http.get(root_api + serverId + '/characters/' + characterId).then(function(response) {
-        return processCharcter(response.data);
-      });
-    }
-
-    function getChar(serverId, characterId)
-    {
-      return $http.get(root_api + serverId + '/characters/' + characterId).then(function(response) {
-        character = response.data;
-        return processCharacter(character);
+        return processCharacter(response.data);
       });
     }
 
@@ -77,7 +69,6 @@ angular
 
     self.getCharacter = getCharacter;
     self.getCharacters = getCharacters;
-    self.getChar = getChar;
     self.getClan = getClan;
     self.getClans = getClans;
     self.getServer = getServer;
