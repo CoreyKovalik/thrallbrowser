@@ -13,3 +13,19 @@ angular
       return '/server/' + serverId + '/clans/' + clanId;
     }
   });
+
+angular
+  .module('thrallbrowser')
+  .filter('serverUrl', function() {
+    return function(serverId) {
+      return '/server/' + serverId;
+    }
+  });
+
+angular
+  .module('thrallbrowser')
+  .filter('steamUrl', function() {
+    return function(steamId) {
+      return "http://steamcommunity.com/profiles/" + steamId;
+    }
+  });

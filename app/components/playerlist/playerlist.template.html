@@ -76,7 +76,7 @@
         ng-repeat="character in playerListCtrl.characters | filter:playerFilter | orderBy:playerListCtrl.orderBy track by character.id">
         <div class="col-xs-2">{{character.level}}</div>
         <div class="col-xs-4">
-          <a ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
+          <a ng-href="{{character.steam_id|steamUrl}}">
             <i class="fa fa-steam-square fa-lg"></i>
           </a>
           <div class="character-name">
@@ -90,7 +90,7 @@
             {{character.clan_name}}
           </a>
         </div>
-        <div class="col-xs-2">{{character | isonline}}</div>
+        <div class="col-xs-2">{{character | isCharacterOnline}}</div>
       </div>
 
       <div class="row itemlist-empty" ng-show="!playerListCtrl.characters.length">

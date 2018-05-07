@@ -23,6 +23,8 @@ angular
         server.name = server.name.substring(1);
       if(server.name.endsWith('"'))
         server.name = server.name.substring(0, server.name.length-1);
+      if(server.last_sync != null)
+        server.last_sync = moment.unix(server.last_sync);
       return server;
     }
 
