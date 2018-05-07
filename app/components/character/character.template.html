@@ -1,73 +1,70 @@
-<div ng-if="the.fail">
-  Invalid Character ID, try again:<br />
-  <a ng-href="/server/{{the.serverId}}">Click to Return to Character List for server {{the.serverId}}</a>
+<server-navbar></server-navbar>
+
+<div ng-show="characterCtrl.isLoading" class="spinner"></div>
+
+<div ng-if="!characterCtrl.isLoading && characterCtrl.loadingError">
+  Invalid Server ID, <a ng-href="/">click here to Return to Server List</a>
 </div>
 
-<div ng-show="the.isloading" class="spinner"></div>
-
-<div ng-if="!the.isloading && !the.fail">
-  <header>
-    {{the.character.name}}
-    <!--
-    <a ng-href="../" style="float:left; font-size:40px; padding-top:12px;">
-      &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-    </a>
-    -->
-    <!--     ^^ not centered and aligned properly, CSS issue to fix later. -->
-  </header>
-
-  <div class="container top-container">
+<div ng-if="!characterCtrl.isLoading && !characterCtrl.loadingError">
+  <div class="container characterview">
     <div class="row">
-      <div class="col-xl-12">
-        <div class="thrall-heading">
-          Character is on
-          <a ng-href="/server/{{the.serverId}}">Server {{the.serverId}}</a>
+      <div class="col-xs-6">
+        <div class="widget-container">
+          <div class="widget-title">Character Info</div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-6">Name</div>
+              <div class="col-xs-6">{{characterCtrl.character.name}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Clan</div>
+              <div class="col-xs-6">
+                <a ng-href="{{characterCtrl.character.clan_id|clanUrl:characterCtrl.character.server_id}}">
+                  {{characterCtrl.character.clan_name}}
+                </a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Location</div>
+              <div class="col-xs-6">{{characterCtrl.roundLocation(characterCtrl.character.location)}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Steam ID</div>
+              <div class="col-xs-6">
+                <a ng-href="{{character.steam_id | steamUrl}}">
+                  <i class="fa fa-steam-square fa-lg"></i> Visit Steam Profile
+                </a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Created</div>
+              <div class="col-xs-6">{{characterCtrl.character.created | momentDate}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Last Online</div>
+              <div class="col-xs-6">{{characterCtrl.character | isCharacterOnline}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">Last Killed By</div>
+              <div class="col-xs-6">{{characterCtrl.character.last_killed_by}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6">
+        <div class="widget-container">
+          <div class="widget-title">Activity Log</div>
+          Coming soon...
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-xl-12">
-        <table class="character-sheet">
-          <tr class="highlight">
-            <td>Name</td>
-            <td>{{the.character.name}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Level</td>
-            <td>{{the.character.level}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Server Name</td>
-            <td>{{the.server.name}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Clan Name</td>
-            <td>{{the.character.clan_name}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Steam ID/Profile</td>
-            <td>{{the.character.steam_id}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>In Game Location</td>
-            <td>{{the.roundConcatXYZ(the.character.x, the.character.y, the.character.z)}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Last killed by</td>
-            <td{{the.character.last_killed_by}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Created</td>
-            <td>{{the.character.created}}</td>
-          </tr>
-          <tr class="highlight">
-            <td>Last Online</td>
-            <td>{{the.character | isonline}}</td>
-          </tr>
-        </table>
-      </div>
-
-    </div> <!-- end 1st(only) row -->
-  </div><!-- end 1st(only) container -->
-</div> <!-- end ng-if -->
+  </div>
+</div>

@@ -23,6 +23,8 @@ angular
         server.name = server.name.substring(1);
       if(server.name.endsWith('"'))
         server.name = server.name.substring(0, server.name.length-1);
+      if(server.last_sync != null)
+        server.last_sync = moment.unix(server.last_sync);
       return server;
     }
 
@@ -53,6 +55,13 @@ angular
       });
     }
 
+    function getClanCharacters(serverId, clanId)
+    {
+      return $http.get(root_api + serverId + '/clans/' + clanId + '/characters').then(function(response) {
+        return _.map(response.data, processCharacter);
+      });
+    }
+
     function getServers()
     {
       return $http.get(root_api).then(function(response) {
@@ -70,6 +79,7 @@ angular
     self.getCharacter = getCharacter;
     self.getCharacters = getCharacters;
     self.getClan = getClan;
+    self.getClanCharacters = getClanCharacters;
     self.getClans = getClans;
     self.getServer = getServer;
     self.getServers = getServers;

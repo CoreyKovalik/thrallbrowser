@@ -47,8 +47,16 @@
       <div
         class="row itemlist-item"
         ng-repeat="clan in clanListCtrl.clans | filter:nameFilter | orderBy:clanListCtrl.orderBy track by clan.id">
-        <div class="col-xs-5">{{clan.name}}</div>
-        <div class="col-xs-5">{{clan.owner_name}}</div>
+        <div class="col-xs-5">
+          <a ng-href="{{clan.id|clanUrl:clan.server_id}}">
+            {{clan.name}}
+          </a>
+        </div>
+        <div class="col-xs-5">
+          <a ng-href="{{clan.owner_id|characterUrl:clan.server_id}}">
+            {{clan.owner_name}}
+          </a>
+        </div>
         <div class="col-xs-2 character-count">{{clan.character_count}}</div>
       </div>
 

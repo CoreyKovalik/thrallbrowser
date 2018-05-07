@@ -2,11 +2,12 @@ angular
   .module('thrallbrowser')
   .component('character', {
     templateUrl: 'components/character/character.template.html',
-    controllerAs: 'the',
+    controllerAs: 'characterCtrl',
     controller: function characterSheetController($q, $routeParams, serverthrallapi) {
       var self = this;
 
-      self.isloading = true;
+      self.isLoading = true;
+      self.loadingError = null;
       self.serverId = $routeParams.serverId;
       self.characterId = $routeParams.characterId;
 
@@ -18,27 +19,23 @@ angular
           .then(function(results) {
             self.server = results[0];
             self.character = results[1];
-            self.isloading = false;
+            self.isLoading = false;
+            self.loadingError = false;
           })
           .catch(function(respone) {
-            self.isloading = false;
-            self.fail = true;
+            self.isLoading = false;
+            self.loadingError = true;
           });
       }
 
-      function roundConcatXYZ(x, y, z) {
-        var xx = Math.round(x);
-        var yy = Math.round(y);
-        var zz = Math.round(z);
-        return "(" + xx + ", " + yy + ", " + zz + ")";
+      function roundLocation(location) {
+        var x = Math.round(location.x);
+        var y = Math.round(location.y);
+        var z = Math.round(location.z);
+        return x + ", " + y + ", " + z;
       }
 
-      function goServer(serverId) {
-        $location.url("/server/" + serverId);
-      }
-
-      self.roundConcatXYZ = roundConcatXYZ;
-      self.goServer = goServer;
+      self.roundLocation = roundLocation;
 
       loadData();
     }

@@ -12,17 +12,21 @@ angular
         id: 'server',
         template: '<server></server>'
       })
-      .when('/server/:serverId/players', {
+      .when('/server/:serverId/characters', {
         id: 'player-list',
         template: '<player-list></player-list>'
+      })
+      .when('/server/:serverId/characters/:characterId', {
+        id: 'character',
+        template: '<character></character>'
       })
       .when('/server/:serverId/clans', {
         id: 'clan-list',
         template: '<clan-list></clan-list>'
       })
-      .when('/server/:serverId/character/:characterId', {
-        id: 'character',
-        template: '<character></character>'
+      .when('/server/:serverId/clans/:clanId', {
+        id: 'clan',
+        template: '<clan></clan>'
       })
       .otherwise('/');
 

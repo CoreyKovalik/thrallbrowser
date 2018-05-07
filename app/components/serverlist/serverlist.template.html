@@ -1,41 +1,102 @@
-<div class="serverlist">
-  <header>
-    THRALL BROWSER
-  </header>
+<div class="main-navigationbar">
+  <div class="main-navigationbar-content">
+    <div class="main-navigation-title">ThrallBrowser</div>
 
-  <div class="container top-container">
-    <div class="row">
-      <div class="col-xl-12">
-        <label class="go-server">
-          Enter your serverthrall server ID
-          <input type="text" class="search-input server-id-placeholder" ng-model="serverId" placeholder="5" required>
-          <button class="btn btn-warning go-server" title="Go to Server #{{serverId}}" ng-click="the.goServer(serverId)">Go!</button>
-        </label>
-      </div>
+    <div class="navigationbar-buttons">
+      <a
+        ng-href="/servers"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'servers'}">
+          <div class="navigationbutton-text">SERVERS</div>
+      </a>
+
+      <a
+        ng-href="/stats"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'stats'}">
+        <div class="navigationbutton-text">STAT CALCULATOR</div>
+      </a>
     </div>
+  </div>
+</div>
 
-    <div class="row">
-      <div class="col-xl-12" style="padding-top: 20px;">
-        <table>
-            <thead>
-              <tr>
-                <th class="level">Name</th>
-                <th class="online">Last Sync</th>
-                <th class="online">Character Count</th>
-                <th class="name">Join</th>
-              </tr>
-            </thead>
+<div class="main-container serverlistview">
+  <div class="row">
+    <div class="col-xs-12">
+      <label class="go-server">
+        Click on a server below, or enter your serverthrall server ID
+        <input
+          type="text"
+          class="search-input server-id-placeholder"
+          ng-model="serverId"
+          placeholder="5"
+          required>
 
-            <tbody>
-              <tr ng-repeat="server in the.servers" ng-click="the.goServer(server.id)" class="highlight">
-                <td>{{server.name}}</td>
-                <td>{{server.last_sync}}</td>
-                <td>{{server.character_count}}</td>
-                <td>{{server.ip_address}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <button
+          class="btn btn-warning go-server"
+          title="Go to Server #{{serverId}}"
+          ng-click="serverListCtrl.goServer(serverId)">
+          Go!
+        </button>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="container-fluid push-top serverlist itemlist">
+      <div class="row">
+        <div class="col-xs-6 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('name')">
+          Server Name
+          <span
+            ng-show="serverListCtrl.currentSort == 'name'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+          </span>
         </div>
+
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('online_count')">
+          Online
+          <span
+            ng-show="serverListCtrl.currentSort == 'online_count'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+          </span>
+        </div>
+
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('character_count')">
+          Characters
+          <span
+            ng-show="serverListCtrl.currentSort == 'character_count'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+          </span>
+        </div>
+
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('ip_address')">
+          Connect
+          <span
+            ng-show="serverListCtrl.currentSort == 'ip_address'"
+            class="glyphicon"
+            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="row itemlist-item"
+        ng-click="serverListCtrl.goServer(server.id)"
+        ng-repeat="server in serverListCtrl.servers | filter:serverFilter | orderBy:serverListCtrl.orderBy track by server.id">
+
+        <div class="col-xs-6 server-name">{{server.name}}</div>
+        <div class="col-xs-2">{{server.online_count}}</div>
+        <div class="col-xs-2">{{server.character_count}}</div>
+        <div class="col-xs-2 ip-address">{{server.ip_address}}</div>
+      </div>
+
+      <div class="row itemlist-empty" ng-show="!serverListCtrl.servers.length">
+        <div class="col-xs-12">No current active servers being tracked.</div>
+      </div>
     </div>
   </div>
 </div>

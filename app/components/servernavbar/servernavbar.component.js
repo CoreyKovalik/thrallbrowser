@@ -1,4 +1,4 @@
-angular
+ angular
   .module('thrallbrowser')
   .component('serverNavbar', {
     templateUrl: 'components/servernavbar/servernavbar.template.html',

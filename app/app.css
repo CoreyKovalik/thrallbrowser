@@ -61,15 +61,26 @@ a:hover {
   width: 1024px;
 }
 
-.navigationbar .servername {
+.navigationbar .thrallbrowser-logo {
+  padding-top: 5px;
+  padding-left: 40px;
+  vertical-align: middle;
+  line-height: 24px;
+  position: absolute;
   font-family: 'poppins';
-  font-size: 20px;
+}
+
+.navigationbar .servername {
+  text-align: center;
+  font-family: 'poppins';
+  display: block;
+  font-size: 24px;
+  padding-top: 5px;
   color: #DDC271;
 }
 
 .navigationbar .navigationbar-buttons {
   width: 100%;
-  padding-top: 10px;
   display: flex;
   justify-content: center;
 }
@@ -106,6 +117,69 @@ a:hover {
   margin-left: 100px;
 }
 
+/* MAIN NAVIGATION */
+.main-navigationbar {
+  background-image: url('images/navigationbg.png');
+  background-repeat: repeat-x;
+  background-size: cover;
+  width: 100%;
+  height: 100px;
+}
+
+.main-navigationbar .navigationbar-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+}
+
+.main-navigationbar .main-navigation-title {
+  text-align: center;
+  font-family: 'poppins';
+  display: block;
+  font-size: 24px;
+  padding-top: 5px;
+  color: #DDC271;
+}
+
+.main-navigationbar .navigationbar-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-navigationbar .navigationbar-buttons .navigationbutton {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  background-size: contain;
+  text-align: center;
+  width: 256px;
+  height: 64px;
+  padding-top: 11px;
+  user-select: none;
+  display: inline-block;
+  background-image: url('images/button_normal.png');
+}
+
+.main-navigationbar .navigationbutton.active {
+  background-image: url('images/button_hover.png');
+}
+
+.main-navigationbar .navigationbutton:hover {
+  background-image: url('images/button_pressed.png');
+  cursor: pointer;
+}
+
+.main-navigationbar .navigationbutton .navigationbutton-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-navigationbar .navigationbutton + .navigationbutton {
+  margin-left: 100px;
+}
+
+/* COMPONENTS */
 .main-container {
   margin-bottom: 100px;
   margin-top: 20px;
@@ -120,6 +194,16 @@ a:hover {
   background-color: black;
 }
 
+.widget-container {
+  margin-top: 20px;
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  background-color: black;
+}
+
 
 /* SERVER */
 .serverview {
@@ -131,14 +215,12 @@ a:hover {
   padding-right: 0;
 }
 
-.serverview .widget-container {
-  margin-top: 20px;
-  border-radius: 25px;
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  padding: 20px;
-  background-color: black;
+.serverview .widget-title {
+  color: #DDC271;
+}
+
+.serverview .playerlist.itemlist .itemlist-header.character-name .fa-steam-square {
+  margin-right: 5px;
 }
 
 .serverview .playerlist.itemlist .itemlist-item .character-name {
@@ -152,6 +234,40 @@ a:hover {
   text-overflow: ellipsis;
 }
 
+/* SERVER LIST */
+.serverlistview .serverlist.itemlist .itemlist-item .server-name,
+.serverlistview .serverlist.itemlist .itemlist-item .ip-address,
+.serverlistview .serverlist.itemlist .itemlist-item .last-sync {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.serverlistview .serverlist.itemlist .itemlist-item {
+  cursor: pointer;
+}
+
+/* CLAN */
+.clanview .playername-search {
+  width: 50%;
+}
+
+.clanview .playerlist.itemlist .itemlist-header.character-name .fa-steam-square {
+  margin-right: 5px;
+}
+
+.clanview .playerlist.itemlist .itemlist-item .character-name {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+
+/* CHARACTER */
+.characterview .widget-title {
+  color: #DDC271;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 /* ITEM LIST*/
 .itemlist .itemlist-header {

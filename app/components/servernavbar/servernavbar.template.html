@@ -1,8 +1,17 @@
 <div class="navigationbar">
   <div class="navigationbar-content">
-    <div class="servername">
-      {{navbarCtrl.server.name}}
+    <div class="thrallbrowser-logo">
+      <a href="/">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        ThrallBrowser
+      </a>
     </div>
+
+    <a
+      class="servername"
+      ng-href="{{navbarCtrl.server.id|serverUrl}}">
+      {{navbarCtrl.server.name}}
+    </a>
 
     <div class="navigationbar-buttons">
       <a
@@ -13,7 +22,7 @@
       </a>
 
       <a
-        ng-href="/server/{{navbarCtrl.serverId}}/players"
+        ng-href="/server/{{navbarCtrl.serverId}}/characters"
         class="navigationbutton"
         ng-class="{'active': navbarCtrl.routeId == 'player-list'}">
         <div class="navigationbutton-text">PLAYERS</div>
