@@ -8,6 +8,10 @@ angular
         id: 'server-list',
         template: '<server-list></server-list>'
       })
+      .when('/stats', {
+        id: 'stats',
+        template: '<stats></stats>'
+      })
       .when('/server/:serverId', {
         id: 'server',
         template: '<server></server>'

@@ -19,6 +19,7 @@ require('./components/server/server.component.js');
 require('./components/clan/clan.component.js');
 require('./components/serverlist/serverlist.component.js');
 require('./components/servernavbar/servernavbar.component.js');
+require('./components/stats/stats.component.js');
 require('./core/filters/isonline.filter.js');
 require('./core/filters/moment.filter.js');
 require('./core/filters/urls.filter.js');

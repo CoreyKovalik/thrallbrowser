@@ -1,0 +1,21 @@
+<div class="main-navigationbar">
+  <div class="main-navigationbar-content">
+    <div class="main-navigation-title">ThrallBrowser</div>
+
+    <div class="navigationbar-buttons">
+      <a
+        ng-href="/servers"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'servers'}">
+          <div class="navigationbutton-text">SERVERS</div>
+      </a>
+
+      <a
+        ng-href="/stats"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'stats'}">
+        <div class="navigationbutton-text">STAT CALCULATOR</div>
+      </a>
+    </div>
+  </div>
+</div>
