@@ -141,6 +141,10 @@ a:hover {
   background-color: black;
 }
 
+.serverview .playerlist.itemlist .itemlist-header.character-name .fa-steam-square {
+  margin-right: 5px;
+}
+
 .serverview .playerlist.itemlist .itemlist-item .character-name {
   display: inline-block;
   margin-left: 5px;

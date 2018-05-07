@@ -23,13 +23,15 @@ angular
         $q.all([serverPromise, charPromise, clanPromise])
           .then(function(results) {
             server = results[0]
-            characters = _.filter(results[1], function(c) {return c.is_online;});
+            characters = results[1]
             clans = results[2]
 
-            firstCharacter = _.minBy(characters, 'conan_id');
-            if(firstCharacter != null) {
-              self.lastWipeDate = firstCharacter.created.format('LL');
-            }
+            firstCharacter = _.minBy(characters, 'id');
+            console.log(firstCharacter)
+            if(firstCharacter != null)
+              self.lastWipeDate = firstCharacter.created
+
+            characters = _.filter(results[1], function(c) {return c.is_online;});
 
             self.server = server
             self.characters = characters;
@@ -44,6 +46,5 @@ angular
       }
 
       loadData();
-      // setInterval(loadData, 62000);
     }
   });

@@ -19,5 +19,6 @@ require('./components/server/server.component.js');
 require('./components/serverlist/serverlist.component.js');
 require('./components/servernavbar/servernavbar.component.js');
 require('./core/filters/isonline.filter.js');
-require('./core/filters/momentago.filter.js');
+require('./core/filters/moment.filter.js');
+require('./core/filters/urls.filter.js');
 require('./core/serverthrallapi.service.js');
