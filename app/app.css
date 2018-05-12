@@ -234,6 +234,11 @@ a:hover {
 }
 
 /* CLAN */
+.clanview .clan-name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .clanview .playername-search {
   width: 50%;
 }
