@@ -88,10 +88,10 @@
         ng-click="serverListCtrl.goServer(server.id)"
         ng-repeat="server in serverListCtrl.servers | filter:serverFilter | orderBy:serverListCtrl.orderBy track by server.id">
 
-        <div class="col-xs-6 server-name">{{server.name}}</div>
-        <div class="col-xs-2">{{server.online_count}}</div>
-        <div class="col-xs-2">{{server.character_count}}</div>
-        <div class="col-xs-2 ip-address">{{server.ip_address}}</div>
+        <div class="col-xs-6 itemlist-value server-name">{{server.name}}</div>
+        <div class="col-xs-2 itemlist-value">{{server.online_count}}</div>
+        <div class="col-xs-2 itemlist-value">{{server.character_count}}</div>
+        <div class="col-xs-2 itemlist-value ip-address">{{server.ip_address}}</div>
       </div>
 
       <div class="row itemlist-empty" ng-show="!serverListCtrl.servers.length">

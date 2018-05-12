@@ -74,18 +74,16 @@
       <div
         class="row itemlist-item"
         ng-repeat="character in playerListCtrl.characters | filter:playerFilter | orderBy:playerListCtrl.orderBy track by character.id">
-        <div class="col-xs-2">{{character.level}}</div>
-        <div class="col-xs-4">
+        <div class="col-xs-2 itemlist-value">{{character.level}}</div>
+        <div class="col-xs-4 itemlist-value">
           <a ng-href="{{character.steam_id|steamUrl}}">
             <i class="fa fa-steam-square fa-lg"></i>
           </a>
           <div class="character-name">
-            <a ng-href="{{character.id|characterUrl:character.server_id}}">
-              {{character.name}}
-            </a>
+            <a ng-href="{{character.id|characterUrl:character.server_id}}">{{character.name}}</a>
           </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 itemlist-value">
           <a ng-href="{{character.clan_id|clanUrl:character.server_id}}">
             {{character.clan_name}}
           </a>

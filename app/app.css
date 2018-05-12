@@ -228,21 +228,7 @@ a:hover {
   margin-left: 5px;
 }
 
-.serverview .playerlist.itemlist .itemlist-item .clan-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 /* SERVER LIST */
-.serverlistview .serverlist.itemlist .itemlist-item .server-name,
-.serverlistview .serverlist.itemlist .itemlist-item .ip-address,
-.serverlistview .serverlist.itemlist .itemlist-item .last-sync {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .serverlistview .serverlist.itemlist .itemlist-item {
   cursor: pointer;
 }
@@ -296,6 +282,12 @@ a:hover {
 .itemlist .itemlist-item:hover {
   color: #DDC271;
   background-color: #050505;
+}
+
+.itemlist .itemlist-item .itemlist-value {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
 }
 
 
