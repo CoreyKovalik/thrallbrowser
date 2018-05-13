@@ -23,5 +23,6 @@ require('./components/stats/stats.component.js');
 require('./core/filters/isonline.filter.js');
 require('./core/filters/moment.filter.js');
 require('./core/filters/urls.filter.js');
+require('./core/filters/servername.filter.js');
 require('./core/serverthrallapi.service.js');
 require('./polyfill.js');
