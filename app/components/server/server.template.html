@@ -12,7 +12,8 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="widget-container">
-          Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}
+          <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
+          <div>Direct Connect IP: {{serverCtrl.server.ip_address}}</div>
         </div>
       </div>
     </div>
@@ -29,7 +30,7 @@
               <div class="col-xs-5 itemlist-header">Clan</div>
             </div>
             <div class="row itemlist-item" ng-repeat="character in serverCtrl.characters | orderBy:'clan_name' track by character.id">
-              <div class="col-xs-7">
+              <div class="col-xs-7 itemlist-value">
                 <a ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
                   <i class="fa fa-steam-square fa-lg"></i>
                 </a>
@@ -37,7 +38,7 @@
                   <a ng-href="{{character.id|characterUrl:character.server_id}}">{{character.name}}</a>
                 </div>
               </div>
-              <div class="col-xs-5 clan-name">
+              <div class="col-xs-5 itemlist-value clan-name">
                 <a ng-href="{{character.clan_id|clanUrl:character.server_id}}">{{character.clan_name}}</a>
               </div>
             </div>
@@ -57,10 +58,10 @@
               <div class="col-xs-2 itemlist-header">Count</div>
             </div>
             <div class="row itemlist-item" ng-repeat="clan in serverCtrl.clans | orderBy:['-character_count', 'name'] track by clan.id">
-              <div class="col-xs-10">
+              <div class="col-xs-10 itemlist-value">
                 <a ng-href="{{clan.id|clanUrl:clan.server_id}}">{{clan.name}}</a>
               </div>
-              <div class="col-xs-2">{{clan.character_count}}</div>
+              <div class="col-xs-2 itemlist-value">{{clan.character_count}}</div>
             </div>
             <div class="row itemlist-empty" ng-show="!serverCtrl.clans.length">
               <div class="col-xs-12">There are no clans on this server yet.</div>

@@ -11,8 +11,15 @@
 
     <div class="container-fluid push-top">
       <div class="row">
+        <div class="col-xs-12 clan-name">
+          <a ng-href="{{clanCtrl.owner.id|characterUrl:clanCtrl.clan.server_id}}">
+            {{clanCtrl.clan.name}}
+          </a>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12">
-          Clan Owner:
+          Owner:
           <a ng-href="{{clanCtrl.owner.id|characterUrl:clanCtrl.clan.server_id}}">
             {{clanCtrl.owner.name}}
           </a>
