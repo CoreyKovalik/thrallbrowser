@@ -11,28 +11,30 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="widget-container">
-          <div class="widget-title">Character Info</div>
-          <div class="container-fluid">
+          <div class="container-fluid itemlist">
             <div class="row">
+              <div class="col-xs-12 itemlist-header">Character Info</div>
+            </div>
+            <div class="row itemlist-item">
               <div class="col-xs-6">Name</div>
-              <div class="col-xs-6">{{characterCtrl.character.name}}</div>
+              <div class="col-xs-6 itemlist-value">{{characterCtrl.character.name}}</div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Clan</div>
-              <div class="col-xs-6">
+              <div class="col-xs-6 itemlist-value">
                 <a ng-href="{{characterCtrl.character.clan_id|clanUrl:characterCtrl.character.server_id}}">
                   {{characterCtrl.character.clan_name}}
                 </a>
               </div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Location</div>
               <div class="col-xs-6">{{characterCtrl.roundLocation(characterCtrl.character.location)}}</div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Steam ID</div>
               <div class="col-xs-6">
                 <a ng-href="{{characterCtrl.character.steam_id | steamUrl}}">
@@ -41,29 +43,30 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Created</div>
               <div class="col-xs-6">{{characterCtrl.character.created | momentDate}}</div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Last Online</div>
               <div class="col-xs-6">{{characterCtrl.character | isCharacterOnline}}</div>
             </div>
 
-            <div class="row">
+            <div class="row itemlist-item">
               <div class="col-xs-6">Last Killed By</div>
-              <div class="col-xs-6">{{characterCtrl.character.last_killed_by}}</div>
+              <div class="col-xs-6 itemlist-value">{{characterCtrl.character.last_killed_by}}</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="col-xs-6">
-        <div class="widget-container">
-          <div class="widget-title">Activity Log</div>
-          Coming soon...
-        </div>
+        <div class="widget-container itemlist">
+          <div class="row">
+            <div class="col-xs-12 itemlist-header">Activity Log</div>
+            <div class="col-xs-12">Coming soon...</div>
+          </div>
       </div>
     </div>
   </div>
