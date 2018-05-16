@@ -73,7 +73,8 @@ body {
 
 a:visited,
 a:active,
-a:link {
+a:link,
+a:focus {
   color: white;
   text-decoration: none;
 }
@@ -81,7 +82,10 @@ a:link {
 a:hover {
   font-weight: bold;
   color: #ddc271;
+  text-decoration: none;
 }
+
+a:focus
 
 #ng-view {
   width: 100%;
@@ -113,6 +117,12 @@ a:hover {
   font-family: 'poppins';
 }
 
+.navigationbar .thrallbrowser-logo a:hover,
+.navigationbar .thrallbrowser-logo a:focus {
+  color: #DDC271;
+  text-decoration: none;
+}
+
 .navigationbar .servername {
   text-align: center;
   font-family: 'poppins';
@@ -120,6 +130,14 @@ a:hover {
   font-size: 24px;
   padding-top: 5px;
   color: #DDC271;
+}
+
+.navigationbar .servername:hover,
+.navigationbar .servername:visited,
+.navigationbar .servername:active,
+.navigationbar .servername:focus {
+  color: #DDC271;
+  text-decoration: none;
 }
 
 .navigationbar .navigationbar-buttons {
@@ -146,9 +164,12 @@ a:hover {
   background-image: url('images/button_hover.png');
 }
 
-.navigationbar .navigationbutton:hover {
+.navigationbar .navigationbutton:hover,
+.navigationbar .navigationbutton:focus {
   background-image: url('images/button_pressed.png');
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 
 .navigationbar .navigationbutton .navigationbutton-text {
@@ -208,9 +229,12 @@ a:hover {
   background-image: url('images/button_hover.png');
 }
 
-.main-navigationbar .navigationbutton:hover {
+.main-navigationbar .navigationbutton:hover,
+.main-navigationbar .navigationbutton:focus {
   background-image: url('images/button_pressed.png');
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 
 .main-navigationbar .navigationbutton .navigationbutton-text {
@@ -323,9 +347,16 @@ a:hover {
   vertical-align: middle;
 }
 
-.itemlist .itemlist-item:hover {
+.itemlist .itemlist-item:hover,
+.itemlist .itemlist-item:hover a {
   color: #DDC271;
   background-color: #191919;
+  text-decoration: none;
+}
+
+.itemlist .itemlist-item a:focus {
+  color: #DDC271;
+  text-decoration: none;
 }
 
 .itemlist .itemlist-item .itemlist-value {
