@@ -127,6 +127,7 @@ a:hover {
   vertical-align: middle;
   line-height: 24px;
   position: absolute;
+  top: 50px;
   font-family: 'poppins';
 }
 
