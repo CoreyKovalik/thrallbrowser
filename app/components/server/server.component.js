@@ -33,7 +33,7 @@ angular
             characters = _.filter(results[1], function(c) {return c.is_online;});
 
             self.server = server
-            self.characters = characters;
+            self.online_characters = characters;
             self.clans = clans;
             self.isLoading = false;
             self.loadingError = false;

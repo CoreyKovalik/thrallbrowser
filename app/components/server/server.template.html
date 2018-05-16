@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="widget-container">
-          {{ serverCtrl.characters.length }} Online Players
+          {{serverCtrl.server.online_count}} / {max_players} Online Players
           <div class="container-fluid push-top playerlist itemlist">
             <div class="row">
               <div class="col-xs-7 itemlist-header character-name">
@@ -29,7 +29,7 @@
               </div>
               <div class="col-xs-5 itemlist-header">Clan</div>
             </div>
-            <div class="row itemlist-item" ng-repeat="character in serverCtrl.characters | orderBy:'clan_name' track by character.id">
+            <div class="row itemlist-item" ng-repeat="character in serverCtrl.online_characters | orderBy:'clan_name' track by character.id">
               <div class="col-xs-7 itemlist-value">
                 <a ng-href="http://steamcommunity.com/profiles/{{character.steam_id}}">
                   <i class="fa fa-steam-square fa-lg"></i>
@@ -42,7 +42,7 @@
                 <a ng-href="{{character.clan_id|clanUrl:character.server_id}}">{{character.clan_name}}</a>
               </div>
             </div>
-            <div class="row itemlist-empty" ng-show="!serverCtrl.characters.length">
+            <div class="row itemlist-empty" ng-show="!serverCtrl.online_characters.length">
               <div class="col-xs-12">Nobody is currently online.</div>
             </div>
           </div>
