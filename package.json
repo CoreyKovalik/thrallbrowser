@@ -1,6 +1,7 @@
 {
   "name": "thrallbrowser",
   "version": "1.0.0",
+  "repository": "github:immotal/thrallbrowser",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,6 +21,7 @@
     "browserify": "^14.5.0",
     "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
+    "less": "^3.0.4",
     "vinyl-source-stream": "^1.1.2"
   }
 }
