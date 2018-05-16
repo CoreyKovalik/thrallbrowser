@@ -1,19 +1,26 @@
 <div class="bootstrap-iso">
 <server-navbar></server-navbar>
-<div ng-show="serverCtrl.isloading" class="spinner"></div>
+<div ng-show="serverCtrl.isLoading" class="spinner"></div>
 
 <div ng-if="serverCtrl.fail">
   <div>Invalid Server ID, try again:</div>
   <a ng-href="/">Click to Return to Server List</a>
 </div>
 
-<div ng-if="!serverCtrl.isloading && !serverCtrl.fail">
+<div ng-if="!serverCtrl.isLoading && !serverCtrl.fail">
   <div class="container serverview">
     <div class="row">
       <div class="col-xs-12">
-        <div class="widget-container">
+        <div class="widget-container itemlist">
+          <div class="itemlist-header">Server Information</div>
+          <div>{{serverCtrl.server.character_count}} total characters created, {{serverCtrl.server.online_count}} are online now</div>
+          <div>
           <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
-          <div>Direct Connect IP: {{serverCtrl.server.ip_address}}</div>
+          <div>Direct Connect IP: {{serverCtrl.server.ip_address}} [join button, coming soon..]</div>
+          <div>Discord Link: coming soon..</div>
+          <div>ServerThrall Version: coming soon..</div>
+          <div>ServerThrall server ID: {{46}}</div>
+          <div>Server Admin(s):  coming soon..</div>
         </div>
       </div>
     </div>
