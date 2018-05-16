@@ -19,5 +19,492 @@
     </div>
   </div>
 </div>
+<div class="conan-stat-calculator">
+  <!-- Logo image credit to Funcom, https://www.conanexiles.com/ -->
+  <img class="conanimg" src="./images/logo.png" alt="logo" width="450" srcset="./images/logo.png 500w, ./images/logo-300x88.png 300w" sizes="(max-width: 500px) 100vw, 500px">
+  <h1 class="calc-title">Stat Calculator</h1>
+  <table class="calc-table">
+    <thead class="calc-thead">
+      <tr>
+        <th rowspan="3" colspan="3">
+          <div class="character-title">
+            <button class="stat-button level-down"> - </button>
+            Exile Level: <span class="character-level"></span>
+            <button class="stat-button level-up"> + </button>
+            <br>Unspent points: <span class="unspent-points"></span>
+          </div>
+          <button class="max-level">Maximum Level</button>
+        </th>
+        <th class="encumbrance-th">Encumbrance 0 / <span class="encumbrance-heading"></span></th>
+        <th class="player-stats" rowspan="3" colspan="1">Player Stats</th>
+      </tr>
+      <tr>
+        <th class="movement-penalty" colspan="1">Movement Penalty 0</th>
+      </tr>
+      <tr>
+        <th class="experience" colspan="1">Experience <span class="current-experience"></span></th>
+      </tr>
+    </thead>
+    <tbody class="calc-tbody">
+      <!-- Begin attribute rows -->
+      <!-- Strength attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div strength">
+            <div>
+              <img class="stat-icon" src="./images/strength-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Strength</span>
+            </div>
+            <span class="cost">
+              <span class="strength current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="strength-down stat-button"> - </button>&nbsp;
+              <button class="strength-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+            </span>
+          </div>
+        </td>
+        <!-- continue attribute rows later after bonuses -->
 
-<a ng-href="http://immotal.github.io/conan-stat-calc">Click here for stat calculator until we migrate it to thrallbrowser</a>
+        <!-- Begin bonuses -->
+        <!-- Strength bonuses -->
+        <td class="bonuses hide strength active" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Strength</div>
+            <div class="bonus-description">Strength determines the damage that you do in melee.<br>&nbsp;</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 strength" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 strength">Thuggery - Every blow you strike with a truncheon deals 100% more concussive damage.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 strength" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 strength">Salting the Wound - You now deal 25% increased damage to enemies affected by negative status effects (i.e cripple, bleed, sunder).
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 strength" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 strength">Slice and Dice - Each light attack you do inflicts 10% more damage.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 strength" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir4 strength">Brutal Strikes - Each heavy attack now inflicts 25% more damage.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 strength" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 strength">Blood-mad Berserker - Whenever your hitpoints fall below 25%, you deal 50% more melee damage.
+              </div>
+            </div>
+          </div>
+
+        <!-- Agility bonuses -->
+        <td class="bonuses hide agility" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Agility</div>
+            <div class="bonus-description">Agility is a measure of ability to move when wearing<br>different clothing types.  It has a direct effect on armor.</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 agility" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 agility">Iron Endurance - Sprinting drains less stamina.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 agility" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 agility">Cat-like - Falling damage is halved.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 agility" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 agility">Effortless Leap - Jumping no longer costs stamina.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 agility" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 agility">Nimble Tumbler - When dodging, your armor counts as one weight-class lower than normal.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 agility" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 agility">Extended Leap - Jump while in the air to do a second jump.
+              </div>
+            </div>
+          </div>
+
+        <!-- Vitality bonuses -->
+        <td class="bonuses hide vitality" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Vitality</div>
+            <div class="bonus-description">Vitality determines the size of your health pool.<br>&nbsp;</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 vitality" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 vitality">Deep Beath - Your breath timer is doubled.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 vitality" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 vitality">Impervious - All temperature effects are diminished.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 vitality" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 vitality">Fierce Vitality - You gain passive health regeneration.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 vitality" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 vitality">Receptive - Increases the healing effect of consumables and dancers by 100%.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 vitality" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 vitality">Gluttonous Gains - Eating food now counts as a healing potion, and provides a healing burst at the end of the regeneration effect.
+              </div>
+            </div>
+          </div>
+
+        <!-- Accuracy bonuses -->
+        <td class="bonuses hide accuracy" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Accuracy</div>
+            <div class="bonus-description">Accuracy determines the damage that you do with ranged weapons.</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 accuracy" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 accuracy">Eye for Injury - Crippling shots with a bow are more severe.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 accuracy" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 accuracy">Trick Shot - Shots fired from your bow will ricochet if you miss your target.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 accuracy" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 accuracy">Steady Hands - All ranged and thrown weapons now do 10% more damage.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 accuracy" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 accuracy">Crevice in the Armor - Increases your armor penetration of any weapon you wield by 50%.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 accuracy" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 accuracy">Shafted - Every headshot deals 50% more damage.
+              </div>
+            </div>
+          </div>
+
+        <!-- Grit bonuses -->
+        <td class="bonuses hide grit" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Grit</div>
+            <div class="bonus-description">Grit determines the size of your stamina pool.<br>&nbsp;</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 grit" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 grit">Strong Grip - You use 10% less stamina whenever you climb.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 grit" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 grit">Barbaric Tenacity - You gain an additional 10% stamina per regeneration tick.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 grit" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 grit">Iron-hard Muscles - You gain a natural resistance to damage. (+15 armor)
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 grit" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 grit">Fluid Swings - Your basic attacks cost less stamina.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 grit" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 grit">Artful Dodger - Dodging costs less stamina.
+              </div>
+            </div>
+          </div>
+
+        <!-- Encumbrance bonuses -->
+        <td class="bonuses hide encumbrance" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Encumbrance</div>
+            <div class="bonus-description">Encumbrance is a measure of how much you can carry.<br>&nbsp;</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 encumbrance" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 encumbrance">Balance and Counterbalance - You deal 10% extra melee damage while over-encumbered but swing using 10% less stamina when no over-encumbered.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 encumbrance" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 encumbrance">Sure-footed - Crippling effects are less severe.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 encumbrance" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 encumbrance">Pack Mule - Your max carry weight is increased by 10%.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 encumbrance" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 encumbrance">Deflection - You have a chance to ignore armor and shield durability loss when hit.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 encumbrance" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 encumbrance">Momentum - When over-encumbered, you can move at full speed.
+              </div>
+            </div>
+          </div>
+
+        <!-- Survival bonuses -->
+        <td class="bonuses hide survival" rowspan="15">
+          <div class="bonuses-container bonuses">
+            <div class="bonus-heading">Survival</div>
+            <div class="bonus-description">Survival is a measure of your ability to live in harsh conditions.  It affects how easily you metabolize food.</div>
+
+            <hr class="bonuses-hr">
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir1 survival" src="./images/t1.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir1 survival">Raw and Bloody - You do not have to cook raw meat to avoid food poisoning.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir2 survival" src="./images/t2.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir2 survival">Hard Worker - You harvest resource nodes twice as fast.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir3 survival" src="./images/t3.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir3 survival">Efficient Buthery - Every animal harvested provides extra resources.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir4 survival" src="./images/t4.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 survival">Antidote of one - Invulnerability to poisons and diseases.  Strength of detrimental status effects are reducded by 20%.
+              </div>
+            </div>
+
+            <div class="bonus-container bonus-teir">
+              <img class="bonus-icon bonus-teir5 survival" src="./images/t5.png" width="100" height="100" alt="stat icon">
+              <div class="bonus-content teir5 survival">Bronzed Physique - All direct combat damage you take is reduced by 10%.
+              </div>
+            </div>
+          </div>
+        </td>
+        <!-- Player stats -->
+        <td class="player-stats" rowspan="15">
+          <ul>
+          <li><span>Health: </span><span class="health"></span></li>
+          <li><span>Stamina: </span><span class="stamina"></span></li>
+          <li><span>Encumbr: </span><span class="encumbrance-player"></span></li>
+          <li><span>Melee: </span><span class="melee"></span></li>
+          <li><span>Ranged: </span><span class="ranged"></span></li>
+          <li><span>Armor: </span><span class="armor">+</span></li>
+          <li><span>Resist: </span><span class="dmg-resist"></span></li>
+          </ul>
+        </td>
+      </tr>
+
+      <!-- Continue with attribute rows starting @ progress-bar strength -->
+      <tr>
+        <td class="progress-bar strength" colspan="3">
+          <div class="progress strength"></div>
+        </td>
+      </tr>
+      <!-- Agility attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div agility">
+            <div>
+              <img class="stat-icon" src="./images/agility-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Agility</span>
+            </div>
+            <span class="cost">
+              <span class="agility current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="agility-down stat-button"> - </button>&nbsp;
+              <button class="agility-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar agility" colspan="3">
+          <div class="progress agility"></div>
+        </td>
+      </tr>
+      <!-- Vitality attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div vitality">
+            <div>
+              <img class="stat-icon" src="./images/vitality-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Vitality</span>
+            </div>
+            <span class="cost">
+              <span class="vitality current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="vitality-down stat-button"> - </button>&nbsp;
+              <button class="vitality-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar vitality" colspan="3">
+          <div class="progress vitality"></div>
+        </td>
+      </tr>
+      <!-- Accuracy attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div accuracy">
+            <div>
+              <img class="stat-icon" src="./images/accuracy-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Accuracy</span>
+            </div>
+            <span class="cost">
+              <span class="accuracy current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="accuracy-down stat-button"> - </button>&nbsp;
+              <button class="accuracy-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar accuracy" colspan="3">
+          <div class="progress accuracy"></div>
+        </td>
+      </tr>
+      <!-- Grit attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div grit">
+            <div>
+              <img class="stat-icon" src="./images/grit-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Grit</span>
+            </div>
+            <span class="cost">
+              <span class="grit current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="grit-down stat-button"> - </button>&nbsp;
+              <button class="grit-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar grit" colspan="3">
+          <div class="progress grit"></div>
+        </td>
+      </tr>
+      <!-- Encumbrance attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div encumbrance">
+            <div>
+              <img class="stat-icon" src="./images/encumbrance-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Encumbrance</span>
+            </div>
+            <span class="cost">
+              <span class="encumbrance current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="encumbrance-down stat-button"> - </button>&nbsp;
+              <button class="encumbrance-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar encumbrance" colspan="3">
+          <div class="progress encumbrance"></div>
+        </td>
+      </tr>
+      <!-- Survival attribute -->
+      <tr>
+        <td class="attribute-td" colspan="3">
+          <div class="attr-div survival">
+            <div>
+              <img class="stat-icon" src="./images/survival-icon.png" height="28" width="28" alt="stat icon">
+              <span class="attribute">Survival</span>
+            </div>
+            <span class="cost">
+              <span class="survival current-level"></span>&nbsp;
+              <button class="reset-attribute">Reset</button>&nbsp;
+              <button class="survival-down stat-button"> - </button>&nbsp;
+              <button class="survival-up stat-button"> + </button>&nbsp;
+              <button class="max-attribute">Max</button>
+          </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="progress-bar survival" colspan="3">
+          <div class="progress survival"></div>
+        </td>
+      </tr>
+      <!-- Reset Buttons -->
+      <tr>
+        <td class="reset" colspan="3">
+          <button class="reset-all">Reset All</button>
+          <button class="reset-attributes">Reset Attributes</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

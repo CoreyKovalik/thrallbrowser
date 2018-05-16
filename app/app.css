@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Jomhuria');
+/*@import url('https://fonts.googleapis.com/css?family=Jomhuria');*/
 
 /* BOOSTRAP-ISO FIX */
 
@@ -408,3 +408,316 @@ input.search-input::placeholder {
   border-top-color: #333;
   animation: spinner .6s linear infinite;
 }
+
+/* STATS */
+
+/* Conan Stat Calculator */
+/*@import url('https://fonts.googleapis.com/css?family=Jomhuria');*/
+
+body {
+  margin: 0;
+  background-image: url(../images/background.jpg);
+}
+
+.conan-stat-calculator .calc-table .calc-thead th {
+  text-align: center;
+  font-weight: normal;
+}
+
+.conan-stat-calculator .calc-table button {
+  background-image: url(../images/ButtonNormal.png);
+  border-left: 0;
+  border-right: 0;
+  border-top: 2px solid grey;
+  border-bottom: 1px solid grey;
+  color: #ECE4C6;
+  font-weight: bold;
+}
+
+.conan-stat-calculator {
+  color: #ddc271;
+  font-family: Jomhuria;
+  font-size: 30px;
+}
+
+.conan-stat-calculator .conanimg {
+  height:auto;
+  max-width: 100%;
+  border: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+.conan-stat-calculator .calc-title {
+  font-weight: normal;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.conan-stat-calculator .calc-table {
+  width: 95%;
+  min-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.conan-stat-calculator .calc-table,
+.conan-stat-calculator .calc-table .attribute-td,
+.conan-stat-calculator .calc-table .player-stats,
+.conan-stat-calculator .calc-table .reset,
+.conan-stat-calculator .calc-table .progress-bar {
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.calc-table .character-title {
+  font-size: 1.5em;
+}
+
+.calc-table .stat-button {
+  font-weight: bold;
+  font-size: 16px;
+  white-space: pre;
+  position: relative;
+  top: 1px;
+  width: 30px;
+}
+
+.calc-table .calc-thead .player-stats {
+  width: 12%;
+}
+
+.calc-table .experience {
+  min-width: 502px;
+}
+
+.calc-table .current-level {
+  background-image: url(../images/StatField.png);
+  width: 68px;
+  background-size: 100% 100%;
+  text-align: right;
+  padding-right: 20px;
+  display: inline-block;
+  padding-top: 2px;
+}
+
+.calc-table .attr-div {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.calc-table .stat-icon {
+  vertical-align: middle;
+}
+
+.calc-table .attribute {
+  text-transform: uppercase;
+}
+
+.calc-table .cost {
+  padding-right: 10px;
+}
+
+.calc-table .max-attribute {
+  width: 48px;
+}
+
+.calc-table .attribute,
+.calc-table .current-level,
+.calc-table .cost {
+  border: 0;
+}
+
+.calc-table .reset-attribute,
+.calc-table .max-attribute,
+.calc-table .stat-button {
+  line-height: 25px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.calc-table .calc-thead {
+  background-image: url(../images/BgTopBanner.png);
+  background-size: 100% 100%;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+}
+
+.calc-table .calc-tbody,
+.calc-table .calc-tbody td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+
+.calc-table td.bonuses {
+  background-image: url(../images/BgFeats.png);
+  background-size: 100% 100%;
+}
+
+/* FULL RESETS */
+.calc-table .reset {
+  text-align: center;
+}
+
+.calc-table .reset-all,
+.calc-table .reset-attributes {
+  background-size: cover;
+}
+
+.calc-table .reset-all {
+  width: 33%
+}
+
+.calc-table .reset-attributes {
+  width: 33%;
+}
+
+.calc-table button:hover {
+  background-image: url(../images/ButtonPressed.png);
+  color: black;
+}
+
+/* PROGRESS BARS */
+.calc-table .progress-bar {
+  width: 60%;
+  display: table-cell;
+  background-image: url(../images/teir0.png);
+  background-size:100% 100%;
+  height: 30px;
+}
+
+.calc-table .progress {
+  width: 0;
+  background-color: rgb(221, 194, 150);
+  background-color: rgba(221, 194, 150,.2);
+  position:relative;
+  left: -5px;
+  height: 12px;
+  transition: .1s
+}
+
+.calc-table .perk-1 {
+  background-image: url(../images/teir1.png);
+}
+.calc-table .perk-2 {
+  background-image: url(../images/teir2.png);
+}
+.calc-table .perk-3 {
+  background-image: url(../images/teir3.png);
+}
+.calc-table .perk-4 {
+  background-image: url(../images/teir4.png);
+}
+.calc-table .perk-5 {
+  background-image: url(../images/teir5.png);
+}
+
+.player-stats .health, .player-stats .stamina, .player-stats .encumbrance-player, .player-stats .melee,
+.player-stats .ranged, .player-stats .armor, .player-stats .dmg-resist {
+  display: table-cell;
+  text-align: right;
+}
+
+.calc-table .calc-tbody .player-stats ul {
+  list-style-type: none;
+  padding-left: 30px;
+}
+
+.calc-table .calc-tbody .player-stats li span:first-child {
+  display: table-cell;
+}
+
+.calc-table .calc-tbody .player-stats li span:last-child {
+  display: table-cell;
+  width: 100%;
+  padding-left: 3px;
+  padding-right: 10%;
+}
+
+/* BONUSES */
+
+.calc-table .bonuses {
+  color: #ECE4C6;
+  padding: 0;
+}
+
+.calc-table .bonuses-container {
+  height: 619px;
+  padding-right: 25px;
+}
+
+.calc-table .bonus-heading {
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+.calc-table .bonus-description {
+  text-align: center;
+}
+
+.calc-table .bonuses-hr {
+  margin-left: 20px;
+  display:block;
+  border:0;
+  height:2px;
+  background-image:url(../images/hr.png);
+}
+
+.calc-table .bonus-container {
+  height: 100px;
+}
+
+.calc-table .bonus-icon {
+  float: left;
+}
+
+.calc-table .bonus-teir1, .calc-table .bonus-teir2, .calc-table .bonus-teir3,
+.calc-table .bonus-teir4, .calc-table .bonus-teir5 {
+  clear: left;
+  margin-top: -25px;
+}
+
+.calc-table .bonus-content {
+  height: 100%;
+}
+
+.calc-table .bonus-description, .calc-table .bonus-content {
+  font-family: Helvetica;
+  font-size: 18px;
+}
+
+.conan-stat-calculator .calc-table .calc-tbody .active {
+  display: table-cell;
+}
+
+.conan-stat-calculator .hide {
+  display: none;
+}
+
+/* END BONUSES*/
+
+/* MEDIA QUERIES */
+
+@media (max-width: 943px) {
+  .conan-stat-calculator .calc-table .calc-tbody .active {
+  display: none;
+  }
+
+  .conan-stat-calculator .calc-table .encumbrance-th,
+  .conan-stat-calculator .calc-table .movement-penalty,
+  .conan-stat-calculator .calc-table .experience,
+  .conan-stat-calculator .calc-table .player-stats,
+  .conan-stat-calculator .calc-table .bonuses,
+  .conan-stat-calculator .calc-table .player-stats {
+    display: none;
+  }
+
+  .conan-stat-calculator,
+  .conan-stat-calculator .calc-table {
+    min-width: 427px;
+  }
+}
+
+/* END STATS */
