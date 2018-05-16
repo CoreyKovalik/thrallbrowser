@@ -1,6 +1,7 @@
 /*@import url('https://fonts.googleapis.com/css?family=Jomhuria');*/
 
 /* BOOSTRAP-ISO FIX */
+/* for html and body selectors in bootstrap.css */
 
 /* bootstrap original line 19*/
 .bootstrap-iso {
@@ -38,6 +39,20 @@
   line-height: 1.42857143;
   /*color: #333333;*/
   /*background-color: #ffffff;*/
+}
+
+.bootstrap-iso a:visited,
+.bootstrap-iso a:active,
+.bootstrap-iso a:link,
+.bootstrap-iso a:focus {
+  color: white;
+  text-decoration: none;
+}
+
+.bootstrap-iso a:hover {
+  font-weight: bold;
+  color: #ddc271;
+  text-decoration: none;
 }
 
 /* END BOOTSTRAP-ISO FIX*/
@@ -84,8 +99,6 @@ a:hover {
   color: #ddc271;
   text-decoration: none;
 }
-
-a:focus
 
 #ng-view {
   width: 100%;
