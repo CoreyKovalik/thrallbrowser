@@ -27,7 +27,6 @@ angular
             clans = results[2]
 
             firstCharacter = _.minBy(characters, 'id');
-            console.log(firstCharacter)
             if(firstCharacter != null)
               self.lastWipeDate = firstCharacter.created
 
