@@ -3,7 +3,7 @@ angular
   .component('stats', {
     templateUrl: 'components/stats/stats.template.html',
     controllerAs: 'statsCtrl',
-    controller: function statsCalculatorController($q, $route, $routeParams) {
+    controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location) {
     var self = this;
 
     //start calc
@@ -177,17 +177,33 @@ angular
       }
     }
 
-    function maxOutLevel() {
-      while (stats.characterLevel < 60) {
-        levelUp();
+    function increaseLevelTo(value)
+    {
+      while (stats.characterLevel < value) {
+        if(!levelUp())
+          return false;
       }
+      return true;
+    }
+
+    function maxOutLevel() {
+      increaseLevelTo(60);
+    }
+
+    function levelStatTo(statName, value)
+    {
+      while (stats[statName].value < value) {
+        if (getAttrCost(stats[statName].value) > stats.unspentPoints)
+          return false;
+        if(!statUp(statName))
+          return false;
+      }
+
+      return true;
     }
 
     function maxOutAttribute(attribute) {
-      while (stats[attribute].value < 50) {
-        if (getAttrCost(stats[attribute].value) > stats.unspentPoints) return false;
-        statUp(attribute);
-      }
+      levelStatTo(attribute, 50);
     }
 
     function setCurrentExperience(currentlevel) {
@@ -311,6 +327,7 @@ angular
       calcPlayerStats();
       adjustPlayerStats();
       adjustProgress(statString);
+      updateQueryParams();
     }
 
     function adjustPoints() {
@@ -341,17 +358,20 @@ angular
 
     // Increase/Decrease stat functions
     function levelUp() {
-      if (stats.characterLevel == 60) return false;
+      if (stats.characterLevel == 60)
+        return false;
       stats.characterLevel += 1;
       setCurrentExperience(stats.characterLevel);
       stats.unspentPoints += adjustAttrPoints(stats.characterLevel);
       stats.availableFeats += adjustFeatPoints(stats.characterLevel);
       update();
-      console.log("Level Up!");
+      // console.log("Level Up!");
+      return true;
     }
 
     function levelDown() {
-      if (stats.characterLevel == 1) return false;
+      if (stats.characterLevel == 1)
+        return false;
       if (stats.characterLevel == 60) {
         document.getElementsByClassName("level-up")[0].disabled = false;
         document.getElementsByClassName("max-level")[0].disabled = false;
@@ -365,12 +385,14 @@ angular
       setCurrentExperience(stats.characterLevel);
       update();
       console.log("Level Down :(");
+      return true;
     }
 
     function statUp(statString) {
       let stat = stats[statString].value;
       let name = capitalizeFirst(statString);
       let cost = getAttrCost(stat);
+
       if (stat == 50)
         return false;
       if (cost > stats.unspentPoints)
@@ -381,12 +403,14 @@ angular
       stats.spentPoints += cost;
       stats[statString].value = stat;
       update(statString);
-      console.log(name + " Up!");
+      // console.log(name + " Up!");
+      return true;
     }
 
     function statDown(statString) {
       let stat = stats[statString].value;
-      if (stat == 0) return false;
+      if (stat == 0)
+        return false;
 
       stat -= 1;
       let name = capitalizeFirst(statString);
@@ -395,7 +419,46 @@ angular
       stats.spentPoints -= cost;
       stats[statString].value = stat;
       update(statString);
-      console.log(name + " down :(");
+      // console.log(name + " down :(");
+      return true;
+    }
+
+    function loadQueryParams()
+    {
+      var values = $location.search().v;
+      if(!values || !values.split)
+        return;
+
+      var s = values.split(":");
+
+      function takeStat() {
+        return s.length == 0 ? null : Number(s.shift());
+      }
+
+      var level = takeStat();
+      if(level != null)
+        increaseLevelTo(level);
+
+      stats.allStats.forEach(function(attribute, i) {
+        let statName = stats.allStats[i];
+        let statTarget = takeStat();
+
+        if(statTarget != null)
+          levelStatTo(statName, statTarget);
+      });
+    }
+
+    function updateQueryParams()
+    {
+      // $location.search('v',
+      //   stats.characterLevel + ':' +
+      //   stats.strength.value + ':'+
+      //   stats.agility.value + ':'+
+      //   stats.vitality.value + ':'+
+      //   stats.accuracy.value + ':'+
+      //   stats.grit.value + ':'+
+      //   stats.encumbrance.value + ':'+
+      //   stats.survival.value);
     }
 
     // Helper Functions //
@@ -491,10 +554,9 @@ angular
           }
         });
       });
-
     });
 
-//end conan-stat-calc.js
-//end calc
+    loadQueryParams();
+    updateQueryParams();
     }
   });
