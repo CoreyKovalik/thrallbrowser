@@ -13,14 +13,9 @@
       <div class="col-xs-12">
         <div class="widget-container itemlist">
           <div class="itemlist-header">Server Information</div>
-          <div>{{serverCtrl.server.character_count}} total characters created, {{serverCtrl.server.online_count}} are online now</div>
-          <div>
+          <div>{{serverCtrl.server.character_count}} total characters created</div>
           <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
-          <div>Direct Connect IP: {{serverCtrl.server.ip_address}} [join button, coming soon..]</div>
-          <div>Discord Link: coming soon..</div>
-          <div>ServerThrall Version: coming soon..</div>
-          <div>ServerThrall server ID: {{46}}</div>
-          <div>Server Admin(s):  coming soon..</div>
+          <div>Direct Connect IP: {{serverCtrl.server.ip_address}}</div>
         </div>
       </div>
     </div>
@@ -28,7 +23,12 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="widget-container">
-          {{serverCtrl.server.online_count}} / {max_players} Online Players
+          {{serverCtrl.server.online_count}}
+          <span ng-if="serverCtrl.server.max_players">
+            / {{serverCtrl.server.max_players}}
+          </span>
+          Online Players
+
           <div class="container-fluid push-top playerlist itemlist">
             <div class="row">
               <div class="col-xs-7 itemlist-header character-name">
