@@ -28,15 +28,6 @@ angular
           });
       }
 
-      function roundLocation(location) {
-        var x = Math.round(location.x);
-        var y = Math.round(location.y);
-        var z = Math.round(location.z);
-        return x + ", " + y + ", " + z;
-      }
-
-      self.roundLocation = roundLocation;
-
       loadData();
     }
   });
