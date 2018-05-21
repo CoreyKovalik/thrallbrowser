@@ -11,11 +11,37 @@
   <div class="container serverview">
     <div class="row">
       <div class="col-xs-12">
-        <div class="widget-container itemlist">
-          <div class="itemlist-header">Server Information</div>
-          <div>{{serverCtrl.server.character_count}} total characters created</div>
-          <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
-          <div>Direct Connect IP: {{serverCtrl.server.ip_address}}</div>
+        <div class="widget-container itemlist container-fluid">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="itemlist-header">Server Information</div>
+              <div>{{serverCtrl.server.character_count}} total characters created</div>
+              <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
+
+              <div ng-if="serverCtrl.server.query_port">
+                Connect To Server:
+                <a ng-if="serverCtrl.server.query_port" ng-href="{{serverCtrl.server|connectUrl}}">
+                  {{serverCtrl.server.ip_address}}
+                </a>
+                <span ng-if="!serverCtrl.server.query_port">
+                  {{serverCtrl.server.ip_address}}
+                </span>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <a
+                class="join-button"
+                ng-if="serverCtrl.server.query_port"
+                ng-href="{{serverCtrl.server|connectUrl}}">
+                <button
+                  class="button button-large"
+                  ng-click="serverCtrl.openJoinServer()">
+                  JOIN SERVER NOW
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

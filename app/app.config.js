@@ -1,6 +1,6 @@
 angular
   .module('thrallbrowser')
-  .config(function config($routeProvider, $locationProvider) {
+  .config(function config($routeProvider, $locationProvider, $compileProvider) {
     // $locationProvider.hashPrefix('');
 
     $routeProvider
@@ -35,4 +35,6 @@ angular
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|steam|mailto):/);
   });

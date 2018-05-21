@@ -29,3 +29,11 @@ angular
       return "http://steamcommunity.com/profiles/" + steamId;
     }
   });
+
+angular
+  .module('thrallbrowser')
+  .filter('connectUrl', function() {
+    return function(server) {
+      return "steam://connect/" + server.ip_address + ":" + server.query_port;
+    }
+  });
