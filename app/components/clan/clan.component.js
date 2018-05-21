@@ -14,6 +14,16 @@ angular
       self.sortOnline = '-is_online';
       self.clan = null;
       self.members = null;
+      self.averageLevel = null;
+
+      function getAverageLevel(characters)
+      {
+        if(characters.length == 0)
+          return 0;
+
+        let levels = characters.reduce(function(acc, v) { return acc + v.level; }, 0);
+        return Math.floor(levels / characters.length);
+      }
 
       function loadData() {
         let clanPromise = serverthrallapi.getClan(self.serverId, self.clanId);
@@ -24,6 +34,7 @@ angular
             clan = results[0]
             characters = results[1]
             self.owner = _.find(characters, function(c) {return c.id == clan.owner_id});
+            self.averageLevel = getAverageLevel(characters);
             self.clan = clan;
             self.characters = characters;
             self.isLoading = false;

@@ -18,12 +18,20 @@
           </a>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
           Owner:
           <a ng-href="{{clanCtrl.owner.id|characterUrl:clanCtrl.clan.server_id}}">
             {{clanCtrl.owner.name}}
           </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          Average Level of Members:
+          {{clanCtrl.averageLevel}}
         </div>
       </div>
     </div>
