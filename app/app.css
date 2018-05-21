@@ -294,6 +294,20 @@ a:hover {
 .serverview .join-button {
  display: block;
  margin-top: 10px;
+.serverview .update-serverthrall {
+  position: relative;
+}
+
+.serverview .update-serverthrall-ribbon {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  border: 0;
+  z-index: 1;
+}
+
+.serverview .server-information {
+  min-height: 155px;
 }
 
 .serverview.container {

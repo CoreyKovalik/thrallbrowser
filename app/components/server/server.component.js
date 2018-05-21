@@ -14,6 +14,7 @@ angular
       self.server = null;
       self.characters = null;
       self.lastWipeDate = null;
+      self.updateServerThrall = false;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
@@ -37,6 +38,9 @@ angular
             self.clans = clans;
             self.isLoading = false;
             self.loadingError = false;
+            if (self.server.version != "2.1.3") {
+              self.updateServerThrall = true;
+            }
           })
           .catch(function(respone) {
             self.isLoading = false;
