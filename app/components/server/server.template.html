@@ -23,10 +23,10 @@
               <div>{{serverCtrl.server.character_count}} total characters created</div>
               <div>Last Server Wipe: {{serverCtrl.lastWipeDate | momentDate}}</div>
 
-              <div ng-if="serverCtrl.server.query_port">
-                Connect To Server:
+              <div ng-if="serverCtrl.server.ip_address">
+                Direct Connect:
                 <a ng-if="serverCtrl.server.query_port" ng-href="{{serverCtrl.server|connectUrl}}">
-                  {{serverCtrl.server.ip_address}}
+                  {{serverCtrl.server.ip_address + ':' + serverCtrl.server.query_port}}
                 </a>
                 <span ng-if="!serverCtrl.server.query_port">
                   {{serverCtrl.server.ip_address}}
