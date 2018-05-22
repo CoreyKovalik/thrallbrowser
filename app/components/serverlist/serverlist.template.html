@@ -1,129 +1,179 @@
 <div class="bootstrap-iso">
-<div class="main-navigationbar">
-  <div class="main-navigationbar-content">
-    <div class="main-navigation-title">ThrallBrowser</div>
+  <div class="main-navigationbar">
+    <div class="main-navigationbar-content">
+      <div class="main-navigation-title">ThrallBrowser</div>
 
-    <div class="navigationbar-buttons">
-      <a
-        ng-href="/servers"
-        class="navigationbutton"
-        ng-class="{'active': navbarCtrl.routeId == 'servers'}">
-          <div class="navigationbutton-text">SERVERS</div>
-      </a>
+      <div class="navigationbar-buttons">
+        <a
+          ng-href="/servers"
+          class="navigationbutton"
+          ng-class="{'active': navbarCtrl.routeId == 'servers'}">
+            <div class="navigationbutton-text">SERVERS</div>
+        </a>
 
-      <a
-        ng-href="/stats"
-        class="navigationbutton"
-        ng-class="{'active': navbarCtrl.routeId == 'stats'}">
-        <div class="navigationbutton-text">STAT CALCULATOR</div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="main-container serverlistview">
-  <div class="row">
-    <div class="col-xs-12">
-      <label class="go-server">
-        Click on a server below, or enter your serverthrall server ID
-        <input
-          ng-keyup="$event.keyCode == 13 ? serverListCtrl.goServer(serverId) : null"
-          type="text"
-          class="search-input server-id-placeholder"
-          ng-model="serverId"
-          placeholder="#"
-          required>
-
-        <button
-          class="btn btn-dark go-server"
-          title="Go to Server #{{serverId}}"
-          ng-click="serverListCtrl.goServer(serverId)">
-          Go!
-        </button>
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="container-fluid push-top serverlist itemlist">
-      <div class="row">
-        <div class="col-xs-5 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('name')">
-          Server Name
-          <span
-            ng-show="serverListCtrl.currentSort == 'name'"
-            class="glyphicon"
-            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
-          </span>
-        </div>
-
-        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('online_count')">
-          Online
-          <span
-            ng-show="serverListCtrl.currentSort == 'online_count'"
-            class="glyphicon"
-            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
-          </span>
-        </div>
-
-        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('character_count')">
-          Characters
-          <span
-            ng-show="serverListCtrl.currentSort == 'character_count'"
-            class="glyphicon"
-            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
-          </span>
-        </div>
-
-        <div class="col-xs-3 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('ip_address')">
-          Direct Connect
-          <span
-            ng-show="serverListCtrl.currentSort == 'ip_address'"
-            class="glyphicon"
-            ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
-          </span>
-        </div>
-      </div>
-
-      <div
-        class="row itemlist-item"
-        ng-click="serverListCtrl.goServer(server.id)"
-        ng-repeat="server in serverListCtrl.servers | filter:serverFilter | orderBy:serverListCtrl.orderBy track by server.id">
-
-        <div class="col-xs-5 itemlist-value server-name">{{server.name | serverName}}</div>
-        <div class="col-xs-2 itemlist-value">{{server.online_count}}</div>
-        <div class="col-xs-2 itemlist-value">{{server.character_count}}</div>
-        <div class="col-xs-3 itemlist-value ip-address">
-          <a ng-if="server.query_port" ng-href="{{server|connectUrl}}" ng-click="$event.stopImmediatePropagation()">
-          <button
-          type="button"
-          class="btn btn-dark connect-button">
-          Join Server
-          </button>
-          </a>
-          <a ng-if="!server.query_port && server.ip_address" ng-href="http://github.com/nullsoldier/serverthrall" ng-click="$event.stopImmediatePropagation()">
-          <button
-          type="button"
-          class="btn btn-warning connect-button">
-          Update
-          </button>
-          </a>
-          <a ng-if="!server.ip_address" ng-href="http://github.com/nullsoldier/serverthrall" ng-click="$event.stopImmediatePropagation()">
-          <button
-          type="button"
-          class="btn btn-danger connect-button">
-          Update ServerThrall
-          </button>
-          </a>
-          <span ng-if="!server.query_port && server.ip_address">&nbsp;&nbsp;- {{server.ip_address}}</span>
-          <span ng-if="server.query_port">&nbsp;- {{server.ip_address}}</span>
-        </div>
-      </div>
-
-      <div class="row itemlist-empty" ng-show="!serverListCtrl.servers.length">
-        <div class="col-xs-12">No current active servers being tracked.</div>
+        <a
+          ng-href="/stats"
+          class="navigationbutton"
+          ng-class="{'active': navbarCtrl.routeId == 'stats'}">
+          <div class="navigationbutton-text">STAT CALCULATOR</div>
+        </a>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="main-container serverlistview">
+    <div class="row">
+      <div class="col-xs-12">
+        <label class="go-server">
+          Click on a server below, or enter your serverthrall server ID
+          <input
+            ng-keyup="$event.keyCode == 13 ? serverListCtrl.goServer(serverId) : null"
+            type="text"
+            class="search-input server-id-placeholder"
+            ng-model="serverId"
+            placeholder="#"
+            required>
+
+          <button
+            class="btn btn-dark go-server"
+            title="Go to Server #{{serverId}}"
+            ng-click="serverListCtrl.goServer(serverId)">
+            Go!
+          </button>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="container-fluid push-top serverlist itemlist">
+        <div class="row">
+          <div class="col-xs-5 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('name')">
+            Server Name
+            <span
+              ng-show="serverListCtrl.currentSort == 'name'"
+              class="glyphicon"
+              ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+            </span>
+          </div>
+
+          <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('online_count')">
+            Online
+            <span
+              ng-show="serverListCtrl.currentSort == 'online_count'"
+              class="glyphicon"
+              ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+            </span>
+          </div>
+
+          <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('character_count')">
+            Characters
+            <span
+              ng-show="serverListCtrl.currentSort == 'character_count'"
+              class="glyphicon"
+              ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+            </span>
+          </div>
+
+          <div class="col-xs-3 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('ip_address')">
+            Direct Connect
+            <span
+              ng-show="serverListCtrl.currentSort == 'ip_address'"
+              class="glyphicon"
+              ng-class="{'glyphicon-menu-down': serverListCtrl.currentSortAsc, 'glyphicon-menu-up': !serverListCtrl.currentSortAsc}">
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="row itemlist-item"
+          ng-repeat="server in serverListCtrl.servers | filter:serverFilter | orderBy:serverListCtrl.orderBy track by server.id">
+          <div ng-click="serverListCtrl.goServer(server.id)">
+            <div class="col-xs-5 itemlist-value server-name">{{server.name | serverName}}</div>
+            <div class="col-xs-2 itemlist-value">{{server.online_count}}</div>
+            <div class="col-xs-2 itemlist-value">{{server.character_count}}</div>
+          </div>
+          <div class="col-xs-3 itemlist-value ip-address">
+            <a ng-if="server.query_port" ng-href="{{server|connectUrl}}">
+            <button
+            type="button"
+            class="btn btn-dark connect-button">
+            Join Server
+            </button>
+            </a>
+            <button
+            ng-if="!server.query_port && server.ip_address"
+            type="button"
+            class="btn btn-warning connect-button"
+            data-toggle="modal"
+            data-target="#update-config-{{server.id}}">
+            Update
+            </button>
+            <button
+            ng-if="!server.ip_address"
+            type="button"
+            class="btn btn-danger connect-button"
+            data-toggle="modal"
+            data-target="#update-server-thrall-{{server.id}}">
+            Update ServerThrall
+            </button>
+            <span ng-if="!server.query_port && server.ip_address">&nbsp;&nbsp;- {{server.ip_address}}</span>
+            <span ng-if="server.query_port">&nbsp;- {{server.ip_address}}</span>
+          </div>
+
+            <!-- 'Update Config' Modal -->
+            <div class="modal fade" id="update-config-{{server.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="vertical-alignment-helper">
+                <div class="modal-dialog modal-vertical-align-center" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                        You cannot use the "Join Server" feature of ThrallBrowser for this server because the administrator of the server <span class="modal-server-name">"{{server.name | serverName}}"</span> has not updated their ServerThrall Config:
+                    </div>
+                    <div class="modal-body">
+                      In order to use this feature, the admin of the server must set their "QueryPort" in the ServerThrall ServerConfig.  Please see <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md#configuration-for-plugins">ServerThrall documentation</a> for more information.  If you want to use this feature, contact your server admin!
+                    </div>
+                    <div class="modal-footer">
+                      <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md"><button type="button" class="btn btn-warning">Visit ServerThrall Github</button></a>
+                      <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 'Update ServerThrall' Modal -->
+            <div class="modal fade" id="update-server-thrall-{{server.id}}" tabindex="-1" role="dialog" aria-labelledby="update-server-thrallTitle" aria-hidden="true">
+              <div class="vertical-alignment-helper">
+                <div class="modal-dialog modal-vertical-align-center" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      You cannot use the "Join Server" feature of ThrallBrowser for this server because the administrator of the server <span class="modal-server-name">"{{server.name | serverName}}"</span> has an outdated version of ServerThrall:
+                    </div>
+                    <div class="modal-body">
+                      This server is using an older version of ServerThrall.  To take advantage of all ThrallBrowser has to offer, the admin must update to the <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">latest version of ServerThrall</a>.
+                    </div>
+                    <div class="modal-footer">
+                      <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md"><button type="button" class="btn btn-warning">Visit ServerThrall Github</button></a>
+                      <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+        <div class="row itemlist-empty" ng-show="!serverListCtrl.servers.length">
+          <div class="col-xs-12">No current active servers being tracked.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
