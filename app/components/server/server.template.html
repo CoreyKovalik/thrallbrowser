@@ -1,4 +1,3 @@
-<div class="bootstrap-iso">
 <server-navbar></server-navbar>
 <div ng-show="serverCtrl.isLoading" class="spinner"></div>
 
@@ -36,15 +35,15 @@
             </div>
 
             <div class="col-xs-6">
-                <a
-                  class="join-button"
-                  ng-if="serverCtrl.server.query_port"
-                  ng-href="{{serverCtrl.server|connectUrl}}">
-                  <button
-                    class="button button-large">
-                    JOIN SERVER NOW
-                  </button>
-                </a>
+              <a
+                class="join-button"
+                ng-if="serverCtrl.server.query_port"
+                ng-href="{{serverCtrl.server|connectUrl}}">
+                <button
+                  class="btn btn-dark btn-large">
+                  JOIN SERVER NOW
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -109,5 +108,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

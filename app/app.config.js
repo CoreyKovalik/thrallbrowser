@@ -6,7 +6,7 @@ angular
     $routeProvider
       .when('/', {
         id: 'server-list',
-        template: '<server-list></server-list>'
+        template: '<div class="bootstrap-iso"><server-list></server-list></div>'
       })
       .when('/stats', {
         id: 'stats',
@@ -14,23 +14,23 @@ angular
       })
       .when('/server/:serverId', {
         id: 'server',
-        template: '<server></server>'
+        template: '<div class="bootstrap-iso"><server></server></div>'
       })
       .when('/server/:serverId/characters', {
         id: 'player-list',
-        template: '<player-list></player-list>'
+        template: '<div class="bootstrap-iso"><player-list></player-list></div>'
       })
       .when('/server/:serverId/characters/:characterId', {
         id: 'character',
-        template: '<character></character>'
+        template: '<div class="bootstrap-iso"><character></character></div>'
       })
       .when('/server/:serverId/clans', {
         id: 'clan-list',
-        template: '<clan-list></clan-list>'
+        template: '<div class="bootstrap-iso"><clan-list></clan-list></div>'
       })
       .when('/server/:serverId/clans/:clanId', {
         id: 'clan',
-        template: '<clan></clan>'
+        template: '<div class="bootstrap-iso"><clan></clan></div>'
       })
       .otherwise('/');
 

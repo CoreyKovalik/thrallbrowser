@@ -1,8 +1,11 @@
 var gulp        = require('gulp');
+var util        = require('gulp-util');
+var less        = require('gulp-less');
+var concatCss   = require('gulp-concat-css');
 var browserify  = require('browserify');
 var source      = require('vinyl-source-stream');
 var browserSync = require('browser-sync');
-var util        = require('gulp-util');
+var path        = require('path');
 var historyApiFallback = require('connect-history-api-fallback');
 
 var ignoreErrors = true;
@@ -54,7 +57,13 @@ gulp.task('html', function() {
 });
 
 gulp.task('styles', function() {
-    return gulp.src('app/**/*.css')
+    return gulp.src('app/**/*.less')
+        .pipe(less({
+            paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(concatCss('app.css', {
+            rebaseUrls: false
+        }))
         .pipe(gulp.dest('dist/'))
 });
 
@@ -90,7 +99,7 @@ gulp.task('watch', ['build'], function() {
 
     gulp.watch('app/index.html', ['index']);
     gulp.watch('app/**/*.js', ['scripts']);
-    gulp.watch('app/**/*.css', ['styles']);
+    gulp.watch('app/**/*.less', ['styles']);
     gulp.watch('images/**/*.*', ['images']);
     gulp.watch('fonts/**/*.*', ['fonts']);
     gulp.watch(['app/**/*.html', '!app/index.html'], ['html']);

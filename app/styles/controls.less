@@ -1,0 +1,80 @@
+input.input-dark {
+  outline-color: transparent;
+  background-color: #191919;
+  font-weight: bold;
+  padding: 0px 5px 0px 5px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+input.input-dark::placeholder {
+  color: #AAA;
+}
+
+.btn.btn-dark {
+    color: #cc;
+    vertical-align: baseline;
+    outline: 0;
+    height: 30px;
+    padding: 0px 12px 0px 12px;
+    display: inline-block;
+    color: #9fa8b0;
+    font-weight: bold;
+    text-shadow: 1px 1px #1f272b;
+    border: 1px solid #1c252b;
+    border-radius: 3px;
+    background: #232B30;
+    background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#3D4850), color-stop(4%,#313d45), color-stop(100%,#232B30));
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.btn.btn-dark:hover {
+    color: #fff;
+    background-color: #23272b;
+    border-color: #1d2124;
+    background: #4C5A64;
+    background: -moz-linear-gradient(top, #4C5A64 3%, #404F5A 4%, #2E3940 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#4C5A64), color-stop(4%,#404F5A), color-stop(100%,#2E3940));
+    cursor: pointer;
+}
+
+.btn.btn-dark:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.btn.btn-dark.disabled {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn.btn-dark:not(:disabled):not(.disabled).active {
+  color: #fff;
+  background-color: #1d2124;
+  border-color: #171a1d;
+}
+
+.btn.btn-dark:not(:disabled):not(.disabled).active:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.btn.btn-dark:active {
+    background-position: 0 top;
+    position: relative;
+    top: 1px;
+    color: #fff;
+    background: #20282D; /* old browsers */
+    background: -moz-linear-gradient(top, #20282D 3%, #252E34 51%, #222A30 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#20282D), color-stop(51%,#252E34), color-stop(100%,#222A30));
+    -moz-box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+    -webkit-box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+    box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+}
+
+.btn.btn-dark.btn-large {
+  padding: 10px 24px;
+  height: 40px;
+}

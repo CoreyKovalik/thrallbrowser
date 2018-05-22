@@ -21,7 +21,9 @@
     "browserify": "^14.5.0",
     "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
-    "less": "^3.0.4",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-less": "^4.0.0",
+    "less": "^3.0.5",
     "vinyl-source-stream": "^1.1.2"
   }
 }
