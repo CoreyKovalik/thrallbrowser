@@ -27,14 +27,15 @@
       <label class="go-server">
         Click on a server below, or enter your serverthrall server ID
         <input
+          ng-keyup="$event.keyCode == 13 ? serverListCtrl.goServer(serverId) : null"
           type="text"
           class="search-input server-id-placeholder"
           ng-model="serverId"
-          placeholder="5"
+          placeholder="#"
           required>
 
         <button
-          class="btn btn-warning go-server"
+          class="btn btn-dark go-server"
           title="Go to Server #{{serverId}}"
           ng-click="serverListCtrl.goServer(serverId)">
           Go!
