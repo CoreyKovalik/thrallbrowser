@@ -370,6 +370,10 @@ a:hover {
   cursor: pointer;
 }
 
+.serverlistview .ip-address {
+  line-height: 25px;
+}
+
 /* CLAN */
 .clanview .clan-name {
   font-size: 30px;
@@ -490,6 +494,28 @@ input.search-input::placeholder {
 }
 
 /* BUTTONS */
+.serverlistview .connect-button {
+  margin-top: 1.5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 6px;
+  padding-right: 6px;
+  float:left;
+}
+
+.serverlistview .connect-button:hover {
+  font-weight: bold;
+  color: green;
+}
+
+.serverlistview .connect-button.btn-warning:hover {
+  color: grey;
+}
+
+.serverlistview .connect-button.btn-danger:hover {
+  color: black;
+}
+
 .button.button-large {
   padding: 10px 24px;
 }
