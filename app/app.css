@@ -344,6 +344,15 @@ a:hover {
   padding-right: 0;
 }
 
+.serverview .server-information {
+  min-height: 155px;
+}
+
+.serverview .vertical-align {
+  display: flex;
+  align-items: center;
+}
+
 .serverview .widget-title {
   color: #DDC271;
 }
