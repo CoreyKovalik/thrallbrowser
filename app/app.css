@@ -322,13 +322,9 @@ a:hover {
 
 
 /* SERVER */
+
 .serverview {
   width: 1024px;
-}
-
-.serverview .join-button {
- display: block;
- margin-top: 36px;
 }
 
 .serverview .update-serverthrall {
@@ -343,10 +339,6 @@ a:hover {
   z-index: 1;
 }
 
-.serverview .server-information {
-  min-height: 155px;
-}
-
 .serverview.container {
   padding-left: 0;
   padding-right: 0;
@@ -354,6 +346,11 @@ a:hover {
 
 .serverview .widget-title {
   color: #DDC271;
+}
+
+.serverview .vertical-align {
+  display: flex;
+  align-items: center;
 }
 
 .serverview .playerlist.itemlist .itemlist-header.character-name .fa-steam-square {
@@ -619,7 +616,6 @@ input.search-input::placeholder {
   color: white;
   font-weight: bold;
 }
-
 
 
 /* SPINNER */
