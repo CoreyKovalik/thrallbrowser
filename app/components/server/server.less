@@ -45,3 +45,67 @@
   display: inline-block;
   margin-left: 5px;
 }
+
+.serverview .vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+.serverview .modal-vertical-align-center {
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+
+.serverview .modal:hover {
+  color: white;
+}
+
+.serverview .modal-header {
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: none;
+}
+.serverview .modal-header .close {
+  opacity: 0.5;
+  color: white;
+}
+
+.serverview .modal-header .modal-server-name {
+  color: #DDC271;
+}
+
+.serverview .modal-header .close:hover {
+  opacity: 0.5;
+  color: red;
+  font-weight: bold;
+}
+
+.serverview .modal-content {
+    width: inherit;
+    max-width: inherit;
+    height: inherit;
+    margin: 0 auto;
+    pointer-events: all;
+    background-color: black;
+    background-image: url(images/BgFeats.png);
+    background-size: 100% 100%;
+}
+
+.serverview .modal-footer {
+  border-top: none;
+  color: black;
+}
+
+.serverview .modal-footer .btn.btn-warning:hover {
+  background-color: #EB9316;
+  color: black;
+  font-weight: bold;
+}
+
+.serverview .modal-footer .btn:hover {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}

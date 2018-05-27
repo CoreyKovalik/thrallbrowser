@@ -97,90 +97,17 @@
           <span ng-if="!server.query_port && server.ip_address">{{server.ip_address}}</span>
           <span ng-if="server.query_port">{{server.ip_address}}</span>
 
-          <a ng-if="server.query_port" ng-href="{{server|connectUrl}}" class="connect-button">
+          <a
+            class="connect-button"
+            ng-if="server.query_port && server.ip_address"
+            ng-href="{{server|connectUrl}}">
             <button
               type="button"
               class="btn btn-dark">
               Join
             </button>
           </a>
-
-          <!-- <a
-            tooltip="hello"
-            ng-if="!server.query_port || !server.ip_address" ng-href="{{server|connectUrl}}">
-            <button
-              disabled=true
-              type="button"
-              class="btn btn-dark connect-button">
-              Join
-            </button>
-          </a> -->
-
-          <!-- <button
-            ng-if="!server.query_port && server.ip_address"
-            type="button"
-            class="btn btn-warning connect-button"
-            data-toggle="modal"
-            data-target="#update-config-{{server.id}}">
-            Update
-          </button> -->
-
-          <!-- <button
-            ng-if="!server.ip_address"
-            type="button"
-            class="btn btn-danger connect-button"
-            data-toggle="modal"
-            data-target="#update-server-thrall-{{server.id}}">
-            Update
-          </button> -->
         </div>
-
-          <!-- 'Update Config' Modal -->
-          <!-- <div class="modal fade" id="update-config-{{server.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="vertical-alignment-helper">
-              <div class="modal-dialog modal-vertical-align-center" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                      You cannot use the "Join Server" feature of ThrallBrowser for this server because the administrator of the server <span class="modal-server-name">"{{server.name | serverName}}"</span> has not updated their ServerThrall Config:
-                  </div>
-                  <div class="modal-body">
-                    In order to use this feature, the admin of the server must set their "QueryPort" in the ServerThrall ServerConfig.  Please see <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md#configuration-for-plugins">ServerThrall documentation</a> for more information.  If you want to use this feature, contact your server admin!
-                  </div>
-                  <div class="modal-footer">
-                    <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md"><button type="button" class="btn btn-warning">Visit ServerThrall Github</button></a>
-                    <button type="button" class="btn" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- 'Update ServerThrall' Modal -->
-          <!-- <div class="modal fade" id="update-server-thrall-{{server.id}}" tabindex="-1" role="dialog" aria-labelledby="update-server-thrallTitle" aria-hidden="true">
-            <div class="vertical-alignment-helper">
-              <div class="modal-dialog modal-vertical-align-center" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    You cannot use the "Join Server" feature of ThrallBrowser for this server because the administrator of the server <span class="modal-server-name">"{{server.name | serverName}}"</span> has an outdated version of ServerThrall:
-                  </div>
-                  <div class="modal-body">
-                    This server is using an older version of ServerThrall.  To take advantage of all ThrallBrowser has to offer, the admin must update to the <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">latest version of ServerThrall</a>.
-                  </div>
-                  <div class="modal-footer">
-                    <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md"><button type="button" class="btn btn-warning">Visit ServerThrall Github</button></a>
-                    <button type="button" class="btn" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
       </div>
 
       <div class="row itemlist-empty" ng-show="!serverListCtrl.servers.length">

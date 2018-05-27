@@ -8,11 +8,18 @@
 
 <div ng-if="!serverCtrl.isLoading && !serverCtrl.fail">
   <div class="container serverview">
+
     <div ng-if="serverCtrl.updateServerThrall" class="update-serverthrall">
-      <a href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">
-        <img class="update-serverthrall-ribbon" src="images/update-serverthrall.png" alt="Update ServerThrall!">
+      <a
+        href="#"
+        data-toggle="modal"
+        data-target="#update-server-thrall-{{serverCtrl.server.id}}">
+        <img
+          class="update-serverthrall-ribbon"
+          src="images/update-serverthrall.png">
       </a>
     </div>
+
     <div class="row">
       <div class="col-xs-12">
         <div class="widget-container itemlist container-fluid server-information">
@@ -107,5 +114,52 @@
         </div>
       </div>
     </div>
+
+    <!-- 'Update ServerThrall' Modal -->
+    <div
+      class="modal fade"
+      id="update-server-thrall-{{serverCtrl.server.id}}"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="update-server-thrallTitle"
+      aria-hidden="true">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-vertical-align-center" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              Update ServerThrall for <span class="modal-server-name">{{serverCtrl.server.name | serverName}}</span>
+            </div>
+
+            <div class="modal-body">
+              This server is using an outdated version of ServerThrall.
+              To take advantage of all ThrallBrowser has to offer, the admin should update to the
+              <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">
+                latest version of ServerThrall
+              </a>.
+            </div>
+
+            <div class="modal-footer">
+              <a
+                ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">
+                <button type="button" class="btn btn-primary">Upgrade ServerThrall</button>
+              </a>
+              <a
+                ng-href="https://discord.gg/5dK2TdN">
+                <button type="button" class="btn btn-warning">Join Discord</button>
+              </a>
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -38,9 +38,9 @@ angular
             self.clans = clans;
             self.isLoading = false;
             self.loadingError = false;
-            if (self.server.version != "2.1.3") {
+
+            if (self.server.version != '2.1.3' || self.server.version != '2.1.4' || self.server.version != 'api')
               self.updateServerThrall = true;
-            }
           })
           .catch(function(respone) {
             self.isLoading = false;
