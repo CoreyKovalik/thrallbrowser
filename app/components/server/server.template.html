@@ -13,10 +13,20 @@
       <a
         href="#"
         data-toggle="modal"
-        data-target="#update-server-thrall-{{serverCtrl.server.id}}">
+        data-target="#update-server-thrall">
         <img
           class="update-serverthrall-ribbon"
           src="images/update-serverthrall.png">
+      </a>
+    </div>
+      <div ng-if="!serverCtrl.updateServerThrall && serverCtrl.updateConfigServerThrall" class="update-serverthrall">
+      <a
+        href="#"
+        data-toggle="modal"
+        data-target="#update-server-thrall">
+        <img
+          class="update-serverthrall-ribbon"
+          src="images/update-config-serverthrall.png">
       </a>
     </div>
 
@@ -120,7 +130,7 @@
     <!-- 'Update ServerThrall' Modal -->
     <div
       class="modal fade"
-      id="update-server-thrall-{{serverCtrl.server.id}}"
+      id="update-server-thrall"
       tabindex="-1"
       role="dialog"
       aria-labelledby="update-server-thrallTitle"
@@ -136,15 +146,24 @@
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              Update ServerThrall for <span class="modal-server-name">{{serverCtrl.server.name | serverName}}</span>
+              Update ServerThrall<span ng-if="!serverCtrl.updateServerThrall && serverCtrl.updateConfigServerThrall"> config </span> for <span class="modal-server-name">{{serverCtrl.server.name | serverName}}</span>
             </div>
 
             <div class="modal-body">
-              This server is using an outdated version of ServerThrall.
-              To take advantage of all ThrallBrowser has to offer, the admin should update to the
-              <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">
-                latest version of ServerThrall
-              </a>.
+              <div ng-if="serverCtrl.updateServerThrall"> <!-- Update ServerThrall -->
+                This server is using an outdated version of ServerThrall.
+                To take advantage of all ThrallBrowser has to offer, the admin should update to the
+                <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md">
+                  latest version of ServerThrall
+                </a>.
+              </div>
+              <div ng-if="!serverCtrl.updateServerThrall && serverCtrl.updateConfigServerThrall"> <!-- Update Configuration -->
+                This server is missing awesome features!  This is due to empty or incorrect fields in the server's config.  Missing features could include:
+                Join buttons, max player slots, server tick rate, etc. Server admin should refer to the
+                <a ng-href="https://github.com/NullSoldier/serverthrall/blob/master/README.md#configuration-for-plugins">
+                  ServerThrall README
+                </a> for more information.  Still need help? Contact us on <a ng-href="https://discord.gg/5dK2TdN">Discord</a>!
+              </div>
             </div>
 
             <div class="modal-footer">

@@ -15,6 +15,7 @@ angular
       self.characters = null;
       self.lastWipeDate = null;
       self.updateServerThrall = false;
+      self.updateConfigServerThrall = false;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
@@ -41,6 +42,9 @@ angular
 
             if (self.server.version != '2.1.3' && self.server.version != '2.1.4' && self.server.version != 'api')
               self.updateServerThrall = true;
+
+            if (self.server.query_port == null || self.server.tick_rate == null || self.server.max_players == null)
+              self.updateConfigServerThrall = true;
           })
           .catch(function(respone) {
             self.isLoading = false;
