@@ -106,6 +106,15 @@
               class="btn btn-dark">
               Join
             </button>
+          <a
+            class="connect-button view-button"
+            ng-if="!server.query_port"
+            ng-click="serverListCtrl.goServer(server.id)">
+            <button
+              type="button"
+              class="btn btn-dark">
+              View
+            </button>
           </a>
         </div>
       </div>

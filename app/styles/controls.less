@@ -43,7 +43,7 @@ input.input-dark::placeholder {
 
 .btn.btn-dark:focus {
   color: #9fa8b0;
-  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+  outline: 0;
 }
 
 .btn.btn-dark.disabled {
@@ -63,6 +63,7 @@ input.input-dark::placeholder {
 }
 
 .btn.btn-dark:active {
+  outline: 0;
   background-position: 0 top;
   position: relative;
   top: 1px;
@@ -73,6 +74,10 @@ input.input-dark::placeholder {
   -moz-box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
   -webkit-box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
   box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
+}
+
+.btn.btn-dark:active:focus {
+  outline: 0;
 }
 
 .btn.btn-dark.btn-large {
