@@ -1,0 +1,72 @@
+<div class="main-navigationbar">
+  <div class="main-navigationbar-content">
+    <div class="main-navigation-title">ThrallBrowser</div>
+
+    <div class="navigationbar-buttons">
+      <a
+        ng-href="/servers"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'servers'}">
+          <div class="navigationbutton-text">SERVERS</div>
+      </a>
+
+      <a
+        ng-href="/stats"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'stats'}">
+        <div class="navigationbutton-text">STAT CALCULATOR</div>
+      </a>
+
+      <a
+        ng-href="/register"
+        class="navigationbutton"
+        ng-class="{'active': navbarCtrl.routeId == 'register'}">
+        <div class="navigationbutton-text">REGISTER</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="main-container registerview">
+
+  <div class="row">
+
+    <div class="col-xs-12 register-header">Register your Conan Exiles server with ThrallBrowser</div>
+    <div class="col-xs-12 register-sub-header"><p>For help or more information on setup, click here: *link*</p>
+    </div>
+    <div class="col-xs-12"><div class="col-xs-6 register-hr"><hr></div></div>
+    <div class="col-xs-3">RCON Host/IP-Address:</div>
+    <div class="col-xs-9">
+      <input
+        type="text"
+        class="input-dark"
+        placeholder="hostname"
+        required>
+    </div>
+    <div class="col-xs-3">RCON Password:</div>
+    <div class="col-xs-9">
+      <input
+        type="password"
+        class="input-dark"
+        placeholder="password"
+        required>
+    </div>
+    <div class="col-xs-3">RCON Query Port:</div>
+    <div class="col-xs-9">
+      <input
+        type="text"
+        class="input-dark"
+        placeholder="port #"
+        required>
+    </div>
+    <div class="col-xs-6 text-right register-button">
+      <input
+        class="btn btn-dark"
+        type="submit"
+        required
+        value="Register Server">
+    </div>
+
+  </div>
+
+</div>

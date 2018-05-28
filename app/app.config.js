@@ -12,6 +12,10 @@ angular
         id: 'stats',
         template: '<stats></stats>'
       })
+      .when('/register', {
+        id: 'register',
+        template: '<div class="bootstrap-iso"><register></register></div>'
+      })
       .when('/server/:serverId', {
         id: 'server',
         template: '<div class="bootstrap-iso"><server></server></div>'
