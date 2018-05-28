@@ -39,7 +39,7 @@ angular
             self.isLoading = false;
             self.loadingError = false;
 
-            if (self.server.version != '2.1.3' || self.server.version != '2.1.4' || self.server.version != 'api')
+            if (self.server.version != '2.1.3' && self.server.version != '2.1.4' && self.server.version != 'api')
               self.updateServerThrall = true;
           })
           .catch(function(respone) {
