@@ -94,8 +94,7 @@
         </div>
 
         <div class="col-xs-3 itemlist-value ip-address">
-          <span ng-if="!server.query_port && server.ip_address">{{server.ip_address}}</span>
-          <span ng-if="server.query_port">{{server.ip_address}}</span>
+          <span ng-if="server.ip_address">{{server.ip_address}}</span>
 
           <a
             class="connect-button"
