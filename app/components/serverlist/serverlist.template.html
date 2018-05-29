@@ -91,8 +91,8 @@
           </span>
         </div>
 
-        <div class="col-xs-3 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('ip_address')">
-          Direct Connect
+        <div class="col-xs-2 itemlist-header non-interactive" ng-click="serverListCtrl.sortBy('ip_address')">
+          Connect
           <span
             ng-show="serverListCtrl.currentSort == 'ip_address'"
             class="glyphicon"
@@ -110,9 +110,10 @@
           <div class="col-xs-2 itemlist-value">{{server.character_count}}</div>
         </div>
 
-        <div class="col-xs-3 itemlist-value ip-address">
+        <div class="col-xs-2 itemlist-value ip-address">
           <span ng-if="server.ip_address">{{server.ip_address}}</span>
-
+        </div>
+        <div class="col-xs-1">
           <a
             class="connect-button"
             ng-if="server.query_port && server.ip_address"
