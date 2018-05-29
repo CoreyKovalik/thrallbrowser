@@ -4,18 +4,18 @@ angular
     var self = this;
 
     var root_api = 'https://serverthrallapi.herokuapp.com/api/';
-    // root_api = 'http://localhost:8000/api/';
+    root_api = 'http://localhost:8000/api/';
 
     function processClan(clan) {
       if(clan.created != null)
         clan.created = moment(clan.created * 1000);
-      clan.is_active = clan.active_count > 0
+      clan.is_active = clan.active_count > 0;
       return clan;
     }
 
     function processCharacter(character) {
       if(character.created != null)
-        character.created = moment(character.created * 1000);
+        character.created = moment.unix(character.created);
       return character;
     }
 
@@ -25,7 +25,7 @@ angular
       if(server.name.endsWith('"'))
         server.name = server.name.substring(0, server.name.length-1);
       if(server.last_sync != null)
-        server.last_sync = moment(server.last_sync * 1000);
+        server.last_sync = moment.unix(server.last_sync);
       return server;
     }
 
@@ -106,12 +106,11 @@ angular
     self.getClan = getClan;
     self.getClanCharacters = getClanCharacters;
     self.getClans = getClans;
-    self.getServers = getServers;
     self.getServer = getServer;
+    self.getServers = getServers;
     self.createServer = createServer;
 
     self.widgets = {}
     self.widgets.getServerInfo = getServerInfo;
     self.widgets.getActiveClans = getActiveClans;
-
   });

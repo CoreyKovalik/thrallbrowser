@@ -4,22 +4,20 @@ angular
     templateUrl: 'components/register/register.template.html',
     controllerAs: 'registerCtrl',
     controller: function registerController($scope, $q, $route, $routeParams, $location, serverthrallapi) {
-    var self = this;
+      var self = this;
 
-    self.hostname = null;
-    self.password = null;
-    self.port = null;
-    self.private_secret = null;
+      self.hostname = null;
+      self.password = null;
+      self.port = null;
+      self.private_secret = null;
 
-    // serverthrallapi.createServer();
+      function registerServerRCON() {
 
-    function registerServer() {
-      anything = serverthrallapi.createServer(self.hostname, self.password, self.port).then(function(response) {
-      self.private_secret = response.data.private_secret;
-      });
-    }
+        serverthrallapi.createServer(self.hostname, self.password, self.port).then(function(response) {
+          self.private_secret = response.data.private_secret;
+        });
+      }
 
-
-    self.registerServer = registerServer;
+      self.registerServerRCON = registerServerRCON;
     }
   });
