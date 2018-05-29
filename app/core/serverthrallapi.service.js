@@ -91,15 +91,27 @@ angular
       });
     }
 
+    function createServer(host,password,port) {
+      let newServer = {
+        rcon_host: host,
+        rcon_port: port,
+        rcon_password: password,
+        sync_rcon: true
+      }
+      return $http.post(root_api, newServer);
+    }
+
     self.getCharacter = getCharacter;
     self.getCharacters = getCharacters;
     self.getClan = getClan;
     self.getClanCharacters = getClanCharacters;
     self.getClans = getClans;
-    self.getServer = getServer;
     self.getServers = getServers;
+    self.getServer = getServer;
+    self.createServer = createServer;
 
     self.widgets = {}
     self.widgets.getServerInfo = getServerInfo;
     self.widgets.getActiveClans = getActiveClans;
+
   });

@@ -39,33 +39,42 @@
     <div class="col-xs-3">RCON Host/IP-Address:</div>
     <div class="col-xs-9">
       <input
+        ng-model="registerCtrl.hostname"
         type="text"
         class="input-dark"
-        placeholder="hostname"
-        required>
+        placeholder="hostname">
     </div>
     <div class="col-xs-3">RCON Password:</div>
     <div class="col-xs-9">
       <input
+        ng-model="registerCtrl.password"
         type="password"
         class="input-dark"
-        placeholder="password"
-        required>
+        placeholder="password">
     </div>
     <div class="col-xs-3">RCON Query Port:</div>
     <div class="col-xs-9">
       <input
+        ng-model="registerCtrl.port"
         type="text"
         class="input-dark"
-        placeholder="port #"
-        required>
+        placeholder="port #">
     </div>
+
     <div class="col-xs-6 text-right register-button">
-      <input
-        class="btn btn-dark"
-        type="submit"
-        required
-        value="Register Server">
+      <button
+        ng-click="registerCtrl.registerServer()"
+        class="btn btn-dark">
+        Register Server
+      </button>
+    </div>
+
+    <div ng-if="registerCtrl.private_secret" class="col-xs-6">
+      Success!<br>
+      <strong>ATTN: IMPORTANT: </strong><br>
+      Your private secret is: <span class="private-secret">{{registerCtrl.private_secret}}</span><br>
+      It is VERY IMPORTANT that you DO NOT LOSE THIS.<br>
+      If you lose this, you will lose access to your server!!!
     </div>
 
   </div>
