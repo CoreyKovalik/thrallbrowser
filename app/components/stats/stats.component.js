@@ -50,17 +50,15 @@ angular
       }
     }
     addLoadEvent(preloader);
+    //end conan-image-preloader
+    //start conan-stat-data
 
-    //end conan-image-preloader.js
-    //start conan-stat-data.js
+    self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
 
-    const EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
-
-    var stats = {
+    self.stats = {
       "characterLevel": 1,
       "unspentPoints": 1,
       "spentPoints": 0,
-      "lifetimePoints": 1,
       "availableFeats": 0,
       "currentExperience": "0 / 275",
       "allStats": ["strength", "agility", "vitality", "accuracy", "grit", "encumbrance", "survival"],
@@ -153,33 +151,33 @@ angular
     }
 
     function resetAll() {
-      stats.strength.value = stats.agility.value = stats.vitality.value = stats.accuracy.value = stats.grit.value = stats.encumbrance.value = stats.survival.value = stats.spentPoints = stats.availableFeats = 0;
-      stats.characterLevel = stats.unspentPoints = stats.lifetimePoints = 1;
-      stats.currentExperience = "0 / 275";
-      stats.playerStats.health.value = stats.playerStats.health.base;
-      stats.playerStats.stamina.value = stats.playerStats.melee.value = stats.playerStats.ranged.value = stats.playerStats.stamina.base;
-      stats.playerStats.encumbrance.value = stats.playerStats.encumbrance.base;
-      stats.playerStats.armor.value = stats.playerStats.damageResistance.value = stats.playerStats.armor.base;
+      self.stats.strength.value = self.stats.agility.value = self.stats.vitality.value = self.stats.accuracy.value = self.stats.grit.value = self.stats.encumbrance.value = self.stats.survival.value = self.stats.spentPoints = self.stats.availableFeats = 0;
+      self.stats.characterLevel = self.stats.unspentPoints = 1;
+      self.stats.currentExperience = "0 / 275";
+      self.stats.playerStats.health.value = self.stats.playerStats.health.base;
+      self.stats.playerStats.stamina.value = self.stats.playerStats.melee.value = self.stats.playerStats.ranged.value = self.stats.playerStats.stamina.base;
+      self.stats.playerStats.encumbrance.value = self.stats.playerStats.encumbrance.base;
+      self.stats.playerStats.armor.value = self.stats.playerStats.damageResistance.value = self.stats.playerStats.armor.base;
       for (var i = 0; i < 7; i++) {
-        update(stats.allStats[i]);
+        update(self.stats.allStats[i]);
       }
     }
 
     function resetAttributes() {
-      stats.allStats.forEach(function(attribute) {
+      self.stats.allStats.forEach(function(attribute) {
         resetAttribute(attribute);
       });
     }
 
     function resetAttribute(attribute) {
-      while (stats[attribute].value > 0) {
+      while (self.stats[attribute].value > 0) {
         statDown(attribute);
       }
     }
 
     function increaseLevelTo(value)
     {
-      while (stats.characterLevel < value) {
+      while (self.stats.characterLevel < value) {
         if(!levelUp())
           return false;
       }
@@ -192,8 +190,8 @@ angular
 
     function levelStatTo(statName, value)
     {
-      while (stats[statName].value < value) {
-        if (getAttrCost(stats[statName].value) > stats.unspentPoints)
+      while (self.stats[statName].value < value) {
+        if (getAttrCost(self.stats[statName].value) > self.stats.unspentPoints)
           return false;
         if(!statUp(statName))
           return false;
@@ -207,8 +205,8 @@ angular
     }
 
     function setCurrentExperience(currentlevel) {
-      stats.currentExperience = EXP_ARRAY[currentlevel - 1].toLocaleString() + " / " + EXP_ARRAY[currentlevel].toLocaleString();
-      return EXP_ARRAY[currentlevel -1];
+      self.stats.currentExperience = self.EXP_ARRAY[currentlevel - 1].toLocaleString() + " / " + self.EXP_ARRAY[currentlevel].toLocaleString();
+      return self.EXP_ARRAY[currentlevel -1];
     }
 
     function getAttrCost(currentlevel) {
@@ -255,34 +253,34 @@ angular
         for (var i = 1; i <= 5; i++) {
         let teir = "_" + i + "0";
         let lvl = i * 10;
-        stats[statString].value >= lvl ? stats[statString][teir] = true : stats[statString][teir] = false;
+        self.stats[statString].value >= lvl ? self.stats[statString][teir] = true : self.stats[statString][teir] = false;
       }
     }
 
     //Math calculations for playerStats based on attributes and certain bonus perks
 
     function calcPlayerStats() {
-      stats.playerStats.health.value = (8 * stats.vitality.value) + stats.playerStats.health.base;
-      stats.playerStats.stamina.value = (3 * stats.grit.value) + stats.playerStats.stamina.base;
-      stats.playerStats.encumbrance.value = (7 * stats.encumbrance.value) + stats.playerStats.encumbrance.base;
-      stats.playerStats.melee.value = (100 * 0.025 * stats.strength.value) + stats.playerStats.melee.base;
-      stats.playerStats.ranged.value = (100 * 0.025 * stats.accuracy.value) + stats.playerStats.ranged.base;
-        if(stats.accuracy._30) stats.playerStats.ranged.value += 10;
-      stats.playerStats.armor.value = (2 * stats.agility.value) + stats.playerStats.armor.base;
-        if(stats.grit._30) stats.playerStats.armor.value += 15;
-      stats.playerStats.damageResistance.value = stats.playerStats.armor.value * 0.003 * 100;
-        if(stats.encumbrance._30) stats.playerStats.encumbrance.value += stats.playerStats.encumbrance.value * .1;
+      self.stats.playerStats.health.value = (8 * self.stats.vitality.value) + self.stats.playerStats.health.base;
+      self.stats.playerStats.stamina.value = (3 * self.stats.grit.value) + self.stats.playerStats.stamina.base;
+      self.stats.playerStats.encumbrance.value = (7 * self.stats.encumbrance.value) + self.stats.playerStats.encumbrance.base;
+      self.stats.playerStats.melee.value = Math.round((100 * 0.025 * self.stats.strength.value) + self.stats.playerStats.melee.base);
+      self.stats.playerStats.ranged.value = Math.round((100 * 0.025 * self.stats.accuracy.value) + self.stats.playerStats.ranged.base);
+        if(self.stats.accuracy._30) self.stats.playerStats.ranged.value += 10;
+      self.stats.playerStats.armor.value = (2 * self.stats.agility.value) + self.stats.playerStats.armor.base;
+        if(self.stats.grit._30) self.stats.playerStats.armor.value += 15;
+      self.stats.playerStats.damageResistance.value = precisionRound((self.stats.playerStats.armor.value * 0.003 * 100),1);
+        if(self.stats.encumbrance._30) self.stats.playerStats.encumbrance.value += self.stats.playerStats.encumbrance.value * .1;
     }
 
     function adjustProgress(statString) {
       if (statString == null) return false;
 
-      let statProgress = (stats[statString].value / 50) * 100;
+      let statProgress = (self.stats[statString].value / 50) * 100;
       document.getElementsByClassName("progress " + statString)[0].setAttribute("style", "width:" + statProgress + "%;");
 
       for (var i = 1; i <= 5; i++) {
         let teir = "_" + i + "0";
-        if (stats[statString][teir]) {
+        if (self.stats[statString][teir]) {
           document.getElementsByClassName("progress-bar " + statString)[0].classList.add("perk-" + i);
           document.getElementsByClassName("bonus-icon bonus-teir" + i + " " + statString)[0].setAttribute("src", "./images/t" + i + "-glow.png");
         }
@@ -293,133 +291,75 @@ angular
       }
     }
 
-    //end conan-stat-data.js
-    //start conan-stat-calc.js
-
-    // Initial Points //
-    let characterLevel_html    = document.getElementsByClassName("character-level")[0];
-    let unspentPoints_html     = document.getElementsByClassName("unspent-points")[0];
-    let currentExperience_html = document.getElementsByClassName("current-experience")[0];
-    let strength_html          = document.getElementsByClassName("strength current-level")[0];
-    let agility_html           = document.getElementsByClassName("agility current-level")[0];
-    let vitality_html          = document.getElementsByClassName("vitality current-level")[0];
-    let accuracy_html          = document.getElementsByClassName("accuracy current-level")[0];
-    let grit_html              = document.getElementsByClassName("grit current-level")[0];
-    let encumbrance_html       = document.getElementsByClassName("encumbrance current-level")[0];
-    let survival_html          = document.getElementsByClassName("survival current-level")[0];
-    adjustPoints();
-
-    // Initial playerStats //
-    let health_html              = document.getElementsByClassName("health")[0];
-    let stamina_html             = document.getElementsByClassName("stamina")[0];
-    let encumbrance_heading_html = document.getElementsByClassName("encumbrance-heading")[0];
-    let encumbrance_player_html  = document.getElementsByClassName("encumbrance-player")[0];
-    let melee_html               = document.getElementsByClassName("melee")[0];
-    let ranged_html              = document.getElementsByClassName("ranged")[0];
-    let armor_html               = document.getElementsByClassName("armor")[0];
-    let dmg_resist_html          = document.getElementsByClassName("dmg-resist")[0];
-    adjustPlayerStats();
+    //end conan-stat-data
+    //start conan-stat-calc
 
     // Update & adjustment functions //
     function update(statString) {
-      adjustPoints();
       adjustBonuses(statString);
       calcPlayerStats();
-      adjustPlayerStats();
       adjustProgress(statString);
       updateQueryParams();
     }
 
-    function adjustPoints() {
-      stats.lifetimePoints             = stats.unspentPoints + stats.spentPoints;
-
-      characterLevel_html.innerText    = stats.characterLevel;
-      unspentPoints_html.innerText     = stats.unspentPoints;
-      currentExperience_html.innerText = stats.currentExperience;
-      strength_html.innerText          = stats.strength.value;
-      agility_html.innerText           = stats.agility.value;
-      vitality_html.innerText          = stats.vitality.value;
-      accuracy_html.innerText          = stats.accuracy.value;
-      grit_html.innerText              = stats.grit.value;
-      encumbrance_html.innerText       = stats.encumbrance.value;
-      survival_html.innerText          = stats.survival.value;
-    }
-
-    function adjustPlayerStats() {
-      health_html.innerText              = stats.playerStats.health.value;
-      stamina_html.innerText             = stats.playerStats.stamina.value;
-      encumbrance_heading_html.innerText = stats.playerStats.encumbrance.value;
-      encumbrance_player_html.innerText  = stats.playerStats.encumbrance.value;
-      melee_html.innerText               = Math.round(stats.playerStats.melee.value) + "%";
-      ranged_html.innerText              = Math.round(stats.playerStats.ranged.value) + "%";
-      armor_html.innerText               = stats.playerStats.armor.value;
-      dmg_resist_html.innerText          = precisionRound(stats.playerStats.damageResistance.value, 1) + "%";
-    }
-
     // Increase/Decrease stat functions
     function levelUp() {
-      if (stats.characterLevel == 60)
+      if (self.stats.characterLevel == 60)
         return false;
-      stats.characterLevel += 1;
-      setCurrentExperience(stats.characterLevel);
-      stats.unspentPoints += adjustAttrPoints(stats.characterLevel);
-      stats.availableFeats += adjustFeatPoints(stats.characterLevel);
+      self.stats.characterLevel += 1;
+      setCurrentExperience(self.stats.characterLevel);
+      self.stats.unspentPoints += adjustAttrPoints(self.stats.characterLevel);
+      self.stats.availableFeats += adjustFeatPoints(self.stats.characterLevel);
       update();
-      // console.log("Level Up!");
       return true;
     }
 
     function levelDown() {
-      if (stats.characterLevel == 1)
+      if (self.stats.characterLevel == 1)
         return false;
-      if (stats.characterLevel == 60) {
+      if (self.stats.characterLevel == 60) {
         document.getElementsByClassName("level-up")[0].disabled = false;
         document.getElementsByClassName("max-level")[0].disabled = false;
       }
-      if (stats.unspentPoints < adjustAttrPoints(stats.characterLevel)) {
+      if (self.stats.unspentPoints < adjustAttrPoints(self.stats.characterLevel)) {
         return alert("You must first remove attributes before leveling down your Exile.  You cannot remove what you've already spent!");
       }
-      stats.unspentPoints -= adjustAttrPoints(stats.characterLevel);
-      stats.availableFeats -= adjustFeatPoints(stats.characterLevel);
-      stats.characterLevel -= 1;
-      setCurrentExperience(stats.characterLevel);
+      self.stats.unspentPoints -= adjustAttrPoints(self.stats.characterLevel);
+      self.stats.availableFeats -= adjustFeatPoints(self.stats.characterLevel);
+      self.stats.characterLevel -= 1;
+      setCurrentExperience(self.stats.characterLevel);
       update();
-      console.log("Level Down :(");
       return true;
     }
 
     function statUp(statString) {
-      let stat = stats[statString].value;
-      let name = capitalizeFirst(statString);
+      let stat = self.stats[statString].value;
       let cost = getAttrCost(stat);
 
       if (stat == 50)
         return false;
-      if (cost > stats.unspentPoints)
+      if (cost > self.stats.unspentPoints)
         return false;
 
       stat += 1;
-      stats.unspentPoints -= cost;
-      stats.spentPoints += cost;
-      stats[statString].value = stat;
+      self.stats.unspentPoints -= cost;
+      self.stats.spentPoints += cost;
+      self.stats[statString].value = stat;
       update(statString);
-      // console.log(name + " Up!");
       return true;
     }
 
     function statDown(statString) {
-      let stat = stats[statString].value;
+      let stat = self.stats[statString].value;
       if (stat == 0)
         return false;
 
       stat -= 1;
-      let name = capitalizeFirst(statString);
       let cost = getAttrCost(stat);
-      stats.unspentPoints += cost;
-      stats.spentPoints -= cost;
-      stats[statString].value = stat;
+      self.stats.unspentPoints += cost;
+      self.stats.spentPoints -= cost;
+      self.stats[statString].value = stat;
       update(statString);
-      // console.log(name + " down :(");
       return true;
     }
 
@@ -439,8 +379,8 @@ angular
       if(level != null)
         increaseLevelTo(level);
 
-      stats.allStats.forEach(function(attribute, i) {
-        let statName = stats.allStats[i];
+      self.stats.allStats.forEach(function(attribute, i) {
+        let statName = self.stats.allStats[i];
         let statTarget = takeStat();
 
         if(statTarget != null)
@@ -450,39 +390,33 @@ angular
 
     function updateQueryParams()
     {
-      // $location.search('v',
-      //   stats.characterLevel + ':' +
-      //   stats.strength.value + ':'+
-      //   stats.agility.value + ':'+
-      //   stats.vitality.value + ':'+
-      //   stats.accuracy.value + ':'+
-      //   stats.grit.value + ':'+
-      //   stats.encumbrance.value + ':'+
-      //   stats.survival.value);
+      $location.search('v',
+        self.stats.characterLevel + ':' +
+        self.stats.strength.value + ':'+
+        self.stats.agility.value + ':'+
+        self.stats.vitality.value + ':'+
+        self.stats.accuracy.value + ':'+
+        self.stats.grit.value + ':'+
+        self.stats.encumbrance.value + ':'+
+        self.stats.survival.value);
     }
 
     // Helper Functions //
 
     let mouseHoldInterval = 0;
 
-    function mouseHold(level) {
-      mouseHoldInterval = setInterval(level, 120);
+    function onMouseHold(func, statString) {
+      mouseHoldInterval = setInterval(function() {
+        if (statString) func(statString);
+        else func();
+
+        $scope.$digest()
+
+      }, 140);
     }
 
-    function mouseHoldStatUp(statString) {
-      mouseHoldInterval = setInterval(function() {statUp(statString);}, 120);
-    }
-
-    function mouseHoldStatDown(statString) {
-      mouseHoldInterval = setInterval(function() {statDown(statString);}, 120);
-    }
-
-    function mouseReleaseStat() {
+    function onMouseRelease() {
       clearInterval(mouseHoldInterval);
-    }
-
-    function capitalizeFirst(string) {
-      return string.charAt(0).toUpperCase() + string.substr(1);
     }
 
     function precisionRound(number, precision) {
@@ -490,67 +424,22 @@ angular
       return Math.round(number * factor) / factor;
     }
 
-
-    // Apply mouseup/mouseleave event listeners to all stat buttons
-    // that clear the mouseHoldInterval for modifying stats
-
-    let statButtons = document.getElementsByClassName("stat-button");
-
-    for (var i = 0; i < statButtons.length; i++) {
-      statButtons[i].addEventListener("mouseup", mouseReleaseStat);
-      statButtons[i].addEventListener("mouseleave", mouseReleaseStat);
-    }
-
-    var levelUp_html   = document.getElementsByClassName("level-up")[0];
-    var levelDown_html = document.getElementsByClassName("level-down")[0];
-
-    function createLevelButton(element, buttonFunc) {
-      element.addEventListener("click", buttonFunc);
-      element.addEventListener("mousedown", mouseHold.bind(null, buttonFunc));
-    }
-
-    createLevelButton(levelUp_html, levelUp);
-    createLevelButton(levelDown_html, levelDown);
-
-    document.getElementsByClassName("max-level")[0].addEventListener("click", function() {
-      maxOutLevel();
-    });
-
-    //Reset buttons - all points and levels reverted to base values  +function createStatButtons(stat) {
-    document.getElementsByClassName("reset-all")[0].addEventListener("click", resetAll);
-    document.getElementsByClassName("reset-attributes")[0].addEventListener("click", resetAttributes);
-
-    function createStatButtons(stat) {
-      document.getElementsByClassName(stat + "-up")[0].addEventListener("click", statUp.bind(null, stat));
-      document.getElementsByClassName(stat + "-up")[0].addEventListener("mousedown", mouseHoldStatUp.bind(null, stat));
-      document.getElementsByClassName(stat + "-down")[0].addEventListener("click", statDown.bind(null, stat));
-      document.getElementsByClassName(stat + "-down")[0].addEventListener("mousedown", mouseHoldStatDown.bind(null, stat));
-    }
-
     let currentActive = "strength";
 
-    stats.allStats.forEach(function(attribute, i) {
-      createStatButtons(attribute);
-
-      document.getElementsByClassName("reset-attribute")[i].addEventListener("click", function() {
-        resetAttribute(stats.allStats[i]);
-      });
-      document.getElementsByClassName("max-attribute")[i].addEventListener("click", function() {
-        maxOutAttribute(stats.allStats[i]);
-      });
+    self.stats.allStats.forEach(function(attribute, i) {
 
       //cache attr-div & progress-bar for each attribute. then,
       let hoverElementsForToggle = [];
-      hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + stats.allStats[i])[0];
-      hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + stats.allStats[i])[0];
+      hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + self.stats.allStats[i])[0];
+      hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + self.stats.allStats[i])[0];
 
       // mouseover on hoverElements to toggle active class on current 'mouseover' attribute
       hoverElementsForToggle.forEach(function(element) {
         element.addEventListener("mouseover", function () {
-          if (stats.allStats[i] != currentActive) {
-          document.getElementsByClassName("bonuses " + stats.allStats[i])[0].classList.add("active");
+          if (self.stats.allStats[i] != currentActive) {
+          document.getElementsByClassName("bonuses " + self.stats.allStats[i])[0].classList.add("active");
           document.getElementsByClassName("bonuses " + currentActive)[0].classList.remove("active");
-          currentActive = stats.allStats[i];
+          currentActive = self.stats.allStats[i];
           }
         });
       });
@@ -558,5 +447,32 @@ angular
 
     loadQueryParams();
     updateQueryParams();
+
+    self.resetAll = resetAll;
+    self.resetAttributes = resetAttributes;
+    self.resetAttribute = resetAttribute;
+    self.increaseLevelTo = increaseLevelTo;
+    self.maxOutLevel = maxOutLevel;
+    self.levelStatTo = levelStatTo;
+    self.maxOutAttribute = maxOutAttribute;
+    self.setCurrentExperience = setCurrentExperience;
+    self.getAttrCost = getAttrCost;
+    self.adjustAttrPoints = adjustAttrPoints;
+    self.adjustFeatPoints = adjustFeatPoints;
+    self.adjustBonuses = adjustBonuses;
+    self.calcPlayerStats = calcPlayerStats;
+    self.adjustProgress = adjustProgress;
+
+    self.levelUp = levelUp;
+    self.levelDown = levelDown;
+    self.statUp = statUp;
+    self.statDown = statDown;
+
+    self.loadQueryParams = loadQueryParams;
+    self.updateQueryParams = updateQueryParams;
+
+    self.onMouseHold = onMouseHold;
+    self.onMouseRelease = onMouseRelease;
+
     }
   });

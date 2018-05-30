@@ -36,21 +36,39 @@
       <tr>
         <th rowspan="3" colspan="3">
           <div class="character-title">
-            <button class="stat-button level-down"> - </button>
-            Exile Level: <span class="character-level"></span>
-            <button class="stat-button level-up"> + </button>
-            <br>Unspent points: <span class="unspent-points"></span>
+            <button
+              ng-click="statsCtrl.levelDown()"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelDown)"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="stat-button level-down"> - </button>
+
+            Exile Level: {{statsCtrl.stats.characterLevel}}
+
+            <button
+              ng-click="statsCtrl.levelUp()"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelUp)"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="stat-button level-up"> + </button>
+
+            <br>Unspent points: {{statsCtrl.stats.unspentPoints}}
           </div>
-          <button class="max-level">Maximum Level</button>
+
+          <button
+            ng-click="statsCtrl.maxOutLevel()"
+            class="max-level">
+            Maximum Level
+          </button>
         </th>
-        <th class="encumbrance-th">Encumbrance 0 / <span class="encumbrance-heading"></span></th>
+        <th class="encumbrance-th">Encumbrance 0 / {{statsCtrl.stats.playerStats.encumbrance.value}}</span></th>
         <th class="player-stats" rowspan="3" colspan="1">Player Stats</th>
       </tr>
       <tr>
         <th class="movement-penalty" colspan="1">Movement Penalty 0</th>
       </tr>
       <tr>
-        <th class="experience" colspan="1">Experience <span class="current-experience"></span></th>
+        <th class="experience" colspan="1">Experience {{statsCtrl.stats.currentExperience}}</th>
       </tr>
     </thead>
     <tbody class="calc-tbody">
@@ -65,10 +83,20 @@
             </div>
             <span class="cost">
               <span class="strength current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="strength-down stat-button"> - </button>&nbsp;
-              <button class="strength-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('strength')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('strength')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'strength')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="strength-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('strength')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'strength')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="strength-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>
             </span>
           </div>
         </td>
@@ -351,13 +379,13 @@
         <!-- Player stats -->
         <td class="player-stats" rowspan="15">
           <ul>
-          <li><span>Health: </span><span class="health"></span></li>
-          <li><span>Stamina: </span><span class="stamina"></span></li>
-          <li><span>Encumbr: </span><span class="encumbrance-player"></span></li>
-          <li><span>Melee: </span><span class="melee"></span></li>
-          <li><span>Ranged: </span><span class="ranged"></span></li>
-          <li><span>Armor: </span><span class="armor">+</span></li>
-          <li><span>Resist: </span><span class="dmg-resist"></span></li>
+          <li><span>Health: </span><span class="health">{{statsCtrl.stats.playerStats.health.value}}</span></li>
+          <li><span>Stamina: </span><span class="stamina">{{statsCtrl.stats.playerStats.stamina.value}}</span></li>
+          <li><span>Encumbr: </span><span class="encumbrance-player">{{statsCtrl.stats.playerStats.encumbrance.value}}</span></li>
+          <li><span>Melee: </span><span class="melee">{{statsCtrl.stats.playerStats.melee.value}}%</span></li>
+          <li><span>Ranged: </span><span class="ranged">{{statsCtrl.stats.playerStats.ranged.value}}%</span></li>
+          <li><span>Armor: </span><span class="armor">+{{statsCtrl.stats.playerStats.armor.value}}</span></li>
+          <li><span>Resist: </span><span class="dmg-resist">{{statsCtrl.stats.playerStats.damageResistance.value}}%</span></li>
           </ul>
         </td>
       </tr>
@@ -378,10 +406,20 @@
             </div>
             <span class="cost">
               <span class="agility current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="agility-down stat-button"> - </button>&nbsp;
-              <button class="agility-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('agility')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('agility')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'agility')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="agility-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('agility')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'agility')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="agility-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('agility')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -401,10 +439,20 @@
             </div>
             <span class="cost">
               <span class="vitality current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="vitality-down stat-button"> - </button>&nbsp;
-              <button class="vitality-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('vitality')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('vitality')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'vitality')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="vitality-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('vitality')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'vitality')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="vitality-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('vitality')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -424,10 +472,20 @@
             </div>
             <span class="cost">
               <span class="accuracy current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="accuracy-down stat-button"> - </button>&nbsp;
-              <button class="accuracy-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('accuracy')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('accuracy')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'accuracy')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="accuracy-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('accuracy')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'accuracy')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="accuracy-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('accuracy')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -447,10 +505,20 @@
             </div>
             <span class="cost">
               <span class="grit current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="grit-down stat-button"> - </button>&nbsp;
-              <button class="grit-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('grit')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('grit')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'grit')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="grit-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('grit')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'grit')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="grit-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('grit')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -470,10 +538,20 @@
             </div>
             <span class="cost">
               <span class="encumbrance current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="encumbrance-down stat-button"> - </button>&nbsp;
-              <button class="encumbrance-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('encumbrance')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('encumbrance')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'encumbrance')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="encumbrance-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('encumbrance')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'encumbrance')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="encumbrance-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('encumbrance')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -493,10 +571,20 @@
             </div>
             <span class="cost">
               <span class="survival current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="survival-down stat-button"> - </button>&nbsp;
-              <button class="survival-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <button ng-click="statsCtrl.resetAttribute('survival')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+              ng-click="statsCtrl.statDown('survival')"
+              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'survival')"
+              ng-mouseUp="statsCtrl.onMouseRelease()"
+              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              class="survival-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('survival')"
+                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'survival')"
+                ng-mouseUp="statsCtrl.onMouseRelease()"
+                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                class="survival-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('survival')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -509,8 +597,8 @@
       <!-- Reset Buttons -->
       <tr>
         <td class="reset" colspan="3">
-          <button class="reset-all">Reset All</button>
-          <button class="reset-attributes">Reset Attributes</button>
+          <button ng-click="statsCtrl.resetAll()" class="reset-all">Reset All</button>
+          <button ng-click="statsCtrl.resetAttributes()" class="reset-attributes">Reset Attributes</button>
         </td>
       </tr>
     </tbody>
