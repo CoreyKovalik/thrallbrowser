@@ -40,10 +40,21 @@ angular
             self.isLoading = false;
             self.loadingError = false;
 
-            if (self.server.version != '2.1.3' && self.server.version != '2.1.4' && self.server.version != 'api')
+            var reasonablyUpdated =
+              self.server.version == '2.1.3' ||
+              self.server.version == '2.1.4' ||
+              self.server.version == '2.1.5' ||
+              self.server.version == 'api';
+
+            if (!reasonablyUpdated)
               self.updateServerThrall = true;
 
-            if (self.server.query_port == null || self.server.tick_rate == null || self.server.max_players == null)
+            var notConfigured =
+              self.server.query_port == null ||
+              self.server.tick_rate == null ||
+              self.server.max_players == null;
+
+            if (notConfigured)
               self.updateConfigServerThrall = true;
           })
           .catch(function(respone) {
