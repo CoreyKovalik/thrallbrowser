@@ -3,11 +3,15 @@ window._ = require('lodash');
 window.moment = require('moment');
 require('angular');
 require('angular-route');
+require('angular-right-click');
+require('angular-long-press');
 require('../vendor/bootstrap/js/bootstrap.min.js');
 
 angular
   .module('thrallbrowser', [
-    'ngRoute'
+    'ngRoute',
+    'ngRightClick',
+    'pr.longpress'
   ]);
 
 require('./app.config.js');

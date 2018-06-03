@@ -418,18 +418,35 @@ angular
 
     let mouseHoldInterval = 0;
 
-    function onMouseHold(func, statString) {
-      mouseHoldInterval = setInterval(function() {
-        if (statString) func(statString);
-        else func();
+    function onMouseHold(func, statString, event) {
+      if (event.which == 3) {
+        console.log("mousehold keycode", event.which, "mouseholdint-" + mouseHoldInterval);
+        clearInterval(mouseHoldInterval);
+        return;
+      }
+      if (event.which == 1)
+      {
+        mouseHoldInterval = setInterval(function() {
+          if (statString)
+          {
+            func(statString);
+            console.log(mouseHoldInterval);
+          }
+          else
+          {
+            func();
+            console.log(mouseHoldInterval);
+          }
 
-        $scope.$digest()
+          $scope.$digest();
 
-      }, 140);
+        }, 140);
+      }
     }
 
-    function clearMouseHold() {
+    function clearMouseHold(event) {
       clearInterval(mouseHoldInterval);
+      console.log('clearMouseHold', mouseHoldInterval);
     }
 
     function precisionRound(number, precision) {
@@ -486,6 +503,5 @@ angular
 
     self.onMouseHold = onMouseHold;
     self.clearMouseHold = clearMouseHold;
-
     }
   });

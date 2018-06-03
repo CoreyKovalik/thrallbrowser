@@ -38,18 +38,24 @@
           <div class="section-title">
             <button
               ng-click="statsCtrl.levelDown()"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelDown)"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
+              on-long-press="statsCtrl.onMouseHold(statsCtrl.levelDown, null, $event)"
+              prevent-click="true"
+              long-press-duration="100"
+              ng-mouseUp="statsCtrl.clearMouseHold($event)"
+              ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+              ng-right-click=""
               class="stat-button level-down"> - </button>
 
             Exile Level: {{statsCtrl.stats.characterLevel}}
 
             <button
               ng-click="statsCtrl.levelUp()"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelUp)"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
+              on-long-press="statsCtrl.onMouseHold(statsCtrl.levelUp, null, $event)"
+              prevent-click="true"
+              long-press-duration="100"
+              ng-mouseUp="statsCtrl.clearMouseHold($event)"
+              ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+              ng-right-click="statsCtrl.clearMouseHold($event)"
               class="stat-button level-up"> + </button>
 
             <br>Unspent points: {{statsCtrl.stats.unspentPoints}}
@@ -84,19 +90,27 @@
             <span class="cost">
               <span class="strength current-level">{{statsCtrl.stats.strength.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('strength')" class="reset-attribute">Reset</button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>&nbsp;
               <button
                 ng-click="statsCtrl.statDown('strength')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'strength')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'strength', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="strength-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('strength')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'strength')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'strength', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="strength-up stat-button"> + </button>&nbsp;
-              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>
+                <span>Cost: {{statsCtrl.getAttrCost(statsCtrl.stats.strength.value)}}</span>
+
             </span>
           </div>
         </td>
@@ -408,16 +422,22 @@
               <span class="agility current-level">{{statsCtrl.stats.agility.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('agility')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('agility')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'agility')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="agility-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('agility')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'agility', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="agility-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('agility')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'agility')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'agility', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="agility-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('agility')" class="max-attribute">Max</button>
           </span>
@@ -441,16 +461,22 @@
               <span class="vitality current-level">{{statsCtrl.stats.vitality.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('vitality')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('vitality')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'vitality')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="vitality-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('vitality')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'vitality', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="vitality-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('vitality')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'vitality')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'vitality', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="vitality-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('vitality')" class="max-attribute">Max</button>
           </span>
@@ -474,16 +500,22 @@
               <span class="accuracy current-level">{{statsCtrl.stats.accuracy.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('accuracy')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('accuracy')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'accuracy')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="accuracy-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('accuracy')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'accuracy', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="accuracy-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('accuracy')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'accuracy')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'accuracy', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="accuracy-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('accuracy')" class="max-attribute">Max</button>
           </span>
@@ -507,16 +539,22 @@
               <span class="grit current-level">{{statsCtrl.stats.grit.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('grit')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('grit')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'grit')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="grit-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('grit')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'grit', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="grit-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('grit')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'grit')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'grit', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="grit-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('grit')" class="max-attribute">Max</button>
           </span>
@@ -540,16 +578,22 @@
               <span class="encumbrance current-level">{{statsCtrl.stats.encumbrance.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('encumbrance')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('encumbrance')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'encumbrance')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="encumbrance-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('encumbrance')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'encumbrance', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="encumbrance-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('encumbrance')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'encumbrance')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'encumbrance', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="encumbrance-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('encumbrance')" class="max-attribute">Max</button>
           </span>
@@ -573,16 +617,22 @@
               <span class="survival current-level">{{statsCtrl.stats.survival.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('survival')" class="reset-attribute">Reset</button>&nbsp;
               <button
-              ng-click="statsCtrl.statDown('survival')"
-              ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'survival')"
-              ng-mouseUp="statsCtrl.clearMouseHold()"
-              ng-mouseLeave="statsCtrl.clearMouseHold()"
-              class="survival-down stat-button"> - </button>&nbsp;
+                ng-click="statsCtrl.statDown('survival')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'survival', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="survival-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('survival')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'survival')"
-                ng-mouseUp="statsCtrl.clearMouseHold()"
-                ng-mouseLeave="statsCtrl.clearMouseHold()"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'survival', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
                 class="survival-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('survival')" class="max-attribute">Max</button>
           </span>
