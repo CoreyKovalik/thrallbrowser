@@ -20,7 +20,7 @@ angular
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
         charPromise = serverthrallapi.getCharacters(self.serverId);
-        clanPromise = serverthrallapi.getClans(self.serverId);
+        clanPromise = serverthrallapi.widgets.getActiveClans(self.serverId);
 
         $q.all([serverPromise, charPromise, clanPromise])
           .then(function(results) {

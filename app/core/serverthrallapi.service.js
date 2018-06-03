@@ -76,6 +76,13 @@ angular
       });
     }
 
+    function getActiveClans(serverId)
+    {
+      return $http.get(root_api + serverId + '/widgets/activeclans').then(function(response) {
+        return _.map(response.data, processClan);
+      });
+    }
+
     self.getCharacter = getCharacter;
     self.getCharacters = getCharacters;
     self.getClan = getClan;
@@ -83,4 +90,7 @@ angular
     self.getClans = getClans;
     self.getServer = getServer;
     self.getServers = getServers;
+
+    self.widgets = {}
+    self.widgets.getActiveClans = getActiveClans;
   });
