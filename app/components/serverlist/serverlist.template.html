@@ -28,10 +28,19 @@
 </div>
 
 <div class="main-container serverlistview">
+  <div class="row" ng-show="serverListCtrl.info">
+    <div class="col-xs-12" style="padding-bottom:20px">
+      ThrallBrowser is tracking
+      <span>{{serverListCtrl.info.character_count}}</span> characters in
+      <span>{{serverListCtrl.info.clan_count}}</span> clans across
+      <span>{{serverListCtrl.info.server_count}}</span> servers
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-12">
       <label class="go-server">
-        Click on a server below, or enter your serverthrall server ID
+        Select a server or enter your <a href="https://github.com/NullSoldier/serverthrall">ServerThrall</a> ID
         <input
           ng-keyup="$event.keyCode == 13 ? serverListCtrl.goServer(serverId) : null"
           type="text"

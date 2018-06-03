@@ -83,6 +83,13 @@ angular
       });
     }
 
+    function getServerInfo()
+    {
+      return $http.get(root_api + 'widgets/serverinfo').then(function(response) {
+        return response.data;
+      });
+    }
+
     self.getCharacter = getCharacter;
     self.getCharacters = getCharacters;
     self.getClan = getClan;
@@ -92,5 +99,6 @@ angular
     self.getServers = getServers;
 
     self.widgets = {}
+    self.widgets.getServerInfo = getServerInfo;
     self.widgets.getActiveClans = getActiveClans;
   });
