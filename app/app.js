@@ -26,4 +26,5 @@ require('./core/filters/moment.filter.js');
 require('./core/filters/urls.filter.js');
 require('./core/filters/servername.filter.js');
 require('./core/serverthrallapi.service.js');
+require('./core/statsdata.service.js');
 require('./polyfill.js');
