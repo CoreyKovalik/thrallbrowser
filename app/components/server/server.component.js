@@ -41,9 +41,10 @@ angular
             self.loadingError = false;
 
             var reasonablyUpdated =
-              self.server.version == '2.1.3' ||
               self.server.version == '2.1.4' ||
               self.server.version == '2.1.5' ||
+              self.server.version == '2.1.6' ||
+              self.server.version == '2.1.7' ||
               self.server.version == 'api';
 
             if (!reasonablyUpdated)
