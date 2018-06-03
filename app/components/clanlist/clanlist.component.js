@@ -14,6 +14,7 @@ angular
       self.orderBy = [];
       self.currentSort = null;
       self.currentSortAsc = true;
+      self.activeOnly = false;
 
       function loadData() {
         serverPromise = serverthrallapi.getServer(self.serverId);
@@ -49,7 +50,15 @@ angular
         self.orderBy = [column, 'name'];
       }
 
+      function filterActiveOnly(clan)
+      {
+        if(self.activeOnly)
+          return clan.is_active;
+        return true;
+      }
+
       self.sortBy = sortBy;
+      self.filterActiveOnly = filterActiveOnly;
 
       sortBy('character_count', false)
       loadData();

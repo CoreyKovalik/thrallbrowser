@@ -9,6 +9,7 @@ angular
     function processClan(clan) {
       if(clan.created != null)
         clan.created = moment(clan.created * 1000);
+      clan.is_active = clan.active_count > 0
       return clan;
     }
 
