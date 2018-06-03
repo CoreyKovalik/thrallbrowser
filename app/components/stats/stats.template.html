@@ -39,8 +39,8 @@
             <button
               ng-click="statsCtrl.levelDown()"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelDown)"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="stat-button level-down"> - </button>
 
             Exile Level: {{statsCtrl.stats.characterLevel}}
@@ -48,8 +48,8 @@
             <button
               ng-click="statsCtrl.levelUp()"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.levelUp)"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="stat-button level-up"> + </button>
 
             <br>Unspent points: {{statsCtrl.stats.unspentPoints}}
@@ -87,14 +87,11 @@
               <button
               ng-click="statsCtrl.statDown('strength')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'strength')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="strength-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('strength')"
-                ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'strength')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
                 class="strength-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>
             </span>
@@ -410,14 +407,14 @@
               <button
               ng-click="statsCtrl.statDown('agility')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'agility')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="agility-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('agility')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'agility')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="agility-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('agility')" class="max-attribute">Max</button>
           </span>
@@ -443,14 +440,14 @@
               <button
               ng-click="statsCtrl.statDown('vitality')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'vitality')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="vitality-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('vitality')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'vitality')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="vitality-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('vitality')" class="max-attribute">Max</button>
           </span>
@@ -476,14 +473,14 @@
               <button
               ng-click="statsCtrl.statDown('accuracy')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'accuracy')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="accuracy-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('accuracy')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'accuracy')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="accuracy-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('accuracy')" class="max-attribute">Max</button>
           </span>
@@ -509,14 +506,14 @@
               <button
               ng-click="statsCtrl.statDown('grit')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'grit')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="grit-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('grit')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'grit')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="grit-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('grit')" class="max-attribute">Max</button>
           </span>
@@ -542,14 +539,14 @@
               <button
               ng-click="statsCtrl.statDown('encumbrance')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'encumbrance')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="encumbrance-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('encumbrance')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'encumbrance')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="encumbrance-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('encumbrance')" class="max-attribute">Max</button>
           </span>
@@ -575,14 +572,14 @@
               <button
               ng-click="statsCtrl.statDown('survival')"
               ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statDown,'survival')"
-              ng-mouseUp="statsCtrl.onMouseRelease()"
-              ng-mouseLeave="statsCtrl.onMouseRelease()"
+              ng-mouseUp="statsCtrl.clearMouseHold()"
+              ng-mouseLeave="statsCtrl.clearMouseHold()"
               class="survival-down stat-button"> - </button>&nbsp;
               <button
                 ng-click="statsCtrl.statUp('survival')"
                 ng-mouseDown="statsCtrl.onMouseHold(statsCtrl.statUp,'survival')"
-                ng-mouseUp="statsCtrl.onMouseRelease()"
-                ng-mouseLeave="statsCtrl.onMouseRelease()"
+                ng-mouseUp="statsCtrl.clearMouseHold()"
+                ng-mouseLeave="statsCtrl.clearMouseHold()"
                 class="survival-up stat-button"> + </button>&nbsp;
               <button ng-click="statsCtrl.maxOutAttribute('survival')" class="max-attribute">Max</button>
           </span>

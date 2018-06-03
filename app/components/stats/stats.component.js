@@ -415,7 +415,7 @@ angular
       }, 140);
     }
 
-    function onMouseRelease() {
+    function clearMouseHold() {
       clearInterval(mouseHoldInterval);
     }
 
@@ -472,7 +472,7 @@ angular
     self.updateQueryParams = updateQueryParams;
 
     self.onMouseHold = onMouseHold;
-    self.onMouseRelease = onMouseRelease;
+    self.clearMouseHold = clearMouseHold;
 
     }
   });
