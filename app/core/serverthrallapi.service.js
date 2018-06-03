@@ -8,13 +8,13 @@ angular
 
     function processClan(clan) {
       if(clan.created != null)
-        clan.created = moment.unix(clan.created);
+        clan.created = moment(clan.created * 1000);
       return clan;
     }
 
     function processCharacter(character) {
       if(character.created != null)
-        character.created = moment.unix(character.created);
+        character.created = moment(character.created * 1000);
       return character;
     }
 
@@ -24,7 +24,7 @@ angular
       if(server.name.endsWith('"'))
         server.name = server.name.substring(0, server.name.length-1);
       if(server.last_sync != null)
-        server.last_sync = moment.unix(server.last_sync);
+        server.last_sync = moment(server.last_sync * 1000);
       return server;
     }
 
