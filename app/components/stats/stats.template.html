@@ -673,7 +673,39 @@
         <td>
           <div>
             <div>
-              div 1
+
+              Head:
+              <select name="headSlot" id="headSlot"
+              ng-options="armor as armor.Name group by 'Mwasdedium' for armor in statsCtrl.armors | filter: 'head' | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.headSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.headSlot.Name}}<br>
+
+              Torso: <select name="torsoSlot" id="torsoSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'torso' | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.torsoSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.torsoSlot.Name}}<br>
+
+              Hands: <select name="handsSlot" id="handsSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'hands' | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.handsSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.handsSlot.Name}}<br>
+
+              Legs: <select name="legsSlot" id="legsSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'legs' | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.legsSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.legsSlot.Name}}<br>
+
+              Feet: <select name="feetSlot" id="feetSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'feet' | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.feetSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.feetSlot.Name}}
+
+
             </div>
             <div>
               div 2

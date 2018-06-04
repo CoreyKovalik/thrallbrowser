@@ -516,6 +516,7 @@ angular
     self.statUp = statUp;
     self.statDown = statDown;
 
+    self.update = update;
     self.loadQueryParams = loadQueryParams;
     self.updateQueryParams = updateQueryParams;
 
