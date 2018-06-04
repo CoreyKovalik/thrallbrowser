@@ -6,6 +6,7 @@ angular
     controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location, statsdata) {
     var self = this;
     self.isLoading = true;
+            // self.isLoading = false;
     self.loadingError = false;
 
     //start calc
@@ -51,13 +52,11 @@ angular
         }
       }
     }
-    addLoadEvent(preloader);
     //end conan-image-preloader
     //start conan-stat-data
 
 
     function loadData() {
-
 
       armorsPromise = statsdata.getArmorsData().then(function(armors) {
         self.armors = armors;
@@ -73,9 +72,10 @@ angular
         .then(function(response) {
           self.isLoading = false;
           self.loadingError = false;
+          addLoadEvent(preloader);
+          createMouseOvers();
           loadQueryParams();
           updateQueryParams();
-          createMouseOvers();
         })
         .catch(function(respone) {
           self.isLoading = false;
@@ -83,9 +83,38 @@ angular
         });
     }
 
-    loadData();
-
     self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
+
+    self.equipment = {
+      "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "damage": 0,
+      "armor": 0,
+      "heatResist":0,
+      "coldResist":0,
+      "weightOfEquipped": 0,
+      "strBonus": 0,
+      "agiBonus": 0,
+      "vitBonus": 0,
+      "accBonus": 0,
+      "gritBonus": 0,
+      "encBonus": 0,
+      "surBonus": 0
+    }
+
+    self.equipped = {
+      "head": 0,
+      "torso": 0,
+      "hands": 0,
+      "legs": 0,
+      "feet": 0
+    }
+
+    self.headSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+    self.torsoSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+    self.handsSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+    self.legsSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+    self.feetSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
 
     self.stats = {
       "characterLevel": 1,
@@ -95,7 +124,7 @@ angular
       "currentExperience": "0 / 275",
       "allStats": ["strength", "agility", "vitality", "accuracy", "grit", "encumbrance", "survival"],
       "strength": {
-        "value": 0,
+        "value": (0 + self.equipment.strBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -103,7 +132,7 @@ angular
         "_50": false
       },
       "agility": {
-        "value": 0,
+        "value": (0 + self.equipment.agiBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -111,7 +140,7 @@ angular
         "_50": false
       },
       "vitality": {
-        "value": 0,
+        "value": (0 + self.equipment.vitBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -119,7 +148,7 @@ angular
         "_50": false
       },
       "accuracy": {
-        "value": 0,
+        "value": (0 + self.equipment.accBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -127,7 +156,7 @@ angular
         "_50": false
       },
       "grit": {
-        "value": 0,
+        "value": (0 + self.equipment.gritBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -135,7 +164,7 @@ angular
         "_50": false
       },
       "encumbrance": {
-        "value": 0,
+        "value": (0 + self.equipment.encBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -143,7 +172,7 @@ angular
         "_50": false
       },
       "survival": {
-        "value": 0,
+        "value": (0 + self.equipment.surBonus),
         "_10": false,
         "_20": false,
         "_30": false,
@@ -182,12 +211,6 @@ angular
       }
     }
 
-    self.headSlot = {ItemID: 0};
-    self.torsoSlot = {ItemID: 0};
-    self.handsSlot = {ItemID: 0};
-    self.legsSlot = {ItemID: 0};
-    self.feetSlot = {ItemID: 0};
-
     function resetAll() {
       self.stats.strength.value = self.stats.agility.value = self.stats.vitality.value = self.stats.accuracy.value = self.stats.grit.value = self.stats.encumbrance.value = self.stats.survival.value = self.stats.spentPoints = self.stats.availableFeats = 0;
       self.stats.characterLevel = self.stats.unspentPoints = 1;
@@ -215,11 +238,11 @@ angular
     }
 
     function resetEquipment() {
-      self.headSlot  = {ItemID: 0};
-      self.torsoSlot = {ItemID: 0};
-      self.handsSlot = {ItemID: 0};
-      self.legsSlot  = {ItemID: 0};
-      self.feetSlot  = {ItemID: 0};
+      self.headSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+      self.torsoSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+      self.handsSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+      self.legsSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+      self.feetSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
       update();
     }
 
@@ -305,6 +328,124 @@ angular
       }
     }
 
+    function adjustEquipmentBonuses() {
+      console.log('adjustEquipmentBonuses() runs');
+      let armor = 0;
+      let heat = 0;
+      let cold = 0;
+      let weight = 0;
+      let str = 0;
+      let agi = 0;
+      let vit = 0;
+      let acc = 0;
+      let grit = 0;
+      let enc = 0;
+      let sur = 0;
+
+      let head = 0;
+      let torso = 0;
+      let hands = 0;
+      let legs = 0;
+      let feet = 0;
+
+      head = self.headSlot.ItemID;
+      torso = self.torsoSlot.ItemID;
+      hands = self.handsSlot.ItemID;
+      legs = self.legsSlot.ItemID;
+      feet = self.feetSlot.ItemID;
+
+      console.log(head);
+      console.log(torso);
+      console.log(hands);
+      console.log(legs);
+      console.log(feet);
+
+      self.equipped.head = head;
+      self.equipped.torso = torso;
+      self.equipped.hands = hands;
+      self.equipped.legs = legs;
+      self.equipped.feet = feet;
+
+      armor = (self.headSlot.Armor   +
+            self.torsoSlot.Armor     +
+            self.handsSlot.Armor     +
+            self.legsSlot.Armor      +
+            self.feetSlot.Armor);
+
+      heat = (self.headSlot.Heat     +
+            self.torsoSlot.Heat      +
+            self.handsSlot.Heat      +
+            self.legsSlot.Heat       +
+            self.feetSlot.Heat);
+
+      cold = (self.headSlot.Cold     +
+            self.torsoSlot.Cold      +
+            self.handsSlot.Cold      +
+            self.legsSlot.Cold       +
+            self.feetSlot.Cold);
+
+      weight = (self.headSlot.Weight +
+            self.torsoSlot.Weight    +
+            self.handsSlot.Weight    +
+            self.legsSlot.Weight     +
+            self.feetSlot.Weight);
+
+      str = (self.headSlot.Str       +
+            self.torsoSlot.Str       +
+            self.handsSlot.Str       +
+            self.legsSlot.Str        +
+            self.feetSlot.Str);
+
+      agi = (self.headSlot.Agi       +
+            self.torsoSlot.Agi       +
+            self.handsSlot.Agi       +
+            self.legsSlot.Agi        +
+            self.feetSlot.Agi);
+
+      vit = (self.headSlot.Vit       +
+            self.torsoSlot.Vit       +
+            self.handsSlot.Vit       +
+            self.legsSlot.Vit        +
+            self.feetSlot.Vit);
+
+      acc = (self.headSlot.Acc       +
+            self.torsoSlot.Acc       +
+            self.handsSlot.Acc       +
+            self.legsSlot.Acc        +
+            self.feetSlot.Acc);
+
+      grit = (self.headSlot.Grit     +
+            self.torsoSlot.Grit      +
+            self.handsSlot.Grit      +
+            self.legsSlot.Grit       +
+            self.feetSlot.Grit);
+
+      enc = (self.headSlot.Enc       +
+            self.torsoSlot.Enc       +
+            self.handsSlot.Enc       +
+            self.legsSlot.Enc        +
+            self.feetSlot.Enc);
+
+      sur = (self.headSlot.Sur       +
+            self.torsoSlot.Sur       +
+            self.handsSlot.Sur       +
+            self.legsSlot.Sur        +
+            self.feetSlot.Sur);
+
+      self.equipment.armor            = armor;
+      self.equipment.heatResist       = heat;
+      self.equipment.coldResist       = cold;
+      self.equipment.weightOfEquipped = weight;
+      self.equipment.strBonus         = str;
+      self.equipment.agiBonus         = agi;
+      self.equipment.vitBonus         = vit;
+      self.equipment.accBonus         = acc;
+      self.equipment.gritBonus        = grit;
+      self.equipment.encBonus         = enc;
+      self.equipment.surBonus         = sur;
+      console.log('adjustEquipmentBonuses() finished');
+    }
+
     //Math calculations for playerStats based on attributes and certain bonus perks
 
     function calcPlayerStats() {
@@ -344,10 +485,13 @@ angular
 
     // Update & adjustment functions //
     function update(statString) {
+      console.log("Update runs");
+      adjustEquipmentBonuses();
       adjustBonuses(statString);
       calcPlayerStats();
       adjustProgress(statString);
-      updateQueryParams();
+      // updateQueryParams();
+      console.log("Update() Finished");
     }
 
     // Increase/Decrease stat functions
@@ -466,6 +610,7 @@ angular
 
     function updateQueryParams()
     {
+      console.log("updateQueryParams() runs")
       $location.search('v',
         self.stats.characterLevel     + ':' +
         self.stats.strength.value     + ':' +
@@ -475,11 +620,12 @@ angular
         self.stats.grit.value         + ':' +
         self.stats.encumbrance.value  + ':' +
         self.stats.survival.value     + ':' +
-        self.headSlot.ItemID          + ':' +
-        self.torsoSlot.ItemID         + ':' +
-        self.handsSlot.ItemID         + ':' +
-        self.legsSlot.ItemID          + ':' +
-        self.feetSlot.ItemID);
+        self.equipped.head            + ':' +
+        self.equipped.torso           + ':' +
+        self.equipped.hands           + ':' +
+        self.equipped.legs            + ':' +
+        self.equipped.feet);
+      console.log("updateQueryParams() finished");
     }
 
     // Helper Functions //
@@ -537,6 +683,10 @@ angular
       });
     }
 
+    // createMouseOvers();
+    // loadQueryParams();
+    // updateQueryParams();
+
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;
     self.resetAttribute = resetAttribute;
@@ -550,6 +700,7 @@ angular
     self.adjustAttrPoints = adjustAttrPoints;
     self.adjustFeatPoints = adjustFeatPoints;
     self.adjustBonuses = adjustBonuses;
+    self.adjustEquipmentBonuses = adjustEquipmentBonuses;
     self.calcPlayerStats = calcPlayerStats;
     self.adjustProgress = adjustProgress;
 
@@ -564,5 +715,7 @@ angular
 
     self.onMouseHold = onMouseHold;
     self.clearMouseHold = clearMouseHold;
+
+    loadData();
     }
   });
