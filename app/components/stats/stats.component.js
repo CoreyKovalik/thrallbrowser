@@ -182,6 +182,12 @@ angular
       }
     }
 
+    self.headSlot = {ItemID: 0};
+    self.torsoSlot = {ItemID: 0};
+    self.handsSlot = {ItemID: 0};
+    self.legsSlot = {ItemID: 0};
+    self.feetSlot = {ItemID: 0};
+
     function resetAll() {
       self.stats.strength.value = self.stats.agility.value = self.stats.vitality.value = self.stats.accuracy.value = self.stats.grit.value = self.stats.encumbrance.value = self.stats.survival.value = self.stats.spentPoints = self.stats.availableFeats = 0;
       self.stats.characterLevel = self.stats.unspentPoints = 1;
@@ -397,20 +403,26 @@ angular
 
     function loadQueryParams()
     {
-      var values = $location.search().v;
-      if(!values || !values.split)
+      var urlValuesString = $location.search().v;
+
+      if(!urlValuesString || !urlValuesString.split)
         return;
 
-      var s = values.split(":");
+      var urlValuesArray = urlValuesString.split(":");
 
       function takeStat() {
-        return s.length == 0 ? null : Number(s.shift());
+        if (urlValuesArray.length == 0)
+          return null;
+        else
+          return Number(urlValuesArray.shift());
       }
 
+      //character level
       var level = takeStat();
       if(level != null)
         increaseLevelTo(level);
 
+      // 7 characters stats
       self.stats.allStats.forEach(function(attribute, i) {
         let statName = self.stats.allStats[i];
         let statTarget = takeStat();
@@ -418,19 +430,46 @@ angular
         if(statTarget != null)
           levelStatTo(statName, statTarget);
       });
+
+      //5 armor slots
+      let slot1 = takeStat();
+      if (slot1 != null && self.armorsMap[slot1])
+        self.headSlot = self.armorsMap[slot1];
+
+      let slot2 = takeStat();
+      if (slot2 != null && self.armorsMap[slot2])
+        self.torsoSlot = self.armorsMap[slot2];
+
+      let slot3 = takeStat();
+      if (slot3 != null && self.armorsMap[slot3])
+        self.handsSlot = self.armorsMap[slot3];
+
+      let slot4 = takeStat();
+      if (slot4 != null && self.armorsMap[slot4])
+        self.legsSlot = self.armorsMap[slot4];
+
+      let slot5 = takeStat();
+      if (slot5 != null && self.armorsMap[slot5])
+        self.feetSlot = self.armorsMap[slot5];
     }
+
 
     function updateQueryParams()
     {
       $location.search('v',
-        self.stats.characterLevel + ':' +
-        self.stats.strength.value + ':'+
-        self.stats.agility.value + ':'+
-        self.stats.vitality.value + ':'+
-        self.stats.accuracy.value + ':'+
-        self.stats.grit.value + ':'+
-        self.stats.encumbrance.value + ':'+
-        self.stats.survival.value);
+        self.stats.characterLevel     + ':' +
+        self.stats.strength.value     + ':' +
+        self.stats.agility.value      + ':' +
+        self.stats.vitality.value     + ':' +
+        self.stats.accuracy.value     + ':' +
+        self.stats.grit.value         + ':' +
+        self.stats.encumbrance.value  + ':' +
+        self.stats.survival.value     + ':' +
+        self.headSlot.ItemID          + ':' +
+        self.torsoSlot.ItemID         + ':' +
+        self.handsSlot.ItemID         + ':' +
+        self.legsSlot.ItemID          + ':' +
+        self.feetSlot.ItemID);
     }
 
     // Helper Functions //
