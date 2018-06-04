@@ -26,7 +26,9 @@
     </div>
   </div>
 </div>
+<div ng-show="serverCtrl.isLoading" class="spinner"></div>
 
+<div ng-if="!serverCtrl.isLoading">
 <div class="conan-stat-calculator">
   <!-- Logo image credit to Funcom, https://www.conanexiles.com/ -->
   <!-- <img class="conanimg" src="./images/logo.png" alt="logo" width="450" srcset="./images/logo.png 500w, ./images/logo-300x88.png 300w" sizes="(max-width: 500px) 100vw, 500px"> -->
@@ -725,4 +727,5 @@
 
 
 
+</div>
 </div>

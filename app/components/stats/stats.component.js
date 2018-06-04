@@ -5,6 +5,8 @@ angular
     controllerAs: 'statsCtrl',
     controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location, statsdata) {
     var self = this;
+    self.isLoading = true;
+    self.loadingError = false;
 
     //start calc
     // better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
@@ -55,13 +57,30 @@ angular
 
 
     function loadData() {
-      statsdata.getArmorsData().then(function(armors) {
+
+
+      armorsPromise = statsdata.getArmorsData().then(function(armors) {
         self.armors = armors;
+        self.armorsMap = _.keyBy(self.armors, 'ItemID');
       });
 
-      statsdata.getWeaponsData().then(function(weapons) {
+      weaponsPromise = statsdata.getWeaponsData().then(function(weapons) {
         self.weapons = weapons;
-      })
+        self.weaponsMap = _.keyBy(self.weapons, 'ItemID');
+      });
+
+      $q.all([armorsPromise, weaponsPromise])
+        .then(function(response) {
+          self.isLoading = false;
+          self.loadingError = false;
+          loadQueryParams();
+          updateQueryParams();
+          createMouseOvers();
+        })
+        .catch(function(respone) {
+          self.isLoading = false;
+          self.loadingError = true;
+        });
     }
 
     loadData();
@@ -456,27 +475,26 @@ angular
 
     let currentActive = "strength";
 
-    self.stats.allStats.forEach(function(attribute, i) {
+    function createMouseOvers() {
+      self.stats.allStats.forEach(function(attribute, i) {
 
-      //cache attr-div & progress-bar for each attribute. then,
-      let hoverElementsForToggle = [];
-      hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + self.stats.allStats[i])[0];
-      hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + self.stats.allStats[i])[0];
+        //cache attr-div & progress-bar for each attribute. then,
+        let hoverElementsForToggle = [];
+        hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + self.stats.allStats[i])[0];
+        hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + self.stats.allStats[i])[0];
 
-      // mouseover on hoverElements to toggle active class on current 'mouseover' attribute
-      hoverElementsForToggle.forEach(function(element) {
-        element.addEventListener("mouseover", function () {
-          if (self.stats.allStats[i] != currentActive) {
-          document.getElementsByClassName("bonuses " + self.stats.allStats[i])[0].classList.add("active");
-          document.getElementsByClassName("bonuses " + currentActive)[0].classList.remove("active");
-          currentActive = self.stats.allStats[i];
-          }
+        // mouseover on hoverElements to toggle active class on current 'mouseover' attribute
+        hoverElementsForToggle.forEach(function(element) {
+          element.addEventListener("mouseover", function () {
+            if (self.stats.allStats[i] != currentActive) {
+            document.getElementsByClassName("bonuses " + self.stats.allStats[i])[0].classList.add("active");
+            document.getElementsByClassName("bonuses " + currentActive)[0].classList.remove("active");
+            currentActive = self.stats.allStats[i];
+            }
+          });
         });
       });
-    });
-
-    loadQueryParams();
-    updateQueryParams();
+    }
 
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;
