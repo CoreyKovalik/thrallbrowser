@@ -196,6 +196,7 @@ angular
       self.stats.playerStats.stamina.value = self.stats.playerStats.melee.value = self.stats.playerStats.ranged.value = self.stats.playerStats.stamina.base;
       self.stats.playerStats.encumbrance.value = self.stats.playerStats.encumbrance.base;
       self.stats.playerStats.armor.value = self.stats.playerStats.damageResistance.value = self.stats.playerStats.armor.base;
+      resetEquipment();
       for (var i = 0; i < 7; i++) {
         update(self.stats.allStats[i]);
       }
@@ -211,6 +212,15 @@ angular
       while (self.stats[attribute].value > 0) {
         statDown(attribute);
       }
+    }
+
+    function resetEquipment() {
+      self.headSlot  = {ItemID: 0};
+      self.torsoSlot = {ItemID: 0};
+      self.handsSlot = {ItemID: 0};
+      self.legsSlot  = {ItemID: 0};
+      self.feetSlot  = {ItemID: 0};
+      update();
     }
 
     function increaseLevelTo(value)
@@ -538,6 +548,7 @@ angular
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;
     self.resetAttribute = resetAttribute;
+    self.resetEquipment = resetEquipment;
     self.increaseLevelTo = increaseLevelTo;
     self.maxOutLevel = maxOutLevel;
     self.levelStatTo = levelStatTo;
