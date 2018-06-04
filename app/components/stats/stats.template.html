@@ -675,7 +675,7 @@
 
               Head:
               <select name="headSlot" id="headSlot"
-              ng-options="armor as armor.Name group by 'Mwasdedium' for armor in statsCtrl.armors | filter: 'head' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'head' | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.headSlot"
               ng-change="statsCtrl.update()">
               </select> {{statsCtrl.headSlot.Name}}<br>
