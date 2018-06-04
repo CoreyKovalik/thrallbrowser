@@ -1,4 +1,6 @@
 [
+  // **IMPORTANT ** //
+  // angular tracks by ItemID 0, defaults the armor options to this object //
   {
    "ItemID"  : 0,
    "Set"     : "",
