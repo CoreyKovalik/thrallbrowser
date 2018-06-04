@@ -4,7 +4,7 @@ angular
     var self = this;
 
     var root_api = 'https://serverthrallapi.herokuapp.com/api/';
-    // root_api = 'http://localhost:8000/api/';
+    root_api = 'http://localhost:8000/api/';
 
     function processClan(clan) {
       if(clan.created != null)

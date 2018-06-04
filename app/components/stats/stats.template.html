@@ -92,7 +92,6 @@
             <span class="cost">
               <span class="strength current-level">{{statsCtrl.stats.strength.value}}</span>&nbsp;
               <button ng-click="statsCtrl.resetAttribute('strength')" class="reset-attribute">Reset</button>&nbsp;
-              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>&nbsp;
               <button
                 ng-click="statsCtrl.statDown('strength')"
                 on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'strength', $event)"
@@ -111,8 +110,7 @@
                 ng-mouseLeave="statsCtrl.clearMouseHold($event)"
                 ng-right-click=""
                 class="strength-up stat-button"> + </button>&nbsp;
-                <span>Cost: {{statsCtrl.getAttrCost(statsCtrl.stats.strength.value)}}</span>
-
+              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>
             </span>
           </div>
         </td>
