@@ -3,7 +3,7 @@ angular
   .service('statsdata', function($http) {
     var self = this;
 
-    var statsRoot = '../data/components/stats/';
+    var statsRoot = '../data/';
 
     function getArmorsData() {
       return $http.get(statsRoot + 'armor.json').then(function(response) {
@@ -21,7 +21,5 @@ angular
 
     self.getArmorsData = getArmorsData;
     self.getWeaponsData = getWeaponsData;
-
-    self.test = getArmorsData();
 
   });

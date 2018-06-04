@@ -84,7 +84,7 @@ gulp.task('vendors', function() {
 
 gulp.task('json', function() {
     return gulp.src('app/**/*.json')
-        .pipe(gulp.dest('dist/data'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('watch', ['build'], function() {
