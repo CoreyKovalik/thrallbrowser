@@ -8,51 +8,14 @@ angular
     self.isLoading = true;
     self.loadingError = false;
 
-    //start calc
-    // better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
-    // pre-loaded for prettier rendering when transitioning between attribute teirs
-    function preloader() {
-      if (document.images) {
-        var img1 = new Image();
-        var img2 = new Image();
-        var img3 = new Image();
-        var img4 = new Image();
-        var img5 = new Image();
-
-        var img6 = new Image();
-        var img7 = new Image();
-        var img8 = new Image();
-        var img9 = new Image();
-        var img10 = new Image();
-
-        img1.src = "./images/teir1.png";
-        img2.src = "./images/teir2.png";
-        img3.src = "./images/teir3.png";
-        img4.src = "./images/teir4.png";
-        img5.src = "./images/teir5.png";
-
-        img6.src = "./images/t1-glow.png";
-        img7.src = "./images/t2-glow.png";
-        img8.src = "./images/t3-glow.png";
-        img9.src = "./images/t4-glow.png";
-        img10.src = "./images/t5-glow.png";
-      }
-    }
-    function addLoadEvent(func) {
-      var oldonload = window.onload;
-      if (typeof window.onload != 'function') {
-        window.onload = func;
-      } else {
-        window.onload = function() {
-          if (oldonload) {
-            oldonload();
-          }
-          func();
-        }
-      }
-    }
-    //end conan-image-preloader
-    //start conan-stat-data
+    //TO DO: cleanup functions --> increaseLevelTo, levelStatTo [maybe change name to increaseStatTo, or setLevel/setStat]
+    //       skim over Increase/Descrease functions for cleanup as well
+    //  add weapon/offhand slot
+    //  add warpaint data and slots
+    //  add armor improvement items data and options for them
+    //  print current character info
+    //  Create a sharing box:
+    //        Name, ServerID (how to find), Character ID(how to find), race (all options), gender (tickbox), full text-only build sharing
 
     function loadData() {
 
@@ -80,40 +43,10 @@ angular
         });
 
     }
-
+    //start calc
+    //start conan-stat-data
 
     self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
-
-    self.equipment = {
-      "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
-      "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
-      "damage": 0,
-      "armor": 0,
-      "heatResist":0,
-      "coldResist":0,
-      "weightOfEquipped": 0,
-      "strBonus": 0,
-      "agiBonus": 0,
-      "vitBonus": 0,
-      "accBonus": 0,
-      "gritBonus": 0,
-      "encBonus": 0,
-      "surBonus": 0
-    }
-
-    self.equipped = {
-      "head": 0,
-      "torso": 0,
-      "hands": 0,
-      "legs": 0,
-      "feet": 0
-    }
-
-    self.headSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-    self.torsoSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-    self.handsSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-    self.legsSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-    self.feetSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
 
     self.stats = {
       "characterLevel": 1,
@@ -210,14 +143,33 @@ angular
       }
     }
 
+    self.headSlot  = null;
+    self.torsoSlot = null;
+    self.handsSlot = null;
+    self.legsSlot  = null;
+    self.feetSlot  = null;
+
+    self.equipment = {
+      "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "damage": 0,
+      "armor": 0,
+      "heatResist":0,
+      "coldResist":0,
+      "weightOfEquipped": 0,
+      "strBonus": 0,
+      "agiBonus": 0,
+      "vitBonus": 0,
+      "accBonus": 0,
+      "gritBonus": 0,
+      "encBonus": 0,
+      "surBonus": 0
+    }
+
     function resetAll() {
       self.stats.strength.value = self.stats.agility.value = self.stats.vitality.value = self.stats.accuracy.value = self.stats.grit.value = self.stats.encumbrance.value = self.stats.survival.value = self.stats.spentPoints = self.stats.availableFeats = 0;
       self.stats.characterLevel = self.stats.unspentPoints = 1;
       self.stats.currentExperience = "0 / 275";
-      self.stats.playerStats.health.value = self.stats.playerStats.health.base;
-      self.stats.playerStats.stamina.value = self.stats.playerStats.melee.value = self.stats.playerStats.ranged.value = self.stats.playerStats.stamina.base;
-      self.stats.playerStats.encumbrance.value = self.stats.playerStats.encumbrance.base;
-      self.stats.playerStats.armor.value = self.stats.playerStats.damageResistance.value = self.stats.playerStats.armor.base;
       resetEquipment();
       for (var i = 0; i < 7; i++) {
         update(self.stats.allStats[i]);
@@ -237,11 +189,11 @@ angular
     }
 
     function resetEquipment() {
-      self.headSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-      self.torsoSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-      self.handsSlot = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-      self.legsSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
-      self.feetSlot  = {ItemID: 0, Armor: 0, Heat: 0, Cold: 0, Weight: 0, Str: 0, Agi: 0, Vit: 0, Acc: 0, Grit: 0, Enc: 0, Sur:0};
+      self.headSlot  = null;
+      self.torsoSlot = null;
+      self.handsSlot = null;
+      self.legsSlot  = null;
+      self.feetSlot  = null;
       update();
     }
 
@@ -263,8 +215,10 @@ angular
       while (self.stats[statName].value < value) {
         if (getAttrCost(self.stats[statName].value) > self.stats.unspentPoints)
           return false;
-        if(!statUp(statName))
+        if(!statUp(statName)) {
+          console.log("still works!");
           return false;
+        }
       }
 
       return true;
@@ -328,121 +282,19 @@ angular
     }
 
     function adjustEquipmentBonuses() {
-      console.log('adjustEquipmentBonuses() runs');
-      let armor = 0;
-      let heat = 0;
-      let cold = 0;
-      let weight = 0;
-      let str = 0;
-      let agi = 0;
-      let vit = 0;
-      let acc = 0;
-      let grit = 0;
-      let enc = 0;
-      let sur = 0;
+      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot];
 
-      let head = 0;
-      let torso = 0;
-      let hands = 0;
-      let legs = 0;
-      let feet = 0;
-
-      head = self.headSlot.ItemID;
-      torso = self.torsoSlot.ItemID;
-      hands = self.handsSlot.ItemID;
-      legs = self.legsSlot.ItemID;
-      feet = self.feetSlot.ItemID;
-
-      console.log(head);
-      console.log(torso);
-      console.log(hands);
-      console.log(legs);
-      console.log(feet);
-
-      self.equipped.head = head;
-      self.equipped.torso = torso;
-      self.equipped.hands = hands;
-      self.equipped.legs = legs;
-      self.equipped.feet = feet;
-
-      armor = (self.headSlot.Armor   +
-            self.torsoSlot.Armor     +
-            self.handsSlot.Armor     +
-            self.legsSlot.Armor      +
-            self.feetSlot.Armor);
-
-      heat = (self.headSlot.Heat     +
-            self.torsoSlot.Heat      +
-            self.handsSlot.Heat      +
-            self.legsSlot.Heat       +
-            self.feetSlot.Heat);
-
-      cold = (self.headSlot.Cold     +
-            self.torsoSlot.Cold      +
-            self.handsSlot.Cold      +
-            self.legsSlot.Cold       +
-            self.feetSlot.Cold);
-
-      weight = (self.headSlot.Weight +
-            self.torsoSlot.Weight    +
-            self.handsSlot.Weight    +
-            self.legsSlot.Weight     +
-            self.feetSlot.Weight);
-
-      str = (self.headSlot.Str       +
-            self.torsoSlot.Str       +
-            self.handsSlot.Str       +
-            self.legsSlot.Str        +
-            self.feetSlot.Str);
-
-      agi = (self.headSlot.Agi       +
-            self.torsoSlot.Agi       +
-            self.handsSlot.Agi       +
-            self.legsSlot.Agi        +
-            self.feetSlot.Agi);
-
-      vit = (self.headSlot.Vit       +
-            self.torsoSlot.Vit       +
-            self.handsSlot.Vit       +
-            self.legsSlot.Vit        +
-            self.feetSlot.Vit);
-
-      acc = (self.headSlot.Acc       +
-            self.torsoSlot.Acc       +
-            self.handsSlot.Acc       +
-            self.legsSlot.Acc        +
-            self.feetSlot.Acc);
-
-      grit = (self.headSlot.Grit     +
-            self.torsoSlot.Grit      +
-            self.handsSlot.Grit      +
-            self.legsSlot.Grit       +
-            self.feetSlot.Grit);
-
-      enc = (self.headSlot.Enc       +
-            self.torsoSlot.Enc       +
-            self.handsSlot.Enc       +
-            self.legsSlot.Enc        +
-            self.feetSlot.Enc);
-
-      sur = (self.headSlot.Sur       +
-            self.torsoSlot.Sur       +
-            self.handsSlot.Sur       +
-            self.legsSlot.Sur        +
-            self.feetSlot.Sur);
-
-      self.equipment.armor            = armor;
-      self.equipment.heatResist       = heat;
-      self.equipment.coldResist       = cold;
-      self.equipment.weightOfEquipped = weight;
-      self.equipment.strBonus         = str;
-      self.equipment.agiBonus         = agi;
-      self.equipment.vitBonus         = vit;
-      self.equipment.accBonus         = acc;
-      self.equipment.gritBonus        = grit;
-      self.equipment.encBonus         = enc;
-      self.equipment.surBonus         = sur;
-      console.log('adjustEquipmentBonuses() finished');
+      self.equipment.armor            = _(items).filter().sumBy('Armor');
+      self.equipment.heatResist       = _(items).filter().sumBy('Heat');
+      self.equipment.coldResist       = _(items).filter().sumBy('Cold');
+      self.equipment.weightOfEquipped = _(items).filter().sumBy('Weight');
+      self.equipment.strBonus         = _(items).filter().sumBy('Str');
+      self.equipment.agiBonus         = _(items).filter().sumBy('Agi');
+      self.equipment.vitBonus         = _(items).filter().sumBy('Vit');
+      self.equipment.accBonus         = _(items).filter().sumBy('Acc');
+      self.equipment.gritBonus        = _(items).filter().sumBy('Grit');
+      self.equipment.encBonus         = _(items).filter().sumBy('Enc');
+      self.equipment.surBonus         = _(items).filter().sumBy('Sur');
     }
 
     //Math calculations for playerStats based on attributes and certain bonus perks
@@ -552,6 +404,7 @@ angular
       return true;
     }
 
+    // URL Getter/Setter Functions for sharing character builds
     function loadQueryParams()
     {
       var urlValuesString = $location.search().v;
@@ -568,7 +421,7 @@ angular
           return Number(urlValuesArray.shift());
       }
 
-      //character level
+      // 1 character level
       var level = takeStat();
       if(level != null)
         increaseLevelTo(level);
@@ -582,7 +435,7 @@ angular
           levelStatTo(statName, statTarget);
       });
 
-      //5 armor slots
+      // 5 armor slots
       let slot1 = takeStat();
       if (slot1 != null && self.armorsMap[slot1])
         self.headSlot = self.armorsMap[slot1];
@@ -607,6 +460,13 @@ angular
 
     function updateQueryParams()
     {
+      function setID(slot) {
+        if (slot == null)
+          return '0';
+        else
+          return slot.ItemID;
+      }
+
       $location.search('v',
         self.stats.characterLevel     + ':' +
         self.stats.strength.value     + ':' +
@@ -616,11 +476,11 @@ angular
         self.stats.grit.value         + ':' +
         self.stats.encumbrance.value  + ':' +
         self.stats.survival.value     + ':' +
-        self.equipped.head            + ':' +
-        self.equipped.torso           + ':' +
-        self.equipped.hands           + ':' +
-        self.equipped.legs            + ':' +
-        self.equipped.feet);
+        setID(self.headSlot)          + ':' +
+        setID(self.torsoSlot)         + ':' +
+        setID(self.handsSlot)         + ':' +
+        setID(self.legsSlot)          + ':' +
+        setID(self.feetSlot));
     }
 
     // Helper Functions //
@@ -677,6 +537,51 @@ angular
         });
       });
     }
+
+    // end calc
+    // better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
+    // pre-loaded for prettier rendering when transitioning between attribute teirs
+    function preloader() {
+      if (document.images) {
+        var img1 = new Image();
+        var img2 = new Image();
+        var img3 = new Image();
+        var img4 = new Image();
+        var img5 = new Image();
+
+        var img6 = new Image();
+        var img7 = new Image();
+        var img8 = new Image();
+        var img9 = new Image();
+        var img10 = new Image();
+
+        img1.src = "./images/teir1.png";
+        img2.src = "./images/teir2.png";
+        img3.src = "./images/teir3.png";
+        img4.src = "./images/teir4.png";
+        img5.src = "./images/teir5.png";
+
+        img6.src = "./images/t1-glow.png";
+        img7.src = "./images/t2-glow.png";
+        img8.src = "./images/t3-glow.png";
+        img9.src = "./images/t4-glow.png";
+        img10.src = "./images/t5-glow.png";
+      }
+    }
+    function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      } else {
+        window.onload = function() {
+          if (oldonload) {
+            oldonload();
+          }
+          func();
+        }
+      }
+    }
+    //end conan-image-preloader
 
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;

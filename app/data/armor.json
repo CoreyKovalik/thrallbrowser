@@ -1,25 +1,4 @@
 [
-
-  {
-   "ItemID"  : 0,
-   "COMMENT" : " //**IMPORTANT ** angular tracks by ItemID 0, defaults the armor options to this object // ",
-   "Set"     : "",
-   "Name"    : "",
-   "Category": "",
-   "Epic"    : "",
-   "Slot"    : "",
-   "Armor"   : 0,
-   "Heat"    : 0,
-   "Cold"    : 0,
-   "Weight"  : 0,
-   "Str"     : 0,
-   "Agi"     : 0,
-   "Vit"     : 0,
-   "Acc"     : 0,
-   "Grit"    : 0,
-   "Enc"     : 0,
-   "Sur"     : 0
- },
  {
    "ItemID"  : 52632,
    "Set"     : "Aquilonian",
