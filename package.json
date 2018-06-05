@@ -16,6 +16,7 @@
     "moment": "^2.22.1"
   },
   "devDependencies": {
+    "angular-mocks": "^1.7.0",
     "babelify": "^7.3.0",
     "browser-sync": "^2.23.7",
     "browserify": "^14.5.0",
@@ -23,6 +24,12 @@
     "gulp": "^3.9.1",
     "gulp-concat-css": "^3.1.0",
     "gulp-less": "^4.0.0",
+    "jasmine": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-browserify": "^5.2.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
+    "karma-jasmine-matchers": "^3.7.0",
     "less": "^3.0.4",
     "vinyl-source-stream": "^1.1.2"
   }
