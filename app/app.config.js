@@ -10,7 +10,8 @@ angular
       })
       .when('/stats', {
         id: 'stats',
-        template: '<stats></stats>'
+        template: '<stats></stats>',
+        reloadOnSearch: false
       })
       .when('/register', {
         id: 'register',

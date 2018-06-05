@@ -6,7 +6,6 @@ angular
     controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location, statsdata) {
     var self = this;
     self.isLoading = true;
-            // self.isLoading = false;
     self.loadingError = false;
 
     //start calc
@@ -55,21 +54,19 @@ angular
     //end conan-image-preloader
     //start conan-stat-data
 
-
     function loadData() {
 
-      armorsPromise = statsdata.getArmorsData().then(function(armors) {
-        self.armors = armors;
-        self.armorsMap = _.keyBy(self.armors, 'ItemID');
-      });
+      let armorsPromise = statsdata.getArmorsData();
 
-      weaponsPromise = statsdata.getWeaponsData().then(function(weapons) {
-        self.weapons = weapons;
-        self.weaponsMap = _.keyBy(self.weapons, 'ItemID');
-      });
+      let weaponsPromise = statsdata.getWeaponsData();
 
       $q.all([armorsPromise, weaponsPromise])
-        .then(function(response) {
+        .then(function(results) {
+
+          self.armors = results[0];
+          self.armorsMap = _.keyBy(self.armors, 'ItemID');
+          self.weapons = results[1];
+          self.weaponsMap = _.keyBy(self.weapons, 'ItemID');
           self.isLoading = false;
           self.loadingError = false;
           addLoadEvent(preloader);
@@ -81,7 +78,9 @@ angular
           self.isLoading = false;
           self.loadingError = true;
         });
+
     }
+
 
     self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
 
@@ -124,7 +123,7 @@ angular
       "currentExperience": "0 / 275",
       "allStats": ["strength", "agility", "vitality", "accuracy", "grit", "encumbrance", "survival"],
       "strength": {
-        "value": (0 + self.equipment.strBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -132,7 +131,7 @@ angular
         "_50": false
       },
       "agility": {
-        "value": (0 + self.equipment.agiBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -140,7 +139,7 @@ angular
         "_50": false
       },
       "vitality": {
-        "value": (0 + self.equipment.vitBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -148,7 +147,7 @@ angular
         "_50": false
       },
       "accuracy": {
-        "value": (0 + self.equipment.accBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -156,7 +155,7 @@ angular
         "_50": false
       },
       "grit": {
-        "value": (0 + self.equipment.gritBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -164,7 +163,7 @@ angular
         "_50": false
       },
       "encumbrance": {
-        "value": (0 + self.equipment.encBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -172,7 +171,7 @@ angular
         "_50": false
       },
       "survival": {
-        "value": (0 + self.equipment.surBonus),
+        "value": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -485,13 +484,11 @@ angular
 
     // Update & adjustment functions //
     function update(statString) {
-      console.log("Update runs");
       adjustEquipmentBonuses();
       adjustBonuses(statString);
       calcPlayerStats();
       adjustProgress(statString);
-      // updateQueryParams();
-      console.log("Update() Finished");
+      updateQueryParams();
     }
 
     // Increase/Decrease stat functions
@@ -610,7 +607,6 @@ angular
 
     function updateQueryParams()
     {
-      console.log("updateQueryParams() runs")
       $location.search('v',
         self.stats.characterLevel     + ':' +
         self.stats.strength.value     + ':' +
@@ -625,7 +621,6 @@ angular
         self.equipped.hands           + ':' +
         self.equipped.legs            + ':' +
         self.equipped.feet);
-      console.log("updateQueryParams() finished");
     }
 
     // Helper Functions //
@@ -682,10 +677,6 @@ angular
         });
       });
     }
-
-    // createMouseOvers();
-    // loadQueryParams();
-    // updateQueryParams();
 
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;
