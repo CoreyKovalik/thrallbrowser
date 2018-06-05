@@ -1,0 +1,18 @@
+sudo: false
+notifications:
+  email: false
+
+
+addons:
+  firefox: "latest"
+
+language: node_js
+node_js:
+  "node"
+
+install:
+  npm install
+
+script:
+  # TODO: start xvfb
+  karma start --single-run --browsers Firefox
