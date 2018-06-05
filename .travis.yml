@@ -14,5 +14,4 @@ install:
   npm install
 
 script:
-  # TODO: start xvfb
-  karma start --single-run --browsers Firefox
+  xvfb-run karma start --single-run --browsers Firefox
