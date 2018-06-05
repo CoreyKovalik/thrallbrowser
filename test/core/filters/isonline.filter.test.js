@@ -5,8 +5,8 @@ describe('Filter: isCharacterOnline', function() {
 
   beforeEach(module('thrallbrowser'));
 
-  beforeEach(inject(function (_isCharacterOnlineFilter_) {
-    isCharacterOnline = _isCharacterOnlineFilter_;
+  beforeEach(inject(function ($filter) {
+    isCharacterOnline = $filter('isCharacterOnline');
   }));
 
   it('should handle "Online Now"', function () {
