@@ -20,8 +20,9 @@ describe('Filter: isCharacterOnline', function() {
   it('should handle last online', function () {
     let character = {
       is_online: false,
-      last_online: 0
+      // isCharacterOnline second timestamps, not millisecond
+      last_online: (Date.now() / 1000) - 1
     };
-    expect(isCharacterOnline(character)).toEndWith('years ago');
+    expect(isCharacterOnline(character)).toBe('a few seconds ago');
   });
 });
