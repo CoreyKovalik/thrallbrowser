@@ -680,6 +680,7 @@
           <div>
             <div>
 
+              <!-- 5 Armor Slots -->
               Head:
               <select name="headSlot" id="headSlot"
               ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'head' | orderBy: 'Name' track by armor.ItemID"
@@ -709,7 +710,21 @@
               ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'feet' | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.feetSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.feetSlot.Name}}
+              </select> {{statsCtrl.feetSlot.Name}}<br>
+
+              <!-- 2 Weapons Slots -->
+
+              Weapon: <select name="weaponSlot" id="weaponSlot"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: 'mainhand' | orderBy: 'Name' track by weapon.ItemID"
+              ng-model="statsCtrl.weaponSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.weaponSlot.Name}}<br>
+
+              Off-hand: <select name="offhandSlot" id="offhandSlot"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: 'offhand' | orderBy: 'Name' track by weapon.ItemID"
+              ng-model="statsCtrl.offhandSlot"
+              ng-change="statsCtrl.update()">
+              </select> {{statsCtrl.offhandSlot.Name}}
 
 
             </div>

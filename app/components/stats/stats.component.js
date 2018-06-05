@@ -12,7 +12,7 @@ angular
     //       skim over Increase/Descrease functions for cleanup as well
     //  add weapon/offhand slot
     //  add warpaint data and slots
-    //  add armor improvement items data and options for them
+    //  add armor/weapon tinker items data and options for them
     //  print current character info
     //  Create a sharing box:
     //        Name, ServerID (how to find), Character ID(how to find), race (all options), gender (tickbox), full text-only build sharing
@@ -143,11 +143,13 @@ angular
       }
     }
 
-    self.headSlot  = null;
-    self.torsoSlot = null;
-    self.handsSlot = null;
-    self.legsSlot  = null;
-    self.feetSlot  = null;
+    self.headSlot    = null;
+    self.torsoSlot   = null;
+    self.handsSlot   = null;
+    self.legsSlot    = null;
+    self.feetSlot    = null;
+    self.weaponSlot  = null;
+    self.offhandSlot = null;
 
     self.equipment = {
       "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
@@ -189,11 +191,13 @@ angular
     }
 
     function resetEquipment() {
-      self.headSlot  = null;
-      self.torsoSlot = null;
-      self.handsSlot = null;
-      self.legsSlot  = null;
-      self.feetSlot  = null;
+      self.headSlot    = null;
+      self.torsoSlot   = null;
+      self.handsSlot   = null;
+      self.legsSlot    = null;
+      self.feetSlot    = null;
+      self.weaponSlot  = null;
+      self.offhandSlot = null;
       update();
     }
 
@@ -414,7 +418,7 @@ angular
 
       var urlValuesArray = urlValuesString.split(":");
 
-      function takeStat() {
+      function takeID() {
         if (urlValuesArray.length == 0)
           return null;
         else
@@ -422,39 +426,48 @@ angular
       }
 
       // 1 character level
-      var level = takeStat();
+      var level = takeID();
       if(level != null)
         increaseLevelTo(level);
 
       // 7 characters stats
       self.stats.allStats.forEach(function(attribute, i) {
         let statName = self.stats.allStats[i];
-        let statTarget = takeStat();
+        let statTarget = takeID();
 
         if(statTarget != null)
           levelStatTo(statName, statTarget);
       });
 
       // 5 armor slots
-      let slot1 = takeStat();
+      let slot1 = takeID();
       if (slot1 != null && self.armorsMap[slot1])
         self.headSlot = self.armorsMap[slot1];
 
-      let slot2 = takeStat();
+      let slot2 = takeID();
       if (slot2 != null && self.armorsMap[slot2])
         self.torsoSlot = self.armorsMap[slot2];
 
-      let slot3 = takeStat();
+      let slot3 = takeID();
       if (slot3 != null && self.armorsMap[slot3])
         self.handsSlot = self.armorsMap[slot3];
 
-      let slot4 = takeStat();
+      let slot4 = takeID();
       if (slot4 != null && self.armorsMap[slot4])
         self.legsSlot = self.armorsMap[slot4];
 
-      let slot5 = takeStat();
+      let slot5 = takeID();
       if (slot5 != null && self.armorsMap[slot5])
         self.feetSlot = self.armorsMap[slot5];
+
+      // 2 weapon slots
+      let slot6 = takeID();
+      if (slot6 != null && self.weaponsMap[slot6])
+        self.weaponSlot = self.weaponsMap[slot6];
+
+      let slot7 = takeID();
+      if (slot7 != null && self.weaponsMap[slot7])
+        self.offhandSlot = self.weaponsMap[slot7];
     }
 
 
@@ -480,7 +493,9 @@ angular
         setID(self.torsoSlot)         + ':' +
         setID(self.handsSlot)         + ':' +
         setID(self.legsSlot)          + ':' +
-        setID(self.feetSlot));
+        setID(self.feetSlot)          + ':' +
+        setID(self.weaponSlot)        + ':' +
+        setID(self.offhandSlot));
     }
 
     // Helper Functions //
