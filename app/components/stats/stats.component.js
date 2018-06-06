@@ -274,13 +274,29 @@ angular
     }
 
     function resetEquipment() {
-      self.headSlot    = null;
-      self.torsoSlot   = null;
-      self.handsSlot   = null;
-      self.legsSlot    = null;
-      self.feetSlot    = null;
-      self.weaponSlot  = null;
-      self.offhandSlot = null;
+      self.headSlot         = null;
+      self.torsoSlot        = null;
+      self.handsSlot        = null;
+      self.legsSlot         = null;
+      self.feetSlot         = null;
+      self.weaponSlot       = null;
+      self.offhandSlot      = null;
+      self.headSlotSmith    = null;
+      self.torsoSlotSmith   = null;
+      self.handsSlotSmith   = null;
+      self.legsSlotSmith    = null;
+      self.feetSlotSmith    = null;
+      self.weaponSlotSmith  = null;
+      self.offhandSlotSmith = null;
+      self.warpaintSlot     = null;
+      checkTwoHanded();
+      toggleSmith("headSlotSmith");
+      toggleSmith("torsoSlotSmith");
+      toggleSmith("handsSlotSmith");
+      toggleSmith("legsSlotSmith");
+      toggleSmith("feetSlotSmith");
+      toggleSmith("weaponSlotSmith");
+      toggleSmith("offhandSlotSmith");
       update();
     }
 
