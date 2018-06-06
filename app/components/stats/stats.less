@@ -284,13 +284,34 @@
   width: 40%;
 }
 
-.item-slot {
+.item-slot, .item-slot:active, .item-slot:hover, .item-slot:focus  {
   width: 315px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.9);
   color: #ECE4C6;
+  border-radius: 4px;
+  border-color: grey;
+  user-select: none;
+  outline: 0;
 }
 
-.test {
+.slot-name-filter, .slot-name-filter:active, .slot-name-filter:hover, .slot-name-filter:focus {
+  color: #ECE4C6;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(128,128,128,0.2);
+  outline: 0;
+}
+
+option, option:hover, option:active, option:focus {
+  background-color: #212221;
+}
+
+.conan-stat-calculator button {
+  user-select: none;
+  outline:none;
+}
+
+.slot-title {
   display: inline-block;
   width: 80px;
 }
