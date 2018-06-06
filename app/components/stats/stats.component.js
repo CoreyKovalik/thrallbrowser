@@ -536,33 +536,88 @@ angular
 
       // 5 armor slots
       let slot1 = takeID();
-      if (slot1 != null && self.armorsMap[slot1])
+      if (slot1 != null && self.armorsMap[slot1]) {
         self.headSlot = self.armorsMap[slot1];
+        toggleSmith("headSlotSmith");
+      }
 
       let slot2 = takeID();
-      if (slot2 != null && self.armorsMap[slot2])
+      if (slot2 != null && self.armorsMap[slot2]) {
         self.torsoSlot = self.armorsMap[slot2];
+        toggleSmith("torsoSlotSmith");
+      }
 
       let slot3 = takeID();
-      if (slot3 != null && self.armorsMap[slot3])
+      if (slot3 != null && self.armorsMap[slot3]) {
         self.handsSlot = self.armorsMap[slot3];
+        toggleSmith("handsSlotSmith");
+      }
 
       let slot4 = takeID();
-      if (slot4 != null && self.armorsMap[slot4])
+      if (slot4 != null && self.armorsMap[slot4]) {
         self.legsSlot = self.armorsMap[slot4];
+        toggleSmith("legsSlotSmith");
+      }
 
       let slot5 = takeID();
-      if (slot5 != null && self.armorsMap[slot5])
+      if (slot5 != null && self.armorsMap[slot5]) {
         self.feetSlot = self.armorsMap[slot5];
+        toggleSmith("feetSlotSmith");
+      }
 
       // 2 weapon slots
       let slot6 = takeID();
-      if (slot6 != null && self.weaponsMap[slot6])
+      if (slot6 != null && self.weaponsMap[slot6]) {
         self.weaponSlot = self.weaponsMap[slot6];
+        checkTwoHanded();
+        toggleSmith("weaponSlotSmith");
+      }
 
       let slot7 = takeID();
-      if (slot7 != null && self.weaponsMap[slot7])
+      if (slot7 != null && self.weaponsMap[slot7]) {
         self.offhandSlot = self.weaponsMap[slot7];
+        toggleSmith("offhandSlotSmith");
+      }
+
+      let slot8 = takeID();
+      if (slot8 != null && self.consumablesMap[slot8]) {
+        self.headSlotSmith = self.consumablesMap[slot8];
+      }
+
+      let slot9 = takeID();
+      if (slot9 != null && self.consumablesMap[slot9]) {
+        self.torsoSlotSmith = self.consumablesMap[slot9];
+      }
+
+      let slot10 = takeID();
+      if (slot10 != null && self.consumablesMap[slot10]) {
+        self.handsSlotSmith = self.consumablesMap[slot10];
+      }
+
+      let slot11 = takeID();
+      if (slot11 != null && self.consumablesMap[slot11]) {
+        self.legsSlotSmith = self.consumablesMap[slot11];
+      }
+
+      let slot12 = takeID();
+      if (slot12 != null && self.consumablesMap[slot12]) {
+        self.feetSlotSmith = self.consumablesMap[slot12];
+      }
+
+      let slot13 = takeID();
+      if (slot13 != null && self.consumablesMap[slot13]) {
+        self.weaponSlotSmith = self.consumablesMap[slot13];
+      }
+
+      let slot14 = takeID();
+      if (slot14 != null && self.consumablesMap[slot14]) {
+        self.offhandSlotSmith = self.consumablesMap[slot14];
+      }
+
+      let slot15 = takeID();
+      if (slot15 != null && self.consumablesMap[slot15]) {
+        self.warpaintSlot = self.consumablesMap[slot15];
+      }
       updateAll();
     }
 
@@ -591,7 +646,15 @@ angular
         setID(self.legsSlot)          + ':' +
         setID(self.feetSlot)          + ':' +
         setID(self.weaponSlot)        + ':' +
-        setID(self.offhandSlot));
+        setID(self.offhandSlot)       + ':' +
+        setID(self.headSlotSmith)     + ':' +
+        setID(self.torsoSlotSmith)    + ':' +
+        setID(self.handsSlotSmith)    + ':' +
+        setID(self.legsSlotSmith)     + ':' +
+        setID(self.feetSlotSmith)     + ':' +
+        setID(self.weaponSlotSmith)   + ':' +
+        setID(self.offhandSlotSmith)  + ':' +
+        setID(self.warpaintSlot));
     }
 
     // Helper Functions //
