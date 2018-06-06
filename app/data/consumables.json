@@ -109,20 +109,23 @@
  },
  {
    "ItemID"          : 53531,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Grit",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
    "Grit"            : 3
  },
  {
-   "ItemID"          : 51532,
+   "ItemID"          : 53532,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Support",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
    "Enc"             : 3
  },
  {
-   "ItemID"          : 51533,
+   "ItemID"          : 53533,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Determination",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
