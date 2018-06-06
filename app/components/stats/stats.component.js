@@ -145,17 +145,99 @@ angular
       }
     }
 
-    self.headSlot    = null;
-    self.torsoSlot   = null;
-    self.handsSlot   = null;
-    self.legsSlot    = null;
-    self.feetSlot    = null;
-    self.weaponSlot  = null;
-    self.offhandSlot = null;
+    self.headSlot         = null;
+    self.torsoSlot        = null;
+    self.handsSlot        = null;
+    self.legsSlot         = null;
+    self.feetSlot         = null;
+    self.weaponSlot       = null;
+    self.offhandSlot      = null;
+
+    self.headSlotSmith    = null;
+    self.torsoSlotSmith   = null;
+    self.handsSlotSmith   = null;
+    self.legsSlotSmith    = null;
+    self.feetSlotSmith    = null;
+    self.weaponSlotSmith  = null;
+    self.offhandSlotSmith = null;
+
+    self.warpaintSlot     = null;
+
+    self.slotStatus = ["<empty slot>", "<disabled> - equip an item", "<disabled> - shields only", "<disabled> - Two-Handed", "<select item enhancement>", "<select a warpaint>"];
+    self.unselectedSlot = {
+      "headSlot"        : self.slotStatus[0],
+      "torsoSlot"       : self.slotStatus[0],
+      "handsSlot"       : self.slotStatus[0],
+      "legsSlot"        : self.slotStatus[0],
+      "feetSlot"        : self.slotStatus[0],
+      "weaponSlot"      : self.slotStatus[0],
+      "offhandSlot"     : self.slotStatus[0],
+      "headSlotSmith"   : self.slotStatus[1],
+      "torsoSlotSmith"  : self.slotStatus[1],
+      "handsSlotSmith"  : self.slotStatus[1],
+      "legsSlotSmith"   : self.slotStatus[1],
+      "feetSlotSmith"   : self.slotStatus[1],
+      "weaponSlotSmith" : self.slotStatus[1],
+      "offhandSlotSmith": self.slotStatus[1],
+      "warpaintSlot"    : self.slotStatus[5]
+    }
+
+    function toggleSmith(slot) {
+      let s = slot.substring(0, slot.length - 5);
+      if (self[s] == null) {
+        unequipEquipmentSlot(slot);
+        self.unselectedSlot[slot] = self.slotStatus[1];
+        return;
+      }
+      if (slot == "offhandSlotSmith") {
+          checkShield();
+          return;
+      }
+
+      if (self[s]) {
+        self.unselectedSlot[slot] = self.slotStatus[0];
+        return;
+      }
+    }
+
+    function checkShield() {
+      if (self.offhandSlot && self.offhandSlot.Category != "shield")
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[2];
+      if (self.offhandSlot && self.offhandSlot.Category == "shield")
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[0];
+    }
+
+    function checkTwoHanded() {
+      let twoHanded = ["greatsword", "hammer", "bow", "daggers", "spear"];
+      if (self.weaponSlot == null) {
+        self.equipment.twoHanded = false;
+        self.unselectedSlot.offhandSlot = self.slotStatus[0];
+        if (self.offhandSlot == null)
+          self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
+        checkShield();
+        return;
+      }
+      if (twoHanded.includes(self.weaponSlot.Category)) {
+        self.equipment.twoHanded = true;
+        unequipEquipmentSlot("offhandSlot");
+        unequipEquipmentSlot("offhandSlotSmith");
+        self.unselectedSlot.weaponSlotSmith = self.slotStatus[0];
+        self.unselectedSlot.offhandSlot = self.slotStatus[3] + ' ' + self.weaponSlot.Category + " Equipped";
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[3];
+      }
+
+      else {
+        console.log('one handed');
+        self.equipment.twoHanded = false;
+        self.unselectedSlot.offhandSlot = self.slotStatus[0];
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
+      }
+    }
 
     self.equipment = {
       "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
       "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "twoHanded": false,
       "damage": 0,
       "armor": 0,
       "armorPenetration": 0,
@@ -200,6 +282,10 @@ angular
       self.weaponSlot  = null;
       self.offhandSlot = null;
       update();
+    }
+
+    function unequipEquipmentSlot(slot) {
+      self[slot] = null;
     }
 
     function increaseLevelTo(value)
@@ -608,6 +694,8 @@ angular
     }
     //end conan-image-preloader
 
+    self.toggleSmith = toggleSmith;
+    self.checkTwoHanded = checkTwoHanded;
     self.resetAll = resetAll;
     self.resetAttributes = resetAttributes;
     self.resetAttribute = resetAttribute;
