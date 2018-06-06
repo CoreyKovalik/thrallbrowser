@@ -389,7 +389,9 @@ angular
     }
 
     function adjustEquipmentBonuses() {
-      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot, self.offhandSlot, self.weaponSlot];
+      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot, self.weaponSlot, self.offhandSlot,
+                  self.headSlotSmith, self.torsoSlotSmith, self.handsSlotSmith, self.legsSlotSmith, self.feetSlotSmith, self.weaponSlotSmith, self.offhandSlotSmith,
+                  self.warpaintSlot];
 
       self.equipment.damage           = _(items).filter().sumBy('Damage');
       self.equipment.armorPenetration = _(items).filter().sumBy('ArmorPenetration');
