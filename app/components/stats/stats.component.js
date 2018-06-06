@@ -398,7 +398,19 @@ angular
       self.equipment.armor            = _(items).filter().sumBy('Armor');
       self.equipment.heatResist       = _(items).filter().sumBy('Heat');
       self.equipment.coldResist       = _(items).filter().sumBy('Cold');
-      self.equipment.weightOfEquipped = _(items).filter().sumBy('Weight');
+
+      let calculatedWeight = 0;
+      for(var i=7; i < 14; i++) {
+        if (items[i] != null && items[i].hasOwnProperty('WeightReduction')) {
+          calculatedWeight += (items[i - 7].Weight) - (items[i - 7].Weight * items[i].WeightReduction);
+        }
+        else {
+          if(items[i - 7] != null)
+            calculatedWeight += items[i - 7].Weight;
+        }
+      }
+
+      self.equipment.weightOfEquipped = calculatedWeight;
       self.equipment.strBonus         = _(items).filter().sumBy('Str');
       self.equipment.agiBonus         = _(items).filter().sumBy('Agi');
       self.equipment.vitBonus         = _(items).filter().sumBy('Vit');
