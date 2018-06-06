@@ -475,6 +475,7 @@ angular
       let slot7 = takeID();
       if (slot7 != null && self.weaponsMap[slot7])
         self.offhandSlot = self.weaponsMap[slot7];
+      updateAll();
     }
 
 
