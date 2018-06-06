@@ -681,56 +681,70 @@
             <div>
 
               <!-- 5 Armor Slots -->
-              <span class="test">Head: </span>
+              <span class="slot-title">Head: </span>
               <select class="item-slot" name="headSlot" id="headSlot"
-              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'head' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'head', Category: '', Set: '', Name: statsCtrl.headFilter } | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.headSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.headSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.headFilter">
+              {{statsCtrl.headSlot.Name}}<br>
 
-              <span class="test">Torso: </span>
+              <span class="slot-title">Torso: </span>
               <select class="item-slot" name="torsoSlot" id="torsoSlot"
-              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'torso' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'torso', Category: '', Set: '', Name: statsCtrl.torsoFilter } | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.torsoSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.torsoSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.torsoFilter">
+              {{statsCtrl.torsoSlot.Name}}<br>
 
-              <span class="test">Hands: </span>
+              <span class="slot-title">Hands: </span>
               <select class="item-slot" name="handsSlot" id="handsSlot"
-              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'hands' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'hands', Category: '', Set: '', Name: statsCtrl.handsFilter } | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.handsSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.handsSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.handsFilter">
+              {{statsCtrl.handsSlot.Name}}<br>
 
-              <span class="test">Legs: </span>
+              <span class="slot-title">Legs: </span>
               <select class="item-slot" name="legsSlot" id="legsSlot"
-              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'legs' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'legs', Category: '', Set: '', Name: statsCtrl.legsFilter } | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.legsSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.legsSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.legsFilter">
+              {{statsCtrl.legsSlot.Name}}<br>
 
-              <span class="test">Feet: </span>
+              <span class="slot-title">Feet: </span>
               <select class="item-slot" name="feetSlot" id="feetSlot"
-              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: 'feet' | orderBy: 'Name' track by armor.ItemID"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'feet', Category: '', Set: '', Name: statsCtrl.feetFilter } | orderBy: 'Name' track by armor.ItemID"
               ng-model="statsCtrl.feetSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.feetSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.feetFilter">
+              {{statsCtrl.feetSlot.Name}}<br>
 
               <!-- 2 Weapons Slots -->
 
-              <span class="test">Weapon: </span>
+              <span class="slot-title">Weapon: </span>
               <select class="item-slot" name="weaponSlot" id="weaponSlot"
-              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: 'mainhand' | orderBy: 'Name' track by weapon.ItemID"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'mainhand', Category: '', Name: statsCtrl.mainhandFilter } | orderBy: 'Name' track by weapon.ItemID"
               ng-model="statsCtrl.weaponSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.weaponSlot.Name}}<br>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.mainhandFilter">
+              {{statsCtrl.weaponSlot.Name}}<br>
 
-              <span class="test">Off-hand: </span>
+              <span class="slot-title">Off-hand: </span>
               <select class="item-slot" name="offhandSlot" id="offhandSlot"
-              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: 'offhand' | orderBy: 'Name' track by weapon.ItemID"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'offhand', Category: '', Name: statsCtrl.offhandFilter } | orderBy: 'Name' track by weapon.ItemID"
               ng-model="statsCtrl.offhandSlot"
               ng-change="statsCtrl.update()">
-              </select> {{statsCtrl.offhandSlot.Name}}
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.offhandFilter">
+              {{statsCtrl.offhandSlot.Name}}
 
 
             </div>
