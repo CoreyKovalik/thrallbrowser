@@ -20,16 +20,18 @@ angular
     function loadData() {
 
       let armorsPromise = statsdata.getArmorsData();
-
       let weaponsPromise = statsdata.getWeaponsData();
+      let consumablesPromise = statsdata.getConsumablesData();
 
-      $q.all([armorsPromise, weaponsPromise])
+      $q.all([armorsPromise, weaponsPromise, consumablesPromise])
         .then(function(results) {
 
           self.armors = results[0];
           self.armorsMap = _.keyBy(self.armors, 'ItemID');
           self.weapons = results[1];
           self.weaponsMap = _.keyBy(self.weapons, 'ItemID');
+          self.consumables = results[2];
+          self.consumablesMap = _.keyBy(self.consumables, 'ItemID');
           self.isLoading = false;
           self.loadingError = false;
           addLoadEvent(preloader);

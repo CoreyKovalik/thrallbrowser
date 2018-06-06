@@ -1,0 +1,167 @@
+[
+ {
+   "ItemID"          : 41075,
+   "Name"            : "Simple Armor Flexibility Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 41076,
+   "Name"            : "Armor Flexibility Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 41077,
+   "Name"            : "Advanced Armor Flexibility Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 41070,
+   "Name"            : "Armor Plating",
+   "Category"        : "tinker",
+   "Slot"            : "armor",
+   "Armor"           : 2
+ },
+ {
+   "ItemID"          : 41068,
+   "Name"            : "Armor Reduction Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor",
+   "WeightReduction" : 0.25
+ },
+ {
+   "ItemID"          : 41071,
+   "Name"            : "Thick Armor Plating",
+   "Category"        : "tinker",
+   "Slot"            : "armor",
+   "Armor"           : 3
+ },
+ {
+   "ItemID"          : 41069,
+   "Name"            : "Thin Armor Plating",
+   "Category"        : "tinker",
+   "Slot"            : "armor",
+   "Armor"           : 1
+ },
+ {
+   "ItemID"          : 41064,
+   "Name"            : "Simple Reinforcement Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 41065,
+   "Name"            : "Reinforcement Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 41066,
+   "Name"            : "Advanced Reinforcement Kit",
+   "Category"        : "tinker",
+   "Slot"            : "armor"
+ },
+ {
+   "ItemID"          : 53527,
+   "Name"            : "Warpaint - Strength",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Str"             : 3
+ },
+ {
+   "ItemID"          : 53528,
+   "Name"            : "Warpaint - Agility",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Agi"             : 3
+ },
+ {
+   "ItemID"          : 53529,
+   "Name"            : "Warpaint - Vitality",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Vit"             : 3
+ },
+ {
+   "ItemID"          : 53530,
+   "Name"            : "Warpaint - Accuracy",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Acc"             : 3
+ },
+ {
+   "ItemID"          : 53531,
+   "Name"            : "Warpaint - Grit",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Grit"            : 3
+ },
+ {
+   "ItemID"          : 51532,
+   "Name"            : "Warpaint - Support",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Enc"             : 3
+ },
+ {
+   "ItemID"          : 51533,
+   "Name"            : "Warpaint - Determination",
+   "Category"        : "warpaint",
+   "Slot"            : "warpaint",
+   "Sur"             : 3
+ },
+ {
+   "ItemID"          : 41052,
+   "Name"            : "Simple Weapon Damage Kit",
+   "Category"        : "tinker",
+   "Slot"            : "weapon",
+   "Damage"          : 2
+ },
+ {
+   "ItemID"          : 41053,
+   "Name"            : "Weapon Damage Kit",
+   "Category"        : "tinker",
+   "Slot"            : "weapon",
+   "Damage"          : 4
+ },
+ {
+   "ItemID"          : 41054,
+   "Name"            : "Advanced Weapon Damage Kit",
+   "Category"        : "tinker",
+   "Slot"            : "weapon",
+   "Damage"          : 6
+ },
+ {
+   "ItemID"          : 41067,
+   "Name"            : "Spiked Weapon Fitting",
+   "Category"        : "tinker",
+   "Slot"            : "weapon",
+   "ArmorPenetration": 0.15
+ },
+ {
+   "ItemID"          : 41059,
+   "Name"            : "Simple Blunted Weapon Fitting",
+   "Category"        : "tinker",
+   "Slot"            : "weapon"
+ },
+ {
+   "ItemID"          : 41060,
+   "Name"            : "Blunted Weapon Fitting",
+   "Category"        : "tinker",
+   "Slot"            : "weapon"
+ },
+ {
+   "ItemID"          : 41061,
+   "Name"            : "Advanced Blunted Weapon Fitting",
+   "Category"        : "tinker",
+   "Slot"            : "weapon"
+ },
+ {
+   "ItemID"          : 41051,
+   "Name"            : "Balanced Weapon Fitting",
+   "Category"        : "tinker",
+   "Slot"            : "weapon"
+ }
+]

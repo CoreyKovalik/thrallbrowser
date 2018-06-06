@@ -18,8 +18,14 @@ angular
       });
     }
 
+    function getConsumablesData() {
+      return $http.get(statsRoot + 'consumables.json').then(function(response) {
+        return response.data;
+      });
+    }
+
 
     self.getArmorsData = getArmorsData;
     self.getWeaponsData = getWeaponsData;
-
+    self.getConsumablesData = getConsumablesData;
   });
