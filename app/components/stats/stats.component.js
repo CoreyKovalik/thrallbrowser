@@ -156,6 +156,7 @@ angular
       "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
       "damage": 0,
       "armor": 0,
+      "armorPenetration": 0,
       "heatResist":0,
       "coldResist":0,
       "weightOfEquipped": 0,
@@ -286,8 +287,10 @@ angular
     }
 
     function adjustEquipmentBonuses() {
-      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot];
+      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot, self.offhandSlot, self.weaponSlot];
 
+      self.equipment.damage           = _(items).filter().sumBy('Damage');
+      self.equipment.armorPenetration = _(items).filter().sumBy('ArmorPenetration');
       self.equipment.armor            = _(items).filter().sumBy('Armor');
       self.equipment.heatResist       = _(items).filter().sumBy('Heat');
       self.equipment.coldResist       = _(items).filter().sumBy('Cold');
