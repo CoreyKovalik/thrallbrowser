@@ -174,9 +174,7 @@ angular
       self.stats.characterLevel = self.stats.unspentPoints = 1;
       self.stats.currentExperience = "0 / 275";
       resetEquipment();
-      for (var i = 0; i < 7; i++) {
-        update(self.stats.allStats[i]);
-      }
+      updateAll();
     }
 
     function resetAttributes() {
@@ -348,6 +346,12 @@ angular
       calcPlayerStats();
       adjustProgress(statString);
       updateQueryParams();
+    }
+
+    function updateAll() {
+      for (var i = 0; i < 7; i++) {
+        update(self.stats.allStats[i]);
+      }
     }
 
     // Increase/Decrease stat functions
