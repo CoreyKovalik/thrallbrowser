@@ -1,24 +1,30 @@
 [
  {
    "ItemID"          : 41075,
+   "Set"             : "Flexibility Kits",
    "Name"            : "Simple Armor Flexibility Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 41076,
+   "Set"             : "Flexibility Kits",
+
    "Name"            : "Armor Flexibility Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 41077,
+   "Set"             : "Flexibility Kits",
+
    "Name"            : "Advanced Armor Flexibility Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 41070,
+   "Set"             : "Armor Platings",
    "Name"            : "Armor Plating",
    "Category"        : "smith",
    "Slot"            : "armor",
@@ -26,6 +32,7 @@
  },
  {
    "ItemID"          : 41068,
+   "Set"             : "Weight Reduction",
    "Name"            : "Armor Reduction Kit",
    "Category"        : "smith",
    "Slot"            : "armor",
@@ -33,6 +40,7 @@
  },
  {
    "ItemID"          : 41071,
+   "Set"             : "Armor Platings",
    "Name"            : "Thick Armor Plating",
    "Category"        : "smith",
    "Slot"            : "armor",
@@ -40,6 +48,7 @@
  },
  {
    "ItemID"          : 41069,
+   "Set"             : "Armor Platings",
    "Name"            : "Thin Armor Plating",
    "Category"        : "smith",
    "Slot"            : "armor",
@@ -47,24 +56,28 @@
  },
  {
    "ItemID"          : 41064,
+   "Set"             : "Reinforcement Kits",
    "Name"            : "Simple Reinforcement Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 41065,
+   "Set"             : "Reinforcement Kits",
    "Name"            : "Reinforcement Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 41066,
+   "Set"             : "Reinforcement Kits",
    "Name"            : "Advanced Reinforcement Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
  },
  {
    "ItemID"          : 53527,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Strength",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
@@ -72,6 +85,7 @@
  },
  {
    "ItemID"          : 53528,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Agility",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
@@ -79,6 +93,7 @@
  },
  {
    "ItemID"          : 53529,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Vitality",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
@@ -86,6 +101,7 @@
  },
  {
    "ItemID"          : 53530,
+   "Set"             : "Warpaint",
    "Name"            : "Warpaint - Accuracy",
    "Category"        : "warpaint",
    "Slot"            : "warpaint",
@@ -114,6 +130,7 @@
  },
  {
    "ItemID"          : 41052,
+   "Set"             : "Damage Kits",
    "Name"            : "Simple Weapon Damage Kit",
    "Category"        : "smith",
    "Slot"            : "weapon",
@@ -121,6 +138,7 @@
  },
  {
    "ItemID"          : 41053,
+   "Set"             : "Damage Kits",
    "Name"            : "Weapon Damage Kit",
    "Category"        : "smith",
    "Slot"            : "weapon",
@@ -128,6 +146,7 @@
  },
  {
    "ItemID"          : 41054,
+   "Set"             : "Damage Kits",
    "Name"            : "Advanced Weapon Damage Kit",
    "Category"        : "smith",
    "Slot"            : "weapon",
@@ -135,6 +154,7 @@
  },
  {
    "ItemID"          : 41067,
+   "Set"             : "Weapon Fittings",
    "Name"            : "Spiked Weapon Fitting",
    "Category"        : "smith",
    "Slot"            : "weapon",
@@ -142,24 +162,28 @@
  },
  {
    "ItemID"          : 41059,
+   "Set"             : "Blunted Fittings",
    "Name"            : "Simple Blunted Weapon Fitting",
    "Category"        : "smith",
    "Slot"            : "weapon"
  },
  {
    "ItemID"          : 41060,
+   "Set"             : "Blunted Fittings",
    "Name"            : "Blunted Weapon Fitting",
    "Category"        : "smith",
    "Slot"            : "weapon"
  },
  {
    "ItemID"          : 41061,
+   "Set"             : "Blunted Fittings",
    "Name"            : "Advanced Blunted Weapon Fitting",
    "Category"        : "smith",
    "Slot"            : "weapon"
  },
  {
    "ItemID"          : 41051,
+   "Set"             : "Weapon Fittings",
    "Name"            : "Balanced Weapon Fitting",
    "Category"        : "smith",
    "Slot"            : "weapon"
