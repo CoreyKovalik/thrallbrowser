@@ -19,6 +19,9 @@ angular
 
     // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
 
+    //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
+    //maybe:  adjustSlotStatus function?
+
     function loadData() {
 
       let armorsPromise = statsdata.getArmorsData();
@@ -61,6 +64,7 @@ angular
       "allStats": ["strength", "agility", "vitality", "accuracy", "grit", "encumbrance", "survival"],
       "strength": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -69,6 +73,7 @@ angular
       },
       "agility": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -77,6 +82,7 @@ angular
       },
       "vitality": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -85,6 +91,7 @@ angular
       },
       "accuracy": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -93,6 +100,7 @@ angular
       },
       "grit": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -101,6 +109,7 @@ angular
       },
       "encumbrance": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -109,6 +118,7 @@ angular
       },
       "survival": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -255,13 +265,13 @@ angular
       "heatResist":0,
       "coldResist":0,
       "weightOfEquipped": 0,
-      "strBonus": 0,
-      "agiBonus": 0,
-      "vitBonus": 0,
-      "accBonus": 0,
-      "gritBonus": 0,
-      "encBonus": 0,
-      "surBonus": 0
+      "strength": 0,
+      "agility": 0,
+      "vitality": 0,
+      "accuracy": 0,
+      "grit": 0,
+      "encumbrance": 0,
+      "survival": 0
     }
 
     function resetAll() {
@@ -395,7 +405,7 @@ angular
         for (var i = 1; i <= 5; i++) {
         let teir = "_" + i + "0";
         let lvl = i * 10;
-        self.stats[statString].value >= lvl ? self.stats[statString][teir] = true : self.stats[statString][teir] = false;
+        self.stats[statString].total >= lvl ? self.stats[statString][teir] = true : self.stats[statString][teir] = false;
       }
     }
 
@@ -422,25 +432,31 @@ angular
       }
 
       self.equipment.weightOfEquipped = calculatedWeight;
-      self.equipment.strBonus         = _(items).filter().sumBy('Str');
-      self.equipment.agiBonus         = _(items).filter().sumBy('Agi');
-      self.equipment.vitBonus         = _(items).filter().sumBy('Vit');
-      self.equipment.accBonus         = _(items).filter().sumBy('Acc');
-      self.equipment.gritBonus        = _(items).filter().sumBy('Grit');
-      self.equipment.encBonus         = _(items).filter().sumBy('Enc');
-      self.equipment.surBonus         = _(items).filter().sumBy('Sur');
+      self.equipment.strength   = _(items).filter().sumBy('Str');
+      self.equipment.agility    = _(items).filter().sumBy('Agi');
+      self.equipment.vitality   = _(items).filter().sumBy('Vit');
+      self.equipment.accuracy   = _(items).filter().sumBy('Acc');
+      self.equipment.grit       = _(items).filter().sumBy('Grit');
+      self.equipment.encumbrance= _(items).filter().sumBy('Enc');
+      self.equipment.survival   = _(items).filter().sumBy('Sur');
+    }
+
+    function adjustStatTotals() {
+      for (var i = 0; i < 7; i++) {
+        self.stats[self.stats.allStats[i]].total = self.stats[self.stats.allStats[i]].value + self.equipment[self.stats.allStats[i]];
+      }
     }
 
     //Math calculations for playerStats based on attributes and certain bonus perks
 
     function calcPlayerStats() {
-      self.stats.playerStats.health.value = (8 * self.stats.vitality.value) + self.stats.playerStats.health.base;
-      self.stats.playerStats.stamina.value = (3 * self.stats.grit.value) + self.stats.playerStats.stamina.base;
-      self.stats.playerStats.encumbrance.value = (7 * self.stats.encumbrance.value) + self.stats.playerStats.encumbrance.base;
-      self.stats.playerStats.melee.value = Math.round((100 * 0.025 * self.stats.strength.value) + self.stats.playerStats.melee.base);
-      self.stats.playerStats.ranged.value = Math.round((100 * 0.025 * self.stats.accuracy.value) + self.stats.playerStats.ranged.base);
+      self.stats.playerStats.health.value = (8 * self.stats.vitality.total) + self.stats.playerStats.health.base;
+      self.stats.playerStats.stamina.value = (3 * self.stats.grit.total) + self.stats.playerStats.stamina.base;
+      self.stats.playerStats.encumbrance.value = (7 * self.stats.encumbrance.total) + self.stats.playerStats.encumbrance.base;
+      self.stats.playerStats.melee.value = Math.round((100 * 0.025 * self.stats.strength.total) + self.stats.playerStats.melee.base);
+      self.stats.playerStats.ranged.value = Math.round((100 * 0.025 * self.stats.accuracy.total) + self.stats.playerStats.ranged.base);
         if(self.stats.accuracy._30) self.stats.playerStats.ranged.value += 10;
-      self.stats.playerStats.armor.value = (2 * self.stats.agility.value) + self.stats.playerStats.armor.base;
+      self.stats.playerStats.armor.value = (2 * self.stats.agility.total) + self.stats.playerStats.armor.base;
         if(self.stats.grit._30) self.stats.playerStats.armor.value += 15;
       self.stats.playerStats.damageResistance.value = precisionRound((self.stats.playerStats.armor.value * 0.003 * 100),1);
         if(self.stats.encumbrance._30) self.stats.playerStats.encumbrance.value += self.stats.playerStats.encumbrance.value * .1;
@@ -449,7 +465,7 @@ angular
     function adjustProgress(statString) {
       if (statString == null) return false;
 
-      let statProgress = (self.stats[statString].value / 50) * 100;
+      let statProgress = (self.stats[statString].total / 50) * 100;
       document.getElementsByClassName("progress " + statString)[0].setAttribute("style", "width:" + statProgress + "%;");
 
       for (var i = 1; i <= 5; i++) {
@@ -471,6 +487,7 @@ angular
     // Update & adjustment functions //
     function update(statString) {
       adjustEquipmentBonuses();
+      adjustStatTotals();
       adjustBonuses(statString);
       calcPlayerStats();
       adjustProgress(statString);
