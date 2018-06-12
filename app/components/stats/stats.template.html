@@ -788,13 +788,13 @@
 
               <span class="slot-title">Off-hand: </span>
               <select class="armor-select" name="offhandSlot" id="offhandSlot"
-              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'offhand', Category: '', Name: statsCtrl.offhandFilter } | orderBy: 'Name' track by weapon.ItemID"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'offhand', Category: statsCtrl.offhandFilter_category, Name: statsCtrl.offhandFilter_name } | orderBy: 'Name' track by weapon.ItemID"
               ng-model="statsCtrl.offhandSlot"
               ng-change="statsCtrl.toggleSmith('offhandSlotSmith'); statsCtrl.update()"
               ng-disabled="statsCtrl.equipment.twoHanded">
                 <option value="">{{statsCtrl.unselectedSlot.offhandSlot}}</option>
               </select>
-              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.offhandFilter">
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.offhandFilter_name">
               <select class="smith-select armor-select" name="offhandSlotSmith" id="offhandSlotSmith"
               ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Set: 'Reinforcement Kits'} | orderBy: 'ItemID' track by consumable.ItemID"
               ng-model="statsCtrl.offhandSlotSmith"

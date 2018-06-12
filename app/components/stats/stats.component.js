@@ -17,6 +17,8 @@ angular
     //  Create a sharing box:
     //        Name, ServerID (how to find), Character ID(how to find), race (all options), gender (tickbox), full text-only build sharing
 
+    // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
+
     function loadData() {
 
       let armorsPromise = statsdata.getArmorsData();
@@ -163,7 +165,7 @@ angular
 
     self.warpaintSlot     = null;
 
-    self.slotStatus = ["<empty slot>", "<disabled> - equip an item", "<disabled> - shields only", "<disabled> - Two-Handed", "<select item enhancement>", "<select a warpaint>"];
+    self.slotStatus = ["<empty slot>", "<disabled> - equip an item", "<disabled> - shields only", "<disabled> - Two-Handed", "<select item enhancement>", "<select a warpaint>", "<equip arrows>"];
     self.unselectedSlot = {
       "headSlot"        : self.slotStatus[0],
       "torsoSlot"       : self.slotStatus[0],
@@ -208,13 +210,21 @@ angular
     }
 
     function checkTwoHanded() {
-      let twoHanded = ["greatsword", "hammer", "bow", "daggers", "spear"];
+      let twoHanded = ["greatsword", "hammer", "daggers", "spear"];
       if (self.weaponSlot == null) {
         self.equipment.twoHanded = false;
         self.unselectedSlot.offhandSlot = self.slotStatus[0];
+        self.offhandFilter_category = "";
         if (self.offhandSlot == null)
           self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
         checkShield();
+        return;
+      }
+      if (self.weaponSlot.Category == "bow") {
+        self.equipment.twoHanded = false;
+        self.offhandFilter_category = "arrow";
+        self.unselectedSlot.offhandSlot = self.slotStatus[6];
+        console.log("made it arrow");
         return;
       }
       if (twoHanded.includes(self.weaponSlot.Category)) {
@@ -229,6 +239,7 @@ angular
       else {
         console.log('one handed');
         self.equipment.twoHanded = false;
+        self.offhandFilter_category = "";
         self.unselectedSlot.offhandSlot = self.slotStatus[0];
         self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
       }
@@ -817,6 +828,10 @@ angular
 
     self.onMouseHold = onMouseHold;
     self.clearMouseHold = clearMouseHold;
+
+    // filters
+    self.offhandFilter_name = "";
+    self.offhandFilter_category = "";
 
     loadData();
     }
