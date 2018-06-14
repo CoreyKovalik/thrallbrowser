@@ -24,8 +24,15 @@ angular
       });
     }
 
+    function getIconData() {
+      return $http.get(statsRoot + 'item-icons.json').then(function(response) {
+        return response.data;
+      });
+    }
+
 
     self.getArmorsData = getArmorsData;
     self.getWeaponsData = getWeaponsData;
     self.getConsumablesData = getConsumablesData;
+    self.getIconData = getIconData;
   });

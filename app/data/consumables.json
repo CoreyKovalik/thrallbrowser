@@ -9,7 +9,6 @@
  {
    "ItemID"          : 41076,
    "Set"             : "Flexibility Kits",
-
    "Name"            : "Armor Flexibility Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
@@ -17,7 +16,6 @@
  {
    "ItemID"          : 41077,
    "Set"             : "Flexibility Kits",
-
    "Name"            : "Advanced Armor Flexibility Kit",
    "Category"        : "smith",
    "Slot"            : "armor"
