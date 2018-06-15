@@ -335,9 +335,34 @@ option, option:hover, option:active, option:focus {
   outline: 0;
 }
 
+.equipment-images {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.head-image, .torso-image, .hands-image, .legs-image, .feet-image,
+.weapon-image, .offhand-image, .warpaint-image {
+  background-image: url(../images/inventory_icon.png);
+  background-size: contain;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+  position: relative;
+}
 
+.smith-image {
+  position: relative;
+  bottom: 60px;
+  left: 57px;
+}
 
+.smith-glow {
+  position: relative;
+  bottom: 123px;
+  z-index: -1;
+}
 
 
 

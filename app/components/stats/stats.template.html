@@ -814,21 +814,50 @@
         </td>
 
         <td>
-          <div>
-            <div>
-              div 1
+          <div class="equipment-images">
+            <div class="head-image">
+              <img ng-if="statsCtrl.headSlot" alt="{{statsCtrl.headSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.headSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.headSlotSmith" alt="{{statsCtrl.headSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.headSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.headSlotSmith" alt="{{statsCtrl.headSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
             </div>
-            <div>
-              div 2
+            <div class="torso-image">
+              <img ng-if="statsCtrl.torsoSlot" alt="{{statsCtrl.torsoSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.torsoSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.torsoSlotSmith" alt="{{statsCtrl.torsoSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.torsoSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.torsoSlotSmith" alt="{{statsCtrl.torsoSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
             </div>
-            <div>
-              div 3
+            <div class="hands-image">
+              <img ng-if="statsCtrl.handsSlot" alt="{{statsCtrl.handsSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.handsSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.handsSlotSmith" alt="{{statsCtrl.handsSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.handsSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.handsSlotSmith" alt="{{statsCtrl.handsSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="legs-image">
+              <img ng-if="statsCtrl.legsSlot" alt="{{statsCtrl.legsSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.legsSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.legsSlotSmith" alt="{{statsCtrl.legsSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.legsSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.legsSlotSmith" alt="{{statsCtrl.legsSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="feet-image">
+              <img ng-if="statsCtrl.feetSlot" alt="{{statsCtrl.feetSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.feetSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.feetSlotSmith" alt="{{statsCtrl.feetSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.feetSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.feetSlotSmith" alt="{{statsCtrl.feetSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+
+            <div class="weapon-image">
+              <img ng-if="statsCtrl.weaponSlot" alt="{{statsCtrl.weaponSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.weaponSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.weaponSlotSmith" alt="{{statsCtrl.weaponSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.weaponSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.weaponSlotSmith" alt="{{statsCtrl.weaponSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="offhand-image">
+              <img ng-if="statsCtrl.offhandSlot" alt="{{statsCtrl.offhandSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.offhandSlot.Icon}}">
+              <img class="smith-image" ng-if="statsCtrl.offhandSlotSmith" alt="{{statsCtrl.offhandSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.offhandSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.offhandSlotSmith" alt="{{statsCtrl.offhandSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="warpaint-image">
+              <img ng-if="statsCtrl.warpaintSlot" alt="{{statsCtrl.warpaintSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.warpaintSlot.Icon}}">
             </div>
           </div>
         </td>
       </tr>
     </tbody>
-
   </table>
 
   <div class="feedback-bar main-container">
