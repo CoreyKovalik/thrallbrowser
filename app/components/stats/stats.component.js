@@ -20,7 +20,6 @@ angular
     // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
 
     //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
-    //FIX:  progress bars not updating on equipment change
     //maybe:  adjustSlotStatus function?
 
     //in-progress:  create text-build generator function, search and slice perks, create support to share name, create copy to clipboard
@@ -342,7 +341,7 @@ angular
       toggleSmith("feetSlotSmith");
       toggleSmith("weaponSlotSmith");
       toggleSmith("offhandSlotSmith");
-      update();
+      updateAll();
     }
 
     function unequipEquipmentSlot(slot) {
@@ -902,6 +901,7 @@ angular
     self.statDown = statDown;
 
     self.update = update;
+    self.updateAll = updateAll;
     self.generateTextBuild = generateTextBuild;
     self.loadQueryParams = loadQueryParams;
     self.updateQueryParams = updateQueryParams;
