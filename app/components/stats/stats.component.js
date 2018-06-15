@@ -20,7 +20,7 @@ angular
     // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
 
     //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
-    //FIX:  progress bars beyond 100% with gear and lvl 50 stat
+    //FIX:  progress bars not updating on equipment change
     //maybe:  adjustSlotStatus function?
 
     //in-progress:  create text-build generator function, search and slice perks, create support to share name, create copy to clipboard
@@ -490,6 +490,8 @@ angular
       if (statString == null) return false;
 
       let statProgress = (self.stats[statString].total / 50) * 100;
+      if (statProgress > 100)
+        statProgress = 100;
       document.getElementsByClassName("progress " + statString)[0].setAttribute("style", "width:" + statProgress + "%;");
 
       for (var i = 1; i <= 5; i++) {
