@@ -677,9 +677,6 @@
     <tbody class="calc-tbody">
       <tr>
         <td>
-          <div>
-            <div>
-
               <!-- 5 Armor Slots -->
               <span class="slot-title">Head: </span>
               <select class="armor-select" name="headSlot" id="headSlot"
@@ -694,10 +691,9 @@
               ng-model="statsCtrl.headSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.headSlot">
-              <option value="">{{statsCtrl.unselectedSlot.headSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.headSlotSmith}}</option>
               </select>
-              {{statsCtrl.headSlot.Name}}
-              {{statsCtrl.headSlotSmith.Name}}<br>
+              <br>
 
               <span class="slot-title">Torso: </span>
               <select class="armor-select" name="torsoSlot" id="torsoSlot"
@@ -712,9 +708,9 @@
               ng-model="statsCtrl.torsoSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.torsoSlot">
-              <option value="">{{statsCtrl.unselectedSlot.torsoSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.torsoSlotSmith}}</option>
               </select>
-              {{statsCtrl.torsoSlot.Name}}<br>
+              <br>
 
               <span class="slot-title">Hands: </span>
               <select class="armor-select" name="handsSlot" id="handsSlot"
@@ -729,9 +725,9 @@
               ng-model="statsCtrl.handsSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.handsSlot">
-              <option value="">{{statsCtrl.unselectedSlot.handsSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.handsSlotSmith}}</option>
               </select>
-              {{statsCtrl.handsSlot.Name}}<br>
+              <br>
 
               <span class="slot-title">Legs: </span>
               <select class="armor-select" name="legsSlot" id="legsSlot"
@@ -746,9 +742,9 @@
               ng-model="statsCtrl.legsSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.legsSlot">
-              <option value="">{{statsCtrl.unselectedSlot.legsSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.legsSlotSmith}}</option>
               </select>
-              {{statsCtrl.legsSlot.Name}}<br>
+              <br>
 
               <span class="slot-title">Feet: </span>
               <select class="armor-select" name="feetSlot" id="feetSlot"
@@ -763,9 +759,9 @@
               ng-model="statsCtrl.feetSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.feetSlot">
-              <option value="">{{statsCtrl.unselectedSlot.feetSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.feetSlotSmith}}</option>
               </select>
-              {{statsCtrl.feetSlot.Name}}<br>
+              <br>
 
               <!-- 2 Weapons Slots -->
 
@@ -782,9 +778,9 @@
               ng-model="statsCtrl.weaponSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="!statsCtrl.weaponSlot">
-              <option value="">{{statsCtrl.unselectedSlot.weaponSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.weaponSlotSmith}}</option>
               </select>
-              {{statsCtrl.weaponSlot.Name}}<br>
+              <br>
 
               <span class="slot-title">Off-hand: </span>
               <select class="armor-select" name="offhandSlot" id="offhandSlot"
@@ -800,9 +796,9 @@
               ng-model="statsCtrl.offhandSlotSmith"
               ng-change="statsCtrl.update()"
               ng-disabled="statsCtrl.offhandSlot.Category != 'shield'">
-              <option value="">{{statsCtrl.unselectedSlot.offhandSlotSmith}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.offhandSlotSmith}}</option>
               </select>
-              {{statsCtrl.offhandSlot.Name}}<br>
+              <br>
 
               <!-- 1 Warpaint Slot -->
 
@@ -811,20 +807,10 @@
               ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Set: 'Warpaint'} | orderBy: 'ItemID' track by consumable.ItemID"
               ng-model="statsCtrl.warpaintSlot"
               ng-change="statsCtrl.update()">
-              <option value="">{{statsCtrl.unselectedSlot.warpaintSlot}}</option>
+                <option value="">{{statsCtrl.unselectedSlot.warpaintSlot}}</option>
               </select>
-              {{statsCtrl.warpaintSlot.Name}}
-
-
-
-            </div>
-            <div>
-              div 2
-            </div>
-            <div>
-              div 3
-            </div>
-          </div>
+              <br>
+              <textarea class="text-build" ng-style="statsCtrl.textBuildHeight" ng-model="statsCtrl.textOnlyBuild" readonly></textarea>
         </td>
 
         <td>

@@ -20,7 +20,10 @@ angular
     // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
 
     //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
+    //FIX:  progress bars beyond 100% with gear and lvl 50 stat
     //maybe:  adjustSlotStatus function?
+
+    //in-progress:  create text-build generator function, search and slice perks, create support to share name, create copy to clipboard
 
     function loadData() {
 
@@ -42,6 +45,7 @@ angular
           self.loadingError = false;
           addLoadEvent(preloader);
           createMouseOvers();
+          generateTextBuild();
           loadQueryParams();
           updateQueryParams();
         })
@@ -511,7 +515,43 @@ angular
       adjustBonuses(statString);
       calcPlayerStats();
       adjustProgress(statString);
+      generateTextBuild();
       updateQueryParams();
+    }
+
+    self.textOnlyBuild = ``;
+    function generateTextBuild() {
+      let buildString = `▬▬ι═══════ﺤ  Build Name, Character Level: ${self.stats.characterLevel}, etc -═══════ι▬▬
+      [Attributes]
+      Strength: ${self.stats.strength.value}
+      Agility: ${self.stats.agility.value}
+      Vitality: ${self.stats.vitality.value}
+      Accuracy: ${self.stats.accuracy.value}
+      Grit: ${self.stats.grit.value}
+      Encumbrance: ${self.stats.encumbrance.value}
+      Survival: ${self.stats.survival.value}`
+
+      if (self.headSlot != null || self.torsoSlot != null || self.handsSlot != null || self.legsSlot != null || self.feetSlot != null || self.warpaintSlot != null || self.weaponSlot != null || self.offhandSlot != null) {
+        buildString += `\n\n[Equipment]`
+        if (self.headSlot != null) buildString += `\nHead: ${self.headSlot.Name}`
+          if (self.headSlotSmith != null) buildString += `\n ┗━>(+ ${self.headSlotSmith.Name})`
+        if (self.torsoSlot != null) buildString += `\nTorso: ${self.torsoSlot.Name}`
+          if (self.torsoSlotSmith != null) buildString += `\n ┗━>(+ ${self.torsoSlotSmith.Name})`
+        if (self.handsSlot != null) buildString += `\nHands: ${self.handsSlot.Name}`
+          if (self.handsSlotSmith != null) buildString += `\n ┗━>(+ ${self.handsSlotSmith.Name})`
+        if (self.legsSlot != null) buildString += `\nLegs: ${self.legsSlot.Name}`
+          if (self.legsSlotSmith != null) buildString += `\n ┗━>(+ ${self.legsSlotSmith.Name})`
+        if (self.feetSlot != null) buildString += `\nFeet: ${self.feetSlot.Name}`
+          if (self.feetSlotSmith != null) buildString += `\n ┗━>(+ ${self.feetSlotSmith.Name})`
+
+        if (self.warpaintSlot != null) buildString += `\n\nWarpaint: ${self.warpaintSlot.Name}`
+
+        if (self.weaponSlot != null) buildString += `\n\nWeapon: ${self.weaponSlot.Name}`
+          if (self.weaponSlotSmith != null) buildString += `\n ┗━>(+ ${self.weaponSlotSmith.Name})`
+        if (self.offhandSlot != null) buildString += `\nOffhand: ${self.offhandSlot.Name}`
+          if (self.offhandSlotSmith != null) buildString += `\n ┗━>(+ ${self.offhandSlotSmith.Name})`
+      }
+      self.textOnlyBuild = buildString;
     }
 
     function updateAll() {
@@ -860,6 +900,7 @@ angular
     self.statDown = statDown;
 
     self.update = update;
+    self.generateTextBuild = generateTextBuild;
     self.loadQueryParams = loadQueryParams;
     self.updateQueryParams = updateQueryParams;
 
@@ -869,7 +910,6 @@ angular
     // filters
     self.offhandFilter_name = "";
     self.offhandFilter_category = "";
-
     loadData();
     }
   });
