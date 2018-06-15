@@ -87,6 +87,11 @@ gulp.task('json', function() {
         .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('images-item-icons', function() {
+    return gulp.src('images-item-icons/**/*.*')
+        .pipe(gulp.dest('dist/images/item-icons'))
+});
+
 gulp.task('watch', ['build'], function() {
     browserSync({
         port     : 8080,
@@ -109,10 +114,10 @@ gulp.task('watch', ['build'], function() {
     gulp.watch('images/**/*.*', ['images']);
     gulp.watch('fonts/**/*.*', ['fonts']);
     gulp.watch(['app/**/*.html', '!app/index.html'], ['html']);
-    gulp.watch('dist/**/*.*', browserSync.reload);
+    gulp.watch(['dist/**/*.*', '!dist/images/item-icons/*.*'], browserSync.reload);
 });
 
-gulp.task('build', ['scripts', 'index', 'styles', 'html', 'vendors', 'images', 'fonts', 'json']);
+gulp.task('build', ['scripts', 'index', 'styles', 'html', 'vendors', 'images', 'fonts', 'json', 'images-item-icons']);
 
 gulp.task('default', function() {
     ignoreErrors = false;
