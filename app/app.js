@@ -17,6 +17,7 @@ angular
   ]);
 
 require('./app.config.js');
+require('./app.directives.js');
 
 require('./components/character/character.component.js');
 require('./components/clanlist/clanlist.component.js');
