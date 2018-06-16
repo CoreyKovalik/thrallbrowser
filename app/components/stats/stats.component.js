@@ -74,8 +74,6 @@ angular
       return itemArray;
     }
 
-
-
     self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
 
     self.stats = {
@@ -530,7 +528,7 @@ angular
     }
     function generateTextBuild() {
       let buildString = `▬▬ι═══════ﺤ  ☆ Conan Exiles - Character Build ☆ -═══════ι▬▬
-      ▬▬ι═══════ﺤ  courtesy of thrallbrowser.com/stats -═══════ι▬▬\n\n`
+      ▬▬ι═══════ﺤ  courtesy of thrallbrowser.com/stats -═══════ι▬▬\n`
 
       if (self.textBuild.name != null || self.textBuild.sex != null || self.textBuild.race != null || self.textBuild.serverId != null || self.textBuild.characterId != null) {
         buildString += `[Exile Information]`;
@@ -555,22 +553,22 @@ angular
       if (self.headSlot != null || self.torsoSlot != null || self.handsSlot != null || self.legsSlot != null || self.feetSlot != null || self.warpaintSlot != null || self.weaponSlot != null || self.offhandSlot != null) {
         buildString += `\n\n[Equipment]`;
         if (self.headSlot         != null) buildString += `\nHead: ${self.headSlot.Name}`;
-        if (self.headSlotSmith    != null) buildString += `\n ┗━>(+ ${self.headSlotSmith.Name})`;
+        if (self.headSlotSmith    != null) buildString += `\n ┗━> ${self.headSlotSmith.Name}`;
         if (self.torsoSlot        != null) buildString += `\nTorso: ${self.torsoSlot.Name}`;
-        if (self.torsoSlotSmith   != null) buildString += `\n ┗━>(+ ${self.torsoSlotSmith.Name})`;
+        if (self.torsoSlotSmith   != null) buildString += `\n ┗━> ${self.torsoSlotSmith.Name}`;
         if (self.handsSlot        != null) buildString += `\nHands: ${self.handsSlot.Name}`;
-        if (self.handsSlotSmith   != null) buildString += `\n ┗━>(+ ${self.handsSlotSmith.Name})`;
+        if (self.handsSlotSmith   != null) buildString += `\n ┗━> ${self.handsSlotSmith.Name}`;
         if (self.legsSlot         != null) buildString += `\nLegs: ${self.legsSlot.Name}`;
-        if (self.legsSlotSmith    != null) buildString += `\n ┗━>(+ ${self.legsSlotSmith.Name})`;
+        if (self.legsSlotSmith    != null) buildString += `\n ┗━> ${self.legsSlotSmith.Name}`;
         if (self.feetSlot         != null) buildString += `\nFeet: ${self.feetSlot.Name}`;
-        if (self.feetSlotSmith    != null) buildString += `\n ┗━>(+ ${self.feetSlotSmith.Name})`;
+        if (self.feetSlotSmith    != null) buildString += `\n ┗━> ${self.feetSlotSmith.Name}`;
 
         if (self.warpaintSlot     != null) buildString += `\n\nWarpaint: ${self.warpaintSlot.Name}`;
 
         if (self.weaponSlot       != null) buildString += `\n\nWeapon: ${self.weaponSlot.Name}`;
-        if (self.weaponSlotSmith  != null) buildString += `\n ┗━>(+ ${self.weaponSlotSmith.Name})`;
+        if (self.weaponSlotSmith  != null) buildString += `\n ┗━> ${self.weaponSlotSmith.Name}`;
         if (self.offhandSlot      != null) buildString += `\nOffhand: ${self.offhandSlot.Name}`;
-        if (self.offhandSlotSmith != null) buildString += `\n ┗━>(+ ${self.offhandSlotSmith.Name})`;
+        if (self.offhandSlotSmith != null) buildString += `\n ┗━> ${self.offhandSlotSmith.Name}`;
       }
     buildString += '\n\n[Shareable Build Link]\nhttp://thrallbrowser.com' + $location.url();
       self.textBuild.value = buildString;
