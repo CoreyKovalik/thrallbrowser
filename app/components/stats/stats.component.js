@@ -22,7 +22,7 @@ angular
     //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
     //maybe:  adjustSlotStatus function?
 
-    //in-progress:  create text-build generator function, search and slice perks, create support to share name, create copy to clipboard
+    //in-progress: search and slice perks, create support to share name, create copy to clipboard
 
     function loadData() {
 
@@ -44,9 +44,9 @@ angular
           self.loadingError = false;
           addLoadEvent(preloader);
           createMouseOvers();
-          generateTextBuild();
           loadQueryParams();
           updateQueryParams();
+          generateTextBuild();
         })
         .catch(function(respone) {
           self.isLoading = false;
@@ -516,14 +516,34 @@ angular
       adjustBonuses(statString);
       calcPlayerStats();
       adjustProgress(statString);
-      generateTextBuild();
       updateQueryParams();
+      generateTextBuild();
     }
 
-    self.textOnlyBuild = ``;
+    self.textBuild = {
+      "value"       : ``,
+      "name"        : null,
+      "sex"         : null,
+      "race"        : null,
+      "serverId"    : null,
+      "characterId" : null
+    }
     function generateTextBuild() {
-      let buildString = `▬▬ι═══════ﺤ  Build Name, Character Level: ${self.stats.characterLevel}, etc -═══════ι▬▬
-      [Attributes]
+      let buildString = `▬▬ι═══════ﺤ  ☆ Conan Exiles - Character Build ☆ -═══════ι▬▬
+      ▬▬ι═══════ﺤ  courtesy of thrallbrowser.com/stats -═══════ι▬▬\n\n`
+
+      if (self.textBuild.name != null || self.textBuild.sex != null || self.textBuild.race != null || self.textBuild.serverId != null || self.textBuild.characterId != null) {
+        buildString += `[Exile Information]`;
+        if (self.textBuild.name        != null) buildString += `\nName: ${self.textBuild.name}`;
+        if (self.textBuild.sex         != null) buildString += `\nSex: ${self.textBuild.sex}`;
+        if (self.textBuild.race        != null) buildString += `\nRace: ${self.textBuild.race}`;
+        if (self.textBuild.serverId    != null) buildString += `\nServer ID: ${self.textBuild.serverId}`;
+        if (self.textBuild.characterId != null) buildString += `\nCharacter ID: ${self.textBuild.characterId}`;
+        buildString += `\n\n`;
+      }
+
+      buildString += `[Attributes]
+      Exile Level: ${self.stats.characterLevel}
       Strength: ${self.stats.strength.value}
       Agility: ${self.stats.agility.value}
       Vitality: ${self.stats.vitality.value}
@@ -533,26 +553,27 @@ angular
       Survival: ${self.stats.survival.value}`
 
       if (self.headSlot != null || self.torsoSlot != null || self.handsSlot != null || self.legsSlot != null || self.feetSlot != null || self.warpaintSlot != null || self.weaponSlot != null || self.offhandSlot != null) {
-        buildString += `\n\n[Equipment]`
-        if (self.headSlot != null) buildString += `\nHead: ${self.headSlot.Name}`
-          if (self.headSlotSmith != null) buildString += `\n ┗━>(+ ${self.headSlotSmith.Name})`
-        if (self.torsoSlot != null) buildString += `\nTorso: ${self.torsoSlot.Name}`
-          if (self.torsoSlotSmith != null) buildString += `\n ┗━>(+ ${self.torsoSlotSmith.Name})`
-        if (self.handsSlot != null) buildString += `\nHands: ${self.handsSlot.Name}`
-          if (self.handsSlotSmith != null) buildString += `\n ┗━>(+ ${self.handsSlotSmith.Name})`
-        if (self.legsSlot != null) buildString += `\nLegs: ${self.legsSlot.Name}`
-          if (self.legsSlotSmith != null) buildString += `\n ┗━>(+ ${self.legsSlotSmith.Name})`
-        if (self.feetSlot != null) buildString += `\nFeet: ${self.feetSlot.Name}`
-          if (self.feetSlotSmith != null) buildString += `\n ┗━>(+ ${self.feetSlotSmith.Name})`
+        buildString += `\n\n[Equipment]`;
+        if (self.headSlot         != null) buildString += `\nHead: ${self.headSlot.Name}`;
+        if (self.headSlotSmith    != null) buildString += `\n ┗━>(+ ${self.headSlotSmith.Name})`;
+        if (self.torsoSlot        != null) buildString += `\nTorso: ${self.torsoSlot.Name}`;
+        if (self.torsoSlotSmith   != null) buildString += `\n ┗━>(+ ${self.torsoSlotSmith.Name})`;
+        if (self.handsSlot        != null) buildString += `\nHands: ${self.handsSlot.Name}`;
+        if (self.handsSlotSmith   != null) buildString += `\n ┗━>(+ ${self.handsSlotSmith.Name})`;
+        if (self.legsSlot         != null) buildString += `\nLegs: ${self.legsSlot.Name}`;
+        if (self.legsSlotSmith    != null) buildString += `\n ┗━>(+ ${self.legsSlotSmith.Name})`;
+        if (self.feetSlot         != null) buildString += `\nFeet: ${self.feetSlot.Name}`;
+        if (self.feetSlotSmith    != null) buildString += `\n ┗━>(+ ${self.feetSlotSmith.Name})`;
 
-        if (self.warpaintSlot != null) buildString += `\n\nWarpaint: ${self.warpaintSlot.Name}`
+        if (self.warpaintSlot     != null) buildString += `\n\nWarpaint: ${self.warpaintSlot.Name}`;
 
-        if (self.weaponSlot != null) buildString += `\n\nWeapon: ${self.weaponSlot.Name}`
-          if (self.weaponSlotSmith != null) buildString += `\n ┗━>(+ ${self.weaponSlotSmith.Name})`
-        if (self.offhandSlot != null) buildString += `\nOffhand: ${self.offhandSlot.Name}`
-          if (self.offhandSlotSmith != null) buildString += `\n ┗━>(+ ${self.offhandSlotSmith.Name})`
+        if (self.weaponSlot       != null) buildString += `\n\nWeapon: ${self.weaponSlot.Name}`;
+        if (self.weaponSlotSmith  != null) buildString += `\n ┗━>(+ ${self.weaponSlotSmith.Name})`;
+        if (self.offhandSlot      != null) buildString += `\nOffhand: ${self.offhandSlot.Name}`;
+        if (self.offhandSlotSmith != null) buildString += `\n ┗━>(+ ${self.offhandSlotSmith.Name})`;
       }
-      self.textOnlyBuild = buildString;
+    buildString += '\n\n[Shareable Build Link]\nhttp://thrallbrowser.com' + $location.url();
+      self.textBuild.value = buildString;
     }
 
     function updateAll() {
