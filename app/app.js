@@ -5,13 +5,15 @@ require('angular');
 require('angular-route');
 require('angular-right-click');
 require('angular-long-press');
+require('angularjs-autogrow');
 require('../vendor/bootstrap/js/bootstrap.min.js');
 
 angular
   .module('thrallbrowser', [
     'ngRoute',
     'ngRightClick',
-    'pr.longpress'
+    'pr.longpress',
+    'angularjs-autogrow'
   ]);
 
 require('./app.config.js');
