@@ -1,8 +1,0 @@
-Cut should be based on workflow
- - When node is marked as cut, move it into cut workflow state
- - When node is not cut, move it into ??? workflow state
- - When any parent node is marked as cut, all children should have cut propogated
-
-When nodes are deleted
- - Transfer to deleted workflow state
- 

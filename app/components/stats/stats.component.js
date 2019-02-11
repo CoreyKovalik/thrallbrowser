@@ -3,69 +3,89 @@ angular
   .component('stats', {
     templateUrl: 'components/stats/stats.template.html',
     controllerAs: 'statsCtrl',
-    controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location) {
+    controller: function statsCalculatorController($scope, $q, $route, $routeParams, $location, statsdata) {
     var self = this;
+    self.isLoading = true;
+    self.loadingError = false;
 
+    //TO DO: cleanup functions --> increaseLevelTo, levelStatTo [maybe change name to increaseStatTo, or setLevel/setStat]
+    //       skim over Increase/Descrease functions for cleanup as well
+    //  add weapon/offhand slot
+    //  add warpaint data and slots
+    //  add armor/weapon tinker items data and options for them
+    //  print current character info
+    //  Create a sharing box:
+    //        Name, ServerID (how to find), Character ID(how to find), race (all options), gender (tickbox), full text-only build sharing
+
+    // **test in-game** test certain weapons and offhand items if you can add smiths to them (i.e. what smithing items on bows)
+
+    //FIX:  weird bug with stat buttons on laptop // only on this branch, possibly some sort of ng-click issue mixed with mousepad
+    //maybe:  adjustSlotStatus function?
+
+    //in-progress: search and slice perks, create support to share name, create copy to clipboard
+
+    function loadData() {
+
+      let armorsPromise = statsdata.getArmorsData();
+      let weaponsPromise = statsdata.getWeaponsData();
+      let consumablesPromise = statsdata.getConsumablesData();
+      let iconPromise = statsdata.getIconData();
+
+      $q.all([armorsPromise, weaponsPromise, consumablesPromise, iconPromise])
+        .then(function(results) {
+          let iconData = results[3];
+          self.armors = mergeIconData(results[0], iconData);
+          self.armorsMap = _.keyBy(self.armors, 'ItemID');
+          self.weapons = mergeIconData(results[1], iconData);
+          self.weaponsMap = _.keyBy(self.weapons, 'ItemID');
+          self.consumables = mergeIconData(results[2], iconData);
+          self.consumablesMap = _.keyBy(self.consumables, 'ItemID');
+          self.isLoading = false;
+          self.loadingError = false;
+          addLoadEvent(preloader);
+          createMouseOvers();
+          loadQueryParams();
+          updateQueryParams();
+          generateTextBuild();
+        })
+        .catch(function(respone) {
+          self.isLoading = false;
+          self.loadingError = true;
+        });
+
+    }
     //start calc
-    // better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
-    // pre-loaded for prettier rendering when transitioning between attribute teirs
-    function preloader() {
-      if (document.images) {
-        var img1 = new Image();
-        var img2 = new Image();
-        var img3 = new Image();
-        var img4 = new Image();
-        var img5 = new Image();
+    //start conan-stat-data
 
-        var img6 = new Image();
-        var img7 = new Image();
-        var img8 = new Image();
-        var img9 = new Image();
-        var img10 = new Image();
+    function mergeIconData(targetArray, iconData) {
 
-        img1.src = "./images/teir1.png";
-        img2.src = "./images/teir2.png";
-        img3.src = "./images/teir3.png";
-        img4.src = "./images/teir4.png";
-        img5.src = "./images/teir5.png";
+      let itemArray = targetArray;
+      let iconArray = iconData;
 
-        img6.src = "./images/t1-glow.png";
-        img7.src = "./images/t2-glow.png";
-        img8.src = "./images/t3-glow.png";
-        img9.src = "./images/t4-glow.png";
-        img10.src = "./images/t5-glow.png";
-      }
-    }
-    function addLoadEvent(func) {
-      var oldonload = window.onload;
-      if (typeof window.onload != 'function') {
-        window.onload = func;
-      } else {
-        window.onload = function() {
-          if (oldonload) {
-            oldonload();
+      itemArray.forEach(function(object1, index1, array1) {
+
+        iconArray.forEach(function(object2, index2, array2) {
+          if (object1.ItemID == object2.ItemID) {
+            object1 = _.merge(object1, object2);
           }
-          func();
-        }
-      }
+        });
+
+      });
+      return itemArray;
     }
-    addLoadEvent(preloader);
 
-    //end conan-image-preloader.js
-    //start conan-stat-data.js
+    self.EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
 
-    const EXP_ARRAY = [0,275,1325,3675,7825,14325,23675,36400,53000,74000,99925,131300,168625,212450,263275,321600,387975,462900,546900,640475,744175,858500,983975,1121100,1270400,1432400,1607625,1796600,1999825,2217825,2451125,2700225,2965650,3247925,3547575,3865100,4201025,4555875,4930175,5324425,5739150,6174875,6632125,7111400,7613225,8138125,8686600,9259175,9856375,10478725,11126725,11800925,12501825,13229925,13985775,14769875,15582750,16424900,17296850,18199150,19132275];
-
-    var stats = {
+    self.stats = {
       "characterLevel": 1,
       "unspentPoints": 1,
       "spentPoints": 0,
-      "lifetimePoints": 1,
       "availableFeats": 0,
       "currentExperience": "0 / 275",
       "allStats": ["strength", "agility", "vitality", "accuracy", "grit", "encumbrance", "survival"],
       "strength": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -74,6 +94,7 @@ angular
       },
       "agility": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -82,6 +103,7 @@ angular
       },
       "vitality": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -90,6 +112,7 @@ angular
       },
       "accuracy": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -98,6 +121,7 @@ angular
       },
       "grit": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -106,6 +130,7 @@ angular
       },
       "encumbrance": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -114,6 +139,7 @@ angular
       },
       "survival": {
         "value": 0,
+        "total": 0,
         "_10": false,
         "_20": false,
         "_30": false,
@@ -152,34 +178,177 @@ angular
       }
     }
 
-    function resetAll() {
-      stats.strength.value = stats.agility.value = stats.vitality.value = stats.accuracy.value = stats.grit.value = stats.encumbrance.value = stats.survival.value = stats.spentPoints = stats.availableFeats = 0;
-      stats.characterLevel = stats.unspentPoints = stats.lifetimePoints = 1;
-      stats.currentExperience = "0 / 275";
-      stats.playerStats.health.value = stats.playerStats.health.base;
-      stats.playerStats.stamina.value = stats.playerStats.melee.value = stats.playerStats.ranged.value = stats.playerStats.stamina.base;
-      stats.playerStats.encumbrance.value = stats.playerStats.encumbrance.base;
-      stats.playerStats.armor.value = stats.playerStats.damageResistance.value = stats.playerStats.armor.base;
-      for (var i = 0; i < 7; i++) {
-        update(stats.allStats[i]);
+    self.headSlot         = null;
+    self.torsoSlot        = null;
+    self.handsSlot        = null;
+    self.legsSlot         = null;
+    self.feetSlot         = null;
+    self.weaponSlot       = null;
+    self.offhandSlot      = null;
+
+    self.headSlotSmith    = null;
+    self.torsoSlotSmith   = null;
+    self.handsSlotSmith   = null;
+    self.legsSlotSmith    = null;
+    self.feetSlotSmith    = null;
+    self.weaponSlotSmith  = null;
+    self.offhandSlotSmith = null;
+
+    self.warpaintSlot     = null;
+
+    self.slotStatus = ["<empty slot>", "<disabled> - equip an item", "<disabled> - shields only", "<disabled> - Two-Handed", "<select item enhancement>", "<select a warpaint>", "<equip arrows>"];
+    self.unselectedSlot = {
+      "headSlot"        : self.slotStatus[0],
+      "torsoSlot"       : self.slotStatus[0],
+      "handsSlot"       : self.slotStatus[0],
+      "legsSlot"        : self.slotStatus[0],
+      "feetSlot"        : self.slotStatus[0],
+      "weaponSlot"      : self.slotStatus[0],
+      "offhandSlot"     : self.slotStatus[0],
+      "headSlotSmith"   : self.slotStatus[1],
+      "torsoSlotSmith"  : self.slotStatus[1],
+      "handsSlotSmith"  : self.slotStatus[1],
+      "legsSlotSmith"   : self.slotStatus[1],
+      "feetSlotSmith"   : self.slotStatus[1],
+      "weaponSlotSmith" : self.slotStatus[1],
+      "offhandSlotSmith": self.slotStatus[1],
+      "warpaintSlot"    : self.slotStatus[5]
+    }
+
+    function toggleSmith(slot) {
+      let s = slot.substring(0, slot.length - 5);
+      if (self[s] == null) {
+        unequipEquipmentSlot(slot);
+        self.unselectedSlot[slot] = self.slotStatus[1];
+        return;
+      }
+      if (slot == "offhandSlotSmith") {
+          checkShield();
+          return;
+      }
+
+      if (self[s]) {
+        self.unselectedSlot[slot] = self.slotStatus[0];
+        return;
       }
     }
 
+    function checkShield() {
+      if (self.offhandSlot && self.offhandSlot.Category != "shield")
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[2];
+      if (self.offhandSlot && self.offhandSlot.Category == "shield")
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[0];
+    }
+
+    function checkTwoHanded() {
+      let twoHanded = ["greatsword", "hammer", "daggers", "spear"];
+      if (self.weaponSlot == null) {
+        self.equipment.twoHanded = false;
+        self.unselectedSlot.offhandSlot = self.slotStatus[0];
+        self.offhandFilter_category = "";
+        if (self.offhandSlot == null)
+          self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
+        checkShield();
+        return;
+      }
+      if (self.weaponSlot.Category == "bow") {
+        self.equipment.twoHanded = false;
+        self.offhandFilter_category = "arrow";
+        self.unselectedSlot.offhandSlot = self.slotStatus[6];
+        console.log("made it arrow");
+        return;
+      }
+      if (twoHanded.includes(self.weaponSlot.Category)) {
+        self.equipment.twoHanded = true;
+        unequipEquipmentSlot("offhandSlot");
+        unequipEquipmentSlot("offhandSlotSmith");
+        self.unselectedSlot.weaponSlotSmith = self.slotStatus[0];
+        self.unselectedSlot.offhandSlot = self.slotStatus[3] + ' ' + self.weaponSlot.Category + " Equipped";
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[3];
+      }
+
+      else {
+        console.log('one handed');
+        self.equipment.twoHanded = false;
+        self.offhandFilter_category = "";
+        self.unselectedSlot.offhandSlot = self.slotStatus[0];
+        self.unselectedSlot.offhandSlotSmith = self.slotStatus[1];
+      }
+    }
+
+    self.equipment = {
+      "allArmorBonuses": ["Armor", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "allWeaponBonuses": ["Damage", "Heat", "Cold", "Weight", "Str", "Agi", "Vit", "Acc", "Grit", "Enc", "Sur"],
+      "twoHanded": false,
+      "damage": 0,
+      "armor": 0,
+      "armorPenetration": 0,
+      "heatResist":0,
+      "coldResist":0,
+      "weightOfEquipped": 0,
+      "strength": 0,
+      "agility": 0,
+      "vitality": 0,
+      "accuracy": 0,
+      "grit": 0,
+      "encumbrance": 0,
+      "survival": 0
+    }
+
+    function resetAll() {
+      self.stats.strength.value = self.stats.agility.value = self.stats.vitality.value = self.stats.accuracy.value = self.stats.grit.value = self.stats.encumbrance.value = self.stats.survival.value = self.stats.spentPoints = self.stats.availableFeats = 0;
+      self.stats.characterLevel = self.stats.unspentPoints = 1;
+      self.stats.currentExperience = "0 / 275";
+      resetEquipment();
+      updateAll();
+    }
+
     function resetAttributes() {
-      stats.allStats.forEach(function(attribute) {
+      self.stats.allStats.forEach(function(attribute) {
         resetAttribute(attribute);
       });
     }
 
     function resetAttribute(attribute) {
-      while (stats[attribute].value > 0) {
+      while (self.stats[attribute].value > 0) {
         statDown(attribute);
       }
     }
 
+    function resetEquipment() {
+      self.headSlot         = null;
+      self.torsoSlot        = null;
+      self.handsSlot        = null;
+      self.legsSlot         = null;
+      self.feetSlot         = null;
+      self.weaponSlot       = null;
+      self.offhandSlot      = null;
+      self.headSlotSmith    = null;
+      self.torsoSlotSmith   = null;
+      self.handsSlotSmith   = null;
+      self.legsSlotSmith    = null;
+      self.feetSlotSmith    = null;
+      self.weaponSlotSmith  = null;
+      self.offhandSlotSmith = null;
+      self.warpaintSlot     = null;
+      checkTwoHanded();
+      toggleSmith("headSlotSmith");
+      toggleSmith("torsoSlotSmith");
+      toggleSmith("handsSlotSmith");
+      toggleSmith("legsSlotSmith");
+      toggleSmith("feetSlotSmith");
+      toggleSmith("weaponSlotSmith");
+      toggleSmith("offhandSlotSmith");
+      updateAll();
+    }
+
+    function unequipEquipmentSlot(slot) {
+      self[slot] = null;
+    }
+
     function increaseLevelTo(value)
     {
-      while (stats.characterLevel < value) {
+      while (self.stats.characterLevel < value) {
         if(!levelUp())
           return false;
       }
@@ -192,11 +361,13 @@ angular
 
     function levelStatTo(statName, value)
     {
-      while (stats[statName].value < value) {
-        if (getAttrCost(stats[statName].value) > stats.unspentPoints)
+      while (self.stats[statName].value < value) {
+        if (getAttrCost(self.stats[statName].value) > self.stats.unspentPoints)
           return false;
-        if(!statUp(statName))
+        if(!statUp(statName)) {
+          console.log("still works!");
           return false;
+        }
       }
 
       return true;
@@ -207,8 +378,8 @@ angular
     }
 
     function setCurrentExperience(currentlevel) {
-      stats.currentExperience = EXP_ARRAY[currentlevel - 1].toLocaleString() + " / " + EXP_ARRAY[currentlevel].toLocaleString();
-      return EXP_ARRAY[currentlevel -1];
+      self.stats.currentExperience = self.EXP_ARRAY[currentlevel - 1].toLocaleString() + " / " + self.EXP_ARRAY[currentlevel].toLocaleString();
+      return self.EXP_ARRAY[currentlevel -1];
     }
 
     function getAttrCost(currentlevel) {
@@ -255,34 +426,74 @@ angular
         for (var i = 1; i <= 5; i++) {
         let teir = "_" + i + "0";
         let lvl = i * 10;
-        stats[statString].value >= lvl ? stats[statString][teir] = true : stats[statString][teir] = false;
+        self.stats[statString].total >= lvl ? self.stats[statString][teir] = true : self.stats[statString][teir] = false;
+      }
+    }
+
+    function adjustEquipmentBonuses() {
+      let items = [self.headSlot, self.torsoSlot, self.handsSlot, self.legsSlot, self.feetSlot, self.weaponSlot, self.offhandSlot,
+                  self.headSlotSmith, self.torsoSlotSmith, self.handsSlotSmith, self.legsSlotSmith, self.feetSlotSmith, self.weaponSlotSmith, self.offhandSlotSmith,
+                  self.warpaintSlot];
+
+      self.equipment.damage           = _(items).filter().sumBy('Damage');
+      self.equipment.armorPenetration = _(items).filter().sumBy('ArmorPenetration');
+      self.equipment.armor            = _(items).filter().sumBy('Armor');
+      self.equipment.heatResist       = _(items).filter().sumBy('Heat');
+      self.equipment.coldResist       = _(items).filter().sumBy('Cold');
+
+      let calculatedWeight = 0;
+      for(var i=7; i < 14; i++) {
+        if (items[i] != null && items[i].hasOwnProperty('WeightReduction')) {
+          calculatedWeight += (items[i - 7].Weight) - (items[i - 7].Weight * items[i].WeightReduction);
+        }
+        else {
+          if(items[i - 7] != null)
+            calculatedWeight += items[i - 7].Weight;
+        }
+      }
+
+      self.equipment.weightOfEquipped = calculatedWeight;
+      self.equipment.strength   = _(items).filter().sumBy('Str');
+      self.equipment.agility    = _(items).filter().sumBy('Agi');
+      self.equipment.vitality   = _(items).filter().sumBy('Vit');
+      self.equipment.accuracy   = _(items).filter().sumBy('Acc');
+      self.equipment.grit       = _(items).filter().sumBy('Grit');
+      self.equipment.encumbrance= _(items).filter().sumBy('Enc');
+      self.equipment.survival   = _(items).filter().sumBy('Sur');
+    }
+
+    function adjustStatTotals() {
+      for (var i = 0; i < 7; i++) {
+        self.stats[self.stats.allStats[i]].total = self.stats[self.stats.allStats[i]].value + self.equipment[self.stats.allStats[i]];
       }
     }
 
     //Math calculations for playerStats based on attributes and certain bonus perks
 
     function calcPlayerStats() {
-      stats.playerStats.health.value = (8 * stats.vitality.value) + stats.playerStats.health.base;
-      stats.playerStats.stamina.value = (3 * stats.grit.value) + stats.playerStats.stamina.base;
-      stats.playerStats.encumbrance.value = (7 * stats.encumbrance.value) + stats.playerStats.encumbrance.base;
-      stats.playerStats.melee.value = (100 * 0.025 * stats.strength.value) + stats.playerStats.melee.base;
-      stats.playerStats.ranged.value = (100 * 0.025 * stats.accuracy.value) + stats.playerStats.ranged.base;
-        if(stats.accuracy._30) stats.playerStats.ranged.value += 10;
-      stats.playerStats.armor.value = (2 * stats.agility.value) + stats.playerStats.armor.base;
-        if(stats.grit._30) stats.playerStats.armor.value += 15;
-      stats.playerStats.damageResistance.value = stats.playerStats.armor.value * 0.003 * 100;
-        if(stats.encumbrance._30) stats.playerStats.encumbrance.value += stats.playerStats.encumbrance.value * .1;
+      self.stats.playerStats.health.value = (8 * self.stats.vitality.total) + self.stats.playerStats.health.base;
+      self.stats.playerStats.stamina.value = (3 * self.stats.grit.total) + self.stats.playerStats.stamina.base;
+      self.stats.playerStats.encumbrance.value = (7 * self.stats.encumbrance.total) + self.stats.playerStats.encumbrance.base;
+      self.stats.playerStats.melee.value = Math.round((100 * 0.025 * self.stats.strength.total) + self.stats.playerStats.melee.base);
+      self.stats.playerStats.ranged.value = Math.round((100 * 0.025 * self.stats.accuracy.total) + self.stats.playerStats.ranged.base);
+        if(self.stats.accuracy._30) self.stats.playerStats.ranged.value += 10;
+      self.stats.playerStats.armor.value = (2 * self.stats.agility.total) + self.stats.playerStats.armor.base;
+        if(self.stats.grit._30) self.stats.playerStats.armor.value += 15;
+      self.stats.playerStats.damageResistance.value = precisionRound((self.stats.playerStats.armor.value * 0.003 * 100),1);
+        if(self.stats.encumbrance._30) self.stats.playerStats.encumbrance.value += self.stats.playerStats.encumbrance.value * .1;
     }
 
     function adjustProgress(statString) {
       if (statString == null) return false;
 
-      let statProgress = (stats[statString].value / 50) * 100;
+      let statProgress = (self.stats[statString].total / 50) * 100;
+      if (statProgress > 100)
+        statProgress = 100;
       document.getElementsByClassName("progress " + statString)[0].setAttribute("style", "width:" + statProgress + "%;");
 
       for (var i = 1; i <= 5; i++) {
         let teir = "_" + i + "0";
-        if (stats[statString][teir]) {
+        if (self.stats[statString][teir]) {
           document.getElementsByClassName("progress-bar " + statString)[0].classList.add("perk-" + i);
           document.getElementsByClassName("bonus-icon bonus-teir" + i + " " + statString)[0].setAttribute("src", "./images/t" + i + "-glow.png");
         }
@@ -293,196 +504,322 @@ angular
       }
     }
 
-    //end conan-stat-data.js
-    //start conan-stat-calc.js
-
-    // Initial Points //
-    let characterLevel_html    = document.getElementsByClassName("character-level")[0];
-    let unspentPoints_html     = document.getElementsByClassName("unspent-points")[0];
-    let currentExperience_html = document.getElementsByClassName("current-experience")[0];
-    let strength_html          = document.getElementsByClassName("strength current-level")[0];
-    let agility_html           = document.getElementsByClassName("agility current-level")[0];
-    let vitality_html          = document.getElementsByClassName("vitality current-level")[0];
-    let accuracy_html          = document.getElementsByClassName("accuracy current-level")[0];
-    let grit_html              = document.getElementsByClassName("grit current-level")[0];
-    let encumbrance_html       = document.getElementsByClassName("encumbrance current-level")[0];
-    let survival_html          = document.getElementsByClassName("survival current-level")[0];
-    adjustPoints();
-
-    // Initial playerStats //
-    let health_html              = document.getElementsByClassName("health")[0];
-    let stamina_html             = document.getElementsByClassName("stamina")[0];
-    let encumbrance_heading_html = document.getElementsByClassName("encumbrance-heading")[0];
-    let encumbrance_player_html  = document.getElementsByClassName("encumbrance-player")[0];
-    let melee_html               = document.getElementsByClassName("melee")[0];
-    let ranged_html              = document.getElementsByClassName("ranged")[0];
-    let armor_html               = document.getElementsByClassName("armor")[0];
-    let dmg_resist_html          = document.getElementsByClassName("dmg-resist")[0];
-    adjustPlayerStats();
+    //end conan-stat-data
+    //start conan-stat-calc
 
     // Update & adjustment functions //
     function update(statString) {
-      adjustPoints();
+      adjustEquipmentBonuses();
+      adjustStatTotals();
       adjustBonuses(statString);
       calcPlayerStats();
-      adjustPlayerStats();
       adjustProgress(statString);
       updateQueryParams();
+      generateTextBuild();
     }
 
-    function adjustPoints() {
-      stats.lifetimePoints             = stats.unspentPoints + stats.spentPoints;
+    self.textBuild = {
+      "value"       : ``,
+      "name"        : null,
+      "sex"         : null,
+      "race"        : null,
+      "serverId"    : null,
+      "characterId" : null
+    }
+    function generateTextBuild() {
+      let buildString = `▬▬ι═══════ﺤ  ☆ Conan Exiles - Character Build ☆ -═══════ι▬▬
+      ▬▬ι═══════ﺤ  courtesy of thrallbrowser.com/stats -═══════ι▬▬\n`
 
-      characterLevel_html.innerText    = stats.characterLevel;
-      unspentPoints_html.innerText     = stats.unspentPoints;
-      currentExperience_html.innerText = stats.currentExperience;
-      strength_html.innerText          = stats.strength.value;
-      agility_html.innerText           = stats.agility.value;
-      vitality_html.innerText          = stats.vitality.value;
-      accuracy_html.innerText          = stats.accuracy.value;
-      grit_html.innerText              = stats.grit.value;
-      encumbrance_html.innerText       = stats.encumbrance.value;
-      survival_html.innerText          = stats.survival.value;
+      if (self.textBuild.name != null || self.textBuild.sex != null || self.textBuild.race != null || self.textBuild.serverId != null || self.textBuild.characterId != null) {
+        buildString += `[Exile Information]`;
+        if (self.textBuild.name        != null) buildString += `\nName: ${self.textBuild.name}`;
+        if (self.textBuild.sex         != null) buildString += `\nSex: ${self.textBuild.sex}`;
+        if (self.textBuild.race        != null) buildString += `\nRace: ${self.textBuild.race}`;
+        if (self.textBuild.serverId    != null) buildString += `\nServer ID: ${self.textBuild.serverId}`;
+        if (self.textBuild.characterId != null) buildString += `\nCharacter ID: ${self.textBuild.characterId}`;
+        buildString += `\n\n`;
+      }
+
+      buildString += `[Attributes]
+      Exile Level: ${self.stats.characterLevel}
+      Strength: ${self.stats.strength.value}
+      Agility: ${self.stats.agility.value}
+      Vitality: ${self.stats.vitality.value}
+      Accuracy: ${self.stats.accuracy.value}
+      Grit: ${self.stats.grit.value}
+      Encumbrance: ${self.stats.encumbrance.value}
+      Survival: ${self.stats.survival.value}`
+
+      if (self.headSlot != null || self.torsoSlot != null || self.handsSlot != null || self.legsSlot != null || self.feetSlot != null || self.warpaintSlot != null || self.weaponSlot != null || self.offhandSlot != null) {
+        buildString += `\n\n[Equipment]`;
+        if (self.headSlot         != null) buildString += `\nHead: ${self.headSlot.Name}`;
+        if (self.headSlotSmith    != null) buildString += `\n ┗━> ${self.headSlotSmith.Name}`;
+        if (self.torsoSlot        != null) buildString += `\nTorso: ${self.torsoSlot.Name}`;
+        if (self.torsoSlotSmith   != null) buildString += `\n ┗━> ${self.torsoSlotSmith.Name}`;
+        if (self.handsSlot        != null) buildString += `\nHands: ${self.handsSlot.Name}`;
+        if (self.handsSlotSmith   != null) buildString += `\n ┗━> ${self.handsSlotSmith.Name}`;
+        if (self.legsSlot         != null) buildString += `\nLegs: ${self.legsSlot.Name}`;
+        if (self.legsSlotSmith    != null) buildString += `\n ┗━> ${self.legsSlotSmith.Name}`;
+        if (self.feetSlot         != null) buildString += `\nFeet: ${self.feetSlot.Name}`;
+        if (self.feetSlotSmith    != null) buildString += `\n ┗━> ${self.feetSlotSmith.Name}`;
+
+        if (self.warpaintSlot     != null) buildString += `\n\nWarpaint: ${self.warpaintSlot.Name}`;
+
+        if (self.weaponSlot       != null) buildString += `\n\nWeapon: ${self.weaponSlot.Name}`;
+        if (self.weaponSlotSmith  != null) buildString += `\n ┗━> ${self.weaponSlotSmith.Name}`;
+        if (self.offhandSlot      != null) buildString += `\nOffhand: ${self.offhandSlot.Name}`;
+        if (self.offhandSlotSmith != null) buildString += `\n ┗━> ${self.offhandSlotSmith.Name}`;
+      }
+    buildString += '\n\n[Shareable Build Link]\nhttp://thrallbrowser.com' + $location.url();
+      self.textBuild.value = buildString;
     }
 
-    function adjustPlayerStats() {
-      health_html.innerText              = stats.playerStats.health.value;
-      stamina_html.innerText             = stats.playerStats.stamina.value;
-      encumbrance_heading_html.innerText = stats.playerStats.encumbrance.value;
-      encumbrance_player_html.innerText  = stats.playerStats.encumbrance.value;
-      melee_html.innerText               = Math.round(stats.playerStats.melee.value) + "%";
-      ranged_html.innerText              = Math.round(stats.playerStats.ranged.value) + "%";
-      armor_html.innerText               = stats.playerStats.armor.value;
-      dmg_resist_html.innerText          = precisionRound(stats.playerStats.damageResistance.value, 1) + "%";
+    function updateAll() {
+      for (var i = 0; i < 7; i++) {
+        update(self.stats.allStats[i]);
+      }
     }
 
     // Increase/Decrease stat functions
     function levelUp() {
-      if (stats.characterLevel == 60)
+      if (self.stats.characterLevel == 60)
         return false;
-      stats.characterLevel += 1;
-      setCurrentExperience(stats.characterLevel);
-      stats.unspentPoints += adjustAttrPoints(stats.characterLevel);
-      stats.availableFeats += adjustFeatPoints(stats.characterLevel);
+      self.stats.characterLevel += 1;
+      setCurrentExperience(self.stats.characterLevel);
+      self.stats.unspentPoints += adjustAttrPoints(self.stats.characterLevel);
+      self.stats.availableFeats += adjustFeatPoints(self.stats.characterLevel);
       update();
-      // console.log("Level Up!");
       return true;
     }
 
     function levelDown() {
-      if (stats.characterLevel == 1)
+      if (self.stats.characterLevel == 1)
         return false;
-      if (stats.characterLevel == 60) {
+      if (self.stats.characterLevel == 60) {
         document.getElementsByClassName("level-up")[0].disabled = false;
         document.getElementsByClassName("max-level")[0].disabled = false;
       }
-      if (stats.unspentPoints < adjustAttrPoints(stats.characterLevel)) {
+      if (self.stats.unspentPoints < adjustAttrPoints(self.stats.characterLevel)) {
         return alert("You must first remove attributes before leveling down your Exile.  You cannot remove what you've already spent!");
       }
-      stats.unspentPoints -= adjustAttrPoints(stats.characterLevel);
-      stats.availableFeats -= adjustFeatPoints(stats.characterLevel);
-      stats.characterLevel -= 1;
-      setCurrentExperience(stats.characterLevel);
+      self.stats.unspentPoints -= adjustAttrPoints(self.stats.characterLevel);
+      self.stats.availableFeats -= adjustFeatPoints(self.stats.characterLevel);
+      self.stats.characterLevel -= 1;
+      setCurrentExperience(self.stats.characterLevel);
       update();
-      console.log("Level Down :(");
       return true;
     }
 
     function statUp(statString) {
-      let stat = stats[statString].value;
-      let name = capitalizeFirst(statString);
+      let stat = self.stats[statString].value;
       let cost = getAttrCost(stat);
 
       if (stat == 50)
         return false;
-      if (cost > stats.unspentPoints)
+      if (cost > self.stats.unspentPoints)
         return false;
 
       stat += 1;
-      stats.unspentPoints -= cost;
-      stats.spentPoints += cost;
-      stats[statString].value = stat;
+      self.stats.unspentPoints -= cost;
+      self.stats.spentPoints += cost;
+      self.stats[statString].value = stat;
       update(statString);
-      // console.log(name + " Up!");
       return true;
     }
 
     function statDown(statString) {
-      let stat = stats[statString].value;
+      let stat = self.stats[statString].value;
       if (stat == 0)
         return false;
 
       stat -= 1;
-      let name = capitalizeFirst(statString);
       let cost = getAttrCost(stat);
-      stats.unspentPoints += cost;
-      stats.spentPoints -= cost;
-      stats[statString].value = stat;
+      self.stats.unspentPoints += cost;
+      self.stats.spentPoints -= cost;
+      self.stats[statString].value = stat;
       update(statString);
-      // console.log(name + " down :(");
       return true;
     }
 
+    // URL Getter/Setter Functions for sharing character builds
     function loadQueryParams()
     {
-      var values = $location.search().v;
-      if(!values || !values.split)
+      var urlValuesString = $location.search().v;
+
+      if(!urlValuesString || !urlValuesString.split)
         return;
 
-      var s = values.split(":");
+      var urlValuesArray = urlValuesString.split(":");
 
-      function takeStat() {
-        return s.length == 0 ? null : Number(s.shift());
+      function takeID() {
+        if (urlValuesArray.length == 0)
+          return null;
+        else
+          return Number(urlValuesArray.shift());
       }
 
-      var level = takeStat();
+      // 1 character level
+      var level = takeID();
       if(level != null)
         increaseLevelTo(level);
 
-      stats.allStats.forEach(function(attribute, i) {
-        let statName = stats.allStats[i];
-        let statTarget = takeStat();
+      // 7 characters stats
+      self.stats.allStats.forEach(function(attribute, i) {
+        let statName = self.stats.allStats[i];
+        let statTarget = takeID();
 
         if(statTarget != null)
           levelStatTo(statName, statTarget);
       });
+
+      // 5 armor slots
+      let slot1 = takeID();
+      if (slot1 != null && self.armorsMap[slot1]) {
+        self.headSlot = self.armorsMap[slot1];
+        toggleSmith("headSlotSmith");
+      }
+
+      let slot2 = takeID();
+      if (slot2 != null && self.armorsMap[slot2]) {
+        self.torsoSlot = self.armorsMap[slot2];
+        toggleSmith("torsoSlotSmith");
+      }
+
+      let slot3 = takeID();
+      if (slot3 != null && self.armorsMap[slot3]) {
+        self.handsSlot = self.armorsMap[slot3];
+        toggleSmith("handsSlotSmith");
+      }
+
+      let slot4 = takeID();
+      if (slot4 != null && self.armorsMap[slot4]) {
+        self.legsSlot = self.armorsMap[slot4];
+        toggleSmith("legsSlotSmith");
+      }
+
+      let slot5 = takeID();
+      if (slot5 != null && self.armorsMap[slot5]) {
+        self.feetSlot = self.armorsMap[slot5];
+        toggleSmith("feetSlotSmith");
+      }
+
+      // 2 weapon slots
+      let slot6 = takeID();
+      if (slot6 != null && self.weaponsMap[slot6]) {
+        self.weaponSlot = self.weaponsMap[slot6];
+        checkTwoHanded();
+        toggleSmith("weaponSlotSmith");
+      }
+
+      let slot7 = takeID();
+      if (slot7 != null && self.weaponsMap[slot7]) {
+        self.offhandSlot = self.weaponsMap[slot7];
+        toggleSmith("offhandSlotSmith");
+      }
+
+      let slot8 = takeID();
+      if (slot8 != null && self.consumablesMap[slot8]) {
+        self.headSlotSmith = self.consumablesMap[slot8];
+      }
+
+      let slot9 = takeID();
+      if (slot9 != null && self.consumablesMap[slot9]) {
+        self.torsoSlotSmith = self.consumablesMap[slot9];
+      }
+
+      let slot10 = takeID();
+      if (slot10 != null && self.consumablesMap[slot10]) {
+        self.handsSlotSmith = self.consumablesMap[slot10];
+      }
+
+      let slot11 = takeID();
+      if (slot11 != null && self.consumablesMap[slot11]) {
+        self.legsSlotSmith = self.consumablesMap[slot11];
+      }
+
+      let slot12 = takeID();
+      if (slot12 != null && self.consumablesMap[slot12]) {
+        self.feetSlotSmith = self.consumablesMap[slot12];
+      }
+
+      let slot13 = takeID();
+      if (slot13 != null && self.consumablesMap[slot13]) {
+        self.weaponSlotSmith = self.consumablesMap[slot13];
+      }
+
+      let slot14 = takeID();
+      if (slot14 != null && self.consumablesMap[slot14]) {
+        self.offhandSlotSmith = self.consumablesMap[slot14];
+      }
+
+      let slot15 = takeID();
+      if (slot15 != null && self.consumablesMap[slot15]) {
+        self.warpaintSlot = self.consumablesMap[slot15];
+      }
+      updateAll();
     }
+
 
     function updateQueryParams()
     {
-      // $location.search('v',
-      //   stats.characterLevel + ':' +
-      //   stats.strength.value + ':'+
-      //   stats.agility.value + ':'+
-      //   stats.vitality.value + ':'+
-      //   stats.accuracy.value + ':'+
-      //   stats.grit.value + ':'+
-      //   stats.encumbrance.value + ':'+
-      //   stats.survival.value);
+      function setID(slot) {
+        if (slot == null)
+          return '0';
+        else
+          return slot.ItemID;
+      }
+
+      $location.search('v',
+        self.stats.characterLevel     + ':' +
+        self.stats.strength.value     + ':' +
+        self.stats.agility.value      + ':' +
+        self.stats.vitality.value     + ':' +
+        self.stats.accuracy.value     + ':' +
+        self.stats.grit.value         + ':' +
+        self.stats.encumbrance.value  + ':' +
+        self.stats.survival.value     + ':' +
+        setID(self.headSlot)          + ':' +
+        setID(self.torsoSlot)         + ':' +
+        setID(self.handsSlot)         + ':' +
+        setID(self.legsSlot)          + ':' +
+        setID(self.feetSlot)          + ':' +
+        setID(self.weaponSlot)        + ':' +
+        setID(self.offhandSlot)       + ':' +
+        setID(self.headSlotSmith)     + ':' +
+        setID(self.torsoSlotSmith)    + ':' +
+        setID(self.handsSlotSmith)    + ':' +
+        setID(self.legsSlotSmith)     + ':' +
+        setID(self.feetSlotSmith)     + ':' +
+        setID(self.weaponSlotSmith)   + ':' +
+        setID(self.offhandSlotSmith)  + ':' +
+        setID(self.warpaintSlot));
     }
 
     // Helper Functions //
 
     let mouseHoldInterval = 0;
 
-    function mouseHold(level) {
-      mouseHoldInterval = setInterval(level, 120);
+    function onMouseHold(func, statString, event) {
+      if (event.which == 3) {
+        clearInterval(mouseHoldInterval);
+        return;
+      }
+      if (event.which == 1)
+      {
+        mouseHoldInterval = setInterval(function() {
+          if (statString)
+            func(statString);
+          else
+            func();
+
+          $scope.$digest();
+
+        }, 140);
+      }
     }
 
-    function mouseHoldStatUp(statString) {
-      mouseHoldInterval = setInterval(function() {statUp(statString);}, 120);
-    }
-
-    function mouseHoldStatDown(statString) {
-      mouseHoldInterval = setInterval(function() {statDown(statString);}, 120);
-    }
-
-    function mouseReleaseStat() {
+    function clearMouseHold(event) {
       clearInterval(mouseHoldInterval);
-    }
-
-    function capitalizeFirst(string) {
-      return string.charAt(0).toUpperCase() + string.substr(1);
     }
 
     function precisionRound(number, precision) {
@@ -490,73 +827,110 @@ angular
       return Math.round(number * factor) / factor;
     }
 
-
-    // Apply mouseup/mouseleave event listeners to all stat buttons
-    // that clear the mouseHoldInterval for modifying stats
-
-    let statButtons = document.getElementsByClassName("stat-button");
-
-    for (var i = 0; i < statButtons.length; i++) {
-      statButtons[i].addEventListener("mouseup", mouseReleaseStat);
-      statButtons[i].addEventListener("mouseleave", mouseReleaseStat);
-    }
-
-    var levelUp_html   = document.getElementsByClassName("level-up")[0];
-    var levelDown_html = document.getElementsByClassName("level-down")[0];
-
-    function createLevelButton(element, buttonFunc) {
-      element.addEventListener("click", buttonFunc);
-      element.addEventListener("mousedown", mouseHold.bind(null, buttonFunc));
-    }
-
-    createLevelButton(levelUp_html, levelUp);
-    createLevelButton(levelDown_html, levelDown);
-
-    document.getElementsByClassName("max-level")[0].addEventListener("click", function() {
-      maxOutLevel();
-    });
-
-    //Reset buttons - all points and levels reverted to base values  +function createStatButtons(stat) {
-    document.getElementsByClassName("reset-all")[0].addEventListener("click", resetAll);
-    document.getElementsByClassName("reset-attributes")[0].addEventListener("click", resetAttributes);
-
-    function createStatButtons(stat) {
-      document.getElementsByClassName(stat + "-up")[0].addEventListener("click", statUp.bind(null, stat));
-      document.getElementsByClassName(stat + "-up")[0].addEventListener("mousedown", mouseHoldStatUp.bind(null, stat));
-      document.getElementsByClassName(stat + "-down")[0].addEventListener("click", statDown.bind(null, stat));
-      document.getElementsByClassName(stat + "-down")[0].addEventListener("mousedown", mouseHoldStatDown.bind(null, stat));
-    }
-
     let currentActive = "strength";
 
-    stats.allStats.forEach(function(attribute, i) {
-      createStatButtons(attribute);
+    function createMouseOvers() {
+      self.stats.allStats.forEach(function(attribute, i) {
 
-      document.getElementsByClassName("reset-attribute")[i].addEventListener("click", function() {
-        resetAttribute(stats.allStats[i]);
-      });
-      document.getElementsByClassName("max-attribute")[i].addEventListener("click", function() {
-        maxOutAttribute(stats.allStats[i]);
-      });
+        //cache attr-div & progress-bar for each attribute. then,
+        let hoverElementsForToggle = [];
+        hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + self.stats.allStats[i])[0];
+        hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + self.stats.allStats[i])[0];
 
-      //cache attr-div & progress-bar for each attribute. then,
-      let hoverElementsForToggle = [];
-      hoverElementsForToggle[0] = document.getElementsByClassName("attr-div " + stats.allStats[i])[0];
-      hoverElementsForToggle[1] = document.getElementsByClassName("progress-bar " + stats.allStats[i])[0];
-
-      // mouseover on hoverElements to toggle active class on current 'mouseover' attribute
-      hoverElementsForToggle.forEach(function(element) {
-        element.addEventListener("mouseover", function () {
-          if (stats.allStats[i] != currentActive) {
-          document.getElementsByClassName("bonuses " + stats.allStats[i])[0].classList.add("active");
-          document.getElementsByClassName("bonuses " + currentActive)[0].classList.remove("active");
-          currentActive = stats.allStats[i];
-          }
+        // mouseover on hoverElements to toggle active class on current 'mouseover' attribute
+        hoverElementsForToggle.forEach(function(element) {
+          element.addEventListener("mouseover", function () {
+            if (self.stats.allStats[i] != currentActive) {
+            document.getElementsByClassName("bonuses " + self.stats.allStats[i])[0].classList.add("active");
+            document.getElementsByClassName("bonuses " + currentActive)[0].classList.remove("active");
+            currentActive = self.stats.allStats[i];
+            }
+          });
         });
       });
-    });
+    }
 
-    loadQueryParams();
-    updateQueryParams();
+    // end calc
+    // better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
+    // pre-loaded for prettier rendering when transitioning between attribute teirs
+    function preloader() {
+      if (document.images) {
+        var img1 = new Image();
+        var img2 = new Image();
+        var img3 = new Image();
+        var img4 = new Image();
+        var img5 = new Image();
+
+        var img6 = new Image();
+        var img7 = new Image();
+        var img8 = new Image();
+        var img9 = new Image();
+        var img10 = new Image();
+
+        img1.src = "./images/teir1.png";
+        img2.src = "./images/teir2.png";
+        img3.src = "./images/teir3.png";
+        img4.src = "./images/teir4.png";
+        img5.src = "./images/teir5.png";
+
+        img6.src = "./images/t1-glow.png";
+        img7.src = "./images/t2-glow.png";
+        img8.src = "./images/t3-glow.png";
+        img9.src = "./images/t4-glow.png";
+        img10.src = "./images/t5-glow.png";
+      }
+    }
+    function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      } else {
+        window.onload = function() {
+          if (oldonload) {
+            oldonload();
+          }
+          func();
+        }
+      }
+    }
+    //end conan-image-preloader
+
+    self.toggleSmith = toggleSmith;
+    self.checkTwoHanded = checkTwoHanded;
+    self.resetAll = resetAll;
+    self.resetAttributes = resetAttributes;
+    self.resetAttribute = resetAttribute;
+    self.resetEquipment = resetEquipment;
+    self.increaseLevelTo = increaseLevelTo;
+    self.maxOutLevel = maxOutLevel;
+    self.levelStatTo = levelStatTo;
+    self.maxOutAttribute = maxOutAttribute;
+    self.setCurrentExperience = setCurrentExperience;
+    self.getAttrCost = getAttrCost;
+    self.adjustAttrPoints = adjustAttrPoints;
+    self.adjustFeatPoints = adjustFeatPoints;
+    self.adjustBonuses = adjustBonuses;
+    self.adjustEquipmentBonuses = adjustEquipmentBonuses;
+    self.calcPlayerStats = calcPlayerStats;
+    self.adjustProgress = adjustProgress;
+
+    self.levelUp = levelUp;
+    self.levelDown = levelDown;
+    self.statUp = statUp;
+    self.statDown = statDown;
+
+    self.update = update;
+    self.updateAll = updateAll;
+    self.generateTextBuild = generateTextBuild;
+    self.loadQueryParams = loadQueryParams;
+    self.updateQueryParams = updateQueryParams;
+
+    self.onMouseHold = onMouseHold;
+    self.clearMouseHold = clearMouseHold;
+
+    // filters
+    self.offhandFilter_name = "";
+    self.offhandFilter_category = "";
+    loadData();
     }
   });

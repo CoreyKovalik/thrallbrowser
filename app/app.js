@@ -3,14 +3,21 @@ window._ = require('lodash');
 window.moment = require('moment');
 require('angular');
 require('angular-route');
+require('angular-right-click');
+require('angular-long-press');
+require('angularjs-autogrow');
 require('../vendor/bootstrap/js/bootstrap.min.js');
 
 angular
   .module('thrallbrowser', [
-    'ngRoute'
+    'ngRoute',
+    'ngRightClick',
+    'pr.longpress',
+    'angularjs-autogrow'
   ]);
 
 require('./app.config.js');
+require('./app.directives.js');
 
 require('./components/character/character.component.js');
 require('./components/clanlist/clanlist.component.js');
@@ -26,4 +33,5 @@ require('./core/filters/moment.filter.js');
 require('./core/filters/urls.filter.js');
 require('./core/filters/servername.filter.js');
 require('./core/serverthrallapi.service.js');
+require('./core/statsdata.service.js');
 require('./polyfill.js');

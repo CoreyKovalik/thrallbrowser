@@ -27,31 +27,57 @@
     </div>
   </div>
 </div>
+<div ng-show="serverCtrl.isLoading" class="spinner"></div>
 
+<div ng-if="!serverCtrl.isLoading">
 <div class="conan-stat-calculator">
   <!-- Logo image credit to Funcom, https://www.conanexiles.com/ -->
-  <img class="conanimg" src="./images/logo.png" alt="logo" width="450" srcset="./images/logo.png 500w, ./images/logo-300x88.png 300w" sizes="(max-width: 500px) 100vw, 500px">
-  <h1 class="calc-title">Stat Calculator</h1>
+  <!-- <img class="conanimg" src="./images/logo.png" alt="logo" width="450" srcset="./images/logo.png 500w, ./images/logo-300x88.png 300w" sizes="(max-width: 500px) 100vw, 500px"> -->
+  <h1 class="calc-title">Conan Exiles Stat Calculator</h1>
   <table class="calc-table">
     <thead class="calc-thead">
       <tr>
         <th rowspan="3" colspan="3">
-          <div class="character-title">
-            <button class="stat-button level-down"> - </button>
-            Exile Level: <span class="character-level"></span>
-            <button class="stat-button level-up"> + </button>
-            <br>Unspent points: <span class="unspent-points"></span>
+          <div class="section-title">
+            <button
+              ng-click="statsCtrl.levelDown()"
+              on-long-press="statsCtrl.onMouseHold(statsCtrl.levelDown, null, $event)"
+              prevent-click="true"
+              long-press-duration="100"
+              ng-mouseUp="statsCtrl.clearMouseHold($event)"
+              ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+              ng-right-click=""
+              class="stat-button level-down"> - </button>
+
+            Exile Level: {{statsCtrl.stats.characterLevel}}
+
+            <button
+              ng-click="statsCtrl.levelUp()"
+              on-long-press="statsCtrl.onMouseHold(statsCtrl.levelUp, null, $event)"
+              prevent-click="true"
+              long-press-duration="100"
+              ng-mouseUp="statsCtrl.clearMouseHold($event)"
+              ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+              ng-right-click="statsCtrl.clearMouseHold($event)"
+              class="stat-button level-up"> + </button>
+
+            <br>Unspent points: {{statsCtrl.stats.unspentPoints}}
           </div>
-          <button class="max-level">Maximum Level</button>
+
+          <button
+            ng-click="statsCtrl.maxOutLevel()"
+            class="max-level">
+            Maximum Level
+          </button>
         </th>
-        <th class="encumbrance-th">Encumbrance 0 / <span class="encumbrance-heading"></span></th>
+        <th class="encumbrance-th">Encumbrance 0 / {{statsCtrl.stats.playerStats.encumbrance.value}}</span></th>
         <th class="player-stats" rowspan="3" colspan="1">Player Stats</th>
       </tr>
       <tr>
         <th class="movement-penalty" colspan="1">Movement Penalty 0</th>
       </tr>
       <tr>
-        <th class="experience" colspan="1">Experience <span class="current-experience"></span></th>
+        <th class="experience" colspan="1">Experience {{statsCtrl.stats.currentExperience}}</th>
       </tr>
     </thead>
     <tbody class="calc-tbody">
@@ -65,11 +91,28 @@
               <span class="attribute">Strength</span>
             </div>
             <span class="cost">
-              <span class="strength current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="strength-down stat-button"> - </button>&nbsp;
-              <button class="strength-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.strength}} )</span>
+              <span class="strength current-level">{{statsCtrl.stats.strength.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('strength')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('strength')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'strength', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="strength-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('strength')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'strength', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="strength-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('strength')" class="max-attribute">Max</button>
             </span>
           </div>
         </td>
@@ -352,13 +395,13 @@
         <!-- Player stats -->
         <td class="player-stats" rowspan="15">
           <ul>
-          <li><span>Health: </span><span class="health"></span></li>
-          <li><span>Stamina: </span><span class="stamina"></span></li>
-          <li><span>Encumbr: </span><span class="encumbrance-player"></span></li>
-          <li><span>Melee: </span><span class="melee"></span></li>
-          <li><span>Ranged: </span><span class="ranged"></span></li>
-          <li><span>Armor: </span><span class="armor">+</span></li>
-          <li><span>Resist: </span><span class="dmg-resist"></span></li>
+          <li><span>Health: </span><span class="health">{{statsCtrl.stats.playerStats.health.value}}</span></li>
+          <li><span>Stamina: </span><span class="stamina">{{statsCtrl.stats.playerStats.stamina.value}}</span></li>
+          <li><span>Encumbr: </span><span class="encumbrance-player">{{statsCtrl.stats.playerStats.encumbrance.value}}</span></li>
+          <li><span>Melee: </span><span class="melee">{{statsCtrl.stats.playerStats.melee.value}}%</span></li>
+          <li><span>Ranged: </span><span class="ranged">{{statsCtrl.stats.playerStats.ranged.value}}%</span></li>
+          <li><span>Armor: </span><span class="armor">+{{statsCtrl.stats.playerStats.armor.value}}</span></li>
+          <li><span>Resist: </span><span class="dmg-resist">{{statsCtrl.stats.playerStats.damageResistance.value}}%</span></li>
           </ul>
         </td>
       </tr>
@@ -378,11 +421,28 @@
               <span class="attribute">Agility</span>
             </div>
             <span class="cost">
-              <span class="agility current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="agility-down stat-button"> - </button>&nbsp;
-              <button class="agility-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.agility}} )</span>
+              <span class="agility current-level">{{statsCtrl.stats.agility.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('agility')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('agility')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'agility', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="agility-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('agility')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'agility', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="agility-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('agility')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -401,11 +461,28 @@
               <span class="attribute">Vitality</span>
             </div>
             <span class="cost">
-              <span class="vitality current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="vitality-down stat-button"> - </button>&nbsp;
-              <button class="vitality-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.vitality}} )</span>
+              <span class="vitality current-level">{{statsCtrl.stats.vitality.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('vitality')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('vitality')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'vitality', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="vitality-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('vitality')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'vitality', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="vitality-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('vitality')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -424,11 +501,28 @@
               <span class="attribute">Accuracy</span>
             </div>
             <span class="cost">
-              <span class="accuracy current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="accuracy-down stat-button"> - </button>&nbsp;
-              <button class="accuracy-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.accuracy}} )</span>
+              <span class="accuracy current-level">{{statsCtrl.stats.accuracy.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('accuracy')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('accuracy')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'accuracy', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="accuracy-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('accuracy')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'accuracy', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="accuracy-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('accuracy')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -447,11 +541,28 @@
               <span class="attribute">Grit</span>
             </div>
             <span class="cost">
-              <span class="grit current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="grit-down stat-button"> - </button>&nbsp;
-              <button class="grit-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.grit}} )</span>
+              <span class="grit current-level">{{statsCtrl.stats.grit.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('grit')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('grit')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'grit', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="grit-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('grit')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'grit', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="grit-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('grit')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -470,11 +581,28 @@
               <span class="attribute">Encumbrance</span>
             </div>
             <span class="cost">
-              <span class="encumbrance current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="encumbrance-down stat-button"> - </button>&nbsp;
-              <button class="encumbrance-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.encumbrance}} )</span>
+              <span class="encumbrance current-level">{{statsCtrl.stats.encumbrance.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('encumbrance')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('encumbrance')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'encumbrance', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="encumbrance-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('encumbrance')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'encumbrance', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="encumbrance-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('encumbrance')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -493,11 +621,28 @@
               <span class="attribute">Survival</span>
             </div>
             <span class="cost">
-              <span class="survival current-level"></span>&nbsp;
-              <button class="reset-attribute">Reset</button>&nbsp;
-              <button class="survival-down stat-button"> - </button>&nbsp;
-              <button class="survival-up stat-button"> + </button>&nbsp;
-              <button class="max-attribute">Max</button>
+              <span>( + {{statsCtrl.equipment.survival}} )</span>
+              <span class="survival current-level">{{statsCtrl.stats.survival.value}}</span>&nbsp;
+              <button ng-click="statsCtrl.resetAttribute('survival')" class="reset-attribute">Reset</button>&nbsp;
+              <button
+                ng-click="statsCtrl.statDown('survival')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statDown, 'survival', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="survival-down stat-button"> - </button>&nbsp;
+              <button
+                ng-click="statsCtrl.statUp('survival')"
+                on-long-press="statsCtrl.onMouseHold(statsCtrl.statUp, 'survival', $event)"
+                prevent-click="true"
+                long-press-duration="100"
+                ng-mouseUp="statsCtrl.clearMouseHold($event)"
+                ng-mouseLeave="statsCtrl.clearMouseHold($event)"
+                ng-right-click=""
+                class="survival-up stat-button"> + </button>&nbsp;
+              <button ng-click="statsCtrl.maxOutAttribute('survival')" class="max-attribute">Max</button>
           </span>
           </div>
         </td>
@@ -510,10 +655,237 @@
       <!-- Reset Buttons -->
       <tr>
         <td class="reset" colspan="3">
-          <button class="reset-all">Reset All</button>
-          <button class="reset-attributes">Reset Attributes</button>
+          <button ng-click="statsCtrl.resetAll()" class="reset-all">Reset All</button>
+          <button ng-click="statsCtrl.resetAttributes()" class="reset-attributes">Reset Attributes</button>
+          <button ng-click="statsCtrl.resetEquipment()" class="reset-equipment">Reset Equipment</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+
+
+
+
+  <table class="calc-table equipment-table">
+    <thead class="calc-thead">
+      <tr>
+        <th class="section-title equipment-modifiers">Equipment Modifiers</th>
+        <th class="section-title character-info">Current Character Info</th>
+      </tr>
+    </thead>
+
+    <tbody class="calc-tbody">
+      <tr>
+        <td>
+              <!-- 5 Armor Slots -->
+              <span class="slot-title">Head: </span>
+              <select class="armor-select" name="headSlot" id="headSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'head', Category: '', Set: '', Name: statsCtrl.headFilter } | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.headSlot"
+              ng-change="statsCtrl.toggleSmith('headSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.headSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.headFilter">
+              <select class="smith-select armor-select" name="headSlotSmith" id="headSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'armor', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.headSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.headSlot">
+                <option value="">{{statsCtrl.unselectedSlot.headSlotSmith}}</option>
+              </select>
+              <br>
+
+              <span class="slot-title">Torso: </span>
+              <select class="armor-select" name="torsoSlot" id="torsoSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'torso', Category: '', Set: '', Name: statsCtrl.torsoFilter } | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.torsoSlot"
+              ng-change="statsCtrl.toggleSmith('torsoSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.torsoSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.torsoFilter">
+              <select class="smith-select armor-select" name="torsoSlotSmith" id="torsoSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'armor', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.torsoSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.torsoSlot">
+                <option value="">{{statsCtrl.unselectedSlot.torsoSlotSmith}}</option>
+              </select>
+              <br>
+
+              <span class="slot-title">Hands: </span>
+              <select class="armor-select" name="handsSlot" id="handsSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'hands', Category: '', Set: '', Name: statsCtrl.handsFilter } | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.handsSlot"
+              ng-change="statsCtrl.toggleSmith('handsSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.handsSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.handsFilter">
+              <select class="smith-select armor-select" name="handsSlotSmith" id="handsSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'armor', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.handsSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.handsSlot">
+                <option value="">{{statsCtrl.unselectedSlot.handsSlotSmith}}</option>
+              </select>
+              <br>
+
+              <span class="slot-title">Legs: </span>
+              <select class="armor-select" name="legsSlot" id="legsSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'legs', Category: '', Set: '', Name: statsCtrl.legsFilter } | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.legsSlot"
+              ng-change="statsCtrl.toggleSmith('legsSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.legsSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.legsFilter">
+              <select class="smith-select armor-select" name="legsSlotSmith" id="legsSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'armor', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.legsSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.legsSlot">
+                <option value="">{{statsCtrl.unselectedSlot.legsSlotSmith}}</option>
+              </select>
+              <br>
+
+              <span class="slot-title">Feet: </span>
+              <select class="armor-select" name="feetSlot" id="feetSlot"
+              ng-options="armor as armor.Name group by armor.Set for armor in statsCtrl.armors | filter: {Slot: 'feet', Category: '', Set: '', Name: statsCtrl.feetFilter } | orderBy: 'Name' track by armor.ItemID"
+              ng-model="statsCtrl.feetSlot"
+              ng-change="statsCtrl.toggleSmith('feetSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.feetSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.feetFilter">
+              <select class="smith-select armor-select" name="feetSlotSmith" id="feetSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'armor', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.feetSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.feetSlot">
+                <option value="">{{statsCtrl.unselectedSlot.feetSlotSmith}}</option>
+              </select>
+              <br>
+
+              <!-- 2 Weapons Slots -->
+
+              <span class="slot-title">Weapon: </span>
+              <select class="armor-select" name="weaponSlot" id="weaponSlot"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'mainhand', Category: '', Name: statsCtrl.mainhandFilter } | orderBy: 'Name' track by weapon.ItemID"
+              ng-model="statsCtrl.weaponSlot"
+              ng-change="statsCtrl.checkTwoHanded(); statsCtrl.toggleSmith('weaponSlotSmith'); statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.weaponSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.mainhandFilter">
+              <select class="smith-select armor-select" name="weaponSlotSmith" id="weaponSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Slot: 'weapon', Category: 'smith'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.weaponSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="!statsCtrl.weaponSlot">
+                <option value="">{{statsCtrl.unselectedSlot.weaponSlotSmith}}</option>
+              </select>
+              <br>
+
+              <span class="slot-title">Off-hand: </span>
+              <select class="armor-select" name="offhandSlot" id="offhandSlot"
+              ng-options="weapon as weapon.Name group by weapon.Category for weapon in statsCtrl.weapons | filter: {Slot: 'offhand', Category: statsCtrl.offhandFilter_category, Name: statsCtrl.offhandFilter_name } | orderBy: 'Name' track by weapon.ItemID"
+              ng-model="statsCtrl.offhandSlot"
+              ng-change="statsCtrl.toggleSmith('offhandSlotSmith'); statsCtrl.updateAll()"
+              ng-disabled="statsCtrl.equipment.twoHanded">
+                <option value="">{{statsCtrl.unselectedSlot.offhandSlot}}</option>
+              </select>
+              <input type="text" class="slot-name-filter" placeholder="Filter options by name..." ng-model="statsCtrl.offhandFilter_name">
+              <select class="smith-select armor-select" name="offhandSlotSmith" id="offhandSlotSmith"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Set: 'Reinforcement Kits'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.offhandSlotSmith"
+              ng-change="statsCtrl.updateAll()"
+              ng-disabled="statsCtrl.offhandSlot.Category != 'shield'">
+                <option value="">{{statsCtrl.unselectedSlot.offhandSlotSmith}}</option>
+              </select>
+              <br>
+
+              <!-- 1 Warpaint Slot -->
+
+              <span class="slot-title">Warpaint: </span>
+              <select class="armor-select" name="warpaintSlot" id="warpaintSlot"
+              ng-options="consumable as consumable.Name group by consumable.Set for consumable in statsCtrl.consumables | filter: {Set: 'Warpaint'} | orderBy: 'ItemID' track by consumable.ItemID"
+              ng-model="statsCtrl.warpaintSlot"
+              ng-change="statsCtrl.updateAll()">
+                <option value="">{{statsCtrl.unselectedSlot.warpaintSlot}}</option>
+              </select>
+              <br>
+              <textarea autogrow class="text-build" ng-model="statsCtrl.textBuild.value" readonly></textarea>
+        </td>
+
+        <td>
+          <div class="equipment-images">
+            <div class="head-image">
+              <img ng-if="statsCtrl.headSlot" alt="{{statsCtrl.headSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.headSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.headSlotSmith" alt="{{statsCtrl.headSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.headSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.headSlotSmith" alt="{{statsCtrl.headSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="torso-image">
+              <img ng-if="statsCtrl.torsoSlot" alt="{{statsCtrl.torsoSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.torsoSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.torsoSlotSmith" alt="{{statsCtrl.torsoSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.torsoSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.torsoSlotSmith" alt="{{statsCtrl.torsoSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="hands-image">
+              <img ng-if="statsCtrl.handsSlot" alt="{{statsCtrl.handsSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.handsSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.handsSlotSmith" alt="{{statsCtrl.handsSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.handsSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.handsSlotSmith" alt="{{statsCtrl.handsSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="legs-image">
+              <img ng-if="statsCtrl.legsSlot" alt="{{statsCtrl.legsSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.legsSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.legsSlotSmith" alt="{{statsCtrl.legsSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.legsSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.legsSlotSmith" alt="{{statsCtrl.legsSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="feet-image">
+              <img ng-if="statsCtrl.feetSlot" alt="{{statsCtrl.feetSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.feetSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.feetSlotSmith" alt="{{statsCtrl.feetSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.feetSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.feetSlotSmith" alt="{{statsCtrl.feetSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+
+            <div class="weapon-image">
+              <img ng-if="statsCtrl.weaponSlot" alt="{{statsCtrl.weaponSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.weaponSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.weaponSlotSmith" alt="{{statsCtrl.weaponSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.weaponSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.weaponSlotSmith" alt="{{statsCtrl.weaponSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="offhand-image">
+              <img ng-if="statsCtrl.offhandSlot" alt="{{statsCtrl.offhandSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.offhandSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+              <img class="smith-image" ng-if="statsCtrl.offhandSlotSmith" alt="{{statsCtrl.offhandSlotSmith.Name}}" width="20" height="20" ng-src="./images/item-icons/{{statsCtrl.offhandSlotSmith.Icon}}">
+              <img class="smith-glow" ng-if="statsCtrl.offhandSlotSmith" alt="{{statsCtrl.offhandSlotSmith.Name}}" width="80" height="80" ng-src="./images/smith-glow.png">
+            </div>
+            <div class="warpaint-image">
+              <img ng-if="statsCtrl.warpaintSlot" on-error-src="./images/fallback-icon.png" alt="{{statsCtrl.warpaintSlot.Name}}" width="80" height="80" ng-src="./images/item-icons/{{statsCtrl.warpaintSlot.Icon}}" on-error-src="./images/fallback-icon.png">
+            </div>
+          </div>
+          <img src="./images/race-sex/edits/pict_male.png">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="feedback-bar main-container">
+    <a>Feedback</a>  &nbsp;&nbsp;|&nbsp;&nbsp; <a>Report Incorrect Data</a>  &nbsp;&nbsp;|&nbsp;&nbsp;  <a>Info</a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
 </div>

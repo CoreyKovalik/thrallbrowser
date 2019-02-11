@@ -52,7 +52,7 @@
   padding: 5px;
 }
 
-.calc-table .character-title {
+.calc-table .section-title {
   font-size: 1.5em;
 }
 
@@ -143,16 +143,21 @@
 }
 
 .calc-table .reset-all,
-.calc-table .reset-attributes {
+.calc-table .reset-attributes,
+.calc-table .reset-equipment {
   background-size: cover;
 }
 
 .calc-table .reset-all {
-  width: 33%
+  width: 30%
 }
 
 .calc-table .reset-attributes {
-  width: 33%;
+  width: 30%;
+}
+
+.calc-table .reset-equipment {
+  width: 30%;
 }
 
 .calc-table button:hover {
@@ -270,6 +275,128 @@
   font-size: 18px;
 }
 
+
+.calc-thead .equipment-modifiers {
+  width: 60%;
+}
+
+.calc-thead .character-info {
+  width: 40%;
+}
+
+.armor-select, .armor-select:active, .armor-select:hover, .armor-select:focus  {
+  width: 315px;
+  background-color: rgba(0,0,0,0.9);
+  color: #ECE4C6;
+  border-radius: 4px;
+  border-color: grey;
+  user-select: none;
+  outline: 0;
+}
+
+.smith-select, .smith-select:active, .smith-select:hover, .smith-select:focus {
+  width: 205px;
+}
+
+.slot-name-filter, .slot-name-filter:active, .slot-name-filter:hover, .slot-name-filter:focus {
+  color: #ECE4C6;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(128,128,128,0.2);
+  outline: 0;
+}
+
+option, option:hover, option:active, option:focus {
+  background-color: #212221;
+}
+
+.conan-stat-calculator button {
+  user-select: none;
+  outline:none;
+}
+
+.slot-title {
+  display: inline-block;
+  width: 80px;
+}
+
+.text-build {
+  white-space: pre-line;
+  background-color: black;
+  color: white;
+  border: 0;
+  resize: none;
+  height: 200px;
+  width: 460px;
+  border-radius: 12px;
+  box-sizing: content-box;
+}
+
+.text-build:focus {
+  outline: 0;
+}
+
+.equipment-images {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head-image, .torso-image, .hands-image, .legs-image, .feet-image,
+.weapon-image, .offhand-image, .warpaint-image {
+  background-image: url(../images/inventory_icon.png);
+  background-size: contain;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+  position: relative;
+}
+
+.smith-image {
+  position: relative;
+  bottom: 60px;
+  left: 57px;
+}
+
+.smith-glow {
+  position: relative;
+  bottom: 123px;
+  z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.conan-stat-calculator .feedback-bar {
+  background-image: url(../images/BgFeats.png);
+  background-size: 99% 99%;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 25px;
+  width: 25%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  font-family: 'Poppins';
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  min-width: 350px;
+}
+
 .conan-stat-calculator .calc-table .calc-tbody .active {
   display: table-cell;
 }
@@ -282,7 +409,7 @@
 
 /* MEDIA QUERIES */
 
-@media (max-width: 943px) {
+@media (max-width: 1160px) {
   .conan-stat-calculator .calc-table .calc-tbody .active {
   display: none;
   }
